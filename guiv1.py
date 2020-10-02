@@ -73,7 +73,6 @@ class Ui_MainWindow( QObject ):
         self.browseButton.clicked.connect(self.browseSlot)
         self.cancelButton.clicked.connect(self.cancelSlot)
         self.importButton.clicked.connect(self.importSlot)
-        self.pathLine.returnPressed.connect(self.returnSlot)
         self.nextButton.clicked.connect(self.nextSlot)
         self.nextButton.setEnabled(False)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -90,10 +89,6 @@ class Ui_MainWindow( QObject ):
         self.nextButton.setText(_translate("MainWindow", "Next"))
 
     @pyqtSlot( )
-    def returnSlot( self ):
-        pass
-
-    @pyqtSlot( )
     def browseSlot( self ):
         pass
 
@@ -108,12 +103,6 @@ class Ui_MainWindow( QObject ):
     @pyqtSlot( )
     def nextSlot( self ):
         pass
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+
+
 

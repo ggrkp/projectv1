@@ -6,20 +6,23 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
 from guiv1 import Ui_MainWindow 
-from model import Model
-
+from functions import Func
 import sys
+
+
 
 class MainWindowUIClass( Ui_MainWindow ):
     def __init__(self):
         super().__init__()
-        self.model = Model()
+        self.functions = Func()
     def setupUi( self, MW ):
         super().setupUi( MW )
 
 
     def refreshAll( self ):
-        self.pathLine.setText( self.model.getFileName() )
+        self.pathLine.setText( self.functions.getFileName() )
+        
+
 
     def browseSlot( self ):
         options = QtWidgets.QFileDialog.Options()
@@ -31,13 +34,14 @@ class MainWindowUIClass( Ui_MainWindow ):
                         "CSV Files (*.csv)",
                         options=options)
         if fileName:
-            self.model.setFileName( fileName )
+            self.functions.setFileName( fileName )
             self.refreshAll()
 
     def importSlot( self ): # Slot gia to import button
         fileName =  self.pathLine.text()
-        if self.model.isValid( fileName ):
-            self.model.setFileName( self.pathLine.text() )
+        if self.functions.isValid( fileName ):
+            x = self.functions.readFile(fileName)
+            self.functions.setFileName( self.pathLine.text() )
             self.refreshAll()
             m = QtWidgets.QMessageBox()
             m.setText("File was successfully imported!")
@@ -46,6 +50,7 @@ class MainWindowUIClass( Ui_MainWindow ):
             m.setDefaultButton(QtWidgets.QMessageBox.Ok)
             ret = m.exec_()
             self.refreshAll()
+            self.nextButton.setEnabled(True) # Otan ginei to import me valid file energopoieitai to next button
         else:
             m = QtWidgets.QMessageBox()
             m.setText("Choose a valid file to import!")
@@ -57,6 +62,9 @@ class MainWindowUIClass( Ui_MainWindow ):
 
     def cancelSlot(self): # Slot gia to cancel button
         self.pathLine.setText("") 
+
+    def nextSlot( self ): # Slot gia to next button 
+        
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

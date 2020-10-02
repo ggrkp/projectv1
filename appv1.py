@@ -5,11 +5,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
-from guiv1 import Ui_MainWindow 
+from guiv1 import Ui_MainWindow
 from functions import Func
 import sys
-
-
 
 class MainWindowUIClass( Ui_MainWindow ):
     def __init__(self):
@@ -61,9 +59,10 @@ class MainWindowUIClass( Ui_MainWindow ):
             self.refreshAll()
 
     def cancelSlot(self): # Slot gia to cancel button
-        self.pathLine.setText("") 
+        self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv") 
 
     def nextSlot( self ): # Slot gia to next button 
+        self.centralwidget.hide()
         
 
 def main():

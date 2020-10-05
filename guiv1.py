@@ -76,7 +76,7 @@ class Ui_MainWindow( QObject ):
         self.nextButton.clicked.connect(self.nextSlot)
         self.nextButton.setEnabled(False)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
+    
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -87,6 +87,7 @@ class Ui_MainWindow( QObject ):
         self.importButton.setText(_translate("MainWindow", "Import"))
         self.label_3.setText(_translate("MainWindow", "Please, choose a valid .csv file:"))
         self.nextButton.setText(_translate("MainWindow", "Next"))
+        
 
     @pyqtSlot( )
     def browseSlot( self ):
@@ -103,6 +104,3 @@ class Ui_MainWindow( QObject ):
     @pyqtSlot( )
     def nextSlot( self ):
         pass
-
-
-

@@ -43,8 +43,7 @@ class MainWindowUIClass( Ui_MainWindow ):
             self.refreshAll()
             m = QtWidgets.QMessageBox()
             m.setText("File was successfully imported!")
-            m.setStandardButtons(QtWidgets.QMessageBox.Ok
-                                    | QtWidgets.QMessageBox.Cancel)
+            m.setStandardButtons(QtWidgets.QMessageBox.Ok)
             m.setDefaultButton(QtWidgets.QMessageBox.Ok)
             ret = m.exec_()
             self.refreshAll()
@@ -52,8 +51,7 @@ class MainWindowUIClass( Ui_MainWindow ):
         else:
             m = QtWidgets.QMessageBox()
             m.setText("Choose a valid file to import!")
-            m.setStandardButtons(QtWidgets.QMessageBox.Ok
-                                    | QtWidgets.QMessageBox.Cancel)
+            m.setStandardButtons(QtWidgets.QMessageBox.Ok)
             m.setDefaultButton(QtWidgets.QMessageBox.Ok)
             ret = m.exec_()
             self.refreshAll()
@@ -61,9 +59,12 @@ class MainWindowUIClass( Ui_MainWindow ):
     def cancelSlot(self): # Slot gia to cancel button
         self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv") 
 
-    def nextSlot( self ): # Slot gia to next button 
-        self.centralwidget.hide()
-        
+    def nextSlot( self ): # Slot gia to next button
+        pass
+    
+    def printSlot( self ):
+        print("print Button Pressed!")
+
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

@@ -2,7 +2,6 @@
 # Etsi wste an thelw na allaksw kati sto gui na mhn ephreastei to app logic
 # An peiraksw to gui me to designer to gui.py tha allaksei kai oles oi allages tha xathoun 
 # Gi auto ftiaxnw neo script
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
 from guiv1 import Ui_MainWindow
@@ -60,17 +59,14 @@ class MainWindowUIClass( Ui_MainWindow ):
         self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv") 
 
     def nextSlot( self ): # Slot gia to next button
-        pass
-    
-    def printSlot( self ):
-        print("print Button Pressed!")
-
-
+        self.stackedWidget.setCurrentIndex(1)    
+    def backSlot( self ): # Slot gia to next button
+        self.stackedWidget.setCurrentIndex(0)
 def main():
     app = QtWidgets.QApplication(sys.argv)
+    ex = MainWindowUIClass()
     MainWindow = QtWidgets.QMainWindow()
-    ui = MainWindowUIClass()
-    ui.setupUi(MainWindow)
+    ex.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
 

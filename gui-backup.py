@@ -98,7 +98,7 @@ class Ui_MainWindow(QObject):
         self.pushButton.clicked.connect(self.backSlot)
         self.nextButton.setEnabled(False)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -132,13 +132,4 @@ class Ui_MainWindow(QObject):
     @pyqtSlot( )
     def nextSlot( self ):
         pass
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
-
+    

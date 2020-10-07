@@ -3,11 +3,11 @@
 # An peiraksw to gui me to designer to gui.py tha allaksei kai oles oi allages tha xathoun 
 # Gi auto ftiaxnw neo script
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QObject, pyqtSlot
+from PyQt5.QtCore import QObject
 from guiv1 import Ui_MainWindow
 from functions import Func
-import sys
-
+import sys, csv
+import pandas as pd
 class MainWindowUIClass( Ui_MainWindow ):
     def __init__(self):
         super().__init__()
@@ -59,9 +59,28 @@ class MainWindowUIClass( Ui_MainWindow ):
         self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv") 
 
     def nextSlot( self ): # Slot gia to next button
-        self.stackedWidget.setCurrentIndex(1)    
-    def backSlot( self ): # Slot gia to next button
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
+        # Molis pataw next tha kanei load to combo Box kai tha periexei ta features.
+        fileName = self.functions.getFileName()
+        data = self.functions.readFile(fileName)
+        # iterating the columns 
+        for col in data.columns: 
+            self.comboBox.addItem(col) 
+
+    def backSlot( self ): # Slot gia to back button
+        self.stackedWidget.setCurrentIndex(0) # Pame ena screen pisw
+        self.comboBox.clear() # Katharizoyme to Combo box gia na mpoun nea features sto drop down
+
+    def featureSlot( self ): # Slot gia to drop down box
+        print("epelekses to Target feature sigxaritiria !!!!!111111")
+        item_index = self.comboBox.currentIndex()
+        fileName = self.functions.getFileName()
+        df = self.functions.readFile(fileName)
+        y = self.functions.pickTarget(item_index, df)
+        X = self.functions.pickPredictors(item_index, df)
+            
+
+    # MAIN
 def main():
     app = QtWidgets.QApplication(sys.argv)
     ex = MainWindowUIClass()

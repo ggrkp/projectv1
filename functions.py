@@ -43,9 +43,15 @@ class Func:
         X = df.iloc[:, df.columns != df.columns[tar_idx]]  # Predictor Variables (All except the Target one.)              
         return X
 
-    def showCSV(self):
-        pass
+    def previewCsv(self, df):
+        print("preview is enabled!")
     
+    def rowCount(self, df):
+        return df.shape[0]
+
+    def colCount(self, df):
+        return df.shape[1]
+
     def createFeature(self):
         pass
     

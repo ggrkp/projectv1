@@ -66,6 +66,8 @@ class MainWindowUIClass( Ui_MainWindow ):
         # iterating the columns 
         for col in data.columns: 
             self.comboBox.addItem(col) 
+        # Episis me to next tha gemizei to table view me to dataframe.head(10)!     
+        self.functions.previewCsv(data)
 
     def backSlot( self ): # Slot gia to back button
         self.stackedWidget.setCurrentIndex(0) # Pame ena screen pisw
@@ -79,7 +81,11 @@ class MainWindowUIClass( Ui_MainWindow ):
         y = self.functions.pickTarget(item_index, df)
         X = self.functions.pickPredictors(item_index, df)
             
-
+    def previewSlot( self ):
+        pass
+        
+        
+    
     # MAIN
 def main():
     app = QtWidgets.QApplication(sys.argv)

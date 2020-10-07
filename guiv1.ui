@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>742</width>
+    <width>730</width>
     <height>595</height>
    </rect>
   </property>
@@ -17,9 +17,9 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>10</y>
-      <width>691</width>
+      <width>701</width>
       <height>541</height>
      </rect>
     </property>
@@ -161,10 +161,10 @@
      <widget class="QComboBox" name="comboBox">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>370</y>
+        <x>390</x>
+        <y>310</y>
         <width>79</width>
-        <height>23</height>
+        <height>31</height>
        </rect>
       </property>
       <property name="maximumSize">
@@ -177,14 +177,29 @@
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>90</x>
-        <y>370</y>
-        <width>131</width>
-        <height>20</height>
+        <x>210</x>
+        <y>310</y>
+        <width>181</width>
+        <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
       </property>
       <property name="text">
        <string>Select Target Feature</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="csvPreview">
+      <property name="geometry">
+       <rect>
+        <x>15</x>
+        <y>11</y>
+        <width>651</width>
+        <height>291</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -289,22 +304,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>pathLine</sender>
-   <signal>returnPressed()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>returnSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>438</x>
-     <y>348</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>420</x>
-     <y>33</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>nextButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
@@ -317,38 +316,6 @@
     <hint type="destinationlabel">
      <x>380</x>
      <y>185</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>nextButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>nextSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>639</x>
-     <y>499</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>410</x>
-     <y>269</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>nextButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>nextSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>592</x>
-     <y>491</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>737</x>
-     <y>390</y>
     </hint>
    </hints>
   </connection>
@@ -375,8 +342,8 @@
    <slot>featureSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>289</x>
-     <y>396</y>
+     <x>459</x>
+     <y>386</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -393,5 +360,6 @@
   <slot>nextSlot()</slot>
   <slot>backSlot()</slot>
   <slot>featureSlot()</slot>
+  <slot>previewSlot()</slot>
  </slots>
 </ui>

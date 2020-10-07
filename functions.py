@@ -41,10 +41,7 @@ class Func:
         
     def pickPredictors(self, tar_idx, df):
         X = df.iloc[:, df.columns != df.columns[tar_idx]]  # Predictor Variables (All except the Target one.)              
-        return X
-
-    def previewCsv(self, df):
-        print("preview is enabled!")
+        return X        
     
     def rowCount(self, df):
         return df.shape[0]
@@ -52,7 +49,5 @@ class Func:
     def colCount(self, df):
         return df.shape[1]
 
-    def createFeature(self):
-        pass
     
     

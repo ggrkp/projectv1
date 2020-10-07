@@ -8,7 +8,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import  pyqtSlot , QObject
+from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem
+
 import sys
+
 class Ui_MainWindow(QObject):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -87,9 +90,11 @@ class Ui_MainWindow(QObject):
         font.setPointSize(12)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
-        self.csvPreview = QtWidgets.QTableView(self.page_2)
-        self.csvPreview.setGeometry(QtCore.QRect(15, 11, 651, 291))
-        self.csvPreview.setObjectName("csvPreview")
+        self.tableWidget = QtWidgets.QTableWidget(self.page_2)
+        self.tableWidget.setGeometry(QtCore.QRect(10, 0, 661, 301))
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(0)
+        self.tableWidget.setRowCount(0)
         self.stackedWidget.addWidget(self.page_2)
         self.page_3 = QtWidgets.QWidget()
         self.page_3.setObjectName("page_3")
@@ -120,7 +125,9 @@ class Ui_MainWindow(QObject):
         self.backButton1.clicked.connect(self.backSlot)
         self.comboBox.activated['QString'].connect(self.featureSlot)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -138,6 +145,7 @@ class Ui_MainWindow(QObject):
         self.pushButton_3.setText(_translate("MainWindow", "Next"))
         self.pushButton_4.setText(_translate("MainWindow", "Back"))
         self.label_4.setText(_translate("MainWindow", "Im the 3rd Page. Later Bitches."))
-        self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
 
-   
+        self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
+        
+

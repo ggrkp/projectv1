@@ -6,9 +6,10 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import  pyqtSlot , QObject
+from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem
+
 import sys
 
 class Ui_MainWindow(QObject):
@@ -80,24 +81,20 @@ class Ui_MainWindow(QObject):
         self.nextButton1.setGeometry(QtCore.QRect(610, 510, 80, 23))
         self.nextButton1.setObjectName("nextButton1")
         self.comboBox = QtWidgets.QComboBox(self.page_2)
-        self.comboBox.setGeometry(QtCore.QRect(390, 360, 79, 31))
+        self.comboBox.setGeometry(QtCore.QRect(390, 310, 79, 31))
         self.comboBox.setMaximumSize(QtCore.QSize(79, 16777215))
         self.comboBox.setObjectName("comboBox")
         self.label_5 = QtWidgets.QLabel(self.page_2)
-        self.label_5.setGeometry(QtCore.QRect(210, 360, 181, 31))
+        self.label_5.setGeometry(QtCore.QRect(210, 310, 181, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
-        self.csvPreview = QtWidgets.QTableView(self.page_2)
-        self.csvPreview.setGeometry(QtCore.QRect(15, 11, 651, 291))
-        self.csvPreview.setObjectName("csvPreview")
-        self.previewButton = QtWidgets.QPushButton(self.page_2)
-        self.previewButton.setGeometry(QtCore.QRect(290, 310, 101, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.previewButton.setFont(font)
-        self.previewButton.setObjectName("previewButton")
+        self.tableWidget = QtWidgets.QTableWidget(self.page_2)
+        self.tableWidget.setGeometry(QtCore.QRect(10, 0, 661, 301))
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(0)
+        self.tableWidget.setRowCount(0)
         self.stackedWidget.addWidget(self.page_2)
         self.page_3 = QtWidgets.QWidget()
         self.page_3.setObjectName("page_3")
@@ -127,10 +124,10 @@ class Ui_MainWindow(QObject):
         self.nextButton.clicked.connect(self.nextSlot)
         self.backButton1.clicked.connect(self.backSlot)
         self.comboBox.activated['QString'].connect(self.featureSlot)
-        self.previewButton.clicked.connect(self.previewSlot)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        
+
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -145,11 +142,10 @@ class Ui_MainWindow(QObject):
         self.backButton1.setText(_translate("MainWindow", "Back"))
         self.nextButton1.setText(_translate("MainWindow", "Next"))
         self.label_5.setText(_translate("MainWindow", "Select Target Feature"))
-        self.previewButton.setText(_translate("MainWindow", "Preview CSV"))
         self.pushButton_3.setText(_translate("MainWindow", "Next"))
         self.pushButton_4.setText(_translate("MainWindow", "Back"))
         self.label_4.setText(_translate("MainWindow", "Im the 3rd Page. Later Bitches."))
-        
-        self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
 
+        self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
+        
 

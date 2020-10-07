@@ -4,10 +4,14 @@
 # Gi auto ftiaxnw neo script
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject
+from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem
+
 from guiv1 import Ui_MainWindow
 from functions import Func
 import sys, csv
 import pandas as pd
+
+
 class MainWindowUIClass( Ui_MainWindow ):
     def __init__(self):
         super().__init__()
@@ -15,12 +19,9 @@ class MainWindowUIClass( Ui_MainWindow ):
     def setupUi( self, MW ):
         super().setupUi( MW )
 
-
     def refreshAll( self ):
         self.pathLine.setText( self.functions.getFileName() )
         
-
-
     def browseSlot( self ):
         options = QtWidgets.QFileDialog.Options()
         options |= QtWidgets.QFileDialog.DontUseNativeDialog
@@ -37,7 +38,8 @@ class MainWindowUIClass( Ui_MainWindow ):
     def importSlot( self ): # Slot gia to import button
         fileName =  self.pathLine.text()
         if self.functions.isValid( fileName ):
-            x = self.functions.readFile(fileName)
+            global data
+            data = self.functions.readFile(fileName)
             self.functions.setFileName( self.pathLine.text() )
             self.refreshAll()
             m = QtWidgets.QMessageBox()
@@ -61,34 +63,35 @@ class MainWindowUIClass( Ui_MainWindow ):
     def nextSlot( self ): # Slot gia to next button
         self.stackedWidget.setCurrentIndex(1)
         # Molis pataw next tha kanei load to combo Box kai tha periexei ta features.
-        fileName = self.functions.getFileName()
-        data = self.functions.readFile(fileName)
         # iterating the columns 
         for col in data.columns: 
             self.comboBox.addItem(col) 
-        # Episis me to next tha gemizei to table view me to dataframe.head(10)!     
-        self.functions.previewCsv(data)
-        # Edw ginetai to preview tou dataframe
+        # Episis me to next tha gemizei to view table view me to dataframe.head(10)!     
+        #dimiourgia table me ta dedomena tou dataset
+        self.tableWidget.setRowCount(20) # set row Count
+        self.tableWidget.setColumnCount(self.functions.colCount(data)) # set column count
+        for i in range(20):
+            for j in range(self.functions.colCount(data)):
+                self.tableWidget.setItem(i,j, QTableWidgetItem( f"{ data.iloc[i][j] }" ))
         
 
     def backSlot( self ): # Slot gia to back button
         self.stackedWidget.setCurrentIndex(0) # Pame ena screen pisw
         self.comboBox.clear() # Katharizoyme to Combo box gia na mpoun nea features sto drop down
+        self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
 
     def featureSlot( self ): # Slot gia to drop down box
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
-        fileName = self.functions.getFileName()
-        df = self.functions.readFile(fileName)
-        y = self.functions.pickTarget(item_index, df)
-        X = self.functions.pickPredictors(item_index, df)
-            
-    def previewSlot( self ):
-        pass
-        
-        
-    
-    # MAIN
+
+        y = self.functions.pickTarget(item_index, data)
+        X = self.functions.pickPredictors(item_index, data)
+
+        for i in range(20):
+            for j in range(self.functions.colCount(data)):
+                self.tableWidget.item(i,j).setBackground(QtGui.QColor('white'))
+            self.tableWidget.item(i,item_index).setBackground(QtGui.QColor('light green'))
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
     ex = MainWindowUIClass()

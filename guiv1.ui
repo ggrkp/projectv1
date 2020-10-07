@@ -192,13 +192,13 @@
        <string>Select Target Feature</string>
       </property>
      </widget>
-     <widget class="QTableView" name="csvPreview">
+     <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
-        <x>15</x>
-        <y>11</y>
-        <width>651</width>
-        <height>291</height>
+        <x>10</x>
+        <y>0</y>
+        <width>661</width>
+        <height>301</height>
        </rect>
       </property>
      </widget>

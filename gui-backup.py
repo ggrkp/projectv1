@@ -133,6 +133,7 @@ class Ui_MainWindow(QObject):
         self.pushButton_3.setText(_translate("MainWindow", "Next"))
         self.pushButton_4.setText(_translate("MainWindow", "Back"))
         self.label_4.setText(_translate("MainWindow", "Im the 3rd Page. Later Bitches."))
+        self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
 
     @pyqtSlot( )
     def browseSlot( self ):

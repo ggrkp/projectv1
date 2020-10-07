@@ -72,8 +72,8 @@ class MainWindowUIClass( Ui_MainWindow ):
         self.comboBox.clear() # Katharizoyme to Combo box gia na mpoun nea features sto drop down
 
     def featureSlot( self ): # Slot gia to drop down box
-        print("epelekses to Target feature sigxaritiria !!!!!111111")
         item_index = self.comboBox.currentIndex()
+        print(f"Ok. Column {item_index} is your Target Feature! ")
         fileName = self.functions.getFileName()
         df = self.functions.readFile(fileName)
         y = self.functions.pickTarget(item_index, df)

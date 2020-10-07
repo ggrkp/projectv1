@@ -152,30 +152,4 @@ class Ui_MainWindow(QObject):
         
         self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
 
-    @pyqtSlot( )
-    def browseSlot( self ):
-        pass
-
-    @pyqtSlot( )
-    def backSlot( self ):
-        pass
-
-    @pyqtSlot( )
-    def importSlot( self ):
-        pass
-
-    @pyqtSlot( )
-    def cancelSlot( self ):
-        pass
-
-    @pyqtSlot( )
-    def nextSlot( self ):
-        pass
-
-    @pyqtSlot( )
-    def featureSlot( self ):
-        pass
-    @pyqtSlot( )
-    def previewSlot( self ):
-        pass
 

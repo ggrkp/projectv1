@@ -36,12 +36,12 @@ class Func:
         return df
 
     def pickTarget(self, tar_idx , df):
-        y = df.iloc[:, (tar_idx)]  # Target Variable
-        return y
+        target = df.iloc[:, (tar_idx)]  # Target Variable
+        return target
         
     def pickPredictors(self, tar_idx, df):
-        X = df.iloc[:, df.columns != df.columns[tar_idx]]  # Predictor Variables (All except the Target one.)              
-        return X        
+        predictors = df.iloc[:, df.columns != df.columns[tar_idx]]  # Predictor Variables (All except the Target one.)              
+        return predictors        
     
     def rowCount(self, df):
         return df.shape[0]
@@ -49,5 +49,7 @@ class Func:
     def colCount(self, df):
         return df.shape[1]
 
+    def statInfo(self, df):
+        return df.describe()
     
     

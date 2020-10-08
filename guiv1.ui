@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
-    <height>595</height>
+    <width>904</width>
+    <height>549</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,47 +17,27 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>80</x>
       <y>10</y>
-      <width>701</width>
-      <height>541</height>
+      <width>741</width>
+      <height>511</height>
      </rect>
     </property>
     <property name="currentIndex">
      <number>1</number>
     </property>
     <widget class="QWidget" name="page">
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>621</width>
-        <height>471</height>
+        <x>35</x>
+        <y>85</y>
+        <width>641</width>
+        <height>201</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="1" column="0">
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>428</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="nextButton">
-         <property name="text">
-          <string>Next</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="2">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
         <widget class="QFrame" name="frame">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -66,7 +46,53 @@
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="2" column="0" rowspan="2" colspan="5">
+          <item row="0" column="0" colspan="2">
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Import your Data</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Please, choose a valid .csv file:</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QPushButton" name="cancelButton">
+              <property name="text">
+               <string>Clear</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="importButton">
+              <property name="text">
+               <string>Import</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0" colspan="2">
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
              <widget class="QLabel" name="label_2">
@@ -87,120 +113,136 @@
             </item>
            </layout>
           </item>
-          <item row="1" column="0" colspan="3">
-           <widget class="QLabel" name="label_3">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
+          <item row="2" column="1">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
-            <property name="text">
-             <string>Please, choose a valid .csv file:</string>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>442</width>
+              <height>20</height>
+             </size>
             </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QPushButton" name="importButton">
-            <property name="text">
-             <string>Import</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QPushButton" name="cancelButton">
-            <property name="text">
-             <string>Clear</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label">
-            <property name="font">
-             <font>
-              <pointsize>15</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Import your Data</string>
-            </property>
-           </widget>
+           </spacer>
           </item>
          </layout>
         </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>428</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="nextButton">
+           <property name="text">
+            <string>Next</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="page_2">
-     <widget class="QPushButton" name="backButton1">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>510</y>
-        <width>80</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Back</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="nextButton1">
-      <property name="geometry">
-       <rect>
-        <x>610</x>
-        <y>510</y>
-        <width>80</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Next</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>310</y>
-        <width>79</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>79</width>
-        <height>16777215</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>310</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Select Target Feature</string>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>0</y>
-        <width>661</width>
-        <height>301</height>
+        <y>470</y>
+        <width>261</width>
+        <height>25</height>
        </rect>
       </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Select Target Feature</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox">
+         <property name="maximumSize">
+          <size>
+           <width>79</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>601</x>
+        <y>401</y>
+        <width>82</width>
+        <height>54</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QPushButton" name="backButton1">
+         <property name="text">
+          <string>Back</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="nextButton1">
+         <property name="text">
+          <string>Next</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>581</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Preview of imported file:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="tableWidget"/>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="page_3">
@@ -320,22 +362,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>backButton1</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>backSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>578</x>
-     <y>532</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>147</x>
-     <y>559</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>comboBox</sender>
    <signal>activated(QString)</signal>
    <receiver>MainWindow</receiver>
@@ -348,6 +374,22 @@
     <hint type="destinationlabel">
      <x>488</x>
      <y>572</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>backButton1</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>backSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>578</x>
+     <y>532</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>559</y>
     </hint>
    </hints>
   </connection>

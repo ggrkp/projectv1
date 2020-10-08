@@ -16,6 +16,8 @@ class MainWindowUIClass( Ui_MainWindow ):
     def __init__(self):
         super().__init__()
         self.functions = Func()
+        
+
     def setupUi( self, MW ):
         super().setupUi( MW )
 
@@ -66,8 +68,7 @@ class MainWindowUIClass( Ui_MainWindow ):
         # iterating the columns 
         for col in data.columns: 
             self.comboBox.addItem(col) 
-        # Episis me to next tha gemizei to view table view me to dataframe.head(10)!     
-        #dimiourgia table me ta dedomena tou dataset
+        #dimiourgia table me ta dedomena tou dataset gia preview
         self.tableWidget.setRowCount(20) # set row Count
         self.tableWidget.setColumnCount(self.functions.colCount(data)) # set column count
         for i in range(20):
@@ -83,7 +84,8 @@ class MainWindowUIClass( Ui_MainWindow ):
     def featureSlot( self ): # Slot gia to drop down box
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
-
+        global X
+        global y
         y = self.functions.pickTarget(item_index, data)
         X = self.functions.pickPredictors(item_index, data)
 

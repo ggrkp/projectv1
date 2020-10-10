@@ -4,7 +4,9 @@ import pandas as pd
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
 from guiv1 import Ui_MainWindow
+
 import sys, csv
+import featuretools as ft
 class Func:
     def __init__( self ):
         '''
@@ -12,7 +14,6 @@ class Func:
         the file name and its contents.
         '''
         self.fileName = None
-        self.fileContent = ""
 
     def isValid( self, fileName ): # checks if file exists
         try: 
@@ -48,8 +49,17 @@ class Func:
 
     def colCount(self, df):
         return df.shape[1]
+    
+    def featureSunthesis(self, predictors): 
+        pass
 
-    def statInfo(self, df):
-        return df.describe()
-    
-    
+    def testtrainSplit(self, df):
+        pass
+
+    def preprocessData(self, df):
+        pass
+
+    def hasHeader(self, df):
+        pass
+
+        

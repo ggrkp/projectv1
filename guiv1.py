@@ -5,17 +5,15 @@
 # Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import  pyqtSlot , QObject
 from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem
-
 import sys
 
 class Ui_MainWindow(QObject):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(904, 549)
+        MainWindow.resize(865, 558)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
@@ -159,9 +157,9 @@ class Ui_MainWindow(QObject):
         self.nextButton.clicked.connect(self.nextSlot)
         self.comboBox.activated['QString'].connect(self.featureSlot)
         self.backButton1.clicked.connect(self.backSlot)
-        QtCore.QMetaObject.connectSlotsByName(self)
+        self.nextButton1.clicked.connect(self.nextSlot_1)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
-        
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -181,5 +179,6 @@ class Ui_MainWindow(QObject):
         self.pushButton_4.setText(_translate("MainWindow", "Back"))
         self.label_4.setText(_translate("MainWindow", "Im the 3rd Page. Later Bitches."))
         self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
+
 
 

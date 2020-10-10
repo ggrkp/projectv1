@@ -74,6 +74,7 @@ class MainWindowUIClass( Ui_MainWindow ):
         for i in range(20):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.setItem(i,j, QTableWidgetItem( f"{ data.iloc[i][j] }" ))
+
         
 
     def backSlot( self ): # Slot gia to back button
@@ -92,8 +93,16 @@ class MainWindowUIClass( Ui_MainWindow ):
         for i in range(20):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.item(i,j).setBackground(QtGui.QColor('white'))
-            self.tableWidget.item(i,item_index).setBackground(QtGui.QColor('light green'))
+            self.tableWidget.item(i,item_index).setBackground(QtGui.QColor('springgreen'))
 
+    def nextSlot_1(self):
+        self.stackedWidget.setCurrentIndex(2) # Pame ena screen mprosta sto next screen me preprocessing
+        
+    
+
+
+
+# Main         
 def main():
     app = QtWidgets.QApplication(sys.argv)
     ex = MainWindowUIClass()

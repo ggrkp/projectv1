@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>904</width>
-    <height>549</height>
+    <width>783</width>
+    <height>598</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,21 +17,21 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>10</y>
-      <width>741</width>
-      <height>511</height>
+      <x>50</x>
+      <y>20</y>
+      <width>701</width>
+      <height>531</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page">
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>35</x>
-        <y>85</y>
+        <x>30</x>
+        <y>150</y>
         <width>641</width>
         <height>201</height>
        </rect>
@@ -157,7 +157,7 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page_2">
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -187,11 +187,14 @@
            <height>16777215</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">selection-background-color: rgb(85, 255, 127);</string>
+         </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>601</x>
@@ -217,7 +220,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -246,7 +249,7 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page_3">
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="nextButton2">
       <property name="geometry">
        <rect>
         <x>580</x>
@@ -259,7 +262,7 @@
        <string>Next</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="backButton2">
       <property name="geometry">
        <rect>
         <x>500</x>
@@ -272,23 +275,150 @@
        <string>Back</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_4">
+     <widget class="QPushButton" name="modelButton">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>130</y>
-        <width>691</width>
-        <height>121</height>
+        <x>450</x>
+        <y>460</y>
+        <width>41</width>
+        <height>41</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <pointsize>30</pointsize>
-       </font>
-      </property>
       <property name="text">
-       <string>Im the 3rd Page. Later Bitches.</string>
+       <string>GO!</string>
       </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>220</y>
+        <width>311</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Resampling strategy</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="ressampleCombo"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>270</y>
+        <width>311</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <item>
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>Metric</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="metricCombo"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>191</x>
+        <y>91</y>
+        <width>312</width>
+        <height>58</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Time left for this task</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>Per run time limit</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>118</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <widget class="QSpinBox" name="timeLeft_box"/>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="perRun_box"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>160</y>
+        <width>311</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Ensemble memory limit</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>88</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="memory_box"/>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>
@@ -304,8 +434,8 @@
    <slot>browseSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>628</x>
-     <y>348</y>
+     <x>708</x>
+     <y>263</y>
     </hint>
     <hint type="destinationlabel">
      <x>560</x>
@@ -320,8 +450,8 @@
    <slot>cancelSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>114</x>
-     <y>460</y>
+     <x>171</x>
+     <y>294</y>
     </hint>
     <hint type="destinationlabel">
      <x>30</x>
@@ -336,8 +466,8 @@
    <slot>importSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>289</x>
-     <y>460</y>
+     <x>257</x>
+     <y>294</y>
     </hint>
     <hint type="destinationlabel">
      <x>217</x>
@@ -352,8 +482,8 @@
    <slot>nextSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>639</x>
-     <y>499</y>
+     <x>718</x>
+     <y>351</y>
     </hint>
     <hint type="destinationlabel">
      <x>380</x>
@@ -368,12 +498,12 @@
    <slot>featureSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>459</x>
-     <y>386</y>
+     <x>290</x>
+     <y>513</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
-     <y>572</y>
+     <y>557</y>
     </hint>
    </hints>
   </connection>
@@ -384,12 +514,124 @@
    <slot>backSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>578</x>
-     <y>532</y>
+     <x>720</x>
+     <y>424</y>
     </hint>
     <hint type="destinationlabel">
      <x>147</x>
-     <y>559</y>
+     <y>557</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nextButton1</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>nextSlot_1()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>706</x>
+     <y>453</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>768</x>
+     <y>530</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>modelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>modelSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>540</x>
+     <y>504</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>52</x>
+     <y>258</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>timeLeft_box</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>timeleft_Slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>520</x>
+     <y>120</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>24</x>
+     <y>120</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>perRun_box</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>perrun_Slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>521</x>
+     <y>155</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>65</x>
+     <y>185</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nextButton2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>nextSlot_2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>686</x>
+     <y>506</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>12</x>
+     <y>457</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>backButton2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>backSlot_1()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>594</x>
+     <y>503</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>13</x>
+     <y>547</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>memory_box</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>ensmemory_Slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>530</x>
+     <y>194</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>11</x>
+     <y>221</y>
     </hint>
    </hints>
   </connection>
@@ -403,5 +645,12 @@
   <slot>backSlot()</slot>
   <slot>featureSlot()</slot>
   <slot>previewSlot()</slot>
+  <slot>nextSlot_1()</slot>
+  <slot>modelSlot()</slot>
+  <slot>timeleft_Slot()</slot>
+  <slot>perrun_Slot()</slot>
+  <slot>ensmemory_Slot()</slot>
+  <slot>backSlot_1()</slot>
+  <slot>nextSlot_2()</slot>
  </slots>
 </ui>

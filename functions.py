@@ -4,7 +4,9 @@ import pandas as pd
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
 from guiv1 import Ui_MainWindow
-
+from sklearn.model_selection import train_test_split
+from autosklearn.classification import AutoSklearnClassifier
+import sklearn 
 import sys, csv
 import featuretools as ft
 class Func:
@@ -37,11 +39,11 @@ class Func:
         return df
 
     def pickTarget(self, tar_idx , df):
-        target = df.iloc[:, (tar_idx)]  # Target Variable
+        target = df.iloc[:, (tar_idx)].to_numpy()  # Target Variable
         return target
         
     def pickPredictors(self, tar_idx, df):
-        predictors = df.iloc[:, df.columns != df.columns[tar_idx]]  # Predictor Variables (All except the Target one.)              
+        predictors = df.iloc[:, df.columns != df.columns[tar_idx]].to_numpy()  # Predictor Variables (All except the Target one.)              
         return predictors        
     
     def rowCount(self, df):
@@ -50,16 +52,57 @@ class Func:
     def colCount(self, df):
         return df.shape[1]
     
-    def featureSunthesis(self, predictors): 
-        pass
-
-    def testtrainSplit(self, df):
-        pass
-
-    def preprocessData(self, df):
-        pass
-
     def hasHeader(self, df):
         pass
+    
+    # nees sunartiseis 
+
+    def splitData(self, pred, target):
+        return train_test_split( pred, target, test_size = 0.2, random_state=1 )
+
+    def callClassifier(self, t_left, t_per_run, 
+    mem_limit, inc_est, exc_est, inc_pre, exc_pre, resample, metric):
+        automl = AutoSklearnClassifier(
+        # TIME RESTRICTION
+        time_left_for_this_task=t_left,
+        per_run_time_limit=t_per_run,
+
+        #MEMORY RESTRICTION
+        ensemble_memory_limit= mem_limit, 
+
+        #ALGORITHM RESTRICTION
+        include_estimators= inc_est,
+        exclude_estimators= exc_est,
+
+        #APENERGOPOIHSH PREPROSSESORS
+        include_preprocessors= inc_pre,
+        exclude_preprocessors= exc_pre,
+
+        #RESAMPLING (CROSS VALIDATION) - ISWS ME NEA SUNARTHSH GIA NA PAIRNEI KI AUTO PARAMETROUS
+        resampling_strategy=resample, 
+
+        #EPILOGI METRIKWN
+        metric= metric 
+        )
+        return automl
+    
+    def callRegressor(self):
+        automl = AutoSklearnClassifier(
+        time_left_for_this_task=30,
+        )
+        return automl
+
+    #isws sinartisi na epilegei classifier i regressor meta
+    def fitModel(self, pred_train, target_train, automl, d_name):
+        automl.fit(pred_train, target_train, dataset_name = d_name)
+
+    # def getScore(self, automl, p_test, t_test):
+    #     pred = automl.predict(p_test)
+    #     return sklearn.metrics.accuracy_score(t_test, pred)
+
+
+
+
+ 
 
         

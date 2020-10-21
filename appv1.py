@@ -12,7 +12,8 @@ import sys, csv
 import pandas as pd
 import sklearn
 import os
-# kane commit mori malakiaασδαδ  se parakalv 
+#EDO EGINE ALLAGI BRO 
+
 class MainWindowUIClass( Ui_MainWindow ):
     def __init__(self):
         global t_left

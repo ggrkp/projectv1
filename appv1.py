@@ -105,7 +105,7 @@ class MainWindowUIClass( Ui_MainWindow ):
 
     def nextSlot_1(self): # Next pou pigainei stis parametrous tou modeling
         self.stackedWidget.setCurrentIndex(2) # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning        
-        global  inc_est, exc_est, inc_pre, exc_pre, resample, resample_args, metric, disable_prepro
+        global  t_left, t_per_run, mem_limit, inc_est, exc_est, disable_prepro, resample, resample_args, metric
 
         #MODELING DEFAULTS        
         self.timeLeft_box.setMinimum(30) 
@@ -123,14 +123,33 @@ class MainWindowUIClass( Ui_MainWindow ):
         "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
         "recall","recall_macro","recall_micro","recall_samples","recall_weighted",
         "f1", "f1_macro", "f1_micro", "f1_samples", "f1_weighted"]
-        self.metricCombo.addItems(metric_list)
+
+        self.metricCombo.addItems(metric_list) 
         metric = None
         resample_args = None
         resample_list = ["None", "Cross Validation", "Holdout"]
         self.ressampleCombo.addItems(resample_list)
         resample = 'holdout'
-        inc_est = None
-        exc_est = None
+        inc_est = [ "adaboost",
+                    "bernoulli_nb",
+                    "decision_tree",
+                    "extra_trees",
+                    "gaussian_nb",
+                    "gradient_boosting",
+                    "k_nearest_neighbors",
+                    "lda",
+                    "liblinear_svc",
+                    "libsvm_svc",
+                    "multinomial_nb",
+                    "passive_aggressive",
+                    "random_forest",
+                    "sgd",
+                    "qda" ]
+
+        disable_prepro = None
+
+        inc_est = []
+        exc_est = []
 
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -157,11 +176,13 @@ class MainWindowUIClass( Ui_MainWindow ):
 
     # Metric
     def metricBox(self):
+        global metric
         combo_idx_metric = self.metricCombo.currentIndex()
         metric = self.metricCombo.itemText(combo_idx_metric)
 
     # Resample
     def resampleBox(self):
+        global reasmple
         combo_idx_resample = self.ressampleCombo.currentIndex()
         resample_str = self.ressampleCombo.itemText(combo_idx_resample)
         if resample_str == "Cross Validation":
@@ -174,20 +195,33 @@ class MainWindowUIClass( Ui_MainWindow ):
     # Go !
     
     def nextSlot_2(self):
-        pass
+        print (exc_est)
     def backSlot_1(self):
         pass
 
-    def adaChecked(self):
-        print("ada checked")
+    def adaChecked(self): # Auto prepei na to kanw gia kathe algorithmo logika --> na ftiaksw sunartisi ...
+        global exc_est
+        if self.adaBox.isChecked():
+            print("ada checked")
+            inc_est.append("adaboost")
+            if "adaboost" in exc_est:
+                exc_est.remove("adaboost")
+        else:
+            print("ada unchecked")
+            exc_est.append("adaboost")
+            inc_est.remove("adaboost")
+           
 
     def prepro_Checked(self): # Disable Feature Preprocessing
         global disable_prepro
-        if self.checkBox_16.isChecked():    
-            disable_prepro = ["no_preprocessing"]
+        if self.checkBox_16.isChecked():   
+            disable_prepro = [] 
+            disable_prepro.append("no_preprocessing")
         else:
             disable_prepro = None
-                
+
+
+
     def modelSlot(self):
         print("please wait... May take several seconds...")
         X_train, X_test, y_train, y_test = self.functions.splitData(X, y)
@@ -201,6 +235,12 @@ class MainWindowUIClass( Ui_MainWindow ):
         pred = model.predict(X_test)
         print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
         print(model.show_models())
+
+
+
+
+
+
 # Main         
 def main():
     app = QtWidgets.QApplication(sys.argv)

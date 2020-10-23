@@ -765,8 +765,8 @@
      <y>206</y>
     </hint>
     <hint type="destinationlabel">
-     <x>65</x>
-     <y>185</y>
+     <x>97</x>
+     <y>145</y>
     </hint>
    </hints>
   </connection>
@@ -825,12 +825,12 @@
    <slot>timeleft_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>660</x>
-     <y>182</y>
+     <x>614</x>
+     <y>173</y>
     </hint>
     <hint type="destinationlabel">
-     <x>24</x>
-     <y>120</y>
+     <x>95</x>
+     <y>61</y>
     </hint>
    </hints>
   </connection>
@@ -909,8 +909,8 @@
      <y>565</y>
     </hint>
     <hint type="destinationlabel">
-     <x>39</x>
-     <y>512</y>
+     <x>89</x>
+     <y>320</y>
     </hint>
    </hints>
   </connection>
@@ -925,8 +925,8 @@
      <y>533</y>
     </hint>
     <hint type="destinationlabel">
-     <x>101</x>
-     <y>566</y>
+     <x>96</x>
+     <y>366</y>
     </hint>
    </hints>
   </connection>
@@ -941,8 +941,8 @@
      <y>256</y>
     </hint>
     <hint type="destinationlabel">
-     <x>11</x>
-     <y>221</y>
+     <x>105</x>
+     <y>196</y>
     </hint>
    </hints>
   </connection>
@@ -957,8 +957,8 @@
      <y>334</y>
     </hint>
     <hint type="destinationlabel">
-     <x>30</x>
-     <y>321</y>
+     <x>85</x>
+     <y>233</y>
     </hint>
    </hints>
   </connection>
@@ -973,8 +973,8 @@
      <y>288</y>
     </hint>
     <hint type="destinationlabel">
-     <x>18</x>
-     <y>368</y>
+     <x>95</x>
+     <y>276</y>
     </hint>
    </hints>
   </connection>
@@ -989,8 +989,8 @@
      <y>502</y>
     </hint>
     <hint type="destinationlabel">
-     <x>78</x>
-     <y>593</y>
+     <x>91</x>
+     <y>402</y>
     </hint>
    </hints>
   </connection>
@@ -1005,8 +1005,24 @@
      <y>180</y>
     </hint>
     <hint type="destinationlabel">
-     <x>79</x>
-     <y>155</y>
+     <x>99</x>
+     <y>101</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_16</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>prepro_Checked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>395</x>
+     <y>389</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>117</x>
+     <y>36</y>
     </hint>
    </hints>
   </connection>
@@ -1044,5 +1060,6 @@
   <slot>rforestChecked()</slot>
   <slot>sgdChecked()</slot>
   <slot>qdaChecked()</slot>
+  <slot>prepro_Checked()</slot>
  </slots>
 </ui>

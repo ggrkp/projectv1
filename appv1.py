@@ -129,11 +129,9 @@ class MainWindowUIClass( Ui_MainWindow ):
         resample_list = ["None", "Cross Validation", "Holdout"]
         self.ressampleCombo.addItems(resample_list)
         resample = 'holdout'
-
         inc_est = None
         exc_est = None
 
-        disable_prepro = None
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
@@ -174,6 +172,22 @@ class MainWindowUIClass( Ui_MainWindow ):
             resample = 'holdout'
     
     # Go !
+    
+    def nextSlot_2(self):
+        pass
+    def backSlot_1(self):
+        pass
+
+    def adaChecked(self):
+        print("ada checked")
+
+    def prepro_Checked(self): # Disable Feature Preprocessing
+        global disable_prepro
+        if self.checkBox_16.isChecked():    
+            disable_prepro = ["no_preprocessing"]
+        else:
+            disable_prepro = None
+                
     def modelSlot(self):
         print("please wait... May take several seconds...")
         X_train, X_test, y_train, y_test = self.functions.splitData(X, y)
@@ -187,15 +201,6 @@ class MainWindowUIClass( Ui_MainWindow ):
         pred = model.predict(X_test)
         print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
         print(model.show_models())
-    def nextSlot_2(self):
-        pass
-    def backSlot_1(self):
-        pass
-
-    def adaChecked(self):
-        print("ada checked")
-
-
 # Main         
 def main():
     app = QtWidgets.QApplication(sys.argv)

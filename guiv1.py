@@ -335,11 +335,13 @@ class Ui_MainWindow(QObject):
         self.ressampleCombo.activated['QString'].connect(self.resampleBox)
         self.run_Button.clicked.connect(self.modelSlot)
         self.adaBox.stateChanged['int'].connect(self.adaChecked)
-        QtCore.QMetaObject.connectSlotsByName(self)
+        self.checkBox_16.stateChanged['int'].connect(self.prepro_Checked)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 # extra: 
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
         self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -378,10 +380,20 @@ class Ui_MainWindow(QObject):
         self.label_8.setText(_translate("MainWindow", "Ensemble memory limit"))
         self.label_9.setText(_translate("MainWindow", "Resampling strategy"))
         self.label_10.setText(_translate("MainWindow", "Metric"))
-        self.checkBox_16.setText(_translate("MainWindow", "Enable Feature Preprocessing"))
+        self.checkBox_16.setText(_translate("MainWindow", "Disable Feature Preprocessing"))
         self.label_12.setText(_translate("MainWindow", "Holdout Train Size"))
         self.label_11.setText(_translate("MainWindow", "CV folds"))
         self.run_Button.setText(_translate("MainWindow", "Run"))
         self.backButton2.setText(_translate("MainWindow", "Back"))
         self.nextButton2.setText(_translate("MainWindow", "Next"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
 

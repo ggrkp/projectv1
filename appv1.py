@@ -12,7 +12,7 @@ import sys, csv
 import pandas as pd
 import sklearn
 import os
-
+# εδω αλλαγουλα μπρο 
 class MainWindowUIClass( Ui_MainWindow ):
     def __init__(self):
         global t_left

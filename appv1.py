@@ -2,6 +2,7 @@
 # Etsi wste an thelw na allaksw kati sto gui na mhn ephreastei to app logic
 # An peiraksw to gui me to designer to gui.py tha allaksei kai oles oi allages tha xathoun 
 # Gi auto ftiaxnw neo script
+import featuretools
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem

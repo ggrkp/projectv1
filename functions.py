@@ -61,7 +61,7 @@ class Func:
         return train_test_split( pred, target, test_size = 0.2, random_state=1 )
 
     def callClassifier(self, t_left, t_per_run, 
-    mem_limit, inc_est, exc_est, inc_pre, exc_pre, resample, metric):
+    mem_limit, inc_est_list, exc_est_list, disable_prepro, resample, resample_args, metric):
         automl = AutoSklearnClassifier(
         # TIME RESTRICTION
         time_left_for_this_task=t_left,
@@ -71,16 +71,15 @@ class Func:
         ensemble_memory_limit= mem_limit, 
 
         #ALGORITHM RESTRICTION
-        include_estimators= inc_est,
-        exclude_estimators= exc_est,
+        include_estimators= inc_est_list,
+        exclude_estimators= exc_est_list,
 
         #APENERGOPOIHSH PREPROSSESORS
-        include_preprocessors= inc_pre,
-        exclude_preprocessors= exc_pre,
+        include_preprocessors= disable_prepro,
 
         #RESAMPLING (CROSS VALIDATION) - ISWS ME NEA SUNARTHSH GIA NA PAIRNEI KI AUTO PARAMETROUS
         resampling_strategy=resample, 
-
+        resampling_strategy_arguments= resample_args,
         #EPILOGI METRIKWN
         metric= metric 
         )

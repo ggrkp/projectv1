@@ -105,69 +105,97 @@ class MainWindowUIClass( Ui_MainWindow ):
 
     def nextSlot_1(self): # Next pou pigainei stis parametrous tou modeling
         self.stackedWidget.setCurrentIndex(2) # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning        
-        global  inc_est, exc_est, inc_pre, exc_pre, resample, metric
+        global  inc_est, exc_est, inc_pre, exc_pre, resample, resample_args, metric, disable_prepro
+
         #MODELING DEFAULTS        
         self.timeLeft_box.setMinimum(30) 
         self.timeLeft_box.setMaximum(30000) 
 
         self.perRun_box.setMinimum(3)
         self.perRun_box.setMaximum(int(t_left/2))
-        meminfo = dict((i.split()[0].rstrip(':'),int(i.split()[1])) for i in open('/proc/meminfo').readlines())
-        mem_kib = int(meminfo['MemTotal']/1024)  # e.g. 3921852
+
+        meminfo = dict((i.split()[0].rstrip(':'),int(i.split()[1])) for i in open('/proc/meminfo').readlines())# analoga me ta specs tou pc
+        mem_Mb = int(meminfo['MemTotal']/1024)  
         self.memory_box.setMinimum(1024)
-        self.memory_box.setMaximum(mem_kib) 
+        self.memory_box.setMaximum(mem_Mb) 
+
+        metric_list = ["accuracy", "balanced_accuracy", "roc_auc", "average_precision", "log_loss",
+        "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
+        "recall","recall_macro","recall_micro","recall_samples","recall_weighted",
+        "f1", "f1_macro", "f1_micro", "f1_samples", "f1_weighted"]
+        self.metricCombo.addItems(metric_list)
+        metric = None
+        resample_args = None
+        resample_list = ["None", "Cross Validation", "Holdout"]
+        self.ressampleCombo.addItems(resample_list)
+        resample = 'holdout'
 
         inc_est = None
         exc_est = None
 
-        inc_pre = None
-        exc_pre = None
-
-        resample = 'holdout'
-        metric = None
+        disable_prepro = None
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # --------------------- MODELING SCREEN -------------------------------
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><>< 
+    # Time Left For This Task 
     def timeleft_Slot(self):
         global t_left
         t_left = self.timeLeft_box.value()
         self.perRun_box.setMaximum(int(t_left/2))
         print (t_left)
 
+    # Per Run Time Limit
     def perrun_Slot(self): 
         global t_per_run
         t_per_run = self.perRun_box.value()
         print (t_per_run)
 
+    # Ensemble Memory Limit
     def ensmemory_Slot(self):
         global mem_limit
         mem_limit = self.memory_box.value()
 
+    # Metric
+    def metricBox(self):
+        combo_idx_metric = self.metricCombo.currentIndex()
+        metric = self.metricCombo.itemText(combo_idx_metric)
+
+    # Resample
+    def resampleBox(self):
+        combo_idx_resample = self.ressampleCombo.currentIndex()
+        resample_str = self.ressampleCombo.itemText(combo_idx_resample)
+        if resample_str == "Cross Validation":
+            resample = 'cv'
+        elif resample_str == "None":
+            resample = None
+        else:
+            resample = 'holdout'
     
+    # Go !
     def modelSlot(self):
         print("please wait... May take several seconds...")
         X_train, X_test, y_train, y_test = self.functions.splitData(X, y)
         base = os.path.basename(fileName)
         dataset_name = os.path.splitext(base)[0]
         global model
-        model = self.functions.callClassifier(t_left, t_per_run, mem_limit, inc_est, exc_est, inc_pre, exc_pre, resample, metric)
+        model = self.functions.callClassifier(t_left, t_per_run, mem_limit, inc_est, exc_est, disable_prepro, resample, resample_args, metric)
         self.functions.fitModel(X_train, y_train, model, dataset_name)
         print (model.sprint_statistics())
+        
         pred = model.predict(X_test)
         print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
-
-    def nextSlot_2(self): 
+        print(model.show_models())
+    def nextSlot_2(self):
         pass
-
     def backSlot_1(self):
         pass
-    # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
-    
+    def adaChecked(self):
+        print("ada checked")
 
-    
+
 # Main         
 def main():
     app = QtWidgets.QApplication(sys.argv)

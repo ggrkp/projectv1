@@ -201,12 +201,8 @@ class Ui_MainWindow(QObject):
         self.bernoulliBox = QtWidgets.QCheckBox(self.groupBox)
         self.bernoulliBox.setGeometry(QtCore.QRect(10, 50, 99, 21))
         self.bernoulliBox.setObjectName("bernoulliBox")
-        self.label_17 = QtWidgets.QLabel(self.groupBox)
-        self.label_17.setGeometry(QtCore.QRect(0, 0, 221, 21))
         font = QtGui.QFont()
         font.setPointSize(13)
-        self.label_17.setFont(font)
-        self.label_17.setObjectName("label_17")
         self.widget = QtWidgets.QWidget(self.page_3)
         self.widget.setGeometry(QtCore.QRect(240, 120, 314, 221))
         self.widget.setObjectName("widget")
@@ -341,6 +337,8 @@ class Ui_MainWindow(QObject):
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
         self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
+        
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -374,7 +372,6 @@ class Ui_MainWindow(QObject):
         self.extratreeBox.setText(_translate("MainWindow", "extra_trees"))
         self.knnBox.setText(_translate("MainWindow", "k_nearest_neighbors"))
         self.bernoulliBox.setText(_translate("MainWindow", "bernoulli_nb"))
-        self.label_17.setText(_translate("MainWindow", "Select Estimators"))
         self.label_4.setText(_translate("MainWindow", "Time left for this task"))
         self.label_7.setText(_translate("MainWindow", "Per run time limit"))
         self.label_8.setText(_translate("MainWindow", "Ensemble memory limit"))

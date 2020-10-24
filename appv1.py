@@ -21,6 +21,7 @@ class MainWindowUIClass( Ui_MainWindow ):
         
 
     def setupUi( self, MW ):
+        
         super().setupUi( MW )
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
@@ -105,9 +106,13 @@ class MainWindowUIClass( Ui_MainWindow ):
 
     def nextSlot_1(self): # Next pou pigainei stis parametrous tou modeling
         self.stackedWidget.setCurrentIndex(2) # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning        
-        global  t_left, t_per_run, mem_limit, inc_est, exc_est, disable_prepro, resample, resample_args, metric
+        
+        global  t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric
 
         #MODELING DEFAULTS        
+        self.groupBox.setCheckable(True)
+        self.groupBox.setChecked(False)
+        self.groupBox.setTitle("Select Estimators")
         self.timeLeft_box.setMinimum(30) 
         self.timeLeft_box.setMaximum(30000) 
 
@@ -147,10 +152,6 @@ class MainWindowUIClass( Ui_MainWindow ):
                     "qda" ]
 
         disable_prepro = None
-
-        inc_est = []
-        exc_est = []
-
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
@@ -182,7 +183,7 @@ class MainWindowUIClass( Ui_MainWindow ):
 
     # Resample
     def resampleBox(self):
-        global reasmple
+        global resample
         combo_idx_resample = self.ressampleCombo.currentIndex()
         resample_str = self.ressampleCombo.itemText(combo_idx_resample)
         if resample_str == "Cross Validation":
@@ -191,27 +192,20 @@ class MainWindowUIClass( Ui_MainWindow ):
             resample = None
         else:
             resample = 'holdout'
-    
-    # Go !
-    
+        
     def nextSlot_2(self):
-        print (exc_est)
+        print(f"Included:   {inc_est}")
+        print("group box:", self.groupBox)
     def backSlot_1(self):
         pass
 
-    def adaChecked(self): # Auto prepei na to kanw gia kathe algorithmo logika --> na ftiaksw sunartisi ...
-        global exc_est
-        if self.adaBox.isChecked():
-            print("ada checked")
-            inc_est.append("adaboost")
-            if "adaboost" in exc_est:
-                exc_est.remove("adaboost")
-        else:
-            print("ada unchecked")
-            exc_est.append("adaboost")
-            inc_est.remove("adaboost")
-           
-
+    def adaChecked(self): # Auto prepei na to kanw gia kathe algorithmo logika --> 
+        # na ftiaksw sunartisi h na dw an ginetai na to kanw apo to groupbox...
+        global inc_est
+        box_state = self.adaBox.isChecked()
+        est_name = "adaboost"
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)        
+        print (inc_est)
     def prepro_Checked(self): # Disable Feature Preprocessing
         global disable_prepro
         if self.checkBox_16.isChecked():   
@@ -220,26 +214,20 @@ class MainWindowUIClass( Ui_MainWindow ):
         else:
             disable_prepro = None
 
-
-
     def modelSlot(self):
+        global model, inc_est
         print("please wait... May take several seconds...")
         X_train, X_test, y_train, y_test = self.functions.splitData(X, y)
         base = os.path.basename(fileName)
         dataset_name = os.path.splitext(base)[0]
-        global model
-        model = self.functions.callClassifier(t_left, t_per_run, mem_limit, inc_est, exc_est, disable_prepro, resample, resample_args, metric)
+        
+        model = self.functions.callClassifier(t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
         self.functions.fitModel(X_train, y_train, model, dataset_name)
         print (model.sprint_statistics())
         
         pred = model.predict(X_test)
         print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
         print(model.show_models())
-
-
-
-
-
 
 # Main         
 def main():

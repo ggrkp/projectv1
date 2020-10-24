@@ -60,8 +60,7 @@ class Func:
     def splitData(self, pred, target):
         return train_test_split( pred, target, test_size = 0.2, random_state=1 )
 
-    def callClassifier(self, t_left, t_per_run, 
-    mem_limit, inc_est_list, exc_est_list, disable_prepro, resample, resample_args, metric):
+    def callClassifier(self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric):
         automl = AutoSklearnClassifier(
         # TIME RESTRICTION
         time_left_for_this_task=t_left,
@@ -71,8 +70,7 @@ class Func:
         ensemble_memory_limit= mem_limit, 
 
         #ALGORITHM RESTRICTION
-        include_estimators= inc_est_list,
-        exclude_estimators= exc_est_list,
+        include_estimators= inc_est,
 
         #APENERGOPOIHSH PREPROSSESORS
         include_preprocessors= disable_prepro,
@@ -95,6 +93,16 @@ class Func:
     def fitModel(self, pred_train, target_train, automl, d_name):
         automl.fit(pred_train, target_train, dataset_name = d_name)
 
+
+    def app_Estimator(self, inc_est, box_state, est_name ):
+        if box_state:
+            print("ada checked")
+            inc_est = []
+            inc_est.append(est_name)
+        else:
+            print("ada unchecked")
+            inc_est.remove(est_name)
+        return(inc_est)
     # def getScore(self, automl, p_test, t_test):
     #     pred = automl.predict(p_test)
     #     return sklearn.metrics.accuracy_score(t_test, pred)

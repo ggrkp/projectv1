@@ -112,7 +112,7 @@ class MainWindowUIClass( Ui_MainWindow ):
         #MODELING DEFAULTS        
         self.groupBox.setCheckable(True)
         self.groupBox.setChecked(False)
-        self.groupBox.setTitle("Select Estimators")
+
         self.timeLeft_box.setMinimum(30) 
         self.timeLeft_box.setMaximum(30000) 
 
@@ -130,11 +130,14 @@ class MainWindowUIClass( Ui_MainWindow ):
         "f1", "f1_macro", "f1_micro", "f1_samples", "f1_weighted"]
 
         self.metricCombo.addItems(metric_list) 
+        
         metric = None
         resample_args = None
         resample_list = ["None", "Cross Validation", "Holdout"]
         self.ressampleCombo.addItems(resample_list)
         resample = 'holdout'
+
+        
         inc_est = [ "adaboost",
                     "bernoulli_nb",
                     "decision_tree",
@@ -195,17 +198,139 @@ class MainWindowUIClass( Ui_MainWindow ):
         
     def nextSlot_2(self):
         print(f"Included:   {inc_est}")
-        print("group box:", self.groupBox)
+
     def backSlot_1(self):
         pass
 
-    def adaChecked(self): # Auto prepei na to kanw gia kathe algorithmo logika --> 
-        # na ftiaksw sunartisi h na dw an ginetai na to kanw apo to groupbox...
+    # DEFAULT THA EINAI EILEGMENOI OLOI. AN PATHSEIS TO CHECK THA KSEKINAS NA VAZEIS MONOS SOU .
+    def select_all_Estimators(self):
+        global inc_est
+        if self.groupBox.isChecked():
+            inc_est = []
+            
+        else:
+            self.extratreeBox.setChecked(False)
+            self.adaBox.setChecked(False)
+            self.gaussianBox.setChecked(False)
+            self.bernoulliBox.setChecked(False)
+            self.rforoestBox.setChecked(False)
+            self.qdaBox.setChecked(False)
+            self.multinbBox.setChecked(False)
+            self.ldaBox.setChecked(False)
+            self.libsvmBox.setChecked(False)
+            self.liblinearBox.setChecked(False)
+            self.dtreeBox.setChecked(False)
+            self.sgdBox.setChecked(False)
+            self.gradientBox.setChecked(False)
+            self.knnBox.setChecked(False)
+            self.pasagrBox.setChecked(False)
+            inc_est = [ "adaboost",
+                    "bernoulli_nb",
+                    "decision_tree",
+                    "extra_trees",
+                    "gaussian_nb",
+                    "gradient_boosting",
+                    "k_nearest_neighbors",
+                    "lda",
+                    "liblinear_svc",
+                    "libsvm_svc",
+                    "multinomial_nb",
+                    "passive_aggressive",
+                    "random_forest",
+                    "sgd",
+                    "qda" ]
+    # ALGORITHMOI CHECKED :
+    def adaChecked(self): 
         global inc_est
         box_state = self.adaBox.isChecked()
-        est_name = "adaboost"
+        est_name = self.adaBox.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)        
-        print (inc_est)
+    
+    def bernoulliChecked(self): 
+        global inc_est
+        box_state = self.bernoulliBox.isChecked()
+        est_name = self.bernoulliBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)        
+
+    def dectreeChecked(self):
+        global inc_est
+        box_state = self.dtreeBox.isChecked()
+        est_name = self.dtreeBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def extraTreeChecked(self):
+        global inc_est
+        box_state = self.extratreeBox.isChecked()
+        est_name = self.extratreeBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def gausianChecked(self):
+        global inc_est
+        box_state = self.gaussianBox.isChecked()
+        est_name = self.gaussianBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def gradient_checked(self):
+        global inc_est
+        box_state = self.gradientBox.isChecked()
+        est_name = self.gradientBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def knnChecked(self):
+        global inc_est
+        box_state = self.knnBox.isChecked()
+        est_name = self.knnBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def ldaChecked(self):
+        global inc_est
+        box_state = self.ldaBox.isChecked()
+        est_name = self.ldaBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def liblinearChecked(self):
+        global inc_est
+        box_state = self.liblinearBox.isChecked()
+        est_name = self.liblinearBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def libsvmChecked(self):
+        global inc_est
+        box_state = self.libsvmBox.isChecked()
+        est_name = self.bernoulliBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def multnbChecked(self):
+        global inc_est
+        box_state = self.multinbBox.isChecked()
+        est_name = self.multinbBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def pasagrChecked(self):
+        global inc_est
+        box_state = self.pasagrBox.isChecked()
+        est_name = self.pasagrBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def rforestChecked(self):
+        global inc_est
+        box_state = self.bernoulliBox.isChecked()
+        est_name = self.bernoulliBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def sgdChecked(self):
+        global inc_est
+        box_state = self.sgdBox.isChecked()
+        est_name = self.sgdBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def qdaChecked(self):
+        global inc_est
+        box_state = self.qdaBox.isChecked()
+        est_name = self.qdaBox.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    # DISABLE PREPROCESSING
     def prepro_Checked(self): # Disable Feature Preprocessing
         global disable_prepro
         if self.checkBox_16.isChecked():   

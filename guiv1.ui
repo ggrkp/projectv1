@@ -306,230 +306,124 @@
      <widget class="QGroupBox" name="groupBox">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>50</x>
         <y>100</y>
-        <width>221</width>
+        <width>174</width>
         <height>421</height>
        </rect>
       </property>
       <property name="title">
-       <string/>
+       <string>Select Estimators: </string>
       </property>
-      <widget class="QCheckBox" name="dtreeBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>77</y>
-         <width>105</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>decision_tree</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="ldaBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>212</y>
-         <width>44</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>lda</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="gradientBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>158</y>
-         <width>134</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>gradient_boosting</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="multinbBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>293</y>
-         <width>118</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>multinomial_nb</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="adaBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>23</y>
-         <width>81</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>adaboost</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="qdaBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>401</y>
-         <width>48</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>qda</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="pasagrBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>320</y>
-         <width>142</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>passive_aggressive</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="gaussianBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>131</y>
-         <width>100</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>gaussian_nb</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="liblinearBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>239</y>
-         <width>100</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>liblinear_svc</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="libsvmBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>266</y>
-         <width>91</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>libsvm_svc</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="rforoestBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>347</y>
-         <width>113</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>random_forest</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="sgdBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>374</y>
-         <width>47</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>sgd</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="extratreeBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>104</y>
-         <width>94</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>extra_trees</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="knnBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>185</y>
-         <width>150</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>k_nearest_neighbors</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="bernoulliBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>50</y>
-         <width>99</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>bernoulli_nb</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_17">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>221</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>13</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Select Estimators</string>
-       </property>
-      </widget>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="extratreeBox">
+         <property name="text">
+          <string>extra_trees</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="QCheckBox" name="rforoestBox">
+         <property name="text">
+          <string>random_forest</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="0">
+        <widget class="QCheckBox" name="qdaBox">
+         <property name="text">
+          <string>qda</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="QCheckBox" name="pasagrBox">
+         <property name="text">
+          <string>passive_aggressive</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="bernoulliBox">
+         <property name="text">
+          <string>bernoulli_nb</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="QCheckBox" name="multinbBox">
+         <property name="text">
+          <string>multinomial_nb</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QCheckBox" name="ldaBox">
+         <property name="text">
+          <string>lda</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QCheckBox" name="gaussianBox">
+         <property name="text">
+          <string>gaussian_nb</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="adaBox">
+         <property name="text">
+          <string>adaboost</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QCheckBox" name="liblinearBox">
+         <property name="text">
+          <string>liblinear_svc</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <widget class="QCheckBox" name="libsvmBox">
+         <property name="text">
+          <string>libsvm_svc</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QCheckBox" name="knnBox">
+         <property name="text">
+          <string>k_nearest_neighbors</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QCheckBox" name="gradientBox">
+         <property name="text">
+          <string>gradient_boosting</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <widget class="QCheckBox" name="sgdBox">
+         <property name="text">
+          <string>sgd</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="dtreeBox">
+         <property name="text">
+          <string>decision_tree</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>240</x>
@@ -648,7 +542,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>240</x>
@@ -714,7 +608,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>600</x>
@@ -995,6 +889,22 @@
    </hints>
   </connection>
   <connection>
+   <sender>checkBox_16</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>prepro_Checked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>395</x>
+     <y>389</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>117</x>
+     <y>36</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>adaBox</sender>
    <signal>stateChanged(int)</signal>
    <receiver>MainWindow</receiver>
@@ -1011,18 +921,242 @@
    </hints>
   </connection>
   <connection>
-   <sender>checkBox_16</sender>
-   <signal>stateChanged(int)</signal>
+   <sender>groupBox</sender>
+   <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>prepro_Checked()</slot>
+   <slot>select_all_Estimators()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>395</x>
-     <y>389</y>
+     <x>287</x>
+     <y>165</y>
     </hint>
     <hint type="destinationlabel">
-     <x>117</x>
-     <y>36</y>
+     <x>529</x>
+     <y>11</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bernoulliBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>bernoulliChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>250</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>124</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dtreeBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>dectreeChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>221</x>
+     <y>245</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>113</x>
+     <y>448</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>extratreeBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>extraTreeChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>207</x>
+     <y>271</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>124</x>
+     <y>482</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gaussianBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gausianChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>241</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>30</x>
+     <y>509</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gradientBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gradient_checked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>272</x>
+     <y>323</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>58</x>
+     <y>527</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>knnBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>knnChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>292</x>
+     <y>352</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>33</x>
+     <y>544</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ldaBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>ldaChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>190</x>
+     <y>378</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>79</x>
+     <y>559</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>liblinearBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>liblinearChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>263</x>
+     <y>398</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>712</x>
+     <y>14</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>libsvmBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>libsvmChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>302</x>
+     <y>420</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>652</x>
+     <y>31</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>multinbBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>multnbChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>254</x>
+     <y>441</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>236</x>
+     <y>7</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pasagrBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>pasagrChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>231</x>
+     <y>476</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>369</x>
+     <y>3</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rforoestBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>rforestChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>204</x>
+     <y>496</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>88</x>
+     <y>8</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sgdBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>sgdChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>285</x>
+     <y>528</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>453</x>
+     <y>24</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qdaBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>qdaChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>184</x>
+     <y>552</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>160</x>
+     <y>24</y>
     </hint>
    </hints>
   </connection>
@@ -1047,12 +1181,12 @@
   <slot>resampleBox()</slot>
   <slot>adaChecked()</slot>
   <slot>bernouliChecked()</slot>
-  <slot>dectreeChecekd()</slot>
+  <slot>dectreeChecked()</slot>
   <slot>extraTreeChecked()</slot>
   <slot>gausianChecked()</slot>
   <slot>gradient_checked()</slot>
   <slot>knnChecked()</slot>
-  <slot>ldaChecekd()</slot>
+  <slot>ldaChecked()</slot>
   <slot>liblinearChecked()</slot>
   <slot>libsvmChecked()</slot>
   <slot>multnbChecked()</slot>
@@ -1061,5 +1195,7 @@
   <slot>sgdChecked()</slot>
   <slot>qdaChecked()</slot>
   <slot>prepro_Checked()</slot>
+  <slot>select_all_Estimators()</slot>
+  <slot>bernoulliChecked()</slot>
  </slots>
 </ui>

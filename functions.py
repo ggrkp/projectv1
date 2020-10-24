@@ -93,15 +93,13 @@ class Func:
     def fitModel(self, pred_train, target_train, automl, d_name):
         automl.fit(pred_train, target_train, dataset_name = d_name)
 
-
     def app_Estimator(self, inc_est, box_state, est_name ):
         if box_state:
-            print("ada checked")
-            inc_est = []
-            inc_est.append(est_name)
+            if not est_name in inc_est:
+                inc_est.append(est_name)
         else:
-            print("ada unchecked")
-            inc_est.remove(est_name)
+            if est_name in inc_est:
+                inc_est.remove(est_name)
         return(inc_est)
     # def getScore(self, automl, p_test, t_test):
     #     pred = automl.predict(p_test)

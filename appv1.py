@@ -314,7 +314,7 @@ class MainWindowUIClass(Ui_MainWindow):
     def libsvmChecked(self):
         global inc_est
         box_state = self.libsvmBox.isChecked()
-        est_name = self.bernoulliBox.text()
+        est_name = self.libsvmBox.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def multnbChecked(self):
@@ -331,8 +331,8 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def rforestChecked(self):
         global inc_est
-        box_state = self.bernoulliBox.isChecked()
-        est_name = self.bernoulliBox.text()
+        box_state = self.rforoestBox.isChecked()
+        est_name = self.rforoestBox.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def sgdChecked(self):

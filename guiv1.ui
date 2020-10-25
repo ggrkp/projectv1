@@ -6,25 +6,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>914</width>
-    <height>645</height>
+    <width>818</width>
+    <height>591</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Auto-ML Tool for IoT Applications</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>50</y>
-      <width>751</width>
+      <x>30</x>
+      <y>10</y>
+      <width>731</width>
       <height>551</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QWidget" name="layoutWidget">
@@ -161,7 +161,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>470</y>
+        <y>520</y>
         <width>261</width>
         <height>25</height>
        </rect>
@@ -197,8 +197,8 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>601</x>
-        <y>401</y>
+        <x>590</x>
+        <y>460</y>
         <width>82</width>
         <height>54</height>
        </rect>
@@ -220,17 +220,17 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>581</width>
-        <height>421</height>
+        <x>11</x>
+        <y>41</y>
+        <width>571</width>
+        <height>471</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
         <widget class="QLabel" name="label_6">
          <property name="font">
           <font>
@@ -242,7 +242,7 @@
          </property>
         </widget>
        </item>
-       <item>
+       <item row="1" column="0">
         <widget class="QTableWidget" name="tableWidget"/>
        </item>
       </layout>
@@ -252,8 +252,8 @@
      <widget class="QLabel" name="label_13">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>0</y>
+        <x>50</x>
+        <y>30</y>
         <width>501</width>
         <height>51</height>
        </rect>

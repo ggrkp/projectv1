@@ -211,6 +211,12 @@ class MainWindowUIClass(Ui_MainWindow):
             resample = None
         else:
             resample = 'holdout'
+            
+    def cv_Folds(self):
+        pass
+
+    def holdout_Size(self):
+        pass
 
     def nextSlot_2(self):
         print(f"Included:   {inc_est}")
@@ -218,7 +224,7 @@ class MainWindowUIClass(Ui_MainWindow):
     def backSlot_1(self):
         pass
 
-    # DEFAULT THA EINAI EILEGMENOI OLOI. AN PATHSEIS TO CHECK THA KSEKINAS NA VAZEIS MONOS SOU .
+    # DEFAULT THA EINAI EILEGMENOI OLOI. AN EINAI CHECKED DUNATOTITA NA VAZEIS MANUALLY .
     def select_all_Estimators(self):
         global inc_est
         if self.groupBox.isChecked():
@@ -358,6 +364,8 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def modelSlot(self):
         global model, inc_est
+
+        # ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
         if not inc_est:
             popup = QtWidgets.QMessageBox()
             popup.setWindowTitle(" Error ")
@@ -384,7 +392,7 @@ class MainWindowUIClass(Ui_MainWindow):
             else:
                 popup.setInformativeText(
                     f"This process will take about {minutes} minutes.")
-            popup.setStandardButtons(QtWidgets.QMessageBox.Close)
+            popup.setStandardButtons(QtWidgets.QMessageBox.Ok)
             popup.setIcon(QtWidgets.QMessageBox.Information)
             popup.exec_()
 
@@ -409,6 +417,8 @@ class MainWindowUIClass(Ui_MainWindow):
             self.stackedWidget.setEnabled(True)
 
 # Main
+
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
     ex = MainWindowUIClass()
@@ -417,5 +427,6 @@ def main():
     MainWindow.show()
     sys.exit(app.exec_())
     app.setStyle("cleanlooks")
+
 
 main()

@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QWidget" name="layoutWidget">
@@ -545,72 +545,6 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>440</y>
-        <width>311</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_8">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_10">
-         <item>
-          <widget class="QLabel" name="label_12">
-           <property name="text">
-            <string>Holdout Train Size</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>88</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="memory_box_3"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
-         <item>
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string>CV folds</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>88</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="memory_box_2"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
         <x>600</x>
         <y>440</y>
         <width>82</width>
@@ -641,6 +575,72 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>241</x>
+        <y>440</y>
+        <width>280</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <item>
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>Holdout Train Size</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>88</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="holdout_box"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>CV folds</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>88</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="cvfoldsBox"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -655,8 +655,8 @@
    <slot>perrun_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>640</x>
-     <y>206</y>
+     <x>580</x>
+     <y>186</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
@@ -671,8 +671,8 @@
    <slot>nextSlot_1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>756</x>
-     <y>483</y>
+     <x>666</x>
+     <y>522</y>
     </hint>
     <hint type="destinationlabel">
      <x>768</x>
@@ -687,8 +687,8 @@
    <slot>nextSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>758</x>
-     <y>361</y>
+     <x>698</x>
+     <y>341</y>
     </hint>
     <hint type="destinationlabel">
      <x>380</x>
@@ -703,8 +703,8 @@
    <slot>importSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>297</x>
-     <y>304</y>
+     <x>237</x>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
      <x>217</x>
@@ -719,8 +719,8 @@
    <slot>timeleft_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>614</x>
-     <y>173</y>
+     <x>580</x>
+     <y>136</y>
     </hint>
     <hint type="destinationlabel">
      <x>95</x>
@@ -735,8 +735,8 @@
    <slot>featureSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>359</x>
-     <y>523</y>
+     <x>299</x>
+     <y>534</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -751,8 +751,8 @@
    <slot>backSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>770</x>
-     <y>454</y>
+     <x>680</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
      <x>147</x>
@@ -767,8 +767,8 @@
    <slot>browseSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>748</x>
-     <y>273</y>
+     <x>688</x>
+     <y>253</y>
     </hint>
     <hint type="destinationlabel">
      <x>560</x>
@@ -783,8 +783,8 @@
    <slot>cancelSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>211</x>
-     <y>304</y>
+     <x>143</x>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
      <x>30</x>
@@ -799,8 +799,8 @@
    <slot>nextSlot_2()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>767</x>
-     <y>565</y>
+     <x>688</x>
+     <y>531</y>
     </hint>
     <hint type="destinationlabel">
      <x>89</x>
@@ -815,8 +815,8 @@
    <slot>backSlot_1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>755</x>
-     <y>533</y>
+     <x>676</x>
+     <y>502</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -831,8 +831,8 @@
    <slot>ensmemory_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>661</x>
-     <y>256</y>
+     <x>581</x>
+     <y>225</y>
     </hint>
     <hint type="destinationlabel">
      <x>105</x>
@@ -847,8 +847,8 @@
    <slot>metricBox()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>640</x>
-     <y>334</y>
+     <x>581</x>
+     <y>314</y>
     </hint>
     <hint type="destinationlabel">
      <x>85</x>
@@ -863,8 +863,8 @@
    <slot>resampleBox()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>640</x>
-     <y>288</y>
+     <x>581</x>
+     <y>269</y>
     </hint>
     <hint type="destinationlabel">
      <x>95</x>
@@ -879,8 +879,8 @@
    <slot>modelSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>729</x>
-     <y>502</y>
+     <x>650</x>
+     <y>463</y>
     </hint>
     <hint type="destinationlabel">
      <x>91</x>
@@ -895,8 +895,8 @@
    <slot>prepro_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>395</x>
-     <y>389</y>
+     <x>316</x>
+     <y>349</y>
     </hint>
     <hint type="destinationlabel">
      <x>117</x>
@@ -911,8 +911,8 @@
    <slot>adaChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>172</x>
-     <y>180</y>
+     <x>104</x>
+     <y>159</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -927,8 +927,8 @@
    <slot>select_all_Estimators()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>287</x>
-     <y>165</y>
+     <x>207</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
      <x>529</x>
@@ -943,8 +943,8 @@
    <slot>bernoulliChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>250</x>
-     <y>215</y>
+     <x>182</x>
+     <y>185</y>
     </hint>
     <hint type="destinationlabel">
      <x>124</x>
@@ -959,8 +959,8 @@
    <slot>dectreeChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>221</x>
-     <y>245</y>
+     <x>153</x>
+     <y>210</y>
     </hint>
     <hint type="destinationlabel">
      <x>113</x>
@@ -975,8 +975,8 @@
    <slot>extraTreeChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>207</x>
-     <y>271</y>
+     <x>139</x>
+     <y>236</y>
     </hint>
     <hint type="destinationlabel">
      <x>124</x>
@@ -991,8 +991,8 @@
    <slot>gausianChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>241</x>
-     <y>295</y>
+     <x>173</x>
+     <y>262</y>
     </hint>
     <hint type="destinationlabel">
      <x>30</x>
@@ -1007,8 +1007,8 @@
    <slot>gradient_checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>272</x>
-     <y>323</y>
+     <x>204</x>
+     <y>287</y>
     </hint>
     <hint type="destinationlabel">
      <x>58</x>
@@ -1023,8 +1023,8 @@
    <slot>knnChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>292</x>
-     <y>352</y>
+     <x>224</x>
+     <y>313</y>
     </hint>
     <hint type="destinationlabel">
      <x>33</x>
@@ -1039,8 +1039,8 @@
    <slot>ldaChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>190</x>
-     <y>378</y>
+     <x>122</x>
+     <y>339</y>
     </hint>
     <hint type="destinationlabel">
      <x>79</x>
@@ -1055,8 +1055,8 @@
    <slot>liblinearChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>263</x>
-     <y>398</y>
+     <x>195</x>
+     <y>364</y>
     </hint>
     <hint type="destinationlabel">
      <x>712</x>
@@ -1071,8 +1071,8 @@
    <slot>libsvmChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>302</x>
-     <y>420</y>
+     <x>234</x>
+     <y>390</y>
     </hint>
     <hint type="destinationlabel">
      <x>652</x>
@@ -1087,8 +1087,8 @@
    <slot>multnbChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>254</x>
-     <y>441</y>
+     <x>186</x>
+     <y>416</y>
     </hint>
     <hint type="destinationlabel">
      <x>236</x>
@@ -1103,8 +1103,8 @@
    <slot>pasagrChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>231</x>
-     <y>476</y>
+     <x>163</x>
+     <y>441</y>
     </hint>
     <hint type="destinationlabel">
      <x>369</x>
@@ -1119,8 +1119,8 @@
    <slot>rforestChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>204</x>
-     <y>496</y>
+     <x>136</x>
+     <y>467</y>
     </hint>
     <hint type="destinationlabel">
      <x>88</x>
@@ -1135,8 +1135,8 @@
    <slot>sgdChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>285</x>
-     <y>528</y>
+     <x>217</x>
+     <y>493</y>
     </hint>
     <hint type="destinationlabel">
      <x>453</x>
@@ -1151,12 +1151,44 @@
    <slot>qdaChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>184</x>
-     <y>552</y>
+     <x>116</x>
+     <y>518</y>
     </hint>
     <hint type="destinationlabel">
      <x>160</x>
      <y>24</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cvfoldsBox</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>cv_Folds()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>545</x>
+     <y>496</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>781</x>
+     <y>516</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>holdout_box</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>holdout_Size()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>506</x>
+     <y>457</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>786</x>
+     <y>241</y>
     </hint>
    </hints>
   </connection>
@@ -1197,5 +1229,7 @@
   <slot>prepro_Checked()</slot>
   <slot>select_all_Estimators()</slot>
   <slot>bernoulliChecked()</slot>
+  <slot>holdout_Size()</slot>
+  <slot>cv_Folds()</slot>
  </slots>
 </ui>

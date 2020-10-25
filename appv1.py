@@ -1,18 +1,20 @@
-# Seperate gui logic vs App logic
-# Etsi wste an thelw na allaksw kati sto gui na mhn ephreastei to app logic
-# An peiraksw to gui me to designer to gui.py tha allaksei kai oles oi allages tha xathoun 
-# Gi auto ftiaxnw neo script
-import featuretools
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QObject
-from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem
+# 
+import csv
+import os
+import sys
 from io import StringIO
-from guiv1 import Ui_MainWindow
-from functions import Func
-import sys, csv
+
+import featuretools
 import pandas as pd
 import sklearn
-import os
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QObject
+from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
+
+from functions import Func
+from guiv1 import Ui_MainWindow
+
+
 class MainWindowUIClass( Ui_MainWindow ):
     def __init__(self):
         global t_left
@@ -51,24 +53,23 @@ class MainWindowUIClass( Ui_MainWindow ):
             data = self.functions.readFile(fileName)
             self.functions.setFileName( self.pathLine.text() )
             self.refreshAll()
-            m = QtWidgets.QMessageBox()
-            m.setText("Your file is successfully imported!")
-            m.setWindowTitle(" Success ")
-            m.setIcon(QtWidgets.QMessageBox.Information)
-            m.setStandardButtons(QtWidgets.QMessageBox.Close)
-            m.setDefaultButton(QtWidgets.QMessageBox.Close)
-            ret = m.exec_()
+            popup = QtWidgets.QMessageBox()
+            popup.setText("Your file is successfully imported!")
+            popup.setWindowTitle(" Success ")
+            popup.setIcon(QtWidgets.QMessageBox.Information)
+            popup.setStandardButtons(QtWidgets.QMessageBox.Close)
+            popup.setDefaultButton(QtWidgets.QMessageBox.Close)
+            popup.exec_()
             self.refreshAll()
             self.nextButton.setEnabled(True) # Otan ginei to import me valid file energopoieitai to next button
         else:
-            m = QtWidgets.QMessageBox()
-            m.setWindowTitle(" Error ")
-            m.setText("Please, choose a valid file to import!")
-            m.setStandardButtons(QtWidgets.QMessageBox.Retry)
-            m.setIcon(QtWidgets.QMessageBox.Warning)
-
-            m.setDefaultButton(QtWidgets.QMessageBox.Retry)
-            ret = m.exec_()
+            popup = QtWidgets.QMessageBox()
+            popup.setWindowTitle(" Error ")
+            popup.setText("Please, choose a valid file to import!")
+            popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
+            popup.setIcon(QtWidgets.QMessageBox.Warning)
+            popup.setDefaultButton(QtWidgets.QMessageBox.Retry)
+            popup.exec_()
             self.refreshAll()
             
     def cancelSlot(self): # Slot gia to cancel button --> KANONIKA KANEI CLEAR ALLA TO EXW ETSI GIA EUKOLIA
@@ -246,6 +247,7 @@ class MainWindowUIClass( Ui_MainWindow ):
                     "random_forest",
                     "sgd",
                     "qda" ]
+
     # ALGORITHMOI CHECKED :
     def adaChecked(self): 
         global inc_est
@@ -349,13 +351,13 @@ class MainWindowUIClass( Ui_MainWindow ):
     def modelSlot(self):
         global model, inc_est
         if not inc_est:
-            m = QtWidgets.QMessageBox()
-            m.setWindowTitle(" Error ")
-            m.setText("No Estimators Were Selected!")
-            m.setInformativeText("Please select at least one Estimator from the list.")
-            m.setStandardButtons(QtWidgets.QMessageBox.Retry)
-            m.setIcon(QtWidgets.QMessageBox.Warning)
-            ret = m.exec_()
+            popup = QtWidgets.QMessageBox()
+            popup.setWindowTitle(" Error ")
+            popup.setText("No Estimators Were Selected!")
+            popup.setInformativeText("Please select at least one Estimator from the list.")
+            popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
+            popup.setIcon(QtWidgets.QMessageBox.Warning)
+            popup.exec_()
         else:
             X_train, X_test, y_train, y_test = self.functions.splitData(X, y)
             base = os.path.basename(fileName)
@@ -372,11 +374,11 @@ class MainWindowUIClass( Ui_MainWindow ):
 # Main         
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    app.setStyle("Breeze")
     ex = MainWindowUIClass()
     MainWindow = QtWidgets.QMainWindow()
     ex.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+    app.setStyle("cleanlooks")
 
 main()

@@ -1,14 +1,19 @@
 # Edw tha uparxei to file pou tha ginei load kai ta periexomena tou 
 # ola tha emfanizontai sto GUI (logika)
+import csv
+import sys
+
+import featuretools as ft
 import pandas as pd
+import sklearn
+from autosklearn.classification import AutoSklearnClassifier
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
-from guiv1 import Ui_MainWindow
 from sklearn.model_selection import train_test_split
-from autosklearn.classification import AutoSklearnClassifier
-import sklearn 
-import sys, csv
-import featuretools as ft
+
+from guiv1 import Ui_MainWindow
+
+
 class Func:
     def __init__( self ):
         '''
@@ -101,13 +106,7 @@ class Func:
             if est_name in inc_est:
                 inc_est.remove(est_name)
         return(inc_est)
+        
     # def getScore(self, automl, p_test, t_test):
     #     pred = automl.predict(p_test)
     #     return sklearn.metrics.accuracy_score(t_test, pred)
-
-
-
-
- 
-
-        

@@ -6,11 +6,13 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import  pyqtSlot , QObject
-from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem
-import time
 import sys
+import time
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QObject, pyqtSlot
+from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
+
 
 class Ui_MainWindow(QObject):
     def setupUi(self, MainWindow):
@@ -355,7 +357,7 @@ class Ui_MainWindow(QObject):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Auto ML Tool For IoT Applications"))
         self.label.setText(_translate("MainWindow", "Import your Data"))
         self.label_3.setText(_translate("MainWindow", "Please, choose a valid .csv file:"))
         self.cancelButton.setText(_translate("MainWindow", "Clear"))

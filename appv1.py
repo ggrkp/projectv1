@@ -171,6 +171,14 @@ class MainWindowUIClass(Ui_MainWindow):
                    "qda"]
 
         disable_prepro = None
+
+        self.holdout_box.setEnabled(False)
+        self.cvfoldsBox.setEnabled(False) 
+
+        self.holdout_box.setRange(0.1,1.0)
+        self.holdout_box.setSingleStep(0.1)
+        self.holdout_box.setDecimals(1)
+        self.cvfoldsBox.setRange(1,10)
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
@@ -206,10 +214,16 @@ class MainWindowUIClass(Ui_MainWindow):
         combo_idx_resample = self.ressampleCombo.currentIndex()
         resample_str = self.ressampleCombo.itemText(combo_idx_resample)
         if resample_str == "Cross Validation":
+            self.cvfoldsBox.setEnabled(True)
+            self.holdout_box.setEnabled(False)
             resample = 'cv'
         elif resample_str == "None":
+            self.holdout_box.setEnabled(False)
+            self.cvfoldsBox.setEnabled(False)            
             resample = None
         else:
+            self.holdout_box.setEnabled(True)
+            self.cvfoldsBox.setEnabled(False)
             resample = 'holdout'
             
     def cv_Folds(self):

@@ -1,4 +1,4 @@
-# 
+#
 import csv
 import os
 import sys
@@ -15,43 +15,42 @@ from functions import Func
 from guiv1 import Ui_MainWindow
 
 
-class MainWindowUIClass( Ui_MainWindow ):
+class MainWindowUIClass(Ui_MainWindow):
     def __init__(self):
         global t_left
         super().__init__()
         self.functions = Func()
-        
 
-    def setupUi( self, MW ):
-        
-        super().setupUi( MW )
+    def setupUi(self, MW):
+
+        super().setupUi(MW)
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # --------------------- PRWTO SCREEN ME IMPORT ------------------------
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    def refreshAll( self ):
-        self.pathLine.setText( self.functions.getFileName() )
-    
-    def browseSlot( self ):
+    def refreshAll(self):
+        self.pathLine.setText(self.functions.getFileName())
+
+    def browseSlot(self):
         options = QtWidgets.QFileDialog.Options()
         options |= QtWidgets.QFileDialog.DontUseNativeDialog
         fileName, _ = QtWidgets.QFileDialog.getOpenFileName(
-                        None,
-                        "QFileDialog.getOpenFileName()",
-                        "",
-                        "CSV Files (*.csv)",
-                        options=options)
+            None,
+            "QFileDialog.getOpenFileName()",
+            "",
+            "CSV Files (*.csv)",
+            options=options)
         if fileName:
-            self.functions.setFileName( fileName )
+            self.functions.setFileName(fileName)
             self.refreshAll()
 
-    def importSlot( self ): # Slot gia to import button
+    def importSlot(self):  # Slot gia to import button
         global fileName
         fileName = self.pathLine.text()
-        if self.functions.isValid( fileName ):
+        if self.functions.isValid(fileName):
             global data
             data = self.functions.readFile(fileName)
-            self.functions.setFileName( self.pathLine.text() )
+            self.functions.setFileName(self.pathLine.text())
             self.refreshAll()
             popup = QtWidgets.QMessageBox()
             popup.setText("Your file is successfully imported!")
@@ -61,7 +60,8 @@ class MainWindowUIClass( Ui_MainWindow ):
             popup.setDefaultButton(QtWidgets.QMessageBox.Close)
             popup.exec_()
             self.refreshAll()
-            self.nextButton.setEnabled(True) # Otan ginei to import me valid file energopoieitai to next button
+            # Otan ginei to import me valid file energopoieitai to next button
+            self.nextButton.setEnabled(True)
         else:
             popup = QtWidgets.QMessageBox()
             popup.setWindowTitle(" Error ")
@@ -71,115 +71,123 @@ class MainWindowUIClass( Ui_MainWindow ):
             popup.setDefaultButton(QtWidgets.QMessageBox.Retry)
             popup.exec_()
             self.refreshAll()
-            
-    def cancelSlot(self): # Slot gia to cancel button --> KANONIKA KANEI CLEAR ALLA TO EXW ETSI GIA EUKOLIA
-        self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv") 
 
-    def nextSlot( self ): # Slot gia to next button
+    # Slot gia to cancel button --> KANONIKA KANEI CLEAR ALLA TO EXW ETSI GIA EUKOLIA
+    def cancelSlot(self):
+        self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv")
+
+    def nextSlot(self):  # Slot gia to next button
         global preview_num
         preview_num = 100
         self.stackedWidget.setCurrentIndex(1)
         # Molis pataw next tha kanei load to combo Box kai tha periexei ta features.
-        # iterating the columns 
-        for col in data.columns: 
-            self.comboBox.addItem(col) 
-        #dimiourgia table me ta dedomena tou dataset gia preview
-        self.tableWidget.setRowCount(preview_num) # set row Count
-        self.tableWidget.setColumnCount(self.functions.colCount(data)) # set column count
+        # iterating the columns
+        for col in data.columns:
+            self.comboBox.addItem(col)
+        # dimiourgia table me ta dedomena tou dataset gia preview
+        self.tableWidget.setRowCount(preview_num)  # set row Count
+        self.tableWidget.setColumnCount(
+            self.functions.colCount(data))  # set column count
         for i in range(preview_num):
             for j in range(self.functions.colCount(data)):
-                self.tableWidget.setItem(i,j, QTableWidgetItem( f"{ data.iloc[i][j] }" ))
+                self.tableWidget.setItem(
+                    i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # --------------------- SCREEN ME TARGET KAI PREDICTOR FEATURES -------
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    def featureSlot( self ): # Slot gia to drop down box
+    def featureSlot(self):  # Slot gia to drop down box
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
         global X
         global y
         y = self.functions.pickTarget(item_index, data)
         X = self.functions.pickPredictors(item_index, data)
-        self.nextButton1.setEnabled(True) # Otan ginei to import me valid file energopoieitai to next button
+        # Otan ginei to import me valid file energopoieitai to next button
+        self.nextButton1.setEnabled(True)
         for i in range(preview_num):
             for j in range(self.functions.colCount(data)):
-                self.tableWidget.item(i,j).setBackground(QtGui.QColor('white'))
-            self.tableWidget.item(i,item_index).setBackground(QtGui.QColor('springgreen'))
+                self.tableWidget.item(i, j).setBackground(
+                    QtGui.QColor('white'))
+            self.tableWidget.item(i, item_index).setBackground(
+                QtGui.QColor('springgreen'))
 
-    def backSlot( self ): # Slot gia to back button
-        self.stackedWidget.setCurrentIndex(0) # Pame ena screen pisw
-        self.comboBox.clear() # Katharizoyme to Combo box gia na mpoun nea features sto drop down
-        self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
+    def backSlot(self):  # Slot gia to back button
+        self.stackedWidget.setCurrentIndex(0)  # Pame ena screen pisw
+        self.comboBox.clear()  # Katharizoyme to Combo box gia na mpoun nea features sto drop down
+        # Otan ginei to import me valid file energopoieitai to next button
+        self.nextButton.setEnabled(False)
 
-    def nextSlot_1(self): # Next pou pigainei stis parametrous tou modeling
-        self.stackedWidget.setCurrentIndex(2) # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning        
-        
-        global  t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric
+    def nextSlot_1(self):  # Next pou pigainei stis parametrous tou modeling
+        # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
+        self.stackedWidget.setCurrentIndex(2)
 
-        #MODELING DEFAULTS        
+        global t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric
+
+        # MODELING DEFAULTS
         self.groupBox.setCheckable(True)
         self.groupBox.setChecked(False)
 
-        self.timeLeft_box.setMinimum(30) 
-        self.timeLeft_box.setMaximum(30000) 
+        self.timeLeft_box.setMinimum(30)
+        self.timeLeft_box.setMaximum(30000)
 
         self.perRun_box.setMinimum(3)
         self.perRun_box.setMaximum(int(t_left/2))
 
-        meminfo = dict((i.split()[0].rstrip(':'),int(i.split()[1])) for i in open('/proc/meminfo').readlines())# analoga me ta specs tou pc
-        mem_Mb = int(meminfo['MemTotal']/1024)  
+        meminfo = dict((i.split()[0].rstrip(':'), int(i.split()[1])) for i in open(
+            '/proc/meminfo').readlines())  # analoga me ta specs tou pc
+        mem_Mb = int(meminfo['MemTotal']/1024)
         self.memory_box.setMinimum(1024)
-        self.memory_box.setMaximum(mem_Mb) 
+        self.memory_box.setMaximum(mem_Mb)
 
         metric_list = ["accuracy", "balanced_accuracy", "roc_auc", "average_precision", "log_loss",
-        "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
-        "recall","recall_macro","recall_micro","recall_samples","recall_weighted",
-        "f1", "f1_macro", "f1_micro", "f1_samples", "f1_weighted"]
+                       "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
+                       "recall", "recall_macro", "recall_micro", "recall_samples", "recall_weighted",
+                       "f1", "f1_macro", "f1_micro", "f1_samples", "f1_weighted"]
 
-        self.metricCombo.addItems(metric_list) 
-        
+        self.metricCombo.addItems(metric_list)
+
         metric = None
         resample_args = None
         resample_list = ["None", "Cross Validation", "Holdout"]
         self.ressampleCombo.addItems(resample_list)
         resample = 'holdout'
 
-        
-        inc_est = [ "adaboost",
-                    "bernoulli_nb",
-                    "decision_tree",
-                    "extra_trees",
-                    "gaussian_nb",
-                    "gradient_boosting",
-                    "k_nearest_neighbors",
-                    "lda",
-                    "liblinear_svc",
-                    "libsvm_svc",
-                    "multinomial_nb",
-                    "passive_aggressive",
-                    "random_forest",
-                    "sgd",
-                    "qda" ]
+        inc_est = ["adaboost",
+                   "bernoulli_nb",
+                   "decision_tree",
+                   "extra_trees",
+                   "gaussian_nb",
+                   "gradient_boosting",
+                   "k_nearest_neighbors",
+                   "lda",
+                   "liblinear_svc",
+                   "libsvm_svc",
+                   "multinomial_nb",
+                   "passive_aggressive",
+                   "random_forest",
+                   "sgd",
+                   "qda"]
 
         disable_prepro = None
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # --------------------- MODELING SCREEN -------------------------------
-    # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><>< 
-    # Time Left For This Task 
+    # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
+    # Time Left For This Task
     def timeleft_Slot(self):
         global t_left
         t_left = self.timeLeft_box.value()
         self.perRun_box.setMaximum(int(t_left/2))
-        print (t_left)
+        print(t_left)
 
     # Per Run Time Limit
-    def perrun_Slot(self): 
+    def perrun_Slot(self):
         global t_per_run
         t_per_run = self.perRun_box.value()
-        print (t_per_run)
+        print(t_per_run)
 
     # Ensemble Memory Limit
     def ensmemory_Slot(self):
@@ -203,7 +211,7 @@ class MainWindowUIClass( Ui_MainWindow ):
             resample = None
         else:
             resample = 'holdout'
-        
+
     def nextSlot_2(self):
         print(f"Included:   {inc_est}")
 
@@ -215,7 +223,7 @@ class MainWindowUIClass( Ui_MainWindow ):
         global inc_est
         if self.groupBox.isChecked():
             inc_est = []
-            
+
         else:
             self.extratreeBox.setChecked(False)
             self.adaBox.setChecked(False)
@@ -232,34 +240,34 @@ class MainWindowUIClass( Ui_MainWindow ):
             self.gradientBox.setChecked(False)
             self.knnBox.setChecked(False)
             self.pasagrBox.setChecked(False)
-            inc_est = [ "adaboost",
-                    "bernoulli_nb",
-                    "decision_tree",
-                    "extra_trees",
-                    "gaussian_nb",
-                    "gradient_boosting",
-                    "k_nearest_neighbors",
-                    "lda",
-                    "liblinear_svc",
-                    "libsvm_svc",
-                    "multinomial_nb",
-                    "passive_aggressive",
-                    "random_forest",
-                    "sgd",
-                    "qda" ]
+            inc_est = ["adaboost",
+                       "bernoulli_nb",
+                       "decision_tree",
+                       "extra_trees",
+                       "gaussian_nb",
+                       "gradient_boosting",
+                       "k_nearest_neighbors",
+                       "lda",
+                       "liblinear_svc",
+                       "libsvm_svc",
+                       "multinomial_nb",
+                       "passive_aggressive",
+                       "random_forest",
+                       "sgd",
+                       "qda"]
 
     # ALGORITHMOI CHECKED :
-    def adaChecked(self): 
+    def adaChecked(self):
         global inc_est
         box_state = self.adaBox.isChecked()
         est_name = self.adaBox.text()
-        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)        
-    
-    def bernoulliChecked(self): 
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def bernoulliChecked(self):
         global inc_est
         box_state = self.bernoulliBox.isChecked()
         est_name = self.bernoulliBox.text()
-        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)        
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def dectreeChecked(self):
         global inc_est
@@ -340,10 +348,10 @@ class MainWindowUIClass( Ui_MainWindow ):
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     # DISABLE PREPROCESSING
-    def prepro_Checked(self): # Disable Feature Preprocessing
+    def prepro_Checked(self):  # Disable Feature Preprocessing
         global disable_prepro
-        if self.checkBox_16.isChecked():   
-            disable_prepro = [] 
+        if self.checkBox_16.isChecked():
+            disable_prepro = []
             disable_prepro.append("no_preprocessing")
         else:
             disable_prepro = None
@@ -354,24 +362,53 @@ class MainWindowUIClass( Ui_MainWindow ):
             popup = QtWidgets.QMessageBox()
             popup.setWindowTitle(" Error ")
             popup.setText("No Estimators Were Selected!")
-            popup.setInformativeText("Please select at least one Estimator from the list.")
+            popup.setInformativeText(
+                "Please select at least one Estimator from the list.")
             popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
             popup.setIcon(QtWidgets.QMessageBox.Warning)
             popup.exec_()
         else:
+            minutes = t_left/60
+            seconds = t_left
+            self.stackedWidget.setEnabled(False)
+            popup = QtWidgets.QMessageBox()
+            popup.setWindowTitle(" Running ")
+            popup.setText("Please, wait. An ensemble is being created...     ")
+            if minutes < 1:
+                popup.setInformativeText(
+                    f"This process will take about {seconds} seconds.")
+            elif minutes == 1:
+                popup.setInformativeText(
+                    f"This process will take about 1 minute"
+                )
+            else:
+                popup.setInformativeText(
+                    f"This process will take about {minutes} minutes.")
+            popup.setStandardButtons(QtWidgets.QMessageBox.Close)
+            popup.setIcon(QtWidgets.QMessageBox.Information)
+            popup.exec_()
+
             X_train, X_test, y_train, y_test = self.functions.splitData(X, y)
             base = os.path.basename(fileName)
             dataset_name = os.path.splitext(base)[0]
-            
-            model = self.functions.callClassifier(t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
+
+            model = self.functions.callClassifier(
+                t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
             self.functions.fitModel(X_train, y_train, model, dataset_name)
-            print (model.sprint_statistics())
-            
+            print(model.sprint_statistics())
+
             pred = model.predict(X_test)
             print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
             print(model.show_models())
+            popup = QtWidgets.QMessageBox()
+            popup.setWindowTitle(" Done ")
+            popup.setText("An ensemble is created successfully!")
+            popup.setStandardButtons(QtWidgets.QMessageBox.Close)
+            popup.setIcon(QtWidgets.QMessageBox.Information)
+            popup.exec_()
+            self.stackedWidget.setEnabled(True)
 
-# Main         
+# Main
 def main():
     app = QtWidgets.QApplication(sys.argv)
     ex = MainWindowUIClass()

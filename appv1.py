@@ -52,17 +52,22 @@ class MainWindowUIClass( Ui_MainWindow ):
             self.functions.setFileName( self.pathLine.text() )
             self.refreshAll()
             m = QtWidgets.QMessageBox()
-            m.setText("File was successfully imported!")
-            m.setStandardButtons(QtWidgets.QMessageBox.Ok)
-            m.setDefaultButton(QtWidgets.QMessageBox.Ok)
+            m.setText("Your file is successfully imported!")
+            m.setWindowTitle(" Success ")
+            m.setIcon(QtWidgets.QMessageBox.Information)
+            m.setStandardButtons(QtWidgets.QMessageBox.Close)
+            m.setDefaultButton(QtWidgets.QMessageBox.Close)
             ret = m.exec_()
             self.refreshAll()
             self.nextButton.setEnabled(True) # Otan ginei to import me valid file energopoieitai to next button
         else:
             m = QtWidgets.QMessageBox()
-            m.setText("Choose a valid file to import!")
-            m.setStandardButtons(QtWidgets.QMessageBox.Ok)
-            m.setDefaultButton(QtWidgets.QMessageBox.Ok)
+            m.setWindowTitle(" Error ")
+            m.setText("Please, choose a valid file to import!")
+            m.setStandardButtons(QtWidgets.QMessageBox.Retry)
+            m.setIcon(QtWidgets.QMessageBox.Warning)
+
+            m.setDefaultButton(QtWidgets.QMessageBox.Retry)
             ret = m.exec_()
             self.refreshAll()
             
@@ -341,18 +346,27 @@ class MainWindowUIClass( Ui_MainWindow ):
 
     def modelSlot(self):
         global model, inc_est
-        print("please wait... May take several seconds...")
-        X_train, X_test, y_train, y_test = self.functions.splitData(X, y)
-        base = os.path.basename(fileName)
-        dataset_name = os.path.splitext(base)[0]
-        
-        model = self.functions.callClassifier(t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
-        self.functions.fitModel(X_train, y_train, model, dataset_name)
-        print (model.sprint_statistics())
-        
-        pred = model.predict(X_test)
-        print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
-        print(model.show_models())
+        if not inc_est:
+            m = QtWidgets.QMessageBox()
+            m.setWindowTitle(" Error ")
+            m.setText("No Estimators Were Selected!")
+            m.setInformativeText("Please select at least one Estimator from the list.")
+            m.setStandardButtons(QtWidgets.QMessageBox.Retry)
+            m.setIcon(QtWidgets.QMessageBox.Warning)
+            ret = m.exec_()
+        else:
+            print("please wait... May take several seconds...")
+            X_train, X_test, y_train, y_test = self.functions.splitData(X, y)
+            base = os.path.basename(fileName)
+            dataset_name = os.path.splitext(base)[0]
+            
+            model = self.functions.callClassifier(t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
+            self.functions.fitModel(X_train, y_train, model, dataset_name)
+            print (model.sprint_statistics())
+            
+            pred = model.predict(X_test)
+            print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
+            print(model.show_models())
 
 # Main         
 def main():

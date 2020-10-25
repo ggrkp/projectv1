@@ -149,12 +149,11 @@ class MainWindowUIClass(Ui_MainWindow):
         self.metricCombo.addItems(metric_list)
 
         metric = None
-        resample_args = None
         resample_list = ["None", "Cross Validation", "Holdout"]
         self.ressampleCombo.addItems(resample_list)
 
-        resample = "holdout"
-
+        resample = None
+        resample_args = None
         inc_est = ["adaboost",
                    "bernoulli_nb",
                    "decision_tree",
@@ -176,10 +175,9 @@ class MainWindowUIClass(Ui_MainWindow):
         self.holdout_box.setEnabled(False)
         self.cvfoldsBox.setEnabled(False) 
 
-        self.holdout_box.setRange(0.1,1.0)
-        self.holdout_box.setSingleStep(0.01)
-        self.holdout_box.setDecimals(2)
-        self.cvfoldsBox.setRange(1,10)
+        
+        
+
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
@@ -211,20 +209,31 @@ class MainWindowUIClass(Ui_MainWindow):
 
     # Resample
     def resampleBox(self):
-        global resample
+        global resample, resample_args
         combo_idx_resample = self.ressampleCombo.currentIndex()
         resample_str = self.ressampleCombo.itemText(combo_idx_resample)
+
         if resample_str == "Cross Validation":
             self.cvfoldsBox.setEnabled(True)
             self.holdout_box.setEnabled(False)
+            self.cvfoldsBox.setRange(2,10)
+            resample_args = {'folds':2}
             resample = "cv"
+
         elif resample_str == "None":
             self.holdout_box.setEnabled(False)
-            self.cvfoldsBox.setEnabled(False)            
+            self.cvfoldsBox.setEnabled(False)    
+            resample_args = None
             resample = None
+
         else:
             self.holdout_box.setEnabled(True)
             self.cvfoldsBox.setEnabled(False)
+            self.holdout_box.setRange(0.1,1.0)
+            self.holdout_box.setSingleStep(0.01)
+            self.holdout_box.setDecimals(2)
+            self.holdout_box.setValue(0.67)
+            resample_args = {'train_size':0.67}
             resample = "holdout"
             
     def cv_Folds(self):
@@ -239,9 +248,15 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def nextSlot_2(self):
         print(f"Included:   {inc_est}")
+        print("Metric:", metric)
+        print("Resampling_Technique:", resample)
+        print("Args:" ,resample_args)
+        print(t_left)
+        print("Yoleleison")
 
     def backSlot_1(self):
-        pass
+        sys.exit()
+
 
     # DEFAULT THA EINAI EILEGMENOI OLOI. AN EINAI CHECKED DUNATOTITA NA VAZEIS MANUALLY .
     def select_all_Estimators(self):
@@ -445,7 +460,5 @@ def main():
     ex.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-    app.setStyle("cleanlooks")
-
 
 main()

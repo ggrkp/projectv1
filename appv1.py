@@ -75,15 +75,17 @@ class MainWindowUIClass( Ui_MainWindow ):
         self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv") 
 
     def nextSlot( self ): # Slot gia to next button
+        global preview_num
+        preview_num = 100
         self.stackedWidget.setCurrentIndex(1)
         # Molis pataw next tha kanei load to combo Box kai tha periexei ta features.
         # iterating the columns 
         for col in data.columns: 
             self.comboBox.addItem(col) 
         #dimiourgia table me ta dedomena tou dataset gia preview
-        self.tableWidget.setRowCount(20) # set row Count
+        self.tableWidget.setRowCount(preview_num) # set row Count
         self.tableWidget.setColumnCount(self.functions.colCount(data)) # set column count
-        for i in range(20):
+        for i in range(preview_num):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.setItem(i,j, QTableWidgetItem( f"{ data.iloc[i][j] }" ))
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -99,7 +101,7 @@ class MainWindowUIClass( Ui_MainWindow ):
         y = self.functions.pickTarget(item_index, data)
         X = self.functions.pickPredictors(item_index, data)
         self.nextButton1.setEnabled(True) # Otan ginei to import me valid file energopoieitai to next button
-        for i in range(20):
+        for i in range(preview_num):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.item(i,j).setBackground(QtGui.QColor('white'))
             self.tableWidget.item(i,item_index).setBackground(QtGui.QColor('springgreen'))
@@ -355,7 +357,6 @@ class MainWindowUIClass( Ui_MainWindow ):
             m.setIcon(QtWidgets.QMessageBox.Warning)
             ret = m.exec_()
         else:
-            print("please wait... May take several seconds...")
             X_train, X_test, y_train, y_test = self.functions.splitData(X, y)
             base = os.path.basename(fileName)
             dataset_name = os.path.splitext(base)[0]
@@ -371,6 +372,7 @@ class MainWindowUIClass( Ui_MainWindow ):
 # Main         
 def main():
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyle("Breeze")
     ex = MainWindowUIClass()
     MainWindow = QtWidgets.QMainWindow()
     ex.setupUi(MainWindow)

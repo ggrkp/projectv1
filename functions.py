@@ -85,6 +85,7 @@ class Func:
             # RESAMPLING (CROSS VALIDATION) - ISWS ME NEA SUNARTHSH GIA NA PAIRNEI KI AUTO PARAMETROUS
             resampling_strategy=resample,
             resampling_strategy_arguments=resample_args,
+
             # EPILOGI METRIKWN
             metric=metric
         )

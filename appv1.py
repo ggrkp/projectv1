@@ -152,7 +152,8 @@ class MainWindowUIClass(Ui_MainWindow):
         resample_args = None
         resample_list = ["None", "Cross Validation", "Holdout"]
         self.ressampleCombo.addItems(resample_list)
-        resample = 'holdout'
+
+        resample = "holdout"
 
         inc_est = ["adaboost",
                    "bernoulli_nb",
@@ -176,8 +177,8 @@ class MainWindowUIClass(Ui_MainWindow):
         self.cvfoldsBox.setEnabled(False) 
 
         self.holdout_box.setRange(0.1,1.0)
-        self.holdout_box.setSingleStep(0.1)
-        self.holdout_box.setDecimals(1)
+        self.holdout_box.setSingleStep(0.01)
+        self.holdout_box.setDecimals(2)
         self.cvfoldsBox.setRange(1,10)
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -216,7 +217,7 @@ class MainWindowUIClass(Ui_MainWindow):
         if resample_str == "Cross Validation":
             self.cvfoldsBox.setEnabled(True)
             self.holdout_box.setEnabled(False)
-            resample = 'cv'
+            resample = "cv"
         elif resample_str == "None":
             self.holdout_box.setEnabled(False)
             self.cvfoldsBox.setEnabled(False)            
@@ -224,13 +225,17 @@ class MainWindowUIClass(Ui_MainWindow):
         else:
             self.holdout_box.setEnabled(True)
             self.cvfoldsBox.setEnabled(False)
-            resample = 'holdout'
+            resample = "holdout"
             
     def cv_Folds(self):
-        pass
-
+        global resample_args
+        folds = self.cvfoldsBox.value()
+        resample_args = {'folds':folds}
+        
     def holdout_Size(self):
-        pass
+        global resample_args
+        h_size = self.holdout_box.value()
+        resample_args = {'train_size':h_size}
 
     def nextSlot_2(self):
         print(f"Included:   {inc_est}")
@@ -377,7 +382,7 @@ class MainWindowUIClass(Ui_MainWindow):
             disable_prepro = None
 
     def modelSlot(self):
-        global model, inc_est
+        global model, inc_est, resample
 
         # ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
         if not inc_est:

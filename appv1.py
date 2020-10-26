@@ -1,4 +1,3 @@
-#
 import csv
 import os
 import sys
@@ -16,6 +15,7 @@ from guiv1 import Ui_MainWindow
 
 
 class MainWindowUIClass(Ui_MainWindow):
+    
 #INIT - SETUP UI    
     def __init__(self):
         global t_left
@@ -30,8 +30,10 @@ class MainWindowUIClass(Ui_MainWindow):
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # --------------------- 1. IMPORT SCREEN -------------------------
 
+# REFRESH
     def refreshAll(self):
         self.pathLine.setText(self.functions.getFileName())
+
 # BROWSE BUTTON
     def browseSlot(self):
         options = QtWidgets.QFileDialog.Options()
@@ -98,7 +100,7 @@ class MainWindowUIClass(Ui_MainWindow):
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # --------------------- TARGET FEATURE - PREVIEW SCREEN ------------
+    # --------------------- 2. TARGET FEATURE - PREVIEW SCREEN ------------
     
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
@@ -183,7 +185,7 @@ class MainWindowUIClass(Ui_MainWindow):
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # --------------------- MAKE MODEL SCREEN -------------------------------
+    # --------------------- 3. MAKE MODEL SCREEN -------------------------------
  
 # TIME LEFT FOR THIS TASK SPINBOX
     def timeleft_Slot(self):

@@ -75,7 +75,7 @@ class Func:
 
             # MEMORY RESTRICTION
             ensemble_memory_limit=mem_limit,
-
+        
             # ALGORITHM RESTRICTION
             include_estimators=inc_est,
 

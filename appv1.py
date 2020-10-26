@@ -415,7 +415,6 @@ class MainWindowUIClass(Ui_MainWindow):
         else:
             disable_prepro = None
 
-
 #! RUN BUTTON -> START CREATING ENSEMBLES
     # ? Mporw na exw mono ena model kai oxi ensemble? ensemble size = 1 ? Ylopoihsh an ginetai!
     # TODO: def ensemble_size_Slot (self): global ens_size = 1 an thelw model, alliws ens_size = self.splinbox.value()
@@ -461,7 +460,7 @@ class MainWindowUIClass(Ui_MainWindow):
             model = self.functions.callClassifier(
                 t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
             self.functions.fitModel(X_train, y_train, model, dataset_name)
-            print(model.sprint_statistics())
+            print(model.get_models_with_weights())
 
             pred = model.predict(X_test)
             print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
@@ -479,7 +478,7 @@ class MainWindowUIClass(Ui_MainWindow):
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # * 4. RESULTS - HISTORY TAB SCREEN ----------------
 
-
+        #TODO OLO TO NEO SCREEN ! 
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

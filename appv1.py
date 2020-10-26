@@ -16,6 +16,7 @@ from guiv1 import Ui_MainWindow
 
 
 class MainWindowUIClass(Ui_MainWindow):
+#INIT - SETUP UI    
     def __init__(self):
         global t_left
         super().__init__()
@@ -24,13 +25,14 @@ class MainWindowUIClass(Ui_MainWindow):
     def setupUi(self, MW):
 
         super().setupUi(MW)
+# 
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # --------------------- PRWTO SCREEN ME IMPORT ------------------------
-    # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
+    # --------------------- 1. IMPORT SCREEN -------------------------
+
     def refreshAll(self):
         self.pathLine.setText(self.functions.getFileName())
-
+# BROWSE BUTTON
     def browseSlot(self):
         options = QtWidgets.QFileDialog.Options()
         options |= QtWidgets.QFileDialog.DontUseNativeDialog
@@ -44,6 +46,7 @@ class MainWindowUIClass(Ui_MainWindow):
             self.functions.setFileName(fileName)
             self.refreshAll()
 
+# IMPORT BUTTON
     def importSlot(self):  # Slot gia to import button
         global fileName
         fileName = self.pathLine.text()
@@ -72,7 +75,7 @@ class MainWindowUIClass(Ui_MainWindow):
             popup.exec_()
             self.refreshAll()
 
-    # Slot gia to cancel button --> KANONIKA KANEI CLEAR ALLA TO EXW ETSI GIA EUKOLIA
+# CLEAR BUTTON (ALLAGI STO TELOS GIATI TORA VAZEI TO IRIS)
     def cancelSlot(self):
         self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv")
 
@@ -92,11 +95,12 @@ class MainWindowUIClass(Ui_MainWindow):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.setItem(
                     i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
-    # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # --------------------- SCREEN ME TARGET KAI PREDICTOR FEATURES -------
-    # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
+    # --------------------- TARGET FEATURE - PREVIEW SCREEN ------------
+    
+# TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
@@ -113,6 +117,7 @@ class MainWindowUIClass(Ui_MainWindow):
             self.tableWidget.item(i, item_index).setBackground(
                 QtGui.QColor('springgreen'))
 
+# NEXT BUTTON - BACK BUTTON > DHLWNONTAI DEFAULTS GIA TO EPOMENO SCREEN ( MDOELING SCREEN - PARAMETERS )
     def backSlot(self):  # Slot gia to back button
         self.stackedWidget.setCurrentIndex(0)  # Pame ena screen pisw
         self.comboBox.clear()  # Katharizoyme to Combo box gia na mpoun nea features sto drop down
@@ -149,11 +154,12 @@ class MainWindowUIClass(Ui_MainWindow):
         self.metricCombo.addItems(metric_list)
 
         metric = None
-        resample_list = ["None", "Cross Validation", "Holdout"]
+        resample_list = ["Default", "Cross Validation", "Holdout"]
         self.ressampleCombo.addItems(resample_list)
 
-        resample = None
-        resample_args = None
+        resample_args = {'train_size':0.67}
+        resample = "holdout"
+
         inc_est = ["adaboost",
                    "bernoulli_nb",
                    "decision_tree",
@@ -174,40 +180,36 @@ class MainWindowUIClass(Ui_MainWindow):
 
         self.holdout_box.setEnabled(False)
         self.cvfoldsBox.setEnabled(False) 
-
-        
-        
-
-    # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # --------------------- MODELING SCREEN -------------------------------
-    # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # Time Left For This Task
+    # --------------------- MAKE MODEL SCREEN -------------------------------
+ 
+# TIME LEFT FOR THIS TASK SPINBOX
     def timeleft_Slot(self):
         global t_left
         t_left = self.timeLeft_box.value()
         self.perRun_box.setMaximum(int(t_left/2))
         print(t_left)
 
-    # Per Run Time Limit
+# PER RUN TIME LIMIT SPINBOX
     def perrun_Slot(self):
         global t_per_run
         t_per_run = self.perRun_box.value()
         print(t_per_run)
 
-    # Ensemble Memory Limit
+# ENSEMBLE MEMORY LIMIT SPINBOX
     def ensmemory_Slot(self):
         global mem_limit
         mem_limit = self.memory_box.value()
 
-    # Metric
+# METRIC SELECTION DROPDOWN
     def metricBox(self):
         global metric
         combo_idx_metric = self.metricCombo.currentIndex()
         metric = self.metricCombo.itemText(combo_idx_metric)
 
-    # Resample
+# RESAMPLING STRATEGY DROPDOWN 
     def resampleBox(self):
         global resample, resample_args
         combo_idx_resample = self.ressampleCombo.currentIndex()
@@ -220,11 +222,11 @@ class MainWindowUIClass(Ui_MainWindow):
             resample_args = {'folds':2}
             resample = "cv"
 
-        elif resample_str == "None":
+        elif resample_str == "Default":
             self.holdout_box.setEnabled(False)
             self.cvfoldsBox.setEnabled(False)    
-            resample_args = None
-            resample = None
+            resample_args = {'train_size':0.67}
+            resample = "holdout"
 
         else:
             self.holdout_box.setEnabled(True)
@@ -235,7 +237,8 @@ class MainWindowUIClass(Ui_MainWindow):
             self.holdout_box.setValue(0.67)
             resample_args = {'train_size':0.67}
             resample = "holdout"
-            
+
+# CV FOLDS - HOLDOUT TRAIN SIZE SPINBOXES 
     def cv_Folds(self):
         global resample_args
         folds = self.cvfoldsBox.value()
@@ -246,6 +249,7 @@ class MainWindowUIClass(Ui_MainWindow):
         h_size = self.holdout_box.value()
         resample_args = {'train_size':h_size}
 
+# NEXT BUTTON - BACK BUTTON
     def nextSlot_2(self):
         print(f"Included:   {inc_est}")
         print("Metric:", metric)
@@ -257,8 +261,7 @@ class MainWindowUIClass(Ui_MainWindow):
     def backSlot_1(self):
         sys.exit()
 
-
-    # DEFAULT THA EINAI EILEGMENOI OLOI. AN EINAI CHECKED DUNATOTITA NA VAZEIS MANUALLY .
+# BUTTON GIA MANUALL SELCECTION ESTIMATORS 
     def select_all_Estimators(self):
         global inc_est
         if self.groupBox.isChecked():
@@ -296,7 +299,8 @@ class MainWindowUIClass(Ui_MainWindow):
                        "sgd",
                        "qda"]
 
-    # ALGORITHMOI CHECKED :
+# ESTIMATORS CHECK BOXES (MPAINOUN SE LISTA) :
+
     def adaChecked(self):
         global inc_est
         box_state = self.adaBox.isChecked()
@@ -387,7 +391,7 @@ class MainWindowUIClass(Ui_MainWindow):
         est_name = self.qdaBox.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
-    # DISABLE PREPROCESSING
+# DISABLE PREPROCESSING CHECKBOX 
     def prepro_Checked(self):  # Disable Feature Preprocessing
         global disable_prepro
         if self.checkBox_16.isChecked():
@@ -396,9 +400,9 @@ class MainWindowUIClass(Ui_MainWindow):
         else:
             disable_prepro = None
 
+# RUN BUTTON -> START CREATING ENSEMBLES
     def modelSlot(self):
         global model, inc_est, resample
-
         # ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
         if not inc_est:
             popup = QtWidgets.QMessageBox()
@@ -450,9 +454,7 @@ class MainWindowUIClass(Ui_MainWindow):
             popup.exec_()
             self.stackedWidget.setEnabled(True)
 
-# Main
-
-
+#MAIN
 def main():
     app = QtWidgets.QApplication(sys.argv)
     ex = MainWindowUIClass()

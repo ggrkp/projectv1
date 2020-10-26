@@ -220,7 +220,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>11</x>
@@ -536,7 +536,7 @@
        <item>
         <widget class="QCheckBox" name="checkBox_16">
          <property name="text">
-          <string>Enable Feature Preprocessing</string>
+          <string>Disable Feature Preprocessing</string>
          </property>
         </widget>
        </item>
@@ -562,7 +562,7 @@
        <item>
         <widget class="QPushButton" name="backButton2">
          <property name="text">
-          <string>Back</string>
+          <string>Quit</string>
          </property>
         </widget>
        </item>
@@ -575,7 +575,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>241</x>

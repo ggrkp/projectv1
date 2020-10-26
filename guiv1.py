@@ -386,7 +386,7 @@ class Ui_MainWindow(QObject):
         self.label_8.setText(_translate("MainWindow", "Ensemble memory limit"))
         self.label_9.setText(_translate("MainWindow", "Resampling strategy"))
         self.label_10.setText(_translate("MainWindow", "Metric"))
-        self.checkBox_16.setText(_translate("MainWindow", "Enable Feature Preprocessing"))
+        self.checkBox_16.setText(_translate("MainWindow", "Disable Feature Preprocessing"))
         self.run_Button.setText(_translate("MainWindow", "Run"))
         self.backButton2.setText(_translate("MainWindow", "Quit"))
         self.nextButton2.setText(_translate("MainWindow", "Next"))

@@ -15,8 +15,8 @@ from guiv1 import Ui_MainWindow
 
 
 class MainWindowUIClass(Ui_MainWindow):
-    
-#INIT - SETUP UI    
+
+    # INIT - SETUP UI
     def __init__(self):
         global t_left
         super().__init__()
@@ -25,7 +25,7 @@ class MainWindowUIClass(Ui_MainWindow):
     def setupUi(self, MW):
 
         super().setupUi(MW)
-# 
+#
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # --------------------- 1. IMPORT SCREEN -------------------------
@@ -101,7 +101,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # --------------------- 2. TARGET FEATURE - PREVIEW SCREEN ------------
-    
+
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
         item_index = self.comboBox.currentIndex()
@@ -159,7 +159,7 @@ class MainWindowUIClass(Ui_MainWindow):
         resample_list = ["Default", "Cross Validation", "Holdout"]
         self.ressampleCombo.addItems(resample_list)
 
-        resample_args = {'train_size':0.67}
+        resample_args = {'train_size': 0.67}
         resample = "holdout"
 
         inc_est = ["adaboost",
@@ -181,12 +181,12 @@ class MainWindowUIClass(Ui_MainWindow):
         disable_prepro = None
 
         self.holdout_box.setEnabled(False)
-        self.cvfoldsBox.setEnabled(False) 
+        self.cvfoldsBox.setEnabled(False)
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # --------------------- 3. MAKE MODEL SCREEN -------------------------------
- 
+
 # TIME LEFT FOR THIS TASK SPINBOX
     def timeleft_Slot(self):
         global t_left
@@ -211,7 +211,7 @@ class MainWindowUIClass(Ui_MainWindow):
         combo_idx_metric = self.metricCombo.currentIndex()
         metric = self.metricCombo.itemText(combo_idx_metric)
 
-# RESAMPLING STRATEGY DROPDOWN 
+# RESAMPLING STRATEGY DROPDOWN
     def resampleBox(self):
         global resample, resample_args
         combo_idx_resample = self.ressampleCombo.currentIndex()
@@ -220,50 +220,50 @@ class MainWindowUIClass(Ui_MainWindow):
         if resample_str == "Cross Validation":
             self.cvfoldsBox.setEnabled(True)
             self.holdout_box.setEnabled(False)
-            self.cvfoldsBox.setRange(2,10)
-            resample_args = {'folds':2}
+            self.cvfoldsBox.setRange(2, 10)
+            resample_args = {'folds': 2}
             resample = "cv"
 
         elif resample_str == "Default":
             self.holdout_box.setEnabled(False)
-            self.cvfoldsBox.setEnabled(False)    
-            resample_args = {'train_size':0.67}
+            self.cvfoldsBox.setEnabled(False)
+            resample_args = {'train_size': 0.67}
             resample = "holdout"
 
         else:
             self.holdout_box.setEnabled(True)
             self.cvfoldsBox.setEnabled(False)
-            self.holdout_box.setRange(0.1,1.0)
+            self.holdout_box.setRange(0.1, 1.0)
             self.holdout_box.setSingleStep(0.01)
             self.holdout_box.setDecimals(2)
             self.holdout_box.setValue(0.67)
-            resample_args = {'train_size':0.67}
+            resample_args = {'train_size': 0.67}
             resample = "holdout"
 
-# CV FOLDS - HOLDOUT TRAIN SIZE SPINBOXES 
+# CV FOLDS - HOLDOUT TRAIN SIZE SPINBOXES
     def cv_Folds(self):
         global resample_args
         folds = self.cvfoldsBox.value()
-        resample_args = {'folds':folds}
-        
+        resample_args = {'folds': folds}
+
     def holdout_Size(self):
         global resample_args
         h_size = self.holdout_box.value()
-        resample_args = {'train_size':h_size}
+        resample_args = {'train_size': h_size}
 
 # NEXT BUTTON - BACK BUTTON
     def nextSlot_2(self):
         print(f"Included:   {inc_est}")
         print("Metric:", metric)
         print("Resampling_Technique:", resample)
-        print("Args:" ,resample_args)
+        print("Args:", resample_args)
         print(t_left)
         print("Yoleleison")
 
     def backSlot_1(self):
         sys.exit()
 
-# BUTTON GIA MANUALL SELCECTION ESTIMATORS 
+# BUTTON GIA MANUALL SELCECTION ESTIMATORS
     def select_all_Estimators(self):
         global inc_est
         if self.groupBox.isChecked():
@@ -393,7 +393,7 @@ class MainWindowUIClass(Ui_MainWindow):
         est_name = self.qdaBox.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
-# DISABLE PREPROCESSING CHECKBOX 
+# DISABLE PREPROCESSING CHECKBOX
     def prepro_Checked(self):  # Disable Feature Preprocessing
         global disable_prepro
         if self.checkBox_16.isChecked():
@@ -456,7 +456,9 @@ class MainWindowUIClass(Ui_MainWindow):
             popup.exec_()
             self.stackedWidget.setEnabled(True)
 
-#MAIN
+# MAIN
+
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
     ex = MainWindowUIClass()
@@ -464,5 +466,6 @@ def main():
     ex.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
 
 main()

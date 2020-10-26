@@ -388,7 +388,7 @@ class Ui_MainWindow(QObject):
         self.label_10.setText(_translate("MainWindow", "Metric"))
         self.checkBox_16.setText(_translate("MainWindow", "Disable Feature Preprocessing"))
         self.run_Button.setText(_translate("MainWindow", "Run"))
-        self.backButton2.setText(_translate("MainWindow", "Quit"))
+        self.backButton2.setText(_translate("MainWindow", "Back"))
         self.nextButton2.setText(_translate("MainWindow", "Next"))
         self.label_12.setText(_translate("MainWindow", "Holdout Train Size"))
         self.label_11.setText(_translate("MainWindow", "CV folds"))

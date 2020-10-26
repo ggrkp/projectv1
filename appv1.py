@@ -13,10 +13,13 @@ from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
 from functions import Func
 from guiv1 import Ui_MainWindow
 
+# TODO: To Do!!!
+#! Xreiazetai allages - Den einai akoma etoimo
+# ? Idea - Psaksimo gia ulopoihsh - Erwthsh
+# * Highlight - px New Screen
+
 
 class MainWindowUIClass(Ui_MainWindow):
-
-    # INIT - SETUP UI
     def __init__(self):
         global t_left
         super().__init__()
@@ -25,12 +28,12 @@ class MainWindowUIClass(Ui_MainWindow):
     def setupUi(self, MW):
 
         super().setupUi(MW)
-#
 
-    # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # --------------------- 1. IMPORT SCREEN -------------------------
+    # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><>
+    # * 1. IMPORT SCREEN -------------------------
 
 # REFRESH
+
     def refreshAll(self):
         self.pathLine.setText(self.functions.getFileName())
 
@@ -48,11 +51,12 @@ class MainWindowUIClass(Ui_MainWindow):
             self.functions.setFileName(fileName)
             self.refreshAll()
 
-# IMPORT BUTTON
+#! IMPORT BUTTON
     def importSlot(self):  # Slot gia to import button
         global fileName
         fileName = self.pathLine.text()
         if self.functions.isValid(fileName):
+            #todo: na kanw akoma enan elegxo gia to an einai empty to file! 
             global data
             data = self.functions.readFile(fileName)
             self.functions.setFileName(self.pathLine.text())
@@ -77,8 +81,9 @@ class MainWindowUIClass(Ui_MainWindow):
             popup.exec_()
             self.refreshAll()
 
-# CLEAR BUTTON (ALLAGI STO TELOS GIATI TORA VAZEI TO IRIS)
+# CLEAR BUTTON
     def cancelSlot(self):
+        #TODO: Na allaksw to clear button k na kanei clear - twra bazei to iris gia eukolia. 
         self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv")
 
     def nextSlot(self):  # Slot gia to next button
@@ -97,10 +102,11 @@ class MainWindowUIClass(Ui_MainWindow):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.setItem(
                     i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # --------------------- 2. TARGET FEATURE - PREVIEW SCREEN ------------
+# *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
+    # * 2. TARGET FEATURE - PREVIEW SCREEN ------------
 
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
@@ -119,7 +125,7 @@ class MainWindowUIClass(Ui_MainWindow):
             self.tableWidget.item(i, item_index).setBackground(
                 QtGui.QColor('springgreen'))
 
-# NEXT BUTTON - BACK BUTTON > DHLWNONTAI DEFAULTS GIA TO EPOMENO SCREEN ( MDOELING SCREEN - PARAMETERS )
+#! NEXT BUTTON - BACK BUTTON > DHLWNONTAI DEFAULTS GIA TO EPOMENO SCREEN ( MDOELING SCREEN - PARAMETERS )
     def backSlot(self):  # Slot gia to back button
         self.stackedWidget.setCurrentIndex(0)  # Pame ena screen pisw
         self.comboBox.clear()  # Katharizoyme to Combo box gia na mpoun nea features sto drop down
@@ -148,6 +154,7 @@ class MainWindowUIClass(Ui_MainWindow):
         self.memory_box.setMinimum(1024)
         self.memory_box.setMaximum(mem_Mb)
 
+        # TODO: Na dialeksw poies metrikes tha xrisimopoiw kai na emfanizontai sto teliko model.
         metric_list = ["accuracy", "balanced_accuracy", "roc_auc", "average_precision", "log_loss",
                        "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
                        "recall", "recall_macro", "recall_micro", "recall_samples", "recall_weighted",
@@ -178,14 +185,16 @@ class MainWindowUIClass(Ui_MainWindow):
                    "sgd",
                    "qda"]
 
+
         disable_prepro = None
 
         self.holdout_box.setEnabled(False)
         self.cvfoldsBox.setEnabled(False)
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    # ><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # --------------------- 3. MAKE MODEL SCREEN -------------------------------
+# *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
+    # * 3. MAKE MODEL SCREEN --------------------------
 
 # TIME LEFT FOR THIS TASK SPINBOX
     def timeleft_Slot(self):
@@ -251,7 +260,9 @@ class MainWindowUIClass(Ui_MainWindow):
         h_size = self.holdout_box.value()
         resample_args = {'train_size': h_size}
 
-# NEXT BUTTON - BACK BUTTON
+
+#! NEXT BUTTON - BACK BUTTON
+    #TODO: To next button na se pigainei sto epomeno screen kai na pernaei oti arguments kai data xreiazontai gi auto :
     def nextSlot_2(self):
         print(f"Included:   {inc_est}")
         print("Metric:", metric)
@@ -261,8 +272,10 @@ class MainWindowUIClass(Ui_MainWindow):
         print("Yoleleison")
 
     def backSlot_1(self):
-        sys.exit()
-
+        self.checkBox_16.setChecked(False)
+        self.stackedWidget.setCurrentIndex(1)  # Pame ena screen pisw
+        self.metricCombo.clear()
+        self.ressampleCombo.clear()
 # BUTTON GIA MANUALL SELCECTION ESTIMATORS
     def select_all_Estimators(self):
         global inc_est
@@ -402,7 +415,12 @@ class MainWindowUIClass(Ui_MainWindow):
         else:
             disable_prepro = None
 
-# RUN BUTTON -> START CREATING ENSEMBLES
+
+#! RUN BUTTON -> START CREATING ENSEMBLES
+    # ? Mporw na exw mono ena model kai oxi ensemble? ensemble size = 1 ? Ylopoihsh an ginetai!
+    # TODO: def ensemble_size_Slot (self): global ens_size = 1 an thelw model, alliws ens_size = self.splinbox.value()
+    # TODO: Gia to run button prepei na apothikeuw to teliko model / ensemble se ena file
+    # TODO: Na vrw tropo na to anaktw kai na to xrismopoiw h na to porbalw sthn othoni se History tab (PX)
     def modelSlot(self):
         global model, inc_est, resample
         # ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
@@ -456,9 +474,16 @@ class MainWindowUIClass(Ui_MainWindow):
             popup.exec_()
             self.stackedWidget.setEnabled(True)
 
+# *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
+    # * 4. RESULTS - HISTORY TAB SCREEN ----------------
+
+
+
+# *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 # MAIN
-
-
 def main():
     app = QtWidgets.QApplication(sys.argv)
     ex = MainWindowUIClass()

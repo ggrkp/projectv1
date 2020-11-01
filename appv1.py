@@ -56,7 +56,7 @@ class MainWindowUIClass(Ui_MainWindow):
         global fileName
         fileName = self.pathLine.text()
         if self.functions.isValid(fileName):
-            #todo: na kanw akoma enan elegxo gia to an einai empty to file! 
+            # todo: na kanw akoma enan elegxo gia to an einai empty to file!
             global data
             data = self.functions.readFile(fileName)
             self.functions.setFileName(self.pathLine.text())
@@ -83,7 +83,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # CLEAR BUTTON
     def cancelSlot(self):
-        #TODO: Na allaksw to clear button k na kanei clear - twra bazei to iris gia eukolia. 
+        # TODO: Na allaksw to clear button k na kanei clear - twra bazei to iris gia eukolia.
         self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv")
 
     def nextSlot(self):  # Slot gia to next button
@@ -110,11 +110,18 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
+        global learning_type
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
         global X
         global y
         y = self.functions.pickTarget(item_index, data)
+        #! edw apofasizetai an einai regression i classification 
+        if y.dtype.name == 'category' or y.dtype.name == 'object':
+            learning_type = 'Classification'
+        else:
+            learning_type = 'Regression'
+        
         X = self.functions.pickPredictors(item_index, data)
         # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(True)
@@ -134,9 +141,91 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def nextSlot_1(self):  # Next pou pigainei stis parametrous tou modeling
         # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
-        self.stackedWidget.setCurrentIndex(2)
-
         global t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric
+        self.stackedWidget.setCurrentIndex(2)
+        
+        #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION 
+        if learning_type == "Classification":
+            self.label_13.setText("Select Classification Parameters")
+
+            metric_list = ["accuracy", "balanced_accuracy", "roc_auc", "average_precision", "log_loss",
+                       "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
+                       "recall", "recall_macro", "recall_micro", "recall_samples", "recall_weighted",
+                       "f1", "f1_macro", "f1_micro", "f1_samples", "f1_weighted"]
+
+            self.metricCombo.addItems(metric_list)
+            metric = None
+            self.ardBox.hide()
+            self.linearsvr_Box.hide()
+            self.libsvrBox.hide()
+            self.gausianPro_Box.hide()
+
+            self.bernoulliBox.show()  
+            self.liblinearBox.show()  
+            self.libsvmBox.show()  
+            self.qdaBox.show()  
+            self.pasagrBox.show()  
+            self.multinbBox.show()  
+            self.gaussianBox.show()  
+            self.ldaBox.show()  
+            self.bernoulliBox.show()  
+            self.bernoulliBox.show() 
+
+            inc_est = ["adaboost",
+                    "bernoulli_nb",
+                    "decision_tree",
+                    "extra_trees",
+                    "gaussian_nb",
+                    "gradient_boosting",
+                    "k_nearest_neighbors",
+                    "lda",
+                    "liblinear_svc",
+                    "libsvm_svc",
+                    "multinomial_nb",
+                    "passive_aggressive",
+                    "random_forest",
+                    "sgd",
+                    "qda"]
+
+        elif learning_type == "Regression":
+            self.label_13.setText("Select Regression Parameters")
+
+            self.ardBox.show()
+            self.linearsvr_Box.show()
+            self.libsvrBox.show()
+            self.gausianPro_Box.show()
+
+            self.bernoulliBox.hide()  
+            self.liblinearBox.hide()  
+            self.libsvmBox.hide()  
+            self.qdaBox.hide()  
+            self.pasagrBox.hide()  
+            self.multinbBox.hide()  
+            self.gaussianBox.hide()  
+            self.ldaBox.hide()  
+            self.bernoulliBox.hide()  
+            self.bernoulliBox.hide()  
+
+            metric_list = ["mean_absolute_error",
+                        "mean_squared_error",
+                        "root_mean_squared_error",
+                        "mean_squared_log_error",
+                        "median_absolute_error",
+                        "r2"]
+
+            self.metricCombo.addItems(metric_list)
+            metric = None
+            inc_est = ["adaboost",
+                    "ard_regression",
+                    "decision_tree",
+                    "extra_trees",
+                    "gaussian_process",
+                    "gradient_boosting",
+                    "k_nearest_neighbors",
+                    "liblinear_svr",
+                    "libsvm_svr",
+                    "random_forest",
+                    "sgd"]
 
         # MODELING DEFAULTS
         self.groupBox.setCheckable(True)
@@ -155,36 +244,12 @@ class MainWindowUIClass(Ui_MainWindow):
         self.memory_box.setMaximum(mem_Mb)
 
         # TODO: Na dialeksw poies metrikes tha xrisimopoiw kai na emfanizontai sto teliko model.
-        metric_list = ["accuracy", "balanced_accuracy", "roc_auc", "average_precision", "log_loss",
-                       "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
-                       "recall", "recall_macro", "recall_micro", "recall_samples", "recall_weighted",
-                       "f1", "f1_macro", "f1_micro", "f1_samples", "f1_weighted"]
-
-        self.metricCombo.addItems(metric_list)
-
-        metric = None
+        
         resample_list = ["Default", "Cross Validation", "Holdout"]
         self.ressampleCombo.addItems(resample_list)
 
         resample_args = {'train_size': 0.67}
         resample = "holdout"
-
-        inc_est = ["adaboost",
-                   "bernoulli_nb",
-                   "decision_tree",
-                   "extra_trees",
-                   "gaussian_nb",
-                   "gradient_boosting",
-                   "k_nearest_neighbors",
-                   "lda",
-                   "liblinear_svc",
-                   "libsvm_svc",
-                   "multinomial_nb",
-                   "passive_aggressive",
-                   "random_forest",
-                   "sgd",
-                   "qda"]
-
 
         disable_prepro = None
 
@@ -262,7 +327,9 @@ class MainWindowUIClass(Ui_MainWindow):
 
 
 #! NEXT BUTTON - BACK BUTTON
-    #TODO: To next button na se pigainei sto epomeno screen kai na pernaei oti arguments kai data xreiazontai gi auto :
+    # TODO: To next button na se pigainei sto epomeno screen kai na pernaei oti arguments kai data xreiazontai gi auto :
+
+
     def nextSlot_2(self):
         print(f"Included:   {inc_est}")
         print("Metric:", metric)
@@ -277,133 +344,203 @@ class MainWindowUIClass(Ui_MainWindow):
         self.metricCombo.clear()
         self.ressampleCombo.clear()
 # BUTTON GIA MANUALL SELCECTION ESTIMATORS
+
     def select_all_Estimators(self):
         global inc_est
         if self.groupBox.isChecked():
-            inc_est = []
-
+                inc_est = []
         else:
-            self.extratreeBox.setChecked(False)
-            self.adaBox.setChecked(False)
-            self.gaussianBox.setChecked(False)
-            self.bernoulliBox.setChecked(False)
-            self.rforoestBox.setChecked(False)
-            self.qdaBox.setChecked(False)
-            self.multinbBox.setChecked(False)
-            self.ldaBox.setChecked(False)
-            self.libsvmBox.setChecked(False)
-            self.liblinearBox.setChecked(False)
-            self.dtreeBox.setChecked(False)
-            self.sgdBox.setChecked(False)
-            self.gradientBox.setChecked(False)
-            self.knnBox.setChecked(False)
-            self.pasagrBox.setChecked(False)
-            inc_est = ["adaboost",
-                       "bernoulli_nb",
-                       "decision_tree",
-                       "extra_trees",
-                       "gaussian_nb",
-                       "gradient_boosting",
-                       "k_nearest_neighbors",
-                       "lda",
-                       "liblinear_svc",
-                       "libsvm_svc",
-                       "multinomial_nb",
-                       "passive_aggressive",
-                       "random_forest",
-                       "sgd",
-                       "qda"]
+            if learning_type == "Classification":
+        
+                    self.extratreeBox.setChecked(False)
+                    self.adaBox.setChecked(False)
+                    self.gaussianBox.setChecked(False)
+                    self.bernoulliBox.setChecked(False)
+                    self.rforoestBox.setChecked(False)
+                    self.qdaBox.setChecked(False)
+                    self.multinbBox.setChecked(False)
+                    self.ldaBox.setChecked(False)
+                    self.libsvmBox.setChecked(False)
+                    self.liblinearBox.setChecked(False)
+                    self.dtreeBox.setChecked(False)
+                    self.sgdBox.setChecked(False)
+                    self.gradientBox.setChecked(False)
+                    self.knnBox.setChecked(False)
+                    self.pasagrBox.setChecked(False)
+                    inc_est = ["adaboost",
+                            "bernoulli_nb",
+                            "decision_tree",
+                            "extra_trees",
+                            "gaussian_nb",
+                            "gradient_boosting",
+                            "k_nearest_neighbors",
+                            "lda",
+                            "liblinear_svc",
+                            "libsvm_svc",
+                            "multinomial_nb",
+                            "passive_aggressive",
+                            "random_forest",
+                            "sgd",
+                            "qda"]
+            else:  
+                    self.extratreeBox.setChecked(False)
+                    self.adaBox.setChecked(False)
+                    self.ardBox.setChecked(False)
+                    self.gausianPro_Box.setChecked(False)
+                    self.rforoestBox.setChecked(False)
+                    self.multinbBox.setChecked(False)
+                    self.libsvrBox.setChecked(False)
+                    self.linearsvr_Box.setChecked(False)
+                    self.dtreeBox.setChecked(False)
+                    self.sgdBox.setChecked(False)
+                    self.gradientBox.setChecked(False)
+                    self.knnBox.setChecked(False)
+
+                    inc_est = ["adaboost",
+                        "ard_regression",
+                        "decision_tree",
+                        "extra_trees",
+                        "gaussian_process",
+                        "gradient_boosting",
+                        "k_nearest_neighbors",
+                        "liblinear_svr",
+                        "libsvm_svr",
+                        "random_forest",
+                        "sgd"]
+
 
 # ESTIMATORS CHECK BOXES (MPAINOUN SE LISTA) :
+    def ard_Checked(self):
+        global inc_est
+        box = self.ardBox
+        box_state = box.isChecked()
+        est_name = box.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def gausianPro_Checked(self):
+        global inc_est
+        box = self.gausianPro_Box
+        box_state = box.isChecked()
+        est_name = box.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def liblinearsvr_Checked(self):
+        global inc_est
+        box = self.linearsvr_Box
+        box_state = box.isChecked()
+        est_name = box.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
+
+    def libsvr_Checked(self):
+        global inc_est
+        box = self.libsvrBox
+        box_state = box.isChecked()
+        est_name = box.text()
+        inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def adaChecked(self):
         global inc_est
-        box_state = self.adaBox.isChecked()
-        est_name = self.adaBox.text()
+        box = self.adaBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def bernoulliChecked(self):
         global inc_est
-        box_state = self.bernoulliBox.isChecked()
-        est_name = self.bernoulliBox.text()
+        box = self.bernoulliBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def dectreeChecked(self):
         global inc_est
-        box_state = self.dtreeBox.isChecked()
-        est_name = self.dtreeBox.text()
+        box = self.dtreeBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def extraTreeChecked(self):
         global inc_est
-        box_state = self.extratreeBox.isChecked()
-        est_name = self.extratreeBox.text()
+        box = self.extratreeBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def gausianChecked(self):
         global inc_est
-        box_state = self.gaussianBox.isChecked()
-        est_name = self.gaussianBox.text()
+        box = self.gaussianBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def gradient_checked(self):
         global inc_est
-        box_state = self.gradientBox.isChecked()
-        est_name = self.gradientBox.text()
+        box = self.gradientBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def knnChecked(self):
         global inc_est
-        box_state = self.knnBox.isChecked()
-        est_name = self.knnBox.text()
+        box = self.knnBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def ldaChecked(self):
         global inc_est
-        box_state = self.ldaBox.isChecked()
-        est_name = self.ldaBox.text()
+        box = self.ldaBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def liblinearChecked(self):
         global inc_est
-        box_state = self.liblinearBox.isChecked()
-        est_name = self.liblinearBox.text()
+        box = self.liblinearBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def libsvmChecked(self):
         global inc_est
-        box_state = self.libsvmBox.isChecked()
-        est_name = self.libsvmBox.text()
+        box = self.libsvmBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def multnbChecked(self):
         global inc_est
-        box_state = self.multinbBox.isChecked()
-        est_name = self.multinbBox.text()
+        box = self.multinbBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def pasagrChecked(self):
         global inc_est
-        box_state = self.pasagrBox.isChecked()
-        est_name = self.pasagrBox.text()
+        box = self.pasagrBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def rforestChecked(self):
         global inc_est
-        box_state = self.rforoestBox.isChecked()
-        est_name = self.rforoestBox.text()
+        box = self.rforoestBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def sgdChecked(self):
         global inc_est
-        box_state = self.sgdBox.isChecked()
-        est_name = self.sgdBox.text()
+        box = self.sgdBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
     def qdaChecked(self):
         global inc_est
-        box_state = self.qdaBox.isChecked()
-        est_name = self.qdaBox.text()
+        box = self.qdaBox
+        box_state = box.isChecked()
+        est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
 # DISABLE PREPROCESSING CHECKBOX
@@ -415,11 +552,12 @@ class MainWindowUIClass(Ui_MainWindow):
         else:
             disable_prepro = None
 
-#! RUN BUTTON -> START CREATING ENSEMBLES
+#! RUN BUTTON => START CREATING ENSEMBLES
     # ? Mporw na exw mono ena model kai oxi ensemble? ensemble size = 1 ? Ylopoihsh an ginetai!
     # TODO: def ensemble_size_Slot (self): global ens_size = 1 an thelw model, alliws ens_size = self.splinbox.value()
     # TODO: Gia to run button prepei na apothikeuw to teliko model / ensemble se ena file
     # TODO: Na vrw tropo na to anaktw kai na to xrismopoiw h na to porbalw sthn othoni se History tab (PX)
+    
     def modelSlot(self):
         global model, inc_est, resample
         # ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
@@ -457,14 +595,26 @@ class MainWindowUIClass(Ui_MainWindow):
             base = os.path.basename(fileName)
             dataset_name = os.path.splitext(base)[0]
 
-            model = self.functions.callClassifier(
-                t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
-            self.functions.fitModel(X_train, y_train, model, dataset_name)
-            print(model.get_models_with_weights())
+            if learning_type == "Classification":
+                #! edw kaleitai o classifier !
+                model = self.functions.callClassifier(
+                    t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
+            elif learning_type == "Regression":
+                #! edw kaleitai o regressor !
+                model = self.functions.callRegressor(
+                    t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
 
+            self.functions.fitModel(X_train, y_train, model, dataset_name)
             pred = model.predict(X_test)
-            print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
-            print(model.show_models())
+            
+            if learning_type == 'Regression':
+                print("Max error", sklearn.metrics.max_error(y_test, pred))
+            else:
+                print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
+
+            # print(model.get_models_with_weights())
+
+            # print(model.show_models())
             popup = QtWidgets.QMessageBox()
             popup.setWindowTitle(" Done ")
             popup.setText("An ensemble is created successfully!")
@@ -478,11 +628,13 @@ class MainWindowUIClass(Ui_MainWindow):
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # * 4. RESULTS - HISTORY TAB SCREEN ----------------
 
-        #TODO OLO TO NEO SCREEN ! 
+        # TODO OLO TO NEO SCREEN !
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # MAIN
+
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
     ex = MainWindowUIClass()

@@ -7,6 +7,7 @@ import featuretools as ft
 import pandas as pd
 import sklearn
 from autosklearn.classification import AutoSklearnClassifier
+from autosklearn.regression import AutoSklearnRegressor
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
 from sklearn.model_selection import train_test_split
@@ -58,7 +59,7 @@ class Func:
 
     def colCount(self, df):
         return df.shape[1]
-
+#todo : na ftiaksw to function
     def hasHeader(self, df):
         pass
 
@@ -75,7 +76,7 @@ class Func:
 
             # MEMORY RESTRICTION
             ensemble_memory_limit=mem_limit,
-        
+
             # ALGORITHM RESTRICTION
             include_estimators=inc_est,
 
@@ -90,10 +91,29 @@ class Func:
             metric=metric
         )
         return automl
+#! call regressor
 
-    def callRegressor(self):
-        automl = AutoSklearnClassifier(
-            time_left_for_this_task=30,
+    def callRegressor (self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric):
+        automl = AutoSklearnRegressor(
+            # TIME RESTRICTION
+            time_left_for_this_task=t_left,
+            per_run_time_limit=t_per_run,
+
+            # MEMORY RESTRICTION
+            ensemble_memory_limit=mem_limit,
+
+            # ALGORITHM RESTRICTION
+            include_estimators=inc_est,
+
+            # APENERGOPOIHSH PREPROSSESORS
+            include_preprocessors=disable_prepro,
+
+            # RESAMPLING (CROSS VALIDATION) - ISWS ME NEA SUNARTHSH GIA NA PAIRNEI KI AUTO PARAMETROUS
+            resampling_strategy=resample,
+            resampling_strategy_arguments=resample_args,
+
+            # EPILOGI METRIKWN
+            metric=metric
         )
         return automl
 

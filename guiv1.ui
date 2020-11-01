@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>818</width>
+    <width>804</width>
     <height>591</height>
    </rect>
   </property>
@@ -252,8 +252,8 @@
      <widget class="QLabel" name="label_13">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>30</y>
+        <x>40</x>
+        <y>40</y>
         <width>501</width>
         <height>51</height>
        </rect>
@@ -270,8 +270,8 @@
      <widget class="QLabel" name="label_15">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>100</y>
+        <x>260</x>
+        <y>90</y>
         <width>221</width>
         <height>21</height>
        </rect>
@@ -288,8 +288,8 @@
      <widget class="QLabel" name="label_16">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>410</y>
+        <x>260</x>
+        <y>360</y>
         <width>261</width>
         <height>21</height>
        </rect>
@@ -307,65 +307,72 @@
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>100</y>
+        <y>90</y>
         <width>174</width>
-        <height>421</height>
+        <height>441</height>
        </rect>
       </property>
       <property name="title">
        <string>Select Estimators: </string>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="3" column="0">
+       <item row="6" column="0">
+        <widget class="QCheckBox" name="gausianPro_Box">
+         <property name="text">
+          <string>gaussian_process</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
         <widget class="QCheckBox" name="extratreeBox">
          <property name="text">
           <string>extra_trees</string>
          </property>
         </widget>
        </item>
-       <item row="12" column="0">
+       <item row="16" column="0">
         <widget class="QCheckBox" name="rforoestBox">
          <property name="text">
           <string>random_forest</string>
          </property>
         </widget>
        </item>
-       <item row="14" column="0">
+       <item row="18" column="0">
         <widget class="QCheckBox" name="qdaBox">
          <property name="text">
           <string>qda</string>
          </property>
         </widget>
        </item>
-       <item row="11" column="0">
+       <item row="15" column="0">
         <widget class="QCheckBox" name="pasagrBox">
          <property name="text">
           <string>passive_aggressive</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="2" column="0">
         <widget class="QCheckBox" name="bernoulliBox">
          <property name="text">
           <string>bernoulli_nb</string>
          </property>
         </widget>
        </item>
-       <item row="10" column="0">
+       <item row="14" column="0">
         <widget class="QCheckBox" name="multinbBox">
          <property name="text">
           <string>multinomial_nb</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
+       <item row="9" column="0">
         <widget class="QCheckBox" name="ldaBox">
          <property name="text">
           <string>lda</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="5" column="0">
         <widget class="QCheckBox" name="gaussianBox">
          <property name="text">
           <string>gaussian_nb</string>
@@ -379,45 +386,66 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="0">
+       <item row="10" column="0">
         <widget class="QCheckBox" name="liblinearBox">
          <property name="text">
           <string>liblinear_svc</string>
          </property>
         </widget>
        </item>
-       <item row="9" column="0">
+       <item row="12" column="0">
         <widget class="QCheckBox" name="libsvmBox">
          <property name="text">
           <string>libsvm_svc</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="0">
+       <item row="8" column="0">
         <widget class="QCheckBox" name="knnBox">
          <property name="text">
           <string>k_nearest_neighbors</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="7" column="0">
         <widget class="QCheckBox" name="gradientBox">
          <property name="text">
           <string>gradient_boosting</string>
          </property>
         </widget>
        </item>
-       <item row="13" column="0">
+       <item row="17" column="0">
         <widget class="QCheckBox" name="sgdBox">
          <property name="text">
           <string>sgd</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="3" column="0">
         <widget class="QCheckBox" name="dtreeBox">
          <property name="text">
           <string>decision_tree</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="QCheckBox" name="linearsvr_Box">
+         <property name="text">
+          <string>liblinear_svr</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="ardBox">
+         <property name="text">
+          <string>ard_regression</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <widget class="QCheckBox" name="libsvrBox">
+         <property name="text">
+          <string>libsvm_svr</string>
          </property>
         </widget>
        </item>
@@ -426,9 +454,9 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>240</x>
+        <x>260</x>
         <y>120</y>
-        <width>314</width>
+        <width>391</width>
         <height>221</height>
        </rect>
       </property>
@@ -545,10 +573,10 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>600</x>
-        <y>440</y>
+        <x>570</x>
+        <y>360</y>
         <width>82</width>
-        <height>83</height>
+        <height>161</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -578,10 +606,10 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>241</x>
-        <y>440</y>
+        <x>260</x>
+        <y>390</y>
         <width>280</width>
-        <height>60</height>
+        <height>91</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -642,6 +670,7 @@
       </layout>
      </widget>
     </widget>
+    <widget class="QWidget" name="page_4"/>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -655,7 +684,7 @@
    <slot>perrun_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>580</x>
+     <x>677</x>
      <y>186</y>
     </hint>
     <hint type="destinationlabel">
@@ -719,7 +748,7 @@
    <slot>timeleft_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>580</x>
+     <x>677</x>
      <y>136</y>
     </hint>
     <hint type="destinationlabel">
@@ -799,8 +828,8 @@
    <slot>nextSlot_2()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>688</x>
-     <y>531</y>
+     <x>658</x>
+     <y>508</y>
     </hint>
     <hint type="destinationlabel">
      <x>89</x>
@@ -815,8 +844,8 @@
    <slot>backSlot_1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>676</x>
-     <y>502</y>
+     <x>646</x>
+     <y>460</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -831,7 +860,7 @@
    <slot>ensmemory_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>581</x>
+     <x>678</x>
      <y>225</y>
     </hint>
     <hint type="destinationlabel">
@@ -879,8 +908,8 @@
    <slot>modelSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>650</x>
-     <y>463</y>
+     <x>620</x>
+     <y>402</y>
     </hint>
     <hint type="destinationlabel">
      <x>91</x>
@@ -912,7 +941,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>104</x>
-     <y>159</y>
+     <y>145</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -960,7 +989,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>153</x>
-     <y>210</y>
+     <y>209</y>
     </hint>
     <hint type="destinationlabel">
      <x>113</x>
@@ -976,7 +1005,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>139</x>
-     <y>236</y>
+     <y>230</y>
     </hint>
     <hint type="destinationlabel">
      <x>124</x>
@@ -992,7 +1021,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>173</x>
-     <y>262</y>
+     <y>251</y>
     </hint>
     <hint type="destinationlabel">
      <x>30</x>
@@ -1040,7 +1069,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>122</x>
-     <y>339</y>
+     <y>337</y>
     </hint>
     <hint type="destinationlabel">
      <x>79</x>
@@ -1056,7 +1085,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>195</x>
-     <y>364</y>
+     <y>358</y>
     </hint>
     <hint type="destinationlabel">
      <x>712</x>
@@ -1088,7 +1117,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>186</x>
-     <y>416</y>
+     <y>443</y>
     </hint>
     <hint type="destinationlabel">
      <x>236</x>
@@ -1104,7 +1133,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>163</x>
-     <y>441</y>
+     <y>465</y>
     </hint>
     <hint type="destinationlabel">
      <x>369</x>
@@ -1120,7 +1149,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>136</x>
-     <y>467</y>
+     <y>486</y>
     </hint>
     <hint type="destinationlabel">
      <x>88</x>
@@ -1167,8 +1196,8 @@
    <slot>cv_Folds()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>545</x>
-     <y>496</y>
+     <x>564</x>
+     <y>469</y>
     </hint>
     <hint type="destinationlabel">
      <x>781</x>
@@ -1183,12 +1212,76 @@
    <slot>holdout_Size()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>506</x>
-     <y>457</y>
+     <x>525</x>
+     <y>415</y>
     </hint>
     <hint type="destinationlabel">
      <x>786</x>
      <y>241</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ardBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>ard_Checked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>227</x>
+     <y>161</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>10</x>
+     <y>251</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gausianPro_Box</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gausianPro_Checked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>102</x>
+     <y>265</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>12</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>linearsvr_Box</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>liblinearsvr_Checked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>372</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>8</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>libsvrBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>libsvr_Checked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>176</x>
+     <y>416</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>7</x>
+     <y>387</y>
     </hint>
    </hints>
   </connection>
@@ -1231,5 +1324,9 @@
   <slot>bernoulliChecked()</slot>
   <slot>holdout_Size()</slot>
   <slot>cv_Folds()</slot>
+  <slot>gausianPro_Checked()</slot>
+  <slot>ard_Checked()</slot>
+  <slot>liblinearsvr_Checked()</slot>
+  <slot>libsvr_Checked()</slot>
  </slots>
 </ui>

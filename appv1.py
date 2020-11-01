@@ -13,11 +13,6 @@ from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
 from functions import Func
 from guiv1 import Ui_MainWindow
 
-# TODO: To Do!!!
-#! Xreiazetai allages - Den einai akoma etoimo
-# ? Idea - Psaksimo gia ulopoihsh - Erwthsh
-# * Highlight - px New Screen
-
 
 class MainWindowUIClass(Ui_MainWindow):
     def __init__(self):
@@ -30,7 +25,7 @@ class MainWindowUIClass(Ui_MainWindow):
         super().setupUi(MW)
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><>
-    # * 1. IMPORT SCREEN -------------------------
+    # ! 1. IMPORT SCREEN -------------------------
 
 # REFRESH
 
@@ -51,7 +46,7 @@ class MainWindowUIClass(Ui_MainWindow):
             self.functions.setFileName(fileName)
             self.refreshAll()
 
-#! IMPORT BUTTON
+# IMPORT BUTTON
     def importSlot(self):  # Slot gia to import button
         global fileName
         fileName = self.pathLine.text()
@@ -106,7 +101,7 @@ class MainWindowUIClass(Ui_MainWindow):
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # * 2. TARGET FEATURE - PREVIEW SCREEN ------------
+    # ! 2. TARGET FEATURE - PREVIEW SCREEN ------------
 
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
@@ -132,7 +127,7 @@ class MainWindowUIClass(Ui_MainWindow):
             self.tableWidget.item(i, item_index).setBackground(
                 QtGui.QColor('springgreen'))
 
-#! NEXT BUTTON - BACK BUTTON > DHLWNONTAI DEFAULTS GIA TO EPOMENO SCREEN ( MDOELING SCREEN - PARAMETERS )
+# NEXT BUTTON - BACK BUTTON > DHLWNONTAI DEFAULTS GIA TO EPOMENO SCREEN ( MDOELING SCREEN - PARAMETERS )
     def backSlot(self):  # Slot gia to back button
         self.stackedWidget.setCurrentIndex(0)  # Pame ena screen pisw
         self.comboBox.clear()  # Katharizoyme to Combo box gia na mpoun nea features sto drop down
@@ -143,7 +138,7 @@ class MainWindowUIClass(Ui_MainWindow):
         # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
         global t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric
         self.stackedWidget.setCurrentIndex(2)
-        
+
         #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION 
         if learning_type == "Classification":
             self.label_13.setText("Select Classification Parameters")
@@ -259,7 +254,7 @@ class MainWindowUIClass(Ui_MainWindow):
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # * 3. MAKE MODEL SCREEN --------------------------
+    # ! 3. MAKE MODEL SCREEN --------------------------
 
 # TIME LEFT FOR THIS TASK SPINBOX
     def timeleft_Slot(self):
@@ -325,8 +320,7 @@ class MainWindowUIClass(Ui_MainWindow):
         h_size = self.holdout_box.value()
         resample_args = {'train_size': h_size}
 
-
-#! NEXT BUTTON - BACK BUTTON
+# NEXT BUTTON - BACK BUTTON
     # TODO: To next button na se pigainei sto epomeno screen kai na pernaei oti arguments kai data xreiazontai gi auto :
 
 
@@ -343,6 +337,7 @@ class MainWindowUIClass(Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(1)  # Pame ena screen pisw
         self.metricCombo.clear()
         self.ressampleCombo.clear()
+
 # BUTTON GIA MANUALL SELCECTION ESTIMATORS
 
     def select_all_Estimators(self):
@@ -407,7 +402,6 @@ class MainWindowUIClass(Ui_MainWindow):
                         "libsvm_svr",
                         "random_forest",
                         "sgd"]
-
 
 # ESTIMATORS CHECK BOXES (MPAINOUN SE LISTA) :
     def ard_Checked(self):
@@ -552,15 +546,13 @@ class MainWindowUIClass(Ui_MainWindow):
         else:
             disable_prepro = None
 
-#! RUN BUTTON => START CREATING ENSEMBLES
-    # ? Mporw na exw mono ena model kai oxi ensemble? ensemble size = 1 ? Ylopoihsh an ginetai!
-    # TODO: def ensemble_size_Slot (self): global ens_size = 1 an thelw model, alliws ens_size = self.splinbox.value()
+# RUN BUTTON => START CREATING ENSEMBLES
     # TODO: Gia to run button prepei na apothikeuw to teliko model / ensemble se ena file
     # TODO: Na vrw tropo na to anaktw kai na to xrismopoiw h na to porbalw sthn othoni se History tab (PX)
     
     def modelSlot(self):
         global model, inc_est, resample
-        # ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
+        #! ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
         if not inc_est:
             popup = QtWidgets.QMessageBox()
             popup.setWindowTitle(" Error ")
@@ -591,22 +583,23 @@ class MainWindowUIClass(Ui_MainWindow):
             popup.setIcon(QtWidgets.QMessageBox.Information)
             popup.exec_()
 
+            #! Data Splitting:
             X_train, X_test, y_train, y_test = self.functions.splitData(X, y)
             base = os.path.basename(fileName)
             dataset_name = os.path.splitext(base)[0]
 
-            if learning_type == "Classification":
-                #! edw kaleitai o classifier !
+            #! Check learning problem Type:
+            if learning_type == "Classification": # classifier call
                 model = self.functions.callClassifier(
                     t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
-            elif learning_type == "Regression":
-                #! edw kaleitai o regressor !
+            elif learning_type == "Regression": #regressor call
                 model = self.functions.callRegressor(
                     t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
-
+            #! Model Fit:
             self.functions.fitModel(X_train, y_train, model, dataset_name)
             pred = model.predict(X_test)
             
+            #! Metric results:  
             if learning_type == 'Regression':
                 print("Max error", sklearn.metrics.max_error(y_test, pred))
             else:
@@ -626,13 +619,11 @@ class MainWindowUIClass(Ui_MainWindow):
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # * 4. RESULTS - HISTORY TAB SCREEN ----------------
+    # ! 4. RESULTS - HISTORY TAB SCREEN ----------------
 
         # TODO OLO TO NEO SCREEN !
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-# MAIN
 
 
 def main():

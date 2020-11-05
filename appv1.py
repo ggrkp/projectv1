@@ -338,6 +338,7 @@ class MainWindowUIClass(Ui_MainWindow):
         self.metricCombo.clear()
         self.ressampleCombo.clear()
 
+#! Estimators - Preprocessing
 # BUTTON GIA MANUALL SELCECTION ESTIMATORS
 
     def select_all_Estimators(self):
@@ -546,6 +547,7 @@ class MainWindowUIClass(Ui_MainWindow):
         else:
             disable_prepro = None
 
+#! Modeling
 # RUN BUTTON => START CREATING ENSEMBLES
     # TODO: Gia to run button prepei na apothikeuw to teliko model / ensemble se ena file
     # TODO: Na vrw tropo na to anaktw kai na to xrismopoiw h na to porbalw sthn othoni se History tab (PX)
@@ -578,7 +580,7 @@ class MainWindowUIClass(Ui_MainWindow):
                 )
             else:
                 popup.setInformativeText(
-                    f"This process will take about {minutes} minutes.")
+                    f"This process will take about {minutes} minutes. Press OK to continue...")
             popup.setStandardButtons(QtWidgets.QMessageBox.Ok)
             popup.setIcon(QtWidgets.QMessageBox.Information)
             popup.exec_()
@@ -602,7 +604,7 @@ class MainWindowUIClass(Ui_MainWindow):
             #! Metric results:  
             if learning_type == 'Regression':
                 print("Max error", sklearn.metrics.max_error(y_test, pred))
-            else:
+            elif learning_type == "Classification":
                 print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
 
             # print(model.get_models_with_weights())
@@ -621,7 +623,7 @@ class MainWindowUIClass(Ui_MainWindow):
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # ! 4. RESULTS - HISTORY TAB SCREEN ----------------
 
-        # TODO OLO TO NEO SCREEN !
+        # TODO OLO TO NEO SCREEN ! under construction
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

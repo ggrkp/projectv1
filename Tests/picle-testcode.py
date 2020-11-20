@@ -1,4 +1,4 @@
-# this is a test file 
+# this is a test file for pickling
 # pickle implementation -> reuse models
 import numpy as np
 import pandas as pd

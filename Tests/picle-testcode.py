@@ -26,7 +26,7 @@ import pickle
 
 # model = model.fit(X_train, y_train, dataset_name='pickled')
 
-
+# pickle name
 pkl_filename = "pickle_model.pkl"
 # with open(pkl_filename, 'wb') as file:
 #     pickle.dump(model, file)

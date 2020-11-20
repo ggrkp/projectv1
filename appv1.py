@@ -24,7 +24,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
         super().setupUi(MW)
 
-    # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><>
+# *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><>
     # ! 1. IMPORT SCREEN -------------------------
 
 # REFRESH
@@ -83,7 +83,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def nextSlot(self):  # Slot gia to next button
         global preview_num
-        preview_num = 100
+        preview_num = 10
         self.stackedWidget.setCurrentIndex(1)
         # Molis pataw next tha kanei load to combo Box kai tha periexei ta features.
         # iterating the columns

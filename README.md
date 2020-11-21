@@ -18,3 +18,5 @@ pip3 install auto-sklearn
 conda install -c conda-forge featuretools
 
 conda install -c anaconda pyqt
+
+conda install -c conda-forge sqlite

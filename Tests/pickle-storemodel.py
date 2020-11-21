@@ -11,6 +11,7 @@ import sklearn.metrics
 import autosklearn.classification
 from autosklearn.classification import AutoSklearnClassifier
 import pickle
+from datetime import datetime
 
 import sqlite3
 
@@ -32,11 +33,11 @@ model = model.fit(X_train, y_train, dataset_name='pickled')
 pickled_model = pickle.dumps(model)
 print(type(pickled_model))
 #! INSERT
+insertion_time = datetime.now()
 conn = sqlite3.connect('modelsDB.db')
-query = 'insert into models values (?, ?)'
-conn.execute(query, ['model2', pickled_model])
+query = 'insert into models values (?, ?, ?)'
+conn.execute(query, ['model2', pickled_model,insertion_time])
 conn.commit()
-
 
 # pickle name
 # pkl_filename = "pickle_model.pkl"

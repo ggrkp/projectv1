@@ -29,14 +29,28 @@ model = autosklearn.classification.AutoSklearnClassifier(
 
 model = model.fit(X_train, y_train, dataset_name='pickled')
 
+pickled_model = pickle.dumps(model)
+print(type(pickled_model))
+#! INSERT
+conn = sqlite3.connect('modelsDB.db')
+query = 'insert into models values (?, ?)'
+conn.execute(query, ['model2', pickled_model])
+conn.commit()
+
+
 # pickle name
-pkl_filename = "pickle_model.pkl"
-with open(pkl_filename, 'wb') as file:
-    pickle.dump(model, file)
+# pkl_filename = "pickle_model.pkl"
+# with open(pkl_filename, 'wb') as file:
+#     pickle.dump(model, file)
+
+# conn= sqlite3.connect('modelsDB.db')
+# query = 'insert into models values(?, ?)'
+# conn.execute(query,['model',pkl_filename])
+# conn.commit()
 
 #todo: gia na ta kanw auta load meta prepei na ta apothikeuysw se ena tuple pickle. Tha to dw 
-score = model.score(X_test, y_test)
+# score = model.score(X_test, y_test)
 
-print("Test Score with pickle model: {0:.2f} %". format(100 * score))
+# print("Test Score with pickle model: {0:.2f} %". format(100 * score))
 
-y_predict = model.predict(X_test)
+# y_predict = model.predict(X_test)

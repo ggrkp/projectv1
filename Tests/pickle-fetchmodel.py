@@ -1,4 +1,4 @@
-# this is a test file for pickling and storing data on sqlite
+# this is a test file for pickling and loading data on sqlite
 #! pickle implementation -> reuse models
 
 import numpy as np
@@ -12,13 +12,12 @@ import autosklearn.classification
 from autosklearn.classification import AutoSklearnClassifier
 import pickle
 import sqlite3
+#! connect to database
+conn = sqlite3.connect('modelsDB.db')
+#!SELECT model
+cursor = conn.execute('select * from models where name = "model2"')
+name, pickled_model = cursor.fetchone()
+print(name)
+fetched_model = pickle.loads(pickled_model)
 
-pkl_filename = "pickle_model.pkl"
-
-with open(pkl_filename, 'rb') as file:
-    pickle_model = pickle.load(file)
-
-print(pickle_model.show_models())
-
-
-print(pickle_model.show_models())
+print(fetched_model.show_models())

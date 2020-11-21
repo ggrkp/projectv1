@@ -36,7 +36,7 @@ print(type(pickled_model))
 insertion_time = datetime.now()
 conn = sqlite3.connect('modelsDB.db')
 query = 'insert into models values (?, ?, ?)'
-conn.execute(query, ['model2', pickled_model,insertion_time])
+conn.execute(query, ['model2', pickled_model, insertion_time])
 conn.commit()
 
 # pickle name

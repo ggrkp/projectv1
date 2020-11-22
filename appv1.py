@@ -2,6 +2,7 @@ import csv
 import os
 import sys
 from io import StringIO
+import sqlite3
 
 import featuretools
 import pandas as pd
@@ -81,10 +82,13 @@ class MainWindowUIClass(Ui_MainWindow):
         # TODO: Na allaksw to clear button k na kanei clear - twra bazei to iris gia eukolia.
         self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv")
 
+# NEXT BUTTON POU KANEI TO PREVIEW
     def nextSlot(self):  # Slot gia to next button
         global preview_num
-        preview_num = 10
+        preview_num = 45
         self.stackedWidget.setCurrentIndex(1)
+        self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
+
         # Molis pataw next tha kanei load to combo Box kai tha periexei ta features.
         # iterating the columns
         for col in data.columns:
@@ -111,12 +115,12 @@ class MainWindowUIClass(Ui_MainWindow):
         global X
         global y
         y = self.functions.pickTarget(item_index, data)
-        #! edw apofasizetai an einai regression i classification 
+        #! edw apofasizetai an einai regression i classification
         if y.dtype.name == 'category' or y.dtype.name == 'object':
             learning_type = 'Classification'
         else:
             learning_type = 'Regression'
-        
+
         X = self.functions.pickPredictors(item_index, data)
         # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(True)
@@ -141,14 +145,14 @@ class MainWindowUIClass(Ui_MainWindow):
         global t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric
         self.stackedWidget.setCurrentIndex(3)
 
-        #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION 
+        #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION
         if learning_type == "Classification":
             self.label_13.setText("Select Classification Parameters")
 
             metric_list = ["accuracy", "balanced_accuracy", "roc_auc", "average_precision", "log_loss",
-                       "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
-                       "recall", "recall_macro", "recall_micro", "recall_samples", "recall_weighted",
-                       "f1", "f1_macro", "f1_micro", "f1_samples", "f1_weighted"]
+                           "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
+                           "recall", "recall_macro", "recall_micro", "recall_samples", "recall_weighted",
+                           "f1", "f1_macro", "f1_micro", "f1_samples", "f1_weighted"]
 
             self.metricCombo.addItems(metric_list)
             metric = None
@@ -157,32 +161,32 @@ class MainWindowUIClass(Ui_MainWindow):
             self.libsvrBox.hide()
             self.gausianPro_Box.hide()
 
-            self.bernoulliBox.show()  
-            self.liblinearBox.show()  
-            self.libsvmBox.show()  
-            self.qdaBox.show()  
-            self.pasagrBox.show()  
-            self.multinbBox.show()  
-            self.gaussianBox.show()  
-            self.ldaBox.show()  
-            self.bernoulliBox.show()  
-            self.bernoulliBox.show() 
+            self.bernoulliBox.show()
+            self.liblinearBox.show()
+            self.libsvmBox.show()
+            self.qdaBox.show()
+            self.pasagrBox.show()
+            self.multinbBox.show()
+            self.gaussianBox.show()
+            self.ldaBox.show()
+            self.bernoulliBox.show()
+            self.bernoulliBox.show()
 
             inc_est = ["adaboost",
-                    "bernoulli_nb",
-                    "decision_tree",
-                    "extra_trees",
-                    "gaussian_nb",
-                    "gradient_boosting",
-                    "k_nearest_neighbors",
-                    "lda",
-                    "liblinear_svc",
-                    "libsvm_svc",
-                    "multinomial_nb",
-                    "passive_aggressive",
-                    "random_forest",
-                    "sgd",
-                    "qda"]
+                       "bernoulli_nb",
+                       "decision_tree",
+                       "extra_trees",
+                       "gaussian_nb",
+                       "gradient_boosting",
+                       "k_nearest_neighbors",
+                       "lda",
+                       "liblinear_svc",
+                       "libsvm_svc",
+                       "multinomial_nb",
+                       "passive_aggressive",
+                       "random_forest",
+                       "sgd",
+                       "qda"]
 
         elif learning_type == "Regression":
             self.label_13.setText("Select Regression Parameters")
@@ -192,37 +196,37 @@ class MainWindowUIClass(Ui_MainWindow):
             self.libsvrBox.show()
             self.gausianPro_Box.show()
 
-            self.bernoulliBox.hide()  
-            self.liblinearBox.hide()  
-            self.libsvmBox.hide()  
-            self.qdaBox.hide()  
-            self.pasagrBox.hide()  
-            self.multinbBox.hide()  
-            self.gaussianBox.hide()  
-            self.ldaBox.hide()  
-            self.bernoulliBox.hide()  
-            self.bernoulliBox.hide()  
+            self.bernoulliBox.hide()
+            self.liblinearBox.hide()
+            self.libsvmBox.hide()
+            self.qdaBox.hide()
+            self.pasagrBox.hide()
+            self.multinbBox.hide()
+            self.gaussianBox.hide()
+            self.ldaBox.hide()
+            self.bernoulliBox.hide()
+            self.bernoulliBox.hide()
 
             metric_list = ["mean_absolute_error",
-                        "mean_squared_error",
-                        "root_mean_squared_error",
-                        "mean_squared_log_error",
-                        "median_absolute_error",
-                        "r2"]
+                           "mean_squared_error",
+                           "root_mean_squared_error",
+                           "mean_squared_log_error",
+                           "median_absolute_error",
+                           "r2"]
 
             self.metricCombo.addItems(metric_list)
             metric = None
             inc_est = ["adaboost",
-                    "ard_regression",
-                    "decision_tree",
-                    "extra_trees",
-                    "gaussian_process",
-                    "gradient_boosting",
-                    "k_nearest_neighbors",
-                    "liblinear_svr",
-                    "libsvm_svr",
-                    "random_forest",
-                    "sgd"]
+                       "ard_regression",
+                       "decision_tree",
+                       "extra_trees",
+                       "gaussian_process",
+                       "gradient_boosting",
+                       "k_nearest_neighbors",
+                       "liblinear_svr",
+                       "libsvm_svr",
+                       "random_forest",
+                       "sgd"]
 
         # MODELING DEFAULTS
         self.groupBox.setCheckable(True)
@@ -241,7 +245,7 @@ class MainWindowUIClass(Ui_MainWindow):
         self.memory_box.setMaximum(mem_Mb)
 
         # TODO: Na dialeksw poies metrikes tha xrisimopoiw kai na emfanizontai sto teliko model.
-        
+
         resample_list = ["Default", "Cross Validation", "Holdout"]
         self.ressampleCombo.addItems(resample_list)
 
@@ -325,7 +329,6 @@ class MainWindowUIClass(Ui_MainWindow):
 # NEXT BUTTON - BACK BUTTON
     # TODO: To next button na se pigainei sto epomeno screen kai na pernaei oti arguments kai data xreiazontai gi auto :
 
-
     def nextSlot_2(self):
         print(f"Included:   {inc_est}")
         print("Metric:", metric)
@@ -346,65 +349,65 @@ class MainWindowUIClass(Ui_MainWindow):
     def select_all_Estimators(self):
         global inc_est
         if self.groupBox.isChecked():
-                inc_est = []
+            inc_est = []
         else:
             if learning_type == "Classification":
-        
-                    self.extratreeBox.setChecked(False)
-                    self.adaBox.setChecked(False)
-                    self.gaussianBox.setChecked(False)
-                    self.bernoulliBox.setChecked(False)
-                    self.rforoestBox.setChecked(False)
-                    self.qdaBox.setChecked(False)
-                    self.multinbBox.setChecked(False)
-                    self.ldaBox.setChecked(False)
-                    self.libsvmBox.setChecked(False)
-                    self.liblinearBox.setChecked(False)
-                    self.dtreeBox.setChecked(False)
-                    self.sgdBox.setChecked(False)
-                    self.gradientBox.setChecked(False)
-                    self.knnBox.setChecked(False)
-                    self.pasagrBox.setChecked(False)
-                    inc_est = ["adaboost",
-                            "bernoulli_nb",
-                            "decision_tree",
-                            "extra_trees",
-                            "gaussian_nb",
-                            "gradient_boosting",
-                            "k_nearest_neighbors",
-                            "lda",
-                            "liblinear_svc",
-                            "libsvm_svc",
-                            "multinomial_nb",
-                            "passive_aggressive",
-                            "random_forest",
-                            "sgd",
-                            "qda"]
-            else:  
-                    self.extratreeBox.setChecked(False)
-                    self.adaBox.setChecked(False)
-                    self.ardBox.setChecked(False)
-                    self.gausianPro_Box.setChecked(False)
-                    self.rforoestBox.setChecked(False)
-                    self.multinbBox.setChecked(False)
-                    self.libsvrBox.setChecked(False)
-                    self.linearsvr_Box.setChecked(False)
-                    self.dtreeBox.setChecked(False)
-                    self.sgdBox.setChecked(False)
-                    self.gradientBox.setChecked(False)
-                    self.knnBox.setChecked(False)
 
-                    inc_est = ["adaboost",
-                        "ard_regression",
-                        "decision_tree",
-                        "extra_trees",
-                        "gaussian_process",
-                        "gradient_boosting",
-                        "k_nearest_neighbors",
-                        "liblinear_svr",
-                        "libsvm_svr",
-                        "random_forest",
-                        "sgd"]
+                self.extratreeBox.setChecked(False)
+                self.adaBox.setChecked(False)
+                self.gaussianBox.setChecked(False)
+                self.bernoulliBox.setChecked(False)
+                self.rforoestBox.setChecked(False)
+                self.qdaBox.setChecked(False)
+                self.multinbBox.setChecked(False)
+                self.ldaBox.setChecked(False)
+                self.libsvmBox.setChecked(False)
+                self.liblinearBox.setChecked(False)
+                self.dtreeBox.setChecked(False)
+                self.sgdBox.setChecked(False)
+                self.gradientBox.setChecked(False)
+                self.knnBox.setChecked(False)
+                self.pasagrBox.setChecked(False)
+                inc_est = ["adaboost",
+                           "bernoulli_nb",
+                           "decision_tree",
+                           "extra_trees",
+                           "gaussian_nb",
+                           "gradient_boosting",
+                           "k_nearest_neighbors",
+                           "lda",
+                           "liblinear_svc",
+                           "libsvm_svc",
+                           "multinomial_nb",
+                           "passive_aggressive",
+                           "random_forest",
+                           "sgd",
+                           "qda"]
+            else:
+                self.extratreeBox.setChecked(False)
+                self.adaBox.setChecked(False)
+                self.ardBox.setChecked(False)
+                self.gausianPro_Box.setChecked(False)
+                self.rforoestBox.setChecked(False)
+                self.multinbBox.setChecked(False)
+                self.libsvrBox.setChecked(False)
+                self.linearsvr_Box.setChecked(False)
+                self.dtreeBox.setChecked(False)
+                self.sgdBox.setChecked(False)
+                self.gradientBox.setChecked(False)
+                self.knnBox.setChecked(False)
+
+                inc_est = ["adaboost",
+                           "ard_regression",
+                           "decision_tree",
+                           "extra_trees",
+                           "gaussian_process",
+                           "gradient_boosting",
+                           "k_nearest_neighbors",
+                           "liblinear_svr",
+                           "libsvm_svr",
+                           "random_forest",
+                           "sgd"]
 
 # ESTIMATORS CHECK BOXES (MPAINOUN SE LISTA) :
     def ard_Checked(self):
@@ -553,7 +556,7 @@ class MainWindowUIClass(Ui_MainWindow):
 # RUN BUTTON => START CREATING ENSEMBLES
     # TODO: Gia to run button prepei na apothikeuw to teliko model / ensemble se ena file
     # TODO: Na vrw tropo na to anaktw kai na to xrismopoiw h na to porbalw sthn othoni se History tab (PX)
-    
+
     def modelSlot(self):
         global model, inc_est, resample
         #! ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
@@ -593,17 +596,17 @@ class MainWindowUIClass(Ui_MainWindow):
             dataset_name = os.path.splitext(base)[0]
 
             #! Check learning problem Type:
-            if learning_type == "Classification": # classifier call
+            if learning_type == "Classification":  # classifier call
                 model = self.functions.callClassifier(
                     t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
-            elif learning_type == "Regression": #regressor call
+            elif learning_type == "Regression":  # regressor call
                 model = self.functions.callRegressor(
                     t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
             #! Model Fit:
             self.functions.fitModel(X_train, y_train, model, dataset_name)
             pred = model.predict(X_test)
-            
-            #! Metric results:  
+
+            #! Metric results:
             if learning_type == 'Regression':
                 print("Max error", sklearn.metrics.max_error(y_test, pred))
             elif learning_type == "Classification":
@@ -623,10 +626,28 @@ class MainWindowUIClass(Ui_MainWindow):
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # ! 4. LOAD DATABASE SCREEN ----------------
-    def load_DB(self):
+    # ! 4. LOAD DATABASE SCREEN ---------------------
+    def load_DB(self):  # tha kanei connect meta tha kanei load kai tha petaei mesa ta records!
         self.stackedWidget.setCurrentIndex(2)
-        print("this is where the db will be shown")
+        conn = sqlite3.connect('modelsDB.db')
+
+        cursor = conn.execute("select name, timestamp from models")
+        curs1 = conn.execute("select count(*) from models")
+        tbl_rowcount = curs1.fetchone()
+        self.dbTable.setRowCount(tbl_rowcount[0])
+        self.dbTable.setColumnCount(2)
+        self.dbTable.setSelectionBehavior(QTableWidget.SelectRows)
+
+        row = 0
+        while True:
+            form = cursor.fetchone()
+            if form == None:
+                break
+            for column, item in enumerate(form):
+                self.dbTable.setItem(
+                    row, column, QTableWidgetItem(f'{item}'))
+                print(item)
+            row += 1
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

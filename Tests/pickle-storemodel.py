@@ -39,6 +39,7 @@ query = 'insert into models values (?, ?, ?)'
 conn.execute(query, ['model2', pickled_model, insertion_time])
 conn.commit()
 
+
 # pickle name
 # pkl_filename = "pickle_model.pkl"
 # with open(pkl_filename, 'wb') as file:

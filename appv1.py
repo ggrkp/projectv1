@@ -603,7 +603,8 @@ class MainWindowUIClass(Ui_MainWindow):
                 model = self.functions.callRegressor(
                     t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
             #! Model Fit:
-            self.functions.fitModel(X_train, y_train, model, dataset_name)
+            model = self.functions.fitModel(
+                X_train, y_train, model, dataset_name)
             pred = model.predict(X_test)
 
             #! Metric results:
@@ -624,7 +625,7 @@ class MainWindowUIClass(Ui_MainWindow):
             self.stackedWidget.setEnabled(True)
 
             if self.savemodel_Box.isChecked():
-                self.functions.store_model(model,"model")
+                self.functions.store_model(model, "model")
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -633,10 +634,10 @@ class MainWindowUIClass(Ui_MainWindow):
     def load_DB(self):  # tha kanei connect meta tha kanei load kai tha petaei mesa ta records!
         self.stackedWidget.setCurrentIndex(2)
         db_name = 'modelsDB.db'
-        
+
         conn = sqlite3.connect(db_name)
 
-        #QUERIES
+        # QUERIES
         cursor = conn.execute("select name, timestamp from models")
         curs1 = conn.execute("select count(*) from models")
         tbl_rowcount = curs1.fetchone()
@@ -652,13 +653,45 @@ class MainWindowUIClass(Ui_MainWindow):
             for column, item in enumerate(form):
                 self.dbTable.setItem(
                     row, column, QTableWidgetItem(f'{item}'))
-                print(item)
             row += 1
+
+
+    def fetch_model(self):
+        global ft_model
+        currow = self.dbTable.currentRow()
+        tstamp = self.dbTable.item(currow, 1)
+
+        if tstamp == None:
+            popup = QtWidgets.QMessageBox()
+            popup.setWindowTitle(" Error ")
+            popup.setText("No Models Were Selected!")
+            popup.setInformativeText(
+                "Please select a model form the list.")
+            popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
+            popup.setIcon(QtWidgets.QMessageBox.Warning)
+            popup.exec_()
+        else:
+            tstamp = self.dbTable.item(currow, 1).text()
+            ft_model = self.functions.load_model(tstamp)
+            self.showen_btn.setEnabled(True)
+            self.predict_btn.setEnabled(True)
+
+    def show_ensembles(self):
+        global ft_model
+        print(ft_model.show_models())
+
+    def predict_y(self):
+        global X,y,ft_model
+        score = ft_model.score(X, y)
+        print("Test Score with pickle model: {0:.2f} %". format(100 * score))
+        y_predict = ft_model.predict(X)
+        print(y_predict)
 
     def save_Checked(self):
         pass
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

@@ -402,7 +402,9 @@ class Ui_MainWindow(QObject):
         self.backButton1.clicked.connect(self.backSlot)
         self.nextButton1.clicked.connect(self.nextSlot_1)
         self.load_DB_btn.clicked.connect(self.load_DB)
-    
+        self.savemodel_Box.stateChanged['int'].connect(self.save_Checked)
+        self.showen_btn.clicked.connect(self.show_ensembles)
+        self.predict_btn.clicked.connect(self.predict_y)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 #! extra: 
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
@@ -463,5 +465,4 @@ class Ui_MainWindow(QObject):
         self.run_Button.setText(_translate("MainWindow", "Run"))
         self.backButton2.setText(_translate("MainWindow", "Back"))
         self.nextButton2.setText(_translate("MainWindow", "Next"))
-
 

@@ -130,7 +130,8 @@ class Func:
 
     # isws sinartisi na epilegei classifier i regressor meta
     def fitModel(self, pred_train, target_train, automl, d_name):
-        automl.fit(pred_train, target_train, dataset_name=d_name)
+        automl = automl.fit(pred_train, target_train, dataset_name=d_name)
+        return automl
 
     def app_Estimator(self, inc_est, box_state, est_name):
         if box_state:
@@ -155,8 +156,8 @@ class Func:
         #! connect to database
         conn = sqlite3.connect('modelsDB.db')
         #!SELECT model
-        cursor = conn.execute(f'select data from models where timestamp = "{id}"')
-        pickled_model = cursor.fetchone()
+        cursor = conn.execute(f'select * from models where timestamp = "{id}"')
+        name, pickled_model, timestamp = cursor.fetchone()
         fetched_model = pickle.loads(pickled_model)
         return fetched_model
 

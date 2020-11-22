@@ -17,14 +17,14 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>0</y>
+      <x>50</x>
+      <y>10</y>
       <width>731</width>
       <height>561</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QWidget" name="layoutWidget">
@@ -262,13 +262,65 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page_5">
-     <widget class="QWidget" name="layoutWidget_2">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>50</y>
-        <width>571</width>
-        <height>471</height>
+        <x>470</x>
+        <y>470</y>
+        <width>112</width>
+        <height>54</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QPushButton" name="showen_btn">
+         <property name="text">
+          <string>Show Ensembles</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="predict_btn">
+         <property name="text">
+          <string>Predict Target</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>500</y>
+        <width>168</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_12">
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>Back</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>Load Model</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>258</width>
+        <height>501</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
@@ -288,45 +340,6 @@
         <widget class="QTableWidget" name="dbTable"/>
        </item>
       </layout>
-     </widget>
-     <widget class="QPushButton" name="showen_btn">
-      <property name="geometry">
-       <rect>
-        <x>610</x>
-        <y>440</y>
-        <width>111</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Show Ensembles</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="predict_btn">
-      <property name="geometry">
-       <rect>
-        <x>610</x>
-        <y>470</y>
-        <width>91</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Predict Target</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>610</x>
-        <y>500</y>
-        <width>80</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Back</string>
-      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="page_3">
@@ -1360,8 +1373,8 @@
    <slot>backSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>680</x>
-     <y>494</y>
+     <x>700</x>
+     <y>504</y>
     </hint>
     <hint type="destinationlabel">
      <x>147</x>
@@ -1417,6 +1430,54 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>showen_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>show_ensembles()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>587</x>
+     <y>496</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>782</x>
+     <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>predict_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>predict_y()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>559</x>
+     <y>524</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>777</x>
+     <y>500</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fetch_model()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>519</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>793</x>
+     <y>545</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>browseSlot()</slot>
@@ -1462,5 +1523,8 @@
   <slot>libsvr_Checked()</slot>
   <slot>load_DB()</slot>
   <slot>save_Checked()</slot>
+  <slot>show_ensembles()</slot>
+  <slot>predict_y()</slot>
+  <slot>fetch_model()</slot>
  </slots>
 </ui>

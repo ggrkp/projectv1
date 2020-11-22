@@ -25,18 +25,20 @@ model = autosklearn.classification.AutoSklearnClassifier(
     time_left_for_this_task=30,
     per_run_time_limit=14,
     delete_output_folder_after_terminate=False,
-    delete_tmp_folder_after_terminate=False
+    delete_tmp_folder_after_terminate=False,
+    initial_configurations_via_metalearning=25
 )
 
 model = model.fit(X_train, y_train, dataset_name='pickled')
 
 pickled_model = pickle.dumps(model)
-print(type(pickled_model))
+print(type(pickled_model))\
+
 #! INSERT
 insertion_time = datetime.now()
 conn = sqlite3.connect('modelsDB.db')
 query = 'insert into models values (?, ?, ?)'
-conn.execute(query, ['model2', pickled_model, insertion_time])
+conn.execute(query, ['model_with_metalearning', pickled_model, insertion_time])
 conn.commit()
 
 

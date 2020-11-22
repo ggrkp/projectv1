@@ -120,6 +120,8 @@ class MainWindowUIClass(Ui_MainWindow):
         X = self.functions.pickPredictors(item_index, data)
         # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(True)
+        self.load_DB_btn.setEnabled(True)
+
         for i in range(preview_num):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.item(i, j).setBackground(
@@ -137,7 +139,7 @@ class MainWindowUIClass(Ui_MainWindow):
     def nextSlot_1(self):  # Next pou pigainei stis parametrous tou modeling
         # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
         global t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
 
         #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION 
         if learning_type == "Classification":
@@ -621,9 +623,10 @@ class MainWindowUIClass(Ui_MainWindow):
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # ! 4. RESULTS - HISTORY TAB SCREEN ----------------
-
-        # TODO OLO TO NEO SCREEN ! under construction
+    # ! 4. LOAD DATABASE SCREEN ----------------
+    def load_DB(self):
+        self.stackedWidget.setCurrentIndex(2)
+        print("this is where the db will be shown")
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

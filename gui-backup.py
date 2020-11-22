@@ -362,7 +362,7 @@ class Ui_MainWindow(QObject):
         self.linearsvr_Box.stateChanged['int'].connect(self.liblinearsvr_Checked)
         self.libsvrBox.stateChanged['int'].connect(self.libsvr_Checked)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-# extra: 
+#! extra: 
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
         self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
@@ -381,7 +381,7 @@ class Ui_MainWindow(QObject):
         self.backButton1.setText(_translate("MainWindow", "Back"))
         self.nextButton1.setText(_translate("MainWindow", "Next"))
         self.label_6.setText(_translate("MainWindow", "Preview of imported file:"))
-        self.label_13.setText(_translate("MainWindow", "Select Parameters for the Classifier"))
+        # self.label_13.setText(_translate("MainWindow", "Select Parameters for the Classifier"))
         self.label_15.setText(_translate("MainWindow", "Select Other Parameters"))
         self.label_16.setText(_translate("MainWindow", "Select Resampling Arguments"))
         self.groupBox.setTitle(_translate("MainWindow", "Select Estimators: "))

@@ -7,11 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QObject, pyqtSlot
-from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
 
-
-class Ui_MainWindow(QObject):
+class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(804, 591)
@@ -363,51 +360,47 @@ class Ui_MainWindow(QObject):
 
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(1)
-        self.perRun_box.valueChanged['QString'].connect(self.perrun_Slot)
-        self.nextButton.clicked.connect(self.nextSlot)
-        self.importButton.clicked.connect(self.importSlot)
-        self.timeLeft_box.valueChanged['QString'].connect(self.timeleft_Slot)
-        self.comboBox.activated['QString'].connect(self.featureSlot)
-        self.browseButton.clicked.connect(self.browseSlot)
-        self.cancelButton.clicked.connect(self.cancelSlot)
-        self.nextButton2.clicked.connect(self.nextSlot_2)
-        self.backButton2.clicked.connect(self.backSlot_1)
-        self.memory_box.valueChanged['QString'].connect(self.ensmemory_Slot)
-        self.metricCombo.activated['QString'].connect(self.metricBox)
-        self.ressampleCombo.activated['QString'].connect(self.resampleBox)
-        self.run_Button.clicked.connect(self.modelSlot)
-        self.checkBox_16.stateChanged['int'].connect(self.prepro_Checked)
-        self.adaBox.stateChanged['int'].connect(self.adaChecked)
-        self.groupBox.toggled['bool'].connect(self.select_all_Estimators)
-        self.bernoulliBox.stateChanged['int'].connect(self.bernoulliChecked)
-        self.dtreeBox.stateChanged['int'].connect(self.dectreeChecked)
-        self.extratreeBox.stateChanged['int'].connect(self.extraTreeChecked)
-        self.gaussianBox.stateChanged['int'].connect(self.gausianChecked)
-        self.gradientBox.stateChanged['int'].connect(self.gradient_checked)
-        self.knnBox.stateChanged['int'].connect(self.knnChecked)
-        self.ldaBox.stateChanged['int'].connect(self.ldaChecked)
-        self.liblinearBox.stateChanged['int'].connect(self.liblinearChecked)
-        self.libsvmBox.stateChanged['int'].connect(self.libsvmChecked)
-        self.multinbBox.stateChanged['int'].connect(self.multnbChecked)
-        self.pasagrBox.stateChanged['int'].connect(self.pasagrChecked)
-        self.rforoestBox.stateChanged['int'].connect(self.rforestChecked)
-        self.sgdBox.stateChanged['int'].connect(self.sgdChecked)
-        self.qdaBox.stateChanged['int'].connect(self.qdaChecked)
-        self.cvfoldsBox.valueChanged['QString'].connect(self.cv_Folds)
-        self.holdout_box.valueChanged['QString'].connect(self.holdout_Size)
-        self.ardBox.stateChanged['int'].connect(self.ard_Checked)
-        self.gausianPro_Box.stateChanged['int'].connect(self.gausianPro_Checked)
-        self.linearsvr_Box.stateChanged['int'].connect(self.liblinearsvr_Checked)
-        self.libsvrBox.stateChanged['int'].connect(self.libsvr_Checked)
-        self.backButton1.clicked.connect(self.backSlot)
-        self.nextButton1.clicked.connect(self.nextSlot_1)
-        self.load_DB_btn.clicked.connect(self.load_DB)
+        self.perRun_box.valueChanged['QString'].connect(MainWindow.perrun_Slot)
+        self.nextButton.clicked.connect(MainWindow.nextSlot)
+        self.importButton.clicked.connect(MainWindow.importSlot)
+        self.timeLeft_box.valueChanged['QString'].connect(MainWindow.timeleft_Slot)
+        self.comboBox.activated['QString'].connect(MainWindow.featureSlot)
+        self.browseButton.clicked.connect(MainWindow.browseSlot)
+        self.cancelButton.clicked.connect(MainWindow.cancelSlot)
+        self.nextButton2.clicked.connect(MainWindow.nextSlot_2)
+        self.backButton2.clicked.connect(MainWindow.backSlot_1)
+        self.memory_box.valueChanged['QString'].connect(MainWindow.ensmemory_Slot)
+        self.metricCombo.activated['QString'].connect(MainWindow.metricBox)
+        self.ressampleCombo.activated['QString'].connect(MainWindow.resampleBox)
+        self.run_Button.clicked.connect(MainWindow.modelSlot)
+        self.checkBox_16.stateChanged['int'].connect(MainWindow.prepro_Checked)
+        self.adaBox.stateChanged['int'].connect(MainWindow.adaChecked)
+        self.groupBox.toggled['bool'].connect(MainWindow.select_all_Estimators)
+        self.bernoulliBox.stateChanged['int'].connect(MainWindow.bernoulliChecked)
+        self.dtreeBox.stateChanged['int'].connect(MainWindow.dectreeChecked)
+        self.extratreeBox.stateChanged['int'].connect(MainWindow.extraTreeChecked)
+        self.gaussianBox.stateChanged['int'].connect(MainWindow.gausianChecked)
+        self.gradientBox.stateChanged['int'].connect(MainWindow.gradient_checked)
+        self.knnBox.stateChanged['int'].connect(MainWindow.knnChecked)
+        self.ldaBox.stateChanged['int'].connect(MainWindow.ldaChecked)
+        self.liblinearBox.stateChanged['int'].connect(MainWindow.liblinearChecked)
+        self.libsvmBox.stateChanged['int'].connect(MainWindow.libsvmChecked)
+        self.multinbBox.stateChanged['int'].connect(MainWindow.multnbChecked)
+        self.pasagrBox.stateChanged['int'].connect(MainWindow.pasagrChecked)
+        self.rforoestBox.stateChanged['int'].connect(MainWindow.rforestChecked)
+        self.sgdBox.stateChanged['int'].connect(MainWindow.sgdChecked)
+        self.qdaBox.stateChanged['int'].connect(MainWindow.qdaChecked)
+        self.cvfoldsBox.valueChanged['QString'].connect(MainWindow.cv_Folds)
+        self.holdout_box.valueChanged['QString'].connect(MainWindow.holdout_Size)
+        self.ardBox.stateChanged['int'].connect(MainWindow.ard_Checked)
+        self.gausianPro_Box.stateChanged['int'].connect(MainWindow.gausianPro_Checked)
+        self.linearsvr_Box.stateChanged['int'].connect(MainWindow.liblinearsvr_Checked)
+        self.libsvrBox.stateChanged['int'].connect(MainWindow.libsvr_Checked)
+        self.backButton1.clicked.connect(MainWindow.backSlot)
+        self.nextButton1.clicked.connect(MainWindow.nextSlot_1)
+        self.load_DB_btn.clicked.connect(MainWindow.load_DB)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-#! extra: 
-        self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
-        self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
-        self.nextButton1.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
-        self.load_DB_btn.setEnabled(False)
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Auto-ML Tool for IoT Applications"))
@@ -463,4 +456,13 @@ class Ui_MainWindow(QObject):
         self.backButton2.setText(_translate("MainWindow", "Back"))
         self.nextButton2.setText(_translate("MainWindow", "Next"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
 

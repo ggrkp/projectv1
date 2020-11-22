@@ -18,13 +18,13 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>10</y>
+      <y>0</y>
       <width>731</width>
-      <height>551</height>
+      <height>561</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QWidget" name="layoutWidget">
@@ -197,32 +197,6 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>590</x>
-        <y>460</y>
-        <width>82</width>
-        <height>54</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QPushButton" name="backButton1">
-         <property name="text">
-          <string>Back</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="nextButton1">
-         <property name="text">
-          <string>Next</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
         <x>11</x>
         <y>41</y>
         <width>571</width>
@@ -246,6 +220,113 @@
         <widget class="QTableWidget" name="tableWidget"/>
        </item>
       </layout>
+     </widget>
+     <widget class="QPushButton" name="load_DB_btn">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>460</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Load Model</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="backButton1">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>490</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="nextButton1">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>430</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ceate Model</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_5">
+     <widget class="QWidget" name="layoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>50</y>
+        <width>571</width>
+        <height>471</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_17">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Saved Models</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QTableWidget" name="dbTable"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="showen_btn">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>440</y>
+        <width>111</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Show Ensembles</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="predict_btn">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>470</y>
+        <width>91</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Predict Target</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>500</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="page_3">
@@ -573,39 +654,6 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>570</x>
-        <y>360</y>
-        <width>82</width>
-        <height>161</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_10">
-       <item>
-        <widget class="QPushButton" name="run_Button">
-         <property name="text">
-          <string>Run</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="backButton2">
-         <property name="text">
-          <string>Quit</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="nextButton2">
-         <property name="text">
-          <string>Next</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
         <x>260</x>
         <y>390</y>
         <width>280</width>
@@ -669,6 +717,58 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>390</y>
+        <width>97</width>
+        <height>52</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QCheckBox" name="savemodel_Box">
+         <property name="text">
+          <string>Save Model</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="run_Button">
+         <property name="text">
+          <string>Run</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>460</y>
+        <width>168</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
+       <item>
+        <widget class="QPushButton" name="backButton2">
+         <property name="text">
+          <string>Back</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="nextButton2">
+         <property name="text">
+          <string>Next</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_4"/>
    </widget>
@@ -685,27 +785,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>677</x>
-     <y>186</y>
+     <y>176</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
      <y>145</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>nextButton1</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>nextSlot_1()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>666</x>
-     <y>522</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>768</x>
-     <y>530</y>
     </hint>
    </hints>
   </connection>
@@ -717,7 +801,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>698</x>
-     <y>341</y>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
      <x>380</x>
@@ -733,7 +817,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>237</x>
-     <y>284</y>
+     <y>274</y>
     </hint>
     <hint type="destinationlabel">
      <x>217</x>
@@ -774,22 +858,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>backButton1</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>backSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>680</x>
-     <y>474</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>147</x>
-     <y>552</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>browseButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
@@ -797,7 +865,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>688</x>
-     <y>253</y>
+     <y>243</y>
     </hint>
     <hint type="destinationlabel">
      <x>560</x>
@@ -812,8 +880,8 @@
    <slot>cancelSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>143</x>
-     <y>284</y>
+     <x>151</x>
+     <y>274</y>
     </hint>
     <hint type="destinationlabel">
      <x>30</x>
@@ -828,8 +896,8 @@
    <slot>nextSlot_2()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>658</x>
-     <y>508</y>
+     <x>735</x>
+     <y>483</y>
     </hint>
     <hint type="destinationlabel">
      <x>89</x>
@@ -844,8 +912,8 @@
    <slot>backSlot_1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>646</x>
-     <y>460</y>
+     <x>637</x>
+     <y>483</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -861,7 +929,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>678</x>
-     <y>225</y>
+     <y>215</y>
     </hint>
     <hint type="destinationlabel">
      <x>105</x>
@@ -876,8 +944,8 @@
    <slot>metricBox()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>581</x>
-     <y>314</y>
+     <x>678</x>
+     <y>304</y>
     </hint>
     <hint type="destinationlabel">
      <x>85</x>
@@ -892,8 +960,8 @@
    <slot>resampleBox()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>581</x>
-     <y>269</y>
+     <x>678</x>
+     <y>259</y>
     </hint>
     <hint type="destinationlabel">
      <x>95</x>
@@ -908,8 +976,8 @@
    <slot>modelSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>620</x>
-     <y>402</y>
+     <x>621</x>
+     <y>440</y>
     </hint>
     <hint type="destinationlabel">
      <x>91</x>
@@ -924,8 +992,8 @@
    <slot>prepro_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>349</y>
+     <x>317</x>
+     <y>339</y>
     </hint>
     <hint type="destinationlabel">
      <x>117</x>
@@ -940,8 +1008,8 @@
    <slot>adaChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>104</x>
-     <y>145</y>
+     <x>116</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -972,8 +1040,8 @@
    <slot>bernoulliChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>182</x>
-     <y>185</y>
+     <x>194</x>
+     <y>177</y>
     </hint>
     <hint type="destinationlabel">
      <x>124</x>
@@ -988,8 +1056,8 @@
    <slot>dectreeChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>153</x>
-     <y>209</y>
+     <x>165</x>
+     <y>199</y>
     </hint>
     <hint type="destinationlabel">
      <x>113</x>
@@ -1004,8 +1072,8 @@
    <slot>extraTreeChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>139</x>
-     <y>230</y>
+     <x>151</x>
+     <y>220</y>
     </hint>
     <hint type="destinationlabel">
      <x>124</x>
@@ -1020,8 +1088,8 @@
    <slot>gausianChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>173</x>
-     <y>251</y>
+     <x>185</x>
+     <y>241</y>
     </hint>
     <hint type="destinationlabel">
      <x>30</x>
@@ -1036,8 +1104,8 @@
    <slot>gradient_checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>204</x>
-     <y>287</y>
+     <x>216</x>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
      <x>58</x>
@@ -1052,8 +1120,8 @@
    <slot>knnChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>224</x>
-     <y>313</y>
+     <x>236</x>
+     <y>305</y>
     </hint>
     <hint type="destinationlabel">
      <x>33</x>
@@ -1068,8 +1136,8 @@
    <slot>ldaChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>122</x>
-     <y>337</y>
+     <x>134</x>
+     <y>327</y>
     </hint>
     <hint type="destinationlabel">
      <x>79</x>
@@ -1084,8 +1152,8 @@
    <slot>liblinearChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>195</x>
-     <y>358</y>
+     <x>207</x>
+     <y>348</y>
     </hint>
     <hint type="destinationlabel">
      <x>712</x>
@@ -1116,8 +1184,8 @@
    <slot>multnbChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>186</x>
-     <y>443</y>
+     <x>198</x>
+     <y>433</y>
     </hint>
     <hint type="destinationlabel">
      <x>236</x>
@@ -1132,8 +1200,8 @@
    <slot>pasagrChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>163</x>
-     <y>465</y>
+     <x>175</x>
+     <y>455</y>
     </hint>
     <hint type="destinationlabel">
      <x>369</x>
@@ -1148,8 +1216,8 @@
    <slot>rforestChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>136</x>
-     <y>486</y>
+     <x>148</x>
+     <y>476</y>
     </hint>
     <hint type="destinationlabel">
      <x>88</x>
@@ -1228,8 +1296,8 @@
    <slot>ard_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>227</x>
-     <y>161</y>
+     <x>239</x>
+     <y>156</y>
     </hint>
     <hint type="destinationlabel">
      <x>10</x>
@@ -1244,8 +1312,8 @@
    <slot>gausianPro_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>102</x>
-     <y>265</y>
+     <x>114</x>
+     <y>263</y>
     </hint>
     <hint type="destinationlabel">
      <x>12</x>
@@ -1260,8 +1328,8 @@
    <slot>liblinearsvr_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>111</x>
-     <y>372</y>
+     <x>123</x>
+     <y>369</y>
     </hint>
     <hint type="destinationlabel">
      <x>8</x>
@@ -1276,12 +1344,60 @@
    <slot>libsvr_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>176</x>
-     <y>416</y>
+     <x>188</x>
+     <y>412</y>
     </hint>
     <hint type="destinationlabel">
      <x>7</x>
      <y>387</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>backButton1</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>backSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>680</x>
+     <y>494</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>552</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nextButton1</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>nextSlot_1()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>666</x>
+     <y>450</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>768</x>
+     <y>530</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>load_DB_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>load_DB()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>715</x>
+     <y>472</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>739</x>
+     <y>379</y>
     </hint>
    </hints>
   </connection>
@@ -1328,5 +1444,6 @@
   <slot>ard_Checked()</slot>
   <slot>liblinearsvr_Checked()</slot>
   <slot>libsvr_Checked()</slot>
+  <slot>load_DB()</slot>
  </slots>
 </ui>

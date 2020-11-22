@@ -623,21 +623,27 @@ class MainWindowUIClass(Ui_MainWindow):
             popup.exec_()
             self.stackedWidget.setEnabled(True)
 
+            if self.savemodel_Box.isChecked():
+                self.functions.store_model(model,"model")
+
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # ! 4. LOAD DATABASE SCREEN ---------------------
     def load_DB(self):  # tha kanei connect meta tha kanei load kai tha petaei mesa ta records!
         self.stackedWidget.setCurrentIndex(2)
-        conn = sqlite3.connect('modelsDB.db')
+        db_name = 'modelsDB.db'
+        
+        conn = sqlite3.connect(db_name)
 
+        #QUERIES
         cursor = conn.execute("select name, timestamp from models")
         curs1 = conn.execute("select count(*) from models")
         tbl_rowcount = curs1.fetchone()
         self.dbTable.setRowCount(tbl_rowcount[0])
         self.dbTable.setColumnCount(2)
         self.dbTable.setSelectionBehavior(QTableWidget.SelectRows)
-
+        # DATABASE VIEW
         row = 0
         while True:
             form = cursor.fetchone()
@@ -649,8 +655,10 @@ class MainWindowUIClass(Ui_MainWindow):
                 print(item)
             row += 1
 
-# *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    def save_Checked(self):
+        pass
 
+# *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

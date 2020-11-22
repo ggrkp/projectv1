@@ -2,7 +2,7 @@
 # ola tha emfanizontai sto GUI (logika)
 import csv
 import sys
-
+import sqlite3
 import featuretools as ft
 import pandas as pd
 import sklearn
@@ -11,7 +11,8 @@ from autosklearn.regression import AutoSklearnRegressor
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
 from sklearn.model_selection import train_test_split
-
+import pickle
+from datetime import datetime
 from guiv1 import Ui_MainWindow
 
 
@@ -59,7 +60,8 @@ class Func:
 
     def colCount(self, df):
         return df.shape[1]
-#todo : na ftiaksw to function
+# todo : na ftiaksw to function
+
     def hasHeader(self, df):
         pass
 
@@ -70,6 +72,10 @@ class Func:
 
     def callClassifier(self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric):
         automl = AutoSklearnClassifier(
+
+            delete_output_folder_after_terminate=False,
+
+            delete_tmp_folder_after_terminate=False,
             # TIME RESTRICTION
             time_left_for_this_task=t_left,
             per_run_time_limit=t_per_run,
@@ -93,8 +99,13 @@ class Func:
         return automl
 #! call regressor
 
-    def callRegressor (self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric):
+    def callRegressor(self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric):
         automl = AutoSklearnRegressor(
+
+            delete_output_folder_after_terminate=False,
+
+            delete_tmp_folder_after_terminate=False,
+
             # TIME RESTRICTION
             time_left_for_this_task=t_left,
             per_run_time_limit=t_per_run,
@@ -130,6 +141,25 @@ class Func:
                 inc_est.remove(est_name)
         return(inc_est)
 
-    # def getScore(self, automl, p_test, t_test):
-    #     pred = automl.predict(p_test)
-    #     return sklearn.metrics.accuracy_score(t_test, pred)
+    def store_model(self,model,model_name):
+        pickled_model = pickle.dumps(model)
+        #! INSERT
+        insertion_time = datetime.now()
+        conn = sqlite3.connect('modelsDB.db')
+        query = 'insert into models values (?, ?, ?)'
+        #todo: elegxos gia to an den dwthei name 
+        conn.execute(query, [model_name, pickled_model, insertion_time])
+        conn.commit()
+    
+    def load_model(self, id):
+        #! connect to database
+        conn = sqlite3.connect('modelsDB.db')
+        #!SELECT model
+        cursor = conn.execute(f'select data from models where timestamp = "{id}"')
+        pickled_model = cursor.fetchone()
+        fetched_model = pickle.loads(pickled_model)
+        return fetched_model
+
+# def getScore(self, automl, p_test, t_test):
+#     pred = automl.predict(p_test)
+#     return sklearn.metrics.accuracy_score(t_test, pred)

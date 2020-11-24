@@ -142,10 +142,14 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def nextSlot_1(self):  # Next pou pigainei stis parametrous tou modeling
         # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
-        global t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric
+        global t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable, test_sz
         self.stackedWidget.setCurrentIndex(3)
 
         #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION
+        self.test_sz_box.setValue(0.2)
+
+        ens_size = 50
+        meta_disable = 25
         if learning_type == "Classification":
             self.label_13.setText("Select Classification Parameters")
 
@@ -256,18 +260,24 @@ class MainWindowUIClass(Ui_MainWindow):
 
         self.holdout_box.setEnabled(False)
         self.cvfoldsBox.setEnabled(False)
+        self.test_sz_box.setMinimum(0.1)
+        self.test_sz_box.setMaximum(0.9)
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # ! 3. MAKE MODEL SCREEN --------------------------
+# TEST SPLIT SPINBOX
+    def test_sz_Slot(self):
+        global test_sz
+        self.test_sz_box.setSingleStep(0.01)
+        test_sz = self.test_sz_box.value()
 
 # TIME LEFT FOR THIS TASK SPINBOX
     def timeleft_Slot(self):
         global t_left
         t_left = self.timeLeft_box.value()
-        self.perRun_box.setMaximum(int(t_left/2))
-        print(t_left)
+        self.perRun_box.setMaximum(int(t_left/10))
 
 # PER RUN TIME LIMIT SPINBOX
     def perrun_Slot(self):
@@ -326,7 +336,7 @@ class MainWindowUIClass(Ui_MainWindow):
         h_size = self.holdout_box.value()
         resample_args = {'train_size': h_size}
 
-# NEXT BUTTON - BACK BUTTON
+# NEXT BUTTON (PRINTS) - BACK BUTTON
     # TODO: To next button na se pigainei sto epomeno screen kai na pernaei oti arguments kai data xreiazontai gi auto :
 
     def nextSlot_2(self):
@@ -335,6 +345,9 @@ class MainWindowUIClass(Ui_MainWindow):
         print("Resampling_Technique:", resample)
         print("Args:", resample_args)
         print(t_left)
+        print("split = ",test_sz)
+        print("ensemble size = ", ens_size)
+        print("meta-learning = ", meta_disable)
         print("Yoleleison")
 
     def backSlot_1(self):
@@ -543,7 +556,7 @@ class MainWindowUIClass(Ui_MainWindow):
         est_name = box.text()
         inc_est = self.functions.app_Estimator(inc_est, box_state, est_name)
 
-# DISABLE PREPROCESSING CHECKBOX
+# DISABLE PREPROCESSING CHECKBOX & DISABLE ENSEMBLING CHECKBOX
     def prepro_Checked(self):  # Disable Feature Preprocessing
         global disable_prepro
         if self.checkBox_16.isChecked():
@@ -552,6 +565,19 @@ class MainWindowUIClass(Ui_MainWindow):
         else:
             disable_prepro = None
 
+    def ensembling_checked(self):  # Disable Feature Preprocessing
+        global ens_size
+        if self.ensembling_checkbox.isChecked():
+            ens_size = 1
+        else:
+            ens_size = 50
+
+    def metalearning_checked(self):
+        global meta_disable
+        if self.metalearning_checkbox.isChecked():
+            meta_disable = 0
+        else:
+            meta_disable = 25
 #! Modeling
 # RUN BUTTON => START CREATING ENSEMBLES
     # TODO: Gia to run button prepei na apothikeuw to teliko model / ensemble se ena file
@@ -591,17 +617,17 @@ class MainWindowUIClass(Ui_MainWindow):
             popup.exec_()
 
             #! Data Splitting:
-            X_train, X_test, y_train, y_test = self.functions.splitData(X, y)
+            X_train, X_test, y_train, y_test = self.functions.splitData(X, y, test_sz)
             base = os.path.basename(fileName)
             dataset_name = os.path.splitext(base)[0]
 
             #! Check learning problem Type:
             if learning_type == "Classification":  # classifier call
                 model = self.functions.callClassifier(
-                    t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
+                    t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
             elif learning_type == "Regression":  # regressor call
                 model = self.functions.callRegressor(
-                    t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric)
+                    t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
             #! Model Fit:
             model = self.functions.fitModel(
                 X_train, y_train, model, dataset_name)
@@ -634,7 +660,6 @@ class MainWindowUIClass(Ui_MainWindow):
     def load_DB(self):  # tha kanei connect meta tha kanei load kai tha petaei mesa ta records!
         self.stackedWidget.setCurrentIndex(2)
         db_name = 'modelsDB.db'
-
         conn = sqlite3.connect(db_name)
 
         # QUERIES
@@ -655,7 +680,7 @@ class MainWindowUIClass(Ui_MainWindow):
                     row, column, QTableWidgetItem(f'{item}'))
             row += 1
 
-
+    #* LOAD MODEL BUTTON!!
     def fetch_model(self):
         global ft_model
         currow = self.dbTable.currentRow()
@@ -673,15 +698,17 @@ class MainWindowUIClass(Ui_MainWindow):
         else:
             tstamp = self.dbTable.item(currow, 1).text()
             ft_model = self.functions.load_model(tstamp)
+            self.textEdit.setText(ft_model.sprint_statistics()) # show loaded model statistics
             self.showen_btn.setEnabled(True)
             self.predict_btn.setEnabled(True)
 
     def show_ensembles(self):
         global ft_model
+        # print(ft_model.show_models())
         print(ft_model.show_models())
 
     def predict_y(self):
-        global X,y,ft_model
+        global X, y, ft_model
         score = ft_model.score(X, y)
         print("Test Score with pickle model: {0:.2f} %". format(100 * score))
         y_predict = ft_model.predict(X)
@@ -691,8 +718,6 @@ class MainWindowUIClass(Ui_MainWindow):
         pass
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
 def main():
     app = QtWidgets.QApplication(sys.argv)
     ex = MainWindowUIClass()

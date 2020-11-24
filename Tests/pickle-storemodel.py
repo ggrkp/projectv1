@@ -32,7 +32,7 @@ model = autosklearn.classification.AutoSklearnClassifier(
 model = model.fit(X_train, y_train, dataset_name='pickled')
 
 pickled_model = pickle.dumps(model)
-print(type(pickled_model))\
+print(type(pickled_model))
 
 #! INSERT
 insertion_time = datetime.now()

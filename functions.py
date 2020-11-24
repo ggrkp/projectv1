@@ -67,11 +67,12 @@ class Func:
 
     # nees sunartiseis
 
-    def splitData(self, pred, target):
-        return train_test_split(pred, target, test_size=0.2, random_state=1)
+    def splitData(self, pred, target,test_sz):
+        return train_test_split(pred, target, test_size=test_sz, random_state=1)
 
-    def callClassifier(self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric):
+    def callClassifier(self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_dis):
         automl = AutoSklearnClassifier(
+            initial_configurations_via_metalearning=meta_dis,
 
             delete_output_folder_after_terminate=False,
 
@@ -82,7 +83,7 @@ class Func:
 
             # MEMORY RESTRICTION
             ensemble_memory_limit=mem_limit,
-
+            ensemble_size=ens_size,
             # ALGORITHM RESTRICTION
             include_estimators=inc_est,
 
@@ -99,9 +100,10 @@ class Func:
         return automl
 #! call regressor
 
-    def callRegressor(self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric):
+    def callRegressor(self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_dis):
         automl = AutoSklearnRegressor(
 
+            initial_configurations_via_metalearning=meta_dis,
             delete_output_folder_after_terminate=False,
 
             delete_tmp_folder_after_terminate=False,
@@ -112,7 +114,7 @@ class Func:
 
             # MEMORY RESTRICTION
             ensemble_memory_limit=mem_limit,
-
+            ensemble_size=ens_size,
             # ALGORITHM RESTRICTION
             include_estimators=inc_est,
 
@@ -125,6 +127,8 @@ class Func:
 
             # EPILOGI METRIKWN
             metric=metric
+
+
         )
         return automl
 
@@ -142,16 +146,16 @@ class Func:
                 inc_est.remove(est_name)
         return(inc_est)
 
-    def store_model(self,model,model_name):
+    def store_model(self, model, model_name):
         pickled_model = pickle.dumps(model)
         #! INSERT
         insertion_time = datetime.now()
         conn = sqlite3.connect('modelsDB.db')
         query = 'insert into models values (?, ?, ?)'
-        #todo: elegxos gia to an den dwthei name 
+        # todo: elegxos gia to an den dwthei name
         conn.execute(query, [model_name, pickled_model, insertion_time])
         conn.commit()
-    
+
     def load_model(self, id):
         #! connect to database
         conn = sqlite3.connect('modelsDB.db')

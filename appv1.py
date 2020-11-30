@@ -712,7 +712,7 @@ class MainWindowUIClass(Ui_MainWindow):
         score = ft_model.score(X, y)
         print("Test Score with pickle model: {0:.2f} %". format(100 * score))
         y_predict = ft_model.predict(X)
-        print(y_predict)
+        # print(y_predict)
 
     def save_Checked(self):
         pass

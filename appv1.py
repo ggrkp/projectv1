@@ -3,6 +3,7 @@ import os
 import sys
 from io import StringIO
 import sqlite3
+from PyQt5.QtGui import QFont
 
 import featuretools
 import pandas as pd
@@ -131,7 +132,7 @@ class MainWindowUIClass(Ui_MainWindow):
                 self.tableWidget.item(i, j).setBackground(
                     QtGui.QColor('white'))
             self.tableWidget.item(i, item_index).setBackground(
-                QtGui.QColor('springgreen'))
+                QtGui.QColor('#00a2ed'))
 
 # NEXT BUTTON - BACK BUTTON > DHLWNONTAI DEFAULTS GIA TO EPOMENO SCREEN ( MDOELING SCREEN - PARAMETERS )
     def backSlot(self):  # Slot gia to back button
@@ -703,16 +704,21 @@ class MainWindowUIClass(Ui_MainWindow):
             self.predict_btn.setEnabled(True)
 
     def show_ensembles(self):
+        
         global ft_model
         # print(ft_model.show_models())
         print(ft_model.show_models())
+        
 
     def predict_y(self):
-        global X, y, ft_model
-        score = ft_model.score(X, y)
-        print("Test Score with pickle model: {0:.2f} %". format(100 * score))
-        y_predict = ft_model.predict(X)
-        # print(y_predict)
+        try:
+            global X, y, ft_model
+            score = ft_model.score(X, y)
+            print("Test Score with pickle model: {0:.2f} %". format(100 * score))
+            y_predict = ft_model.predict(X)
+            # print(y_predict)
+        except:
+            print("theres an error on the data set!!!")
 
     def save_Checked(self):
         pass
@@ -721,9 +727,12 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # Time Series - Forecasting
 
+
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    # app.setStyle('Fusion')
+    app.setStyle('Windows') 
+    app.setFont(QFont('Consolas',10))
 
     ex = MainWindowUIClass()
     MainWindow = QtWidgets.QMainWindow()

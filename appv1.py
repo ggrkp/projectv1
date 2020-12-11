@@ -644,7 +644,7 @@ class MainWindowUIClass(Ui_MainWindow):
             # print(model.show_models())
             popup = QtWidgets.QMessageBox()
             popup.setWindowTitle(" Done ")
-            popup.setText("An ensemble is created successfully!")
+            popup.setText("A new ensemble has been created successfully!")
             popup.setStandardButtons(QtWidgets.QMessageBox.Close)
             popup.setIcon(QtWidgets.QMessageBox.Information)
             popup.exec_()
@@ -718,13 +718,17 @@ class MainWindowUIClass(Ui_MainWindow):
         pass
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+# Time Series - Forecasting
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
+    # app.setStyle('Fusion')
+
     ex = MainWindowUIClass()
     MainWindow = QtWidgets.QMainWindow()
     ex.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
 
 main()

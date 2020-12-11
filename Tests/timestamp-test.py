@@ -17,15 +17,18 @@ import datetime
 
 # __________________________________________________________________________
 #!----------------------- FILE LOAD ----------------------------------------
-df = pd.read_csv("/home/ggeorg/Desktop/TSDataSets/sales.csv")
+df = pd.read_csv("/home/ggeorg/Desktop/TSDataSets/sunspots.csv")
+
 cnt = len(df.columns)
 print(cnt)
-header_list = []
-for i in range(cnt):
-    header_list.append(f"column {i}")
-df.columns = header_list
-df['Year'] = pd.DatetimeIndex(df['column 1']).year      # Xronia
-# df['Month'] = pd.DatetimeIndex(df['Date']).month  # Mhnas
+# header_list = []
+# for i in range(cnt):
+#     header_list.append(f"column{i}")
+# df.columns = header_list
+# df['Year'] = pd.DatetimeIndex(df['column1']).year   # Xronia
+print(df)
+df['Year'] = pd.DatetimeIndex(df['Month']).year  # Mhnas
+
 # df['Day'] = pd.DatetimeIndex(df['Date']).day  # Mera
 # df["Week"] = pd.DatetimeIndex(df['Date']).weekofyear  # Mera
 
@@ -36,19 +39,22 @@ df['Year'] = pd.DatetimeIndex(df['column 1']).year      # Xronia
 # # df['Month_Year'] = pd.to_datetime(df['Date']).dt.to_period('M')
 # df.head()
 
-# # df.insert(0, 'id', range(len(df.index)))
-# # df = df.drop(df.columns[[1]], axis=1)
+# df.insert(0, 'id', range(len(df.index)))
+df = df.drop(df.columns[[0]], axis=1)
+
+
 
 # print(df.dtypes.astype(str).value_counts())
 # print(df.head(30))
 
-# # ? Ti simainei relevant features?  POIO EINAI TO Y?
-# #! einai san feature selection ->
+ #! einai san feature selection ->
 features = tsfresh.extract_features(
-    df, column_id="Year")
-final_features = impute(features)
+    df, column_id="Year",column_sort=Month)
 
-print(final_features)
+print(features)
+
+
+
 
 # #__________________________________________________________________________
 # # #!----------------------- TARGET AND PREDICTORS ----------------------------

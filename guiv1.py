@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+#much wow
 # Form implementation generated from reading ui file 'guiv1.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2

@@ -28,6 +28,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
     # ! 0. WELCOME SCREEN 
     def get_started(self):
+        self.radio_btn_c.setChecked(True) #Arxikopoihsh learning Type gia na mh faei error
         self.stackedWidget.setCurrentIndex(1)
     
     def home_slot(self):
@@ -37,6 +38,7 @@ class MainWindowUIClass(Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(5)
 
     # ! 1. IMPORT YOUR DATA SCREEN 
+    
 
 # REFRESH
 
@@ -87,6 +89,22 @@ class MainWindowUIClass(Ui_MainWindow):
             popup.exec_()
             self.refreshAll()
 
+# RADIO BUTTONS - LEARNING TYPE
+    def radio_c(self):
+        global learning_type
+        if self.radio_btn_c.isChecked():
+            learning_type="Classification" 
+            
+    def radio_r(self):
+        global learning_type
+        if self.radio_btn_r.isChecked():
+            learning_type="Regression" 
+            
+    def radio_ts(self):
+        global learning_type
+        if self.radio_btn_ts.isChecked():
+            learning_type="Timeseries"   
+
 # CLEAR BUTTON
     def cancelSlot(self):
         # TODO: Na allaksw to clear button k na kanei clear - twra bazei to iris gia eukolia.
@@ -94,23 +112,26 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # NEXT BUTTON POU KANEI TO PREVIEW
     def nextSlot(self):  # Slot gia to next button
-        global preview_num
-        preview_num = 45
-        self.stackedWidget.setCurrentIndex(2)
-        self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
+        if learning_type == 'Classification' or learning_type=='Regression':
+            global preview_num
+            preview_num = 45
+            self.stackedWidget.setCurrentIndex(2)
+            self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
 
-        # Molis pataw next tha kanei load to combo Box kai tha periexei ta features.
-        # iterating the columns
-        for col in data.columns:
-            self.comboBox.addItem(col)
-        # dimiourgia table me ta dedomena tou dataset gia preview
-        self.tableWidget.setRowCount(preview_num)  # set row Count
-        self.tableWidget.setColumnCount(
-            self.functions.colCount(data))  # set column count
-        for i in range(preview_num):
-            for j in range(self.functions.colCount(data)):
-                self.tableWidget.setItem(
-                    i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
+            # Molis pataw next tha kanei load to combo Box kai tha periexei ta features.
+            # iterating the columns
+            for col in data.columns:
+                self.comboBox.addItem(col)
+            # dimiourgia table me ta dedomena tou dataset gia preview
+            self.tableWidget.setRowCount(preview_num)  # set row Count
+            self.tableWidget.setColumnCount(
+                self.functions.colCount(data))  # set column count
+            for i in range(preview_num):
+                for j in range(self.functions.colCount(data)):
+                    self.tableWidget.setItem(
+                        i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
+        else: #TODO:RADIO BUTTON = TIME SERIES -> NEO SCREEN!
+            pass 
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -119,18 +140,12 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
-        global learning_type
+        # global learning_type
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
         global X
         global y
         y = self.functions.pickTarget(item_index, data)
-        #! edw apofasizetai an einai regression i classification
-        if y.dtype.name == 'category' or y.dtype.name == 'object':
-            learning_type = 'Classification'
-        else:
-            learning_type = 'Regression'
-
         X = self.functions.pickPredictors(item_index, data)
         # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(True)
@@ -237,7 +252,7 @@ class MainWindowUIClass(Ui_MainWindow):
                        "libsvm_svr",
                        "random_forest",
                        "sgd"]
-
+            
         # MODELING DEFAULTS
         self.groupBox.setCheckable(True)
         self.groupBox.setChecked(False)
@@ -723,8 +738,8 @@ class MainWindowUIClass(Ui_MainWindow):
             global X, y, ft_model
             score = ft_model.score(X, y)
             print("Test Score with pickle model: {0:.2f} %". format(100 * score))
-            y_predict = ft_model.predict(X)
-            # print(y_predict)
+            # y_predict = ft_model.predict(X)
+            # # print(y_predict)
         except:
             print("theres an error on the data set!!!")
 

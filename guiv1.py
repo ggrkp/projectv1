@@ -784,13 +784,3 @@ class Ui_MainWindow(QObject):
         self.home_btn.setText(_translate("MainWindow", "HOME"))
         self.pushButton_7.setText(_translate("MainWindow", "Show Model Summary"))
         self.pushButton_9.setText(_translate("MainWindow", "Show more..."))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

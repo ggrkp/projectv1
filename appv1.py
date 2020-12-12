@@ -600,78 +600,89 @@ class MainWindowUIClass(Ui_MainWindow):
             meta_disable = 25
 
 # RUN BUTTON => START CREATING ENSEMBLES
-    # TODO: Gia to run button prepei na apothikeuw to teliko model / ensemble se ena file
-    # TODO: Na vrw tropo na to anaktw kai na to xrismopoiw h na to porbalw sthn othoni se History tab (PX)
-
     def modelSlot(self):
         global model, inc_est, resample
-        #! ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
-        if not inc_est:
+        try:
+            #! ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
+            if not inc_est:
+                popup = QtWidgets.QMessageBox()
+                popup.setWindowTitle(" Error ")
+                popup.setText("No Estimators Were Selected!")
+                popup.setInformativeText(
+                    "Please select at least one Estimator from the list.")
+                popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
+                popup.setIcon(QtWidgets.QMessageBox.Warning)
+                popup.exec_()
+            else:
+                minutes = t_left/60
+                seconds = t_left
+                self.stackedWidget.setEnabled(False)
+                popup = QtWidgets.QMessageBox()
+                popup.setWindowTitle(" Running ")
+                popup.setText("Please, wait. An ensemble is being created...     ")
+                if minutes < 1:
+                    popup.setInformativeText(
+                        f"This process will take about {seconds} seconds.")
+                elif minutes == 1:
+                    popup.setInformativeText(
+                        f"This process will take about 1 minute"
+                    )
+                else:
+                    popup.setInformativeText(
+                        f"This process will take about {minutes} minutes. Press OK to continue...")
+                popup.setStandardButtons(QtWidgets.QMessageBox.Ok)
+                popup.setIcon(QtWidgets.QMessageBox.Information)
+                popup.exec_()
+
+                #! Data Splitting:
+                X_train, X_test, y_train, y_test = self.functions.splitData(X, y, test_sz)
+                base = os.path.basename(fileName)
+                dataset_name = os.path.splitext(base)[0]
+
+                #! Check learning problem Type:
+                if learning_type == "Classification":  # classifier call
+                    model = self.functions.callClassifier(
+                        t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
+                elif learning_type == "Regression":  # regressor call
+                    model = self.functions.callRegressor(
+                        t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
+                #! Model Fit:
+                model = self.functions.fitModel(
+                    X_train, y_train, model, dataset_name)
+                pred = model.predict(X_test)
+
+                #! Metric results:
+                if learning_type == 'Regression':
+                    print("Max error", sklearn.metrics.max_error(y_test, pred))
+                elif learning_type == "Classification":
+                    print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
+
+                # print(model.get_models_with_weights())
+
+                # print(model.show_models())
+                popup = QtWidgets.QMessageBox()
+                popup.setWindowTitle(" Done ")
+                popup.setText("A new ensemble has been created successfully!")
+                popup.setStandardButtons(QtWidgets.QMessageBox.Close)
+                popup.setIcon(QtWidgets.QMessageBox.Information)
+                popup.exec_()
+                self.stackedWidget.setEnabled(True)
+
+                if self.savemodel_Box.isChecked():
+                    self.functions.store_model(model, "model")
+        except: # lathos learning type h lathos target variable
+            print("An error has occured!")
+            self.comboBox.clear()
+            self.nextButton.setEnabled(False)
             popup = QtWidgets.QMessageBox()
-            popup.setWindowTitle(" Error ")
-            popup.setText("No Estimators Were Selected!")
-            popup.setInformativeText(
-                "Please select at least one Estimator from the list.")
+            popup.setWindowTitle(" Done ")
+            popup.setText("An error has occured. Restart the Process.")
+            popup.setInformativeText("Make sure you defined the correct learning type and selected the correct target feature!")
             popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
             popup.setIcon(QtWidgets.QMessageBox.Warning)
             popup.exec_()
-        else:
-            minutes = t_left/60
-            seconds = t_left
-            self.stackedWidget.setEnabled(False)
-            popup = QtWidgets.QMessageBox()
-            popup.setWindowTitle(" Running ")
-            popup.setText("Please, wait. An ensemble is being created...     ")
-            if minutes < 1:
-                popup.setInformativeText(
-                    f"This process will take about {seconds} seconds.")
-            elif minutes == 1:
-                popup.setInformativeText(
-                    f"This process will take about 1 minute"
-                )
-            else:
-                popup.setInformativeText(
-                    f"This process will take about {minutes} minutes. Press OK to continue...")
-            popup.setStandardButtons(QtWidgets.QMessageBox.Ok)
-            popup.setIcon(QtWidgets.QMessageBox.Information)
-            popup.exec_()
-
-            #! Data Splitting:
-            X_train, X_test, y_train, y_test = self.functions.splitData(X, y, test_sz)
-            base = os.path.basename(fileName)
-            dataset_name = os.path.splitext(base)[0]
-
-            #! Check learning problem Type:
-            if learning_type == "Classification":  # classifier call
-                model = self.functions.callClassifier(
-                    t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
-            elif learning_type == "Regression":  # regressor call
-                model = self.functions.callRegressor(
-                    t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
-            #! Model Fit:
-            model = self.functions.fitModel(
-                X_train, y_train, model, dataset_name)
-            pred = model.predict(X_test)
-
-            #! Metric results:
-            if learning_type == 'Regression':
-                print("Max error", sklearn.metrics.max_error(y_test, pred))
-            elif learning_type == "Classification":
-                print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
-
-            # print(model.get_models_with_weights())
-
-            # print(model.show_models())
-            popup = QtWidgets.QMessageBox()
-            popup.setWindowTitle(" Done ")
-            popup.setText("A new ensemble has been created successfully!")
-            popup.setStandardButtons(QtWidgets.QMessageBox.Close)
-            popup.setIcon(QtWidgets.QMessageBox.Information)
-            popup.exec_()
             self.stackedWidget.setEnabled(True)
-
-            if self.savemodel_Box.isChecked():
-                self.functions.store_model(model, "model")
+            self.stackedWidget.setCurrentIndex(1)
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -715,7 +726,7 @@ class MainWindowUIClass(Ui_MainWindow):
             popup.setWindowTitle(" Error ")
             popup.setText("No Models Were Selected!")
             popup.setInformativeText(
-                "Please select a model form the list.")
+                "Please select a model from the list.")
             popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
             popup.setIcon(QtWidgets.QMessageBox.Warning)
             popup.exec_()
@@ -741,17 +752,18 @@ class MainWindowUIClass(Ui_MainWindow):
             # y_predict = ft_model.predict(X)
             # # print(y_predict)
         except:
-            print("theres an error on the data set!!!")
-
+            popup = QtWidgets.QMessageBox()
+            popup.setWindowTitle(" Error ")
+            popup.setText("The selected model is trained on a different Data Set.")
+            popup.StandardButtons(QtWidgets.QMessageBox.Retry)
+            popup.setIcon(QtWidgets.QMessageBox.Warning)
+            popup.exec_()
     def save_Checked(self):
         pass
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ! 5. MODEL HISTORY SCREEN
-
-
-
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

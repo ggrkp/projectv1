@@ -26,8 +26,17 @@ class MainWindowUIClass(Ui_MainWindow):
 
         super().setupUi(MW)
 
-# *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><>
-    # ! 1. IMPORT SCREEN -------------------------
+    # ! 0. WELCOME SCREEN 
+    def get_started(self):
+        self.stackedWidget.setCurrentIndex(1)
+    
+    def home_slot(self):
+        self.stackedWidget.setCurrentIndex(0)
+
+    def history_tabs(self):
+        self.stackedWidget.setCurrentIndex(5)
+
+    # ! 1. IMPORT YOUR DATA SCREEN 
 
 # REFRESH
 
@@ -87,7 +96,7 @@ class MainWindowUIClass(Ui_MainWindow):
     def nextSlot(self):  # Slot gia to next button
         global preview_num
         preview_num = 45
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
         self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
 
         # Molis pataw next tha kanei load to combo Box kai tha periexei ta features.
@@ -106,7 +115,7 @@ class MainWindowUIClass(Ui_MainWindow):
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # ! 2. TARGET FEATURE - PREVIEW SCREEN ------------
+    # ! 2. SELECT YOUR TARGET TARGET SCREEN 
 
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
@@ -136,7 +145,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # NEXT BUTTON - BACK BUTTON > DHLWNONTAI DEFAULTS GIA TO EPOMENO SCREEN ( MDOELING SCREEN - PARAMETERS )
     def backSlot(self):  # Slot gia to back button
-        self.stackedWidget.setCurrentIndex(0)  # Pame ena screen pisw
+        self.stackedWidget.setCurrentIndex(1)  # Pame ena screen pisw
         self.comboBox.clear()  # Katharizoyme to Combo box gia na mpoun nea features sto drop down
         # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton.setEnabled(False)
@@ -144,7 +153,7 @@ class MainWindowUIClass(Ui_MainWindow):
     def nextSlot_1(self):  # Next pou pigainei stis parametrous tou modeling
         # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
         global t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable, test_sz
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(4)
 
         #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION
         self.test_sz_box.setValue(0.2)
@@ -152,8 +161,6 @@ class MainWindowUIClass(Ui_MainWindow):
         ens_size = 50
         meta_disable = 25
         if learning_type == "Classification":
-            self.label_13.setText("Select Classification Parameters")
-
             metric_list = ["accuracy", "balanced_accuracy", "roc_auc", "average_precision", "log_loss",
                            "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
                            "recall", "recall_macro", "recall_micro", "recall_samples", "recall_weighted",
@@ -194,8 +201,6 @@ class MainWindowUIClass(Ui_MainWindow):
                        "qda"]
 
         elif learning_type == "Regression":
-            self.label_13.setText("Select Regression Parameters")
-
             self.ardBox.show()
             self.linearsvr_Box.show()
             self.libsvrBox.show()
@@ -267,7 +272,7 @@ class MainWindowUIClass(Ui_MainWindow):
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # ! 3. MAKE MODEL SCREEN --------------------------
+    # ! 3. PARAMETER TUNING SCREEN 
 # TEST SPLIT SPINBOX
     def test_sz_Slot(self):
         global test_sz
@@ -353,11 +358,10 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def backSlot_1(self):
         self.checkBox_16.setChecked(False)
-        self.stackedWidget.setCurrentIndex(1)  # Pame ena screen pisw
+        self.stackedWidget.setCurrentIndex(2)  # Pame ena screen pisw
         self.metricCombo.clear()
         self.ressampleCombo.clear()
 
-#! Estimators - Preprocessing
 # BUTTON GIA MANUALL SELCECTION ESTIMATORS
 
     def select_all_Estimators(self):
@@ -579,7 +583,7 @@ class MainWindowUIClass(Ui_MainWindow):
             meta_disable = 0
         else:
             meta_disable = 25
-#! Modeling
+
 # RUN BUTTON => START CREATING ENSEMBLES
     # TODO: Gia to run button prepei na apothikeuw to teliko model / ensemble se ena file
     # TODO: Na vrw tropo na to anaktw kai na to xrismopoiw h na to porbalw sthn othoni se History tab (PX)
@@ -657,9 +661,13 @@ class MainWindowUIClass(Ui_MainWindow):
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # ! 4. LOAD DATABASE SCREEN ---------------------
+    # ! 4. MODELS SCREEN
+    
+    def models_back(self):
+        self.stackedWidget.setCurrentIndex(2)    
+    
     def load_DB(self):  # tha kanei connect meta tha kanei load kai tha petaei mesa ta records!
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
         db_name = 'modelsDB.db'
         conn = sqlite3.connect(db_name)
 
@@ -725,7 +733,8 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-# Time Series - Forecasting
+    # ! 5. MODEL HISTORY SCREEN
+
 
 
 

@@ -137,7 +137,7 @@
        <string>About</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="get_started_btn">
       <property name="geometry">
        <rect>
         <x>100</x>
@@ -157,7 +157,7 @@
        <string>Get Started</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QPushButton" name="history_btn">
       <property name="geometry">
        <rect>
         <x>100</x>
@@ -240,7 +240,7 @@
        <string>IMPORT YOUR DATA</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="home_btn2">
       <property name="geometry">
        <rect>
         <x>170</x>
@@ -290,7 +290,15 @@
         <string>Select a CSV File</string>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>168</width>
+         <height>30</height>
+        </rect>
+       </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QPushButton" name="cancelButton">
@@ -314,7 +322,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -347,7 +355,7 @@
        </layout>
       </widget>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>170</x>
@@ -473,7 +481,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>290</x>
@@ -525,14 +533,19 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="back_btn">
       <property name="geometry">
        <rect>
         <x>20</x>
         <y>560</y>
         <width>80</width>
-        <height>23</height>
+        <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
       </property>
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
@@ -564,7 +577,7 @@
        <string>MODELS</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>407</x>
@@ -841,7 +854,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>500</y>
+        <y>460</y>
         <width>80</width>
         <height>31</height>
        </rect>
@@ -857,7 +870,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>530</y>
+        <y>500</y>
         <width>80</width>
         <height>31</height>
        </rect>
@@ -869,7 +882,7 @@
        <string>INFO</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>320</x>
@@ -953,7 +966,7 @@
        <string>Resampling Arguments</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>320</x>
@@ -986,7 +999,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>320</x>
@@ -1039,7 +1052,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>320</x>
@@ -1074,7 +1087,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>320</x>
@@ -1100,7 +1113,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>320</x>
@@ -1126,7 +1139,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>620</x>
@@ -1251,7 +1264,7 @@
        <string>MODEL HISTORY</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_8">
+     <widget class="QPushButton" name="home_btn">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -1272,7 +1285,7 @@
        <string>HOME</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>460</x>
@@ -1367,8 +1380,8 @@
    <slot>importSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>276</x>
-     <y>225</y>
+     <x>266</x>
+     <y>155</y>
     </hint>
     <hint type="destinationlabel">
      <x>217</x>
@@ -1431,8 +1444,8 @@
    <slot>cancelSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>190</x>
-     <y>225</y>
+     <x>180</x>
+     <y>155</y>
     </hint>
     <hint type="destinationlabel">
      <x>30</x>
@@ -1448,7 +1461,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>119</x>
-     <y>564</y>
+     <y>534</y>
     </hint>
     <hint type="destinationlabel">
      <x>89</x>
@@ -1464,7 +1477,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>97</x>
-     <y>533</y>
+     <y>493</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -2064,6 +2077,86 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>home_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>home_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>129</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>32</x>
+     <y>85</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>home_btn2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>home_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>270</x>
+     <y>370</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>28</x>
+     <y>376</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>back_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>models_back()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>591</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>19</x>
+     <y>597</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>get_started_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>get_started()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>279</x>
+     <y>369</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>23</x>
+     <y>460</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>history_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>history_tabs()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>172</x>
+     <y>420</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>28</x>
+     <y>586</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>browseSlot()</slot>
@@ -2115,5 +2208,9 @@
   <slot>ensembling_checked()</slot>
   <slot>metalearning_checked()</slot>
   <slot>test_sz_Slot()</slot>
+  <slot>home_slot()</slot>
+  <slot>models_back()</slot>
+  <slot>get_started()</slot>
+  <slot>history_tabs()</slot>
  </slots>
 </ui>

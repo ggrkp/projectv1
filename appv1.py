@@ -127,7 +127,8 @@ class MainWindowUIClass(Ui_MainWindow):
             # iterating the columns
             for col in data.columns:
                 self.comboBox.addItem(col)
-            self.comboBox.adjustSize()         # dimiourgia table me ta dedomena tou dataset gia preview
+            self.comboBox.adjustSize()         
+            # dimiourgia table me ta dedomena tou dataset gia preview
             self.tableWidget.setRowCount(preview_num)  # set row Count
             self.tableWidget.setColumnCount(
                 self.functions.colCount(data))  # set column count

@@ -26,12 +26,14 @@ class MainWindowUIClass(Ui_MainWindow):
 
         super().setupUi(MW)
 
-    # ! 0. WELCOME SCREEN 
+    # ! 0. WELCOME SCREEN
     def get_started(self):
-        self.radio_btn_c.setChecked(True) #Arxikopoihsh learning Type gia na mh faei error
+        # Arxikopoihsh learning Type gia na mh faei error
+        self.radio_btn_c.setChecked(True)
         self.stackedWidget.setCurrentIndex(1)
-    
+
     def home_slot(self):
+        self.nextButton.setEnabled(False)
         self.stackedWidget.setCurrentIndex(0)
 
     def history_tabs(self):
@@ -114,6 +116,9 @@ class MainWindowUIClass(Ui_MainWindow):
     def nextSlot(self):  # Slot gia to next button
         if learning_type == 'Classification' or learning_type=='Regression':
             global preview_num
+            self.describe_text_edit.setLineWrapMode(QtWidgets.QTextEdit.NoWrap) # NO WRAP GIA NA GINETAI SCROLL KAI NA MHN XALANE TA COLS 
+            self.describe_text_edit.setText(f"{data.describe()}")  #describe            
+
             preview_num = 45
             self.stackedWidget.setCurrentIndex(2)
             self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
@@ -122,7 +127,7 @@ class MainWindowUIClass(Ui_MainWindow):
             # iterating the columns
             for col in data.columns:
                 self.comboBox.addItem(col)
-            # dimiourgia table me ta dedomena tou dataset gia preview
+            self.comboBox.adjustSize()         # dimiourgia table me ta dedomena tou dataset gia preview
             self.tableWidget.setRowCount(preview_num)  # set row Count
             self.tableWidget.setColumnCount(
                 self.functions.colCount(data))  # set column count
@@ -130,8 +135,9 @@ class MainWindowUIClass(Ui_MainWindow):
                 for j in range(self.functions.colCount(data)):
                     self.tableWidget.setItem(
                         i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
+            self.comboBox.adjustSize()
         else: #TODO:RADIO BUTTON = TIME SERIES -> NEO SCREEN!
-            pass 
+            self.stackedWidget.setCurrentIndex(6)
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -715,7 +721,7 @@ class MainWindowUIClass(Ui_MainWindow):
                     row, column, QTableWidgetItem(f'{item}'))
             row += 1
 
-    #* LOAD MODEL BUTTON!!
+    # * LOAD MODEL BUTTON!!
     def fetch_model(self):
         global ft_model
         currow = self.dbTable.currentRow()

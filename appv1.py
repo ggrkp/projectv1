@@ -39,10 +39,24 @@ class MainWindowUIClass(Ui_MainWindow):
     def history_tabs(self):
         self.stackedWidget.setCurrentIndex(5)
 
-    # ! 1. IMPORT YOUR DATA SCREEN 
-    
+        db_name = 'modelsDB.db'
+        
+        query1 = "select name, timestamp from models"        
+        query1_cnt="select count(*) from models"
+        table1 = self.classification_table      
+        table2 = self.regression_table        
+        table3 = self.ts_table        
+  
+        self.functions.fill_tables(db_name,query1,query1_cnt,table1)
+        self.functions.fill_tables(db_name,query1,query1_cnt,table2)
+        self.functions.fill_tables(db_name,query1,query1_cnt,table3)
+
+
+    # ! 1. IMPORT YOUR DATA SCREEN
+
 
 # REFRESH
+
 
     def refreshAll(self):
         self.pathLine.setText(self.functions.getFileName())
@@ -95,17 +109,17 @@ class MainWindowUIClass(Ui_MainWindow):
     def radio_c(self):
         global learning_type
         if self.radio_btn_c.isChecked():
-            learning_type="Classification" 
-            
+            learning_type = "Classification"
+
     def radio_r(self):
         global learning_type
         if self.radio_btn_r.isChecked():
-            learning_type="Regression" 
-            
+            learning_type = "Regression"
+
     def radio_ts(self):
         global learning_type
         if self.radio_btn_ts.isChecked():
-            learning_type="Timeseries"   
+            learning_type = "Timeseries"
 
 # CLEAR BUTTON
     def cancelSlot(self):
@@ -114,10 +128,11 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # NEXT BUTTON POU KANEI TO PREVIEW
     def nextSlot(self):  # Slot gia to next button
-        if learning_type == 'Classification' or learning_type=='Regression':
+        if learning_type == 'Classification' or learning_type == 'Regression':
             global preview_num
-            self.describe_text_edit.setLineWrapMode(QtWidgets.QTextEdit.NoWrap) # NO WRAP GIA NA GINETAI SCROLL KAI NA MHN XALANE TA COLS 
-            self.describe_text_edit.setText(f"{data.describe()}")  #describe            
+            # NO WRAP GIA NA GINETAI SCROLL KAI NA MHN XALANE TA COLS
+            self.describe_text_edit.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
+            self.describe_text_edit.setText(f"{data.describe()}")  # describe
 
             preview_num = 45
             self.stackedWidget.setCurrentIndex(2)
@@ -127,7 +142,7 @@ class MainWindowUIClass(Ui_MainWindow):
             # iterating the columns
             for col in data.columns:
                 self.comboBox.addItem(col)
-            self.comboBox.adjustSize()         
+            self.comboBox.adjustSize()
             # dimiourgia table me ta dedomena tou dataset gia preview
             self.tableWidget.setRowCount(preview_num)  # set row Count
             self.tableWidget.setColumnCount(
@@ -137,13 +152,13 @@ class MainWindowUIClass(Ui_MainWindow):
                     self.tableWidget.setItem(
                         i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
             self.comboBox.adjustSize()
-        else: #TODO:RADIO BUTTON = TIME SERIES -> NEO SCREEN!
+        else:  # TODO:RADIO BUTTON = TIME SERIES -> NEO SCREEN!
             self.stackedWidget.setCurrentIndex(6)
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # ! 2. SELECT YOUR TARGET TARGET SCREEN 
+    # ! 2. SELECT YOUR TARGET TARGET SCREEN
 
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
@@ -259,7 +274,7 @@ class MainWindowUIClass(Ui_MainWindow):
                        "libsvm_svr",
                        "random_forest",
                        "sgd"]
-            
+
         # MODELING DEFAULTS
         self.groupBox.setCheckable(True)
         self.groupBox.setChecked(False)
@@ -294,7 +309,7 @@ class MainWindowUIClass(Ui_MainWindow):
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # ! 3. PARAMETER TUNING SCREEN 
+    # ! 3. PARAMETER TUNING SCREEN
 # TEST SPLIT SPINBOX
     def test_sz_Slot(self):
         global test_sz
@@ -373,7 +388,7 @@ class MainWindowUIClass(Ui_MainWindow):
         print("Resampling_Technique:", resample)
         print("Args:", resample_args)
         print(t_left)
-        print("split = ",test_sz)
+        print("split = ", test_sz)
         print("ensemble size = ", ens_size)
         print("meta-learning = ", meta_disable)
         print("Yoleleison")
@@ -626,7 +641,8 @@ class MainWindowUIClass(Ui_MainWindow):
                 self.stackedWidget.setEnabled(False)
                 popup = QtWidgets.QMessageBox()
                 popup.setWindowTitle(" Running ")
-                popup.setText("Please, wait. An ensemble is being created...     ")
+                popup.setText(
+                    "Please, wait. An ensemble is being created...     ")
                 if minutes < 1:
                     popup.setInformativeText(
                         f"This process will take about {seconds} seconds.")
@@ -642,7 +658,8 @@ class MainWindowUIClass(Ui_MainWindow):
                 popup.exec_()
 
                 #! Data Splitting:
-                X_train, X_test, y_train, y_test = self.functions.splitData(X, y, test_sz)
+                X_train, X_test, y_train, y_test = self.functions.splitData(
+                    X, y, test_sz)
                 base = os.path.basename(fileName)
                 dataset_name = os.path.splitext(base)[0]
 
@@ -662,7 +679,8 @@ class MainWindowUIClass(Ui_MainWindow):
                 if learning_type == 'Regression':
                     print("Max error", sklearn.metrics.max_error(y_test, pred))
                 elif learning_type == "Classification":
-                    print("Accuracy score", sklearn.metrics.accuracy_score(y_test, pred))
+                    print("Accuracy score",
+                          sklearn.metrics.accuracy_score(y_test, pred))
 
                 # print(model.get_models_with_weights())
 
@@ -677,14 +695,15 @@ class MainWindowUIClass(Ui_MainWindow):
 
                 if self.savemodel_Box.isChecked():
                     self.functions.store_model(model, "model")
-        except: # lathos learning type h lathos target variable
+        except:  # lathos learning type h lathos target variable
             print("An error has occured!")
             self.comboBox.clear()
             self.nextButton.setEnabled(False)
             popup = QtWidgets.QMessageBox()
             popup.setWindowTitle(" Done ")
             popup.setText("An error has occured. Restart the Process.")
-            popup.setInformativeText("Make sure you defined the correct learning type and selected the correct target feature!")
+            popup.setInformativeText(
+                "Make sure you defined the correct learning type and selected the correct target feature!")
             popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
             popup.setIcon(QtWidgets.QMessageBox.Warning)
             popup.exec_()
@@ -695,33 +714,18 @@ class MainWindowUIClass(Ui_MainWindow):
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # ! 4. MODELS SCREEN
-    
+
     def models_back(self):
-        self.stackedWidget.setCurrentIndex(2)    
-    
+        self.stackedWidget.setCurrentIndex(2)
+
     def load_DB(self):  # tha kanei connect meta tha kanei load kai tha petaei mesa ta records!
         self.stackedWidget.setCurrentIndex(3)
         db_name = 'modelsDB.db'
-        conn = sqlite3.connect(db_name)
-
-        # QUERIES
-        cursor = conn.execute("select name, timestamp from models")
-        curs1 = conn.execute("select count(*) from models")
-        tbl_rowcount = curs1.fetchone()
-        self.dbTable.setRowCount(tbl_rowcount[0])
-        self.dbTable.setColumnCount(2)
-        self.dbTable.setSelectionBehavior(QTableWidget.SelectRows)
-        # DATABASE VIEW
-        row = 0
-        while True:
-            form = cursor.fetchone()
-            if form == None:
-                break
-            for column, item in enumerate(form):
-                self.dbTable.setItem(
-                    row, column, QTableWidgetItem(f'{item}'))
-            row += 1
-
+        query1 = "select name, timestamp from models"        
+        query1_cnt="select count(*) from models"    
+        table4 = self.dbTable        
+        self.functions.fill_tables(db_name,query1,query1_cnt,table4)
+        
     # * LOAD MODEL BUTTON!!
     def fetch_model(self):
         global ft_model
@@ -740,31 +744,34 @@ class MainWindowUIClass(Ui_MainWindow):
         else:
             tstamp = self.dbTable.item(currow, 1).text()
             ft_model = self.functions.load_model(tstamp)
-            self.textEdit.setText(ft_model.sprint_statistics()) # show loaded model statistics
+            # show loaded model statistics
+            self.textEdit.setText(ft_model.sprint_statistics())
             self.showen_btn.setEnabled(True)
             self.predict_btn.setEnabled(True)
 
     def show_ensembles(self):
-        
+
         global ft_model
         # print(ft_model.show_models())
         print(ft_model.show_models())
-        
 
     def predict_y(self):
         try:
             global X, y, ft_model
             score = ft_model.score(X, y)
-            print("Test Score with pickle model: {0:.2f} %". format(100 * score))
+            print("Test Score with pickle model: {0:.2f} %". format(
+                100 * score))
             # y_predict = ft_model.predict(X)
             # # print(y_predict)
         except:
             popup = QtWidgets.QMessageBox()
             popup.setWindowTitle(" Error ")
-            popup.setText("The selected model is trained on a different Data Set.")
+            popup.setText(
+                "The selected model is trained on a different Data Set.")
             popup.StandardButtons(QtWidgets.QMessageBox.Retry)
             popup.setIcon(QtWidgets.QMessageBox.Warning)
             popup.exec_()
+
     def save_Checked(self):
         pass
 
@@ -772,15 +779,17 @@ class MainWindowUIClass(Ui_MainWindow):
 
     # ! 5. MODEL HISTORY SCREEN
 
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    app.setStyle('Windows') 
-    app.setFont(QFont('Consolas',10))
+    app.setStyle('Windows')
+    app.setFont(QFont('Consolas', 10))
 
     ex = MainWindowUIClass()
     MainWindow = QtWidgets.QMainWindow()
     ex.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
 
 main()

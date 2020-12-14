@@ -14,6 +14,8 @@ from sklearn.model_selection import train_test_split
 import pickle
 from datetime import datetime
 from guiv1 import Ui_MainWindow
+from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
+
 
 
 class Func:
@@ -67,7 +69,7 @@ class Func:
 
     # nees sunartiseis
 
-    def splitData(self, pred, target,test_sz):
+    def splitData(self, pred, target, test_sz):
         return train_test_split(pred, target, test_size=test_sz, random_state=1)
 
     def callClassifier(self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_dis):
@@ -164,6 +166,27 @@ class Func:
         name, pickled_model, timestamp = cursor.fetchone()
         fetched_model = pickle.loads(pickled_model)
         return fetched_model
+
+    def fill_tables(self, db_name, query, query_cnt, table):
+        conn = sqlite3.connect(db_name)
+
+        # QUERIES
+        cursor = conn.execute(f"{query}")
+        curs1 = conn.execute(f"{query_cnt}")
+        tbl_rowcount = curs1.fetchone()
+        table.setRowCount(tbl_rowcount[0])
+        table.setColumnCount(2)
+        table.setSelectionBehavior(QTableWidget.SelectRows)
+        # DATABASE VIEW
+        row = 0
+        while True:
+            form = cursor.fetchone()
+            if form == None:
+                break
+            for column, item in enumerate(form):
+                table.setItem(
+                    row, column, QTableWidgetItem(f'{item}'))
+            row += 1
 
 # def getScore(self, automl, p_test, t_test):
 #     pred = automl.predict(p_test)

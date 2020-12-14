@@ -33,6 +33,7 @@ class MainWindowUIClass(Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(1)
 
     def home_slot(self):
+        self.comboBox.clear()
         self.nextButton.setEnabled(False)
         self.stackedWidget.setCurrentIndex(0)
 
@@ -41,19 +42,25 @@ class MainWindowUIClass(Ui_MainWindow):
 
         db_name = 'modelsDB.db'
         
-        query1 = "select name, timestamp from models"        
-        query1_cnt="select count(*) from models"
-        table1 = self.classification_table      
-        table2 = self.regression_table        
-        table3 = self.ts_table        
+        class_query = "select name, timestamp from models where learning_type='Classification'"    
+        reg_query = "select name, timestamp from models where learning_type='Regression'"        
+        ts_query = "select name, timestamp from models where learning_type='Time Series'"        
+    
+        class_query_cnt="select count(*) from models where learning_type='Classification'"
+        reg_query_cnt="select count(*) from models where learning_type='Regression'"
+        ts_query_cnt="select count(*) from models where learning_type='Time Series'"
+
+        
+        table_c = self.classification_table      
+        table_r = self.regression_table        
+        table_ts = self.ts_table        
   
-        self.functions.fill_tables(db_name,query1,query1_cnt,table1)
-        self.functions.fill_tables(db_name,query1,query1_cnt,table2)
-        self.functions.fill_tables(db_name,query1,query1_cnt,table3)
+        self.functions.fill_tables(db_name,class_query,class_query_cnt,table_c)
+        self.functions.fill_tables(db_name,reg_query,reg_query_cnt,table_r)
+        self.functions.fill_tables(db_name,ts_query,ts_query_cnt,table_ts)
 
 
     # ! 1. IMPORT YOUR DATA SCREEN
-
 
 # REFRESH
 
@@ -645,7 +652,7 @@ class MainWindowUIClass(Ui_MainWindow):
                     "Please, wait. An ensemble is being created...     ")
                 if minutes < 1:
                     popup.setInformativeText(
-                        f"This process will take about {seconds} seconds.")
+                        f"This process will take about {seconds} seconds.   Press OK to continue...")
                 elif minutes == 1:
                     popup.setInformativeText(
                         f"This process will take about 1 minute"
@@ -694,7 +701,7 @@ class MainWindowUIClass(Ui_MainWindow):
                 self.stackedWidget.setEnabled(True)
 
                 if self.savemodel_Box.isChecked():
-                    self.functions.store_model(model, "model")
+                    self.functions.store_model(model, "model",learning_type)
         except:  # lathos learning type h lathos target variable
             print("An error has occured!")
             self.comboBox.clear()

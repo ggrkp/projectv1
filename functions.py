@@ -17,7 +17,6 @@ from guiv1 import Ui_MainWindow
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
 
 
-
 class Func:
     def __init__(self):
         '''
@@ -148,14 +147,16 @@ class Func:
                 inc_est.remove(est_name)
         return(inc_est)
 
-    def store_model(self, model, model_name):
+    def store_model(self, model, model_name, l_type):
         pickled_model = pickle.dumps(model)
         #! INSERT
+        learning_type = l_type
         insertion_time = datetime.now()
         conn = sqlite3.connect('modelsDB.db')
-        query = 'insert into models values (?, ?, ?)'
+        query = 'insert into models values (?, ?, ?, ?)'
         # todo: elegxos gia to an den dwthei name
-        conn.execute(query, [model_name, pickled_model, insertion_time])
+        conn.execute(query, [model_name, pickled_model,
+                             insertion_time, learning_type])
         conn.commit()
 
     def load_model(self, id):

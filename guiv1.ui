@@ -29,7 +29,7 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>50</x>
       <y>10</y>
       <width>801</width>
       <height>631</height>
@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="page_6">
      <widget class="QLabel" name="label_19">
@@ -885,8 +885,8 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>460</y>
-        <width>80</width>
+        <y>500</y>
+        <width>91</width>
         <height>31</height>
        </rect>
       </property>
@@ -906,8 +906,8 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>500</y>
-        <width>80</width>
+        <y>460</y>
+        <width>91</width>
         <height>31</height>
        </rect>
       </property>
@@ -1277,6 +1277,38 @@
        <string>GO</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="nextButton2_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="text">
+       <string>ΗΟΜΕ</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="hist_btn">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>30</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="text">
+       <string>Show History</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_4">
      <widget class="QTabWidget" name="tabWidget">
@@ -1579,7 +1611,7 @@
    <slot>featureSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>480</x>
+     <x>478</x>
      <y>105</y>
     </hint>
     <hint type="destinationlabel">
@@ -1627,8 +1659,8 @@
    <slot>nextSlot_2()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>119</x>
-     <y>534</y>
+     <x>129</x>
+     <y>494</y>
     </hint>
     <hint type="destinationlabel">
      <x>89</x>
@@ -1643,8 +1675,8 @@
    <slot>backSlot_1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>97</x>
-     <y>493</y>
+     <x>107</x>
+     <y>533</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -1659,8 +1691,8 @@
    <slot>ensmemory_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>641</x>
-     <y>220</y>
+     <x>689</x>
+     <y>221</y>
     </hint>
     <hint type="destinationlabel">
      <x>105</x>
@@ -1963,7 +1995,7 @@
    <slot>qdaChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>146</x>
+     <x>168</x>
      <y>528</y>
     </hint>
     <hint type="destinationlabel">
@@ -2075,8 +2107,8 @@
    <slot>backSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>110</x>
-     <y>514</y>
+     <x>120</x>
+     <y>570</y>
     </hint>
     <hint type="destinationlabel">
      <x>147</x>
@@ -2091,8 +2123,8 @@
    <slot>nextSlot_1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>560</y>
+     <x>678</x>
+     <y>418</y>
     </hint>
     <hint type="destinationlabel">
      <x>768</x>
@@ -2107,8 +2139,8 @@
    <slot>load_DB()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>445</x>
-     <y>552</y>
+     <x>407</x>
+     <y>418</y>
     </hint>
     <hint type="destinationlabel">
      <x>739</x>
@@ -2123,8 +2155,8 @@
    <slot>save_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>772</x>
-     <y>520</y>
+     <x>758</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
      <x>607</x>
@@ -2203,7 +2235,7 @@
    <slot>metalearning_checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>594</x>
+     <x>578</x>
      <y>532</y>
     </hint>
     <hint type="destinationlabel">
@@ -2315,8 +2347,8 @@
    <slot>modelSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>731</x>
-     <y>572</y>
+     <x>741</x>
+     <y>540</y>
     </hint>
     <hint type="destinationlabel">
      <x>91</x>
@@ -2331,8 +2363,8 @@
    <slot>radio_c()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>218</x>
-     <y>301</y>
+     <x>229</x>
+     <y>302</y>
     </hint>
     <hint type="destinationlabel">
      <x>23</x>
@@ -2385,6 +2417,38 @@
     <hint type="destinationlabel">
      <x>25</x>
      <y>500</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nextButton2_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>home_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>100</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>45</x>
+     <y>79</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>hist_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>history_tabs()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>793</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>859</x>
+     <y>28</y>
     </hint>
    </hints>
   </connection>

@@ -41,6 +41,11 @@ conda install -c conda-forge sqlite
 Could not connect to any X display.
 INSTALL Xming h kapoion allon Xserver
 
+
+GIA TO GITHUB:
+git config --global user.name ggrkp
+git config --global user.email g.georgak.77@gmail.com
+
 meta sto terminal tou wsl:
 export DISPLAY=:0
 Gia na exei graphics

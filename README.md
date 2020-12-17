@@ -31,24 +31,44 @@ conda install -c conda-forge featuretools
 conda install -c anaconda pyqt
 
 conda install -c conda-forge sqlite
+h 
+sudo apt-get install sqlite3
+sqlite3 --version (test)
+sudo apt-get install sqlitebrowser (gia gui)
 
 ** pyinstaller gia na ftiaskw to app
 
+GIA TO GITHUB:
+gitlens-plugin (PUSH)
+git installation sta windows
 
+SQLITE
+CREATE TABLE IF NOT EXISTS models(
+    name TEXT,
+    data BLOB,
+    timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    learning_type TEXT
+);
 
 
 ** Trouble shooting 
 Could not connect to any X display.
-INSTALL Xming h kapoion allon Xserver
+INSTALL Xming h kapoion allon Xserver px vcXsrv
 
 
-GIA TO GITHUB:
-git config --global user.name ggrkp
-git config --global user.email g.georgak.77@gmail.com
 
-meta sto terminal tou wsl:
-export DISPLAY=:0
-Gia na exei graphics
 
-kai run to program
+ERROR- >    configure email and username: (entoles sto terminal)
+SOLUTION:   git config --global user.name ggrkp
+            git config --global user.email g.georgak.77@gmail.com
 
+            meta sto terminal tou wsl:
+            export DISPLAY=:0
+            Gia na exei graphics
+
+            kai run to program
+
+
+ERROR:      sqlitebrowser: error while loading shared libraries: libQt5Core.so.5: cannot open shared object file: No such file or directory
+SOLUTION:   sudo apt-get install -y binutils
+            sudo strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5 

@@ -1,3 +1,14 @@
 {
-    "python.pythonPath": "/home/georgak/miniconda3/envs/thesis_env/bin/python"
+    "python.pythonPath": "/home/georgak/miniconda3/envs/thesis_env/bin/python",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "\\\\wsl$\\Ubuntu-20.04\\home\\georgak\\projectv1\\modelsDB.db",
+            "name": "conn"
+        }
+    ],
+    "sqltools.useNodeRuntime": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }

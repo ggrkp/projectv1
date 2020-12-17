@@ -39,9 +39,8 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def history_tabs(self):
         self.stackedWidget.setCurrentIndex(5)
-
-        db_name = 'modelsDB.db'
         
+        db_name = 'models.db'
         class_query = "select name, timestamp from models where learning_type='Classification'"    
         reg_query = "select name, timestamp from models where learning_type='Regression'"        
         ts_query = "select name, timestamp from models where learning_type='Time Series'"        
@@ -727,7 +726,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def load_DB(self):  # tha kanei connect meta tha kanei load kai tha petaei mesa ta records!
         self.stackedWidget.setCurrentIndex(3)
-        db_name = 'modelsDB.db'
+        db_name = 'models.db'
         query1 = "select name, timestamp from models"        
         query1_cnt="select count(*) from models"    
         table4 = self.dbTable        

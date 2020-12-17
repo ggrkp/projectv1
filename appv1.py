@@ -41,6 +41,14 @@ class MainWindowUIClass(Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(5)
         
         db_name = 'models.db'
+
+# CREATE TABLE IF NOT EXISTS models(
+#     name TEXT,
+#     data BLOB,
+#     timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+#     learning_type TEXT
+# );
+
         class_query = "select name, timestamp from models where learning_type='Classification'"    
         reg_query = "select name, timestamp from models where learning_type='Regression'"        
         ts_query = "select name, timestamp from models where learning_type='Time Series'"        

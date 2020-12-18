@@ -455,14 +455,3 @@ class Ui_MainWindow(object):
         self.run_Button.setText(_translate("MainWindow", "Run"))
         self.backButton2.setText(_translate("MainWindow", "Back"))
         self.nextButton2.setText(_translate("MainWindow", "Next"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
-

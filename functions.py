@@ -71,7 +71,7 @@ class Func:
     def splitData(self, pred, target, test_sz):
         return train_test_split(pred, target, test_size=test_sz, random_state=1)
 
-    def callClassifier(self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_dis):
+    def callClassifier(self, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_dis):
         automl = AutoSklearnClassifier(
             initial_configurations_via_metalearning=meta_dis,
 
@@ -83,7 +83,6 @@ class Func:
             per_run_time_limit=t_per_run,
 
             # MEMORY RESTRICTION
-            ensemble_memory_limit=mem_limit,
             ensemble_size=ens_size,
             # ALGORITHM RESTRICTION
             include_estimators=inc_est,
@@ -101,7 +100,7 @@ class Func:
         return automl
 #! call regressor
 
-    def callRegressor(self, t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_dis):
+    def callRegressor(self, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_dis):
         automl = AutoSklearnRegressor(
 
             initial_configurations_via_metalearning=meta_dis,
@@ -114,7 +113,6 @@ class Func:
             per_run_time_limit=t_per_run,
 
             # MEMORY RESTRICTION
-            ensemble_memory_limit=mem_limit,
             ensemble_size=ens_size,
             # ALGORITHM RESTRICTION
             include_estimators=inc_est,
@@ -152,7 +150,7 @@ class Func:
         #! INSERT
         learning_type = l_type
         insertion_time = datetime.now()
-        conn = sqlite3.connect('modelsDB.db')
+        conn = sqlite3.connect('models.db')
         query = 'insert into models values (?, ?, ?, ?)'
         # todo: elegxos gia to an den dwthei name
         conn.execute(query, [model_name, pickled_model,
@@ -161,10 +159,10 @@ class Func:
 
     def load_model(self, id):
         #! connect to database
-        conn = sqlite3.connect('modelsDB.db')
+        conn = sqlite3.connect('models.db')
         #!SELECT model
         cursor = conn.execute(f'select * from models where timestamp = "{id}"')
-        name, pickled_model, timestamp = cursor.fetchone()
+        name, pickled_model, timestamp, learning_type = cursor.fetchone()
         fetched_model = pickle.loads(pickled_model)
         return fetched_model
 

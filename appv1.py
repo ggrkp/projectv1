@@ -203,7 +203,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def nextSlot_1(self):  # Next pou pigainei stis parametrous tou modeling
         # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
-        global t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable, test_sz
+        global t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable, test_sz
         self.stackedWidget.setCurrentIndex(4)
 
         #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION
@@ -680,10 +680,10 @@ class MainWindowUIClass(Ui_MainWindow):
                 #! Check learning problem Type:
                 if learning_type == "Classification":  # classifier call
                     model = self.functions.callClassifier(
-                        t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
+                        t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
                 elif learning_type == "Regression":  # regressor call
                     model = self.functions.callRegressor(
-                        t_left, t_per_run, mem_limit, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
+                        t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
                 #! Model Fit:
                 model = self.functions.fitModel(
                     X_train, y_train, model, dataset_name)
@@ -692,9 +692,14 @@ class MainWindowUIClass(Ui_MainWindow):
                 #! Metric results:
                 if learning_type == 'Regression':
                     print("Max error", sklearn.metrics.max_error(y_test, pred))
+                    # self.reslut_text.setText(f"Max error: {sklearn.metrics.max_error(y_test, pred)}" )  # describe
+
+
                 elif learning_type == "Classification":
                     print("Accuracy score",
-                          sklearn.metrics.accuracy_score(y_test, pred))
+                            sklearn.metrics.accuracy_score(y_test, pred))
+                            # self.reslut_text.setText(f"Max error: {sklearn.metrics.max_error(y_test, pred)}" )  # describe
+
 
                 # print(model.get_models_with_weights())
 
@@ -792,8 +797,6 @@ class MainWindowUIClass(Ui_MainWindow):
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # ! 5. MODEL HISTORY SCREEN
-
-
 def main():
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle('Windows')
@@ -805,5 +808,5 @@ def main():
     MainWindow.show()
     sys.exit(app.exec_())
 
-
-main()
+if __name__ == "__main__":
+    main()

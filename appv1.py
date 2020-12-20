@@ -39,7 +39,6 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def history_tabs(self):
         self.stackedWidget.setCurrentIndex(5)
-        
         db_name = 'models.db'
 
 # CREATE TABLE IF NOT EXISTS models(
@@ -48,7 +47,6 @@ class MainWindowUIClass(Ui_MainWindow):
 #     timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 #     learning_type TEXT
 # );
-
         class_query = "select name, timestamp from models where learning_type='Classification'"    
         reg_query = "select name, timestamp from models where learning_type='Regression'"        
         ts_query = "select name, timestamp from models where learning_type='Time Series'"        
@@ -177,6 +175,8 @@ class MainWindowUIClass(Ui_MainWindow):
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
         # global learning_type
+        self.comboBox.setStyleSheet("selection-background-color: #00a2ed;")
+
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
         global X

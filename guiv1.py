@@ -256,7 +256,6 @@ class Ui_MainWindow(QObject):
         self.comboBox.setGeometry(QtCore.QRect(350, 80, 79, 23))
         self.comboBox.setMaximumSize(QtCore.QSize(79, 16777215))
         self.comboBox.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.comboBox.setStyleSheet("selection-background-color: rgb(85, 255, 127);")
         self.comboBox.setObjectName("comboBox")
         self.stackedWidget.addWidget(self.page_2)
         self.page_5 = QtWidgets.QWidget()
@@ -752,6 +751,8 @@ class Ui_MainWindow(QObject):
         self.back_btn.clicked.connect(self.models_back)
         self.get_started_btn.clicked.connect(self.get_started)
         self.history_btn.clicked.connect(self.history_tabs)
+        self.hist_btn.clicked.connect(self.history_tabs)
+
         self.radio_btn_c.toggled['bool'].connect(self.radio_c)
         self.radio_btn_r.toggled['bool'].connect(self.radio_r)
         self.radio_btn_ts.toggled['bool'].connect(self.radio_ts)

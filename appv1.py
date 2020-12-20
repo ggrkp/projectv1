@@ -689,18 +689,6 @@ class MainWindowUIClass(Ui_MainWindow):
                     X_train, y_train, model, dataset_name)
                 pred = model.predict(X_test)
 
-                #! Metric results:
-                if learning_type == 'Regression':
-                    print("Max error", sklearn.metrics.max_error(y_test, pred))
-                    # self.reslut_text.setText(f"Max error: {sklearn.metrics.max_error(y_test, pred)}" )  # describe
-
-
-                elif learning_type == "Classification":
-                    print("Accuracy score",
-                            sklearn.metrics.accuracy_score(y_test, pred))
-                            # self.reslut_text.setText(f"Max error: {sklearn.metrics.max_error(y_test, pred)}" )  # describe
-
-
                 # print(model.get_models_with_weights())
 
                 # print(model.show_models())
@@ -711,6 +699,17 @@ class MainWindowUIClass(Ui_MainWindow):
                 popup.setIcon(QtWidgets.QMessageBox.Information)
                 popup.exec_()
                 self.stackedWidget.setEnabled(True)
+#! Metric results:
+                if learning_type == 'Regression':
+                    print("Max error", sklearn.metrics.max_error(y_test, pred))
+                    self.result_text.setText(f"Max error: {sklearn.metrics.max_error(y_test, pred)}" )  # describe
+
+
+                elif learning_type == "Classification":
+                    print("Accuracy score",
+                    sklearn.metrics.accuracy_score(y_test, pred))
+                    self.result_text.setText(f"Accuracy: {sklearn.metrics.accuracy_score(y_test, pred)}" )  # describe
+
 
                 if self.savemodel_Box.isChecked():
                     self.functions.store_model(model, "model",learning_type)

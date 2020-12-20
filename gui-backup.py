@@ -11,10 +11,10 @@ from PyQt5.QtCore import QObject, pyqtSlot
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_MainWindow(QObject):  
+class Ui_MainWindow(QObject): 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(868, 675)
+        MainWindow.resize(908, 675)
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         MainWindow.setLayoutDirection(QtCore.Qt.LeftToRight)
         MainWindow.setAutoFillBackground(False)
@@ -256,7 +256,6 @@ class Ui_MainWindow(QObject):
         self.comboBox.setGeometry(QtCore.QRect(350, 80, 79, 23))
         self.comboBox.setMaximumSize(QtCore.QSize(79, 16777215))
         self.comboBox.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.comboBox.setStyleSheet("selection-background-color: rgb(85, 255, 127);")
         self.comboBox.setObjectName("comboBox")
         self.stackedWidget.addWidget(self.page_2)
         self.page_5 = QtWidgets.QWidget()
@@ -757,15 +756,15 @@ class Ui_MainWindow(QObject):
         self.radio_btn_ts.toggled['bool'].connect(self.radio_ts)
         self.home_btn2_2.clicked.connect(self.home_slot)
         self.nextButton2_2.clicked.connect(self.home_slot)
+        self.pushButton_7.clicked.connect(self.fetch_model)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        #! extra: 
+    #! extra: 
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
         self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
         self.load_DB_btn.setEnabled(False)
         self.showen_btn.setEnabled(False)
         self.predict_btn.setEnabled(False)
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Auto-ML Tool for IoT Applications"))
@@ -849,5 +848,4 @@ class Ui_MainWindow(QObject):
         self.label_27.setText(_translate("MainWindow", "TIME - SERIES MODE"))
         self.label_28.setText(_translate("MainWindow", "Under Construction!"))
         self.home_btn2_2.setText(_translate("MainWindow", "HOME"))
-
 

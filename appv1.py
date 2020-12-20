@@ -68,8 +68,6 @@ class MainWindowUIClass(Ui_MainWindow):
     # ! 1. IMPORT YOUR DATA SCREEN
 
 # REFRESH
-
-
     def refreshAll(self):
         self.pathLine.setText(self.functions.getFileName())
 
@@ -93,6 +91,8 @@ class MainWindowUIClass(Ui_MainWindow):
         fileName = self.pathLine.text()
         if self.functions.isValid(fileName):
             # todo: na kanw akoma enan elegxo gia to an einai empty to file!
+            #todo: na kanw elegxo an to file exei header h oxi kai na pernaw dika mou headers diaforetika
+
             global data
             data = self.functions.readFile(fileName)
             self.functions.setFileName(self.pathLine.text())
@@ -136,6 +136,7 @@ class MainWindowUIClass(Ui_MainWindow):
 # CLEAR BUTTON
     def cancelSlot(self):
         # TODO: Na allaksw to clear button k na kanei clear - twra bazei to iris gia eukolia.
+        #TODO: Na valw epilogh gia drop columns h drop rows me NaN values!
         self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv")
 
 # NEXT BUTTON POU KANEI TO PREVIEW
@@ -684,14 +685,12 @@ class MainWindowUIClass(Ui_MainWindow):
                 elif learning_type == "Regression":  # regressor call
                     model = self.functions.callRegressor(
                         t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
+                
                 #! Model Fit:
                 model = self.functions.fitModel(
                     X_train, y_train, model, dataset_name)
                 pred = model.predict(X_test)
 
-                # print(model.get_models_with_weights())
-
-                # print(model.show_models())
                 popup = QtWidgets.QMessageBox()
                 popup.setWindowTitle(" Done ")
                 popup.setText("A new ensemble has been created successfully!")
@@ -699,17 +698,16 @@ class MainWindowUIClass(Ui_MainWindow):
                 popup.setIcon(QtWidgets.QMessageBox.Information)
                 popup.exec_()
                 self.stackedWidget.setEnabled(True)
-#! Metric results:
+                
+                #! Metric results:
                 if learning_type == 'Regression':
                     print("Max error", sklearn.metrics.max_error(y_test, pred))
                     self.result_text.setText(f"Max error: {sklearn.metrics.max_error(y_test, pred)}" )  # describe
-
 
                 elif learning_type == "Classification":
                     print("Accuracy score",
                     sklearn.metrics.accuracy_score(y_test, pred))
                     self.result_text.setText(f"Accuracy: {sklearn.metrics.accuracy_score(y_test, pred)}" )  # describe
-
 
                 if self.savemodel_Box.isChecked():
                     self.functions.store_model(model, "model",learning_type)
@@ -732,7 +730,6 @@ class MainWindowUIClass(Ui_MainWindow):
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # ! 4. MODELS SCREEN
-
     def models_back(self):
         self.stackedWidget.setCurrentIndex(2)
 
@@ -746,6 +743,8 @@ class MainWindowUIClass(Ui_MainWindow):
         
     # * LOAD MODEL BUTTON!!
     def fetch_model(self):
+
+        #todo : Na ftiaksw ta antistoixa gia to history tab !
         global ft_model
         currow = self.dbTable.currentRow()
         tstamp = self.dbTable.item(currow, 1)
@@ -794,7 +793,6 @@ class MainWindowUIClass(Ui_MainWindow):
         pass
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
     # ! 5. MODEL HISTORY SCREEN
 def main():
     app = QtWidgets.QApplication(sys.argv)

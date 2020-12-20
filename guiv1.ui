@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>868</width>
+    <width>908</width>
     <height>675</height>
    </rect>
   </property>
@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="page_6">
      <widget class="QLabel" name="label_19">
@@ -2459,6 +2459,22 @@
     <hint type="destinationlabel">
      <x>859</x>
      <y>28</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fetch_model()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>739</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>874</x>
+     <y>82</y>
     </hint>
    </hints>
   </connection>

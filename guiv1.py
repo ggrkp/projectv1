@@ -11,10 +11,10 @@ from PyQt5.QtCore import QObject, pyqtSlot
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_MainWindow(QObject):  
+class Ui_MainWindow(QObject): 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(868, 675)
+        MainWindow.resize(908, 675)
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         MainWindow.setLayoutDirection(QtCore.Qt.LeftToRight)
         MainWindow.setAutoFillBackground(False)
@@ -751,22 +751,20 @@ class Ui_MainWindow(QObject):
         self.back_btn.clicked.connect(self.models_back)
         self.get_started_btn.clicked.connect(self.get_started)
         self.history_btn.clicked.connect(self.history_tabs)
-        self.hist_btn.clicked.connect(self.history_tabs)
-
         self.radio_btn_c.toggled['bool'].connect(self.radio_c)
         self.radio_btn_r.toggled['bool'].connect(self.radio_r)
         self.radio_btn_ts.toggled['bool'].connect(self.radio_ts)
         self.home_btn2_2.clicked.connect(self.home_slot)
         self.nextButton2_2.clicked.connect(self.home_slot)
+        self.pushButton_7.clicked.connect(self.fetch_model)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        #! extra: 
+    #! extra: 
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
         self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
         self.load_DB_btn.setEnabled(False)
         self.showen_btn.setEnabled(False)
         self.predict_btn.setEnabled(False)
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Auto-ML Tool for IoT Applications"))
@@ -850,5 +848,3 @@ class Ui_MainWindow(QObject):
         self.label_27.setText(_translate("MainWindow", "TIME - SERIES MODE"))
         self.label_28.setText(_translate("MainWindow", "Under Construction!"))
         self.home_btn2_2.setText(_translate("MainWindow", "HOME"))
-
-

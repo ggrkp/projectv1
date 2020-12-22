@@ -50,6 +50,11 @@ CREATE TABLE IF NOT EXISTS models(
     learning_type TEXT
 );
 
+GIA TSFRESH:
+conda install -c conda-forge tsfresh
+
+
+
 
 ** Trouble shooting 
 Could not connect to any X display.

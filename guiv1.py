@@ -757,6 +757,7 @@ class Ui_MainWindow(QObject):
         self.home_btn2_2.clicked.connect(self.home_slot)
         self.nextButton2_2.clicked.connect(self.home_slot)
         self.pushButton_7.clicked.connect(self.fetch_model)
+        self.hist_btn.clicked.connect(self.history_tabs)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     #! extra: 
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni

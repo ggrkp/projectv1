@@ -147,7 +147,7 @@ class MainWindowUIClass(Ui_MainWindow):
             self.describe_text_edit.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
             self.describe_text_edit.setText(f"{data.describe()}")  # describe
 
-            preview_num = 45
+            preview_num = 20
             self.stackedWidget.setCurrentIndex(2)
             self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
 

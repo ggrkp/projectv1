@@ -10,12 +10,12 @@ from tsfresh import extract_relevant_features
 from tsfresh import select_features
 from tsfresh.utilities.dataframe_functions import impute
 
-import autosklearn.regression
-import sklearn.model_selection
+
 import sklearn.datasets
 import sklearn.metrics
 
-df = pd.read_csv('births.csv', index_col=0, squeeze = True)
+import autosklearn.regression
+df = pd.read_csv('/home/ggeorg/Desktop/TSDataSets/sales.csv', index_col=0, squeeze = True)
 print (type(df))
 # print(df)
 # #insert id column for every row
@@ -38,19 +38,46 @@ X = X.iloc[1:]
 
 # print(X)
 impute(X)
-X_rl = select_features(X,y,show_warnings=False)
-X=X_rl
+X = select_features(X,y,show_warnings=False)
+
+print ('ok')
+print(X)
 
 
 
+############################################################################
+# Data Loading
+# ============
 
 
-X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, random_state=0)
-automl = autosklearn.regression.AutoSklearnRegressor()
-automl.fit(X_train, y_train)
-y_hat = automl.predict(X_test)
-print("Accuracy score", sklearn.metrics.accuracy_score(y_test, y_hat))
+X_train, X_test, y_train, y_test = \
+    sklearn.model_selection.train_test_split(X, y, random_state=-1)
 
+############################################################################
+# Build and fit a regressor
+# =========================
+
+automl = autosklearn.regression.AutoSklearnRegressor(
+    time_left_for_this_task=30,
+    per_run_time_limit=5,
+   )
+automl.fit(X_train, y_train, dataset_name='ts')
+
+############################################################################
+# Print the final ensemble constructed by auto-sklearn
+# ====================================================
+
+print(automl.show_models())
+
+###########################################################################
+# Get the Score of the final ensemble
+# ===================================
+
+predictions = automl.predict(X_test)
+print("R2 score:", sklearn.metrics.r2_score(y_test, predictions))
+print('MAX ERROR',sklearn.metrics.max_error(y_test, predictions) )
+print(predictions)
+print(y_test)
 # # print(X)
 
 # y = pd.read_csv('y_ftou', index_col=0, squeeze = True)

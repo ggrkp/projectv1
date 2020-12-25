@@ -3,7 +3,6 @@
 import csv
 import sys
 import sqlite3
-import featuretools as ft
 import pandas as pd
 import sklearn
 from autosklearn.classification import AutoSklearnClassifier

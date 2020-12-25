@@ -1,11 +1,10 @@
-# change with wsl
+# yolo 
 import csv
 import os
 import sys
 from io import StringIO
 import sqlite3
 from PyQt5.QtGui import QFont
-import featuretools
 import pandas as pd
 import sklearn
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -28,6 +27,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
     # ! 0. WELCOME SCREEN
     def get_started(self):
+        
         # Arxikopoihsh learning Type gia na mh faei error
         self.radio_btn_c.setChecked(True)
         self.stackedWidget.setCurrentIndex(1)

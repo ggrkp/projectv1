@@ -15,7 +15,7 @@ import sklearn.datasets
 import sklearn.metrics
 
 import autosklearn.regression
-df = pd.read_csv('/home/ggeorg/Desktop/TSDataSets/sales.csv', index_col=0, squeeze = True)
+df = pd.read_csv('PATH!', index_col=0, squeeze = True)
 print (type(df))
 # print(df)
 # #insert id column for every row

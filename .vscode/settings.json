@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/home/georgak/miniconda3/envs/thesis_env/bin/python",
+    "python.pythonPath": "/home/larry/miniconda3/envs/ths/bin/python",
     "sqltools.connections": [
         {
             "previewLimit": 50,

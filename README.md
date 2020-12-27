@@ -2,8 +2,6 @@
 
 pyuic5 -x guiv1.ui -o guiv1.py 
 
-WSL GIA WINDOWS OPERATING SYSTEM
-WSL FILE EXPLORER PATH :            \\wsl$\Ubuntu-20.04\home\georgak
 
 MINICONDA INSTALLATION
 https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -26,21 +24,27 @@ pip3 install pyfr
 
 pip3 install auto-sklearn
 
-conda install -c conda-forge featuretools
-
 conda install -c anaconda pyqt
 
 conda install -c conda-forge sqlite
+
 h 
+
 sudo apt-get install sqlite3
 sqlite3 --version (test)
 sudo apt-get install sqlitebrowser (gia gui)
+
+conda install -c conda-forge tsfresh
+
+
 
 ** pyinstaller gia na ftiaskw to app
 
 GIA TO GITHUB:
 gitlens-plugin (PUSH)
 git installation sta windows
+
+
 
 SQLITE
 CREATE TABLE IF NOT EXISTS models(
@@ -50,8 +54,10 @@ CREATE TABLE IF NOT EXISTS models(
     learning_type TEXT
 );
 
-GIA TSFRESH:
-conda install -c conda-forge tsfresh
+
+
+
+
 
 
 

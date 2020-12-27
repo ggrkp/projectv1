@@ -1,14 +1,10 @@
-# projectv1
-
+Metatropi ui se py script
 pyuic5 -x guiv1.ui -o guiv1.py 
 
 
 MINICONDA INSTALLATION
 https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
-
-
-AutoML GUI using PyQT &amp; auto-sklearn
 
 conda create -n automl_env
 
@@ -64,7 +60,7 @@ CREATE TABLE IF NOT EXISTS models(
 
 ** Trouble shooting 
 Could not connect to any X display.
-INSTALL Xming h kapoion allon Xserver px vcXsrv
+export DISPLAY=:0.0
 
 
 

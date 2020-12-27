@@ -1,4 +1,4 @@
-# yolo 
+# yolo
 import csv
 import os
 import sys
@@ -27,7 +27,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
     # ! 0. WELCOME SCREEN
     def get_started(self):
-        
+
         # Arxikopoihsh learning Type gia na mh faei error
         self.radio_btn_c.setChecked(True)
         self.stackedWidget.setCurrentIndex(1)
@@ -47,27 +47,27 @@ class MainWindowUIClass(Ui_MainWindow):
 #     timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 #     learning_type TEXT
 # );
-        class_query = "select name, timestamp from models where learning_type='Classification'"    
-        reg_query = "select name, timestamp from models where learning_type='Regression'"        
-        ts_query = "select name, timestamp from models where learning_type='Time Series'"        
-    
-        class_query_cnt="select count(*) from models where learning_type='Classification'"
-        reg_query_cnt="select count(*) from models where learning_type='Regression'"
-        ts_query_cnt="select count(*) from models where learning_type='Time Series'"
+        class_query = "select name, timestamp from models where learning_type='Classification'"
+        reg_query = "select name, timestamp from models where learning_type='Regression'"
+        ts_query = "select name, timestamp from models where learning_type='Time Series'"
 
-        
-        table_c = self.classification_table      
-        table_r = self.regression_table        
-        table_ts = self.ts_table        
-  
-        self.functions.fill_tables(db_name,class_query,class_query_cnt,table_c)
-        self.functions.fill_tables(db_name,reg_query,reg_query_cnt,table_r)
-        self.functions.fill_tables(db_name,ts_query,ts_query_cnt,table_ts)
+        class_query_cnt = "select count(*) from models where learning_type='Classification'"
+        reg_query_cnt = "select count(*) from models where learning_type='Regression'"
+        ts_query_cnt = "select count(*) from models where learning_type='Time Series'"
 
+        table_c = self.classification_table
+        table_r = self.regression_table
+        table_ts = self.ts_table
+
+        self.functions.fill_tables(
+            db_name, class_query, class_query_cnt, table_c)
+        self.functions.fill_tables(db_name, reg_query, reg_query_cnt, table_r)
+        self.functions.fill_tables(db_name, ts_query, ts_query_cnt, table_ts)
 
     # ! 1. IMPORT YOUR DATA SCREEN
 
 # REFRESH
+
     def refreshAll(self):
         self.pathLine.setText(self.functions.getFileName())
 
@@ -91,7 +91,7 @@ class MainWindowUIClass(Ui_MainWindow):
         fileName = self.pathLine.text()
         if self.functions.isValid(fileName):
             # todo: na kanw akoma enan elegxo gia to an einai empty to file!
-            #todo: na kanw elegxo an to file exei header h oxi kai na pernaw dika mou headers diaforetika
+            # todo: na kanw elegxo an to file exei header h oxi kai na pernaw dika mou headers diaforetika
 
             global data
             data = self.functions.readFile(fileName)
@@ -136,7 +136,7 @@ class MainWindowUIClass(Ui_MainWindow):
 # CLEAR BUTTON
     def cancelSlot(self):
         # TODO: Na allaksw to clear button k na kanei clear - twra bazei to iris gia eukolia.
-        #TODO: Na valw epilogh gia drop columns h drop rows me NaN values!
+        # TODO: Na valw epilogh gia drop columns h drop rows me NaN values!
         self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv")
 
 # NEXT BUTTON POU KANEI TO PREVIEW
@@ -685,7 +685,7 @@ class MainWindowUIClass(Ui_MainWindow):
                 elif learning_type == "Regression":  # regressor call
                     model = self.functions.callRegressor(
                         t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
-                
+
                 #! Model Fit:
                 model = self.functions.fitModel(
                     X_train, y_train, model, dataset_name)
@@ -698,19 +698,21 @@ class MainWindowUIClass(Ui_MainWindow):
                 popup.setIcon(QtWidgets.QMessageBox.Information)
                 popup.exec_()
                 self.stackedWidget.setEnabled(True)
-                
+
                 #! Metric results:
                 if learning_type == 'Regression':
                     print("Max error", sklearn.metrics.max_error(y_test, pred))
-                    self.result_text.setText(f"Max error: {sklearn.metrics.max_error(y_test, pred)}" )  # describe
+                    self.result_text.setText(
+                        f"Max error: {sklearn.metrics.max_error(y_test, pred)}")  # describe
 
                 elif learning_type == "Classification":
                     print("Accuracy score",
                     sklearn.metrics.accuracy_score(y_test, pred))
-                    self.result_text.setText(f"Accuracy: {sklearn.metrics.accuracy_score(y_test, pred)}" )  # describe
+                    self.result_text.setText(
+                        f"Accuracy: {sklearn.metrics.accuracy_score(y_test, pred)}")  # describe
 
                 if self.savemodel_Box.isChecked():
-                    self.functions.store_model(model, "model",learning_type)
+                    self.functions.store_model(model, "model", learning_type)
         except:  # lathos learning type h lathos target variable
             print("An error has occured!")
             self.comboBox.clear()
@@ -736,15 +738,15 @@ class MainWindowUIClass(Ui_MainWindow):
     def load_DB(self):  # tha kanei connect meta tha kanei load kai tha petaei mesa ta records!
         self.stackedWidget.setCurrentIndex(3)
         db_name = 'models.db'
-        query1 = "select name, timestamp from models"        
-        query1_cnt="select count(*) from models"    
-        table4 = self.dbTable        
-        self.functions.fill_tables(db_name,query1,query1_cnt,table4)
-        
+        query1 = "select name, timestamp from models"
+        query1_cnt = "select count(*) from models"
+        table4 = self.dbTable
+        self.functions.fill_tables(db_name, query1, query1_cnt, table4)
+
     # * LOAD MODEL BUTTON!!
     def fetch_model(self):
 
-        #todo : Na ftiaksw ta antistoixa gia to history tab !
+        # todo : Na ftiaksw ta antistoixa gia to history tab !
         global ft_model
         currow = self.dbTable.currentRow()
         tstamp = self.dbTable.item(currow, 1)
@@ -794,9 +796,11 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     # ! 5. MODEL HISTORY SCREEN
+
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    app.setStyle('Windows')
+    # app.setStyle('Windows')
     app.setFont(QFont('Consolas', 10))
 
     ex = MainWindowUIClass()
@@ -805,5 +809,6 @@ def main():
     MainWindow.show()
     sys.exit(app.exec_())
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()

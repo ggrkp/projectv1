@@ -40,7 +40,6 @@ if __name__ == '__main__':
     # print(X)
     impute(X)
     X = select_features(X,y,show_warnings=False)
-
     print ('ok')
     print(X)
 

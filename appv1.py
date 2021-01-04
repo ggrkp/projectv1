@@ -141,32 +141,31 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # NEXT BUTTON POU KANEI TO PREVIEW
     def nextSlot(self):  # Slot gia to next button
-        if learning_type == 'Classification' or learning_type == 'Regression':
-            global preview_num
-            # NO WRAP GIA NA GINETAI SCROLL KAI NA MHN XALANE TA COLS
-            self.describe_text_edit.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
-            self.describe_text_edit.setText(f"{data.describe()}")  # describe
+        global preview_num
+        # NO WRAP GIA NA GINETAI SCROLL KAI NA MHN XALANE TA COLS
+        self.describe_text_edit.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
+        self.describe_text_edit.setText(f"{data.describe()}")  # describe
 
-            preview_num = 20
-            self.stackedWidget.setCurrentIndex(2)
-            self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
+        preview_num = 20
+        self.stackedWidget.setCurrentIndex(2)
+        self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
 
-            # Molis pataw next tha kanei load to combo Box kai tha periexei ta features.
-            # iterating the columns
-            for col in data.columns:
-                self.comboBox.addItem(col)
-            self.comboBox.adjustSize()
-            # dimiourgia table me ta dedomena tou dataset gia preview
-            self.tableWidget.setRowCount(preview_num)  # set row Count
-            self.tableWidget.setColumnCount(
-                self.functions.colCount(data))  # set column count
-            for i in range(preview_num):
-                for j in range(self.functions.colCount(data)):
-                    self.tableWidget.setItem(
-                        i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
-            self.comboBox.adjustSize()
-        else:  # TODO:RADIO BUTTON = TIME SERIES -> NEO SCREEN!
-            self.stackedWidget.setCurrentIndex(6)
+        # Molis pataw next tha kanei load to combo Box kai tha periexei ta features.
+        # iterating the columns
+        for col in data.columns:
+            self.comboBox.addItem(col)
+        self.comboBox.adjustSize()
+        # dimiourgia table me ta dedomena tou dataset gia preview
+        self.tableWidget.setRowCount(preview_num)  # set row Count
+        self.tableWidget.setColumnCount(
+            self.functions.colCount(data))  # set column count
+        for i in range(preview_num):
+            for j in range(self.functions.colCount(data)):
+                self.tableWidget.setItem(
+                    i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
+        self.comboBox.adjustSize()
+        if learning_type == 'Timeseries':
+            self.load_DB_btn.hide()
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -182,12 +181,11 @@ class MainWindowUIClass(Ui_MainWindow):
         print(f"Ok. Column {item_index} is your Target Feature! ")
         global X
         global y
+        #todo: otan kanw pick target gia time series tha exei diaforetikh diadikasia giati tha ginetai pandas.Series h sthlh
         y = self.functions.pickTarget(item_index, data)
         X = self.functions.pickPredictors(item_index, data)
         # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(True)
-        self.load_DB_btn.setEnabled(True)
-
         for i in range(preview_num):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.item(i, j).setBackground(
@@ -205,14 +203,15 @@ class MainWindowUIClass(Ui_MainWindow):
     def nextSlot_1(self):  # Next pou pigainei stis parametrous tou modeling
         # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
         global t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable, test_sz
-        self.stackedWidget.setCurrentIndex(4)
 
-        #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION
-        self.test_sz_box.setValue(0.2)
-
-        ens_size = 50
-        meta_disable = 25
         if learning_type == "Classification":
+            self.stackedWidget.setCurrentIndex(4)
+
+            #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION
+            self.test_sz_box.setValue(0.2)
+
+            ens_size = 50
+            meta_disable = 25
             metric_list = ["accuracy", "balanced_accuracy", "roc_auc", "average_precision", "log_loss",
                            "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
                            "recall", "recall_macro", "recall_micro", "recall_samples", "recall_weighted",
@@ -251,8 +250,45 @@ class MainWindowUIClass(Ui_MainWindow):
                        "random_forest",
                        "sgd",
                        "qda"]
+            # MODELING DEFAULTS
+            self.groupBox.setCheckable(True)
+            self.groupBox.setChecked(False)
+
+            self.timeLeft_box.setMinimum(30)
+            self.timeLeft_box.setMaximum(30000)
+
+            self.perRun_box.setMinimum(3)
+            self.perRun_box.setMaximum(int(t_left/2))  # ! na allaksei!
+
+            meminfo = dict((i.split()[0].rstrip(':'), int(i.split()[1])) for i in open(
+                '/proc/meminfo').readlines())  # analoga me ta specs tou pc
+            mem_Mb = int(meminfo['MemTotal']/1024)
+            self.memory_box.setMinimum(1024)
+            self.memory_box.setMaximum(mem_Mb)
+
+            # TODO: Na dialeksw poies metrikes tha xrisimopoiw kai na emfanizontai sto teliko model.
+
+            resample_list = ["Default", "Cross Validation", "Holdout"]
+            self.ressampleCombo.addItems(resample_list)
+
+            resample_args = {'train_size': 0.67}
+            resample = "holdout"
+
+            disable_prepro = None
+
+            self.holdout_box.setEnabled(False)
+            self.cvfoldsBox.setEnabled(False)
+            self.test_sz_box.setMinimum(0.1)
+            self.test_sz_box.setMaximum(0.9)
 
         elif learning_type == "Regression":
+            self.stackedWidget.setCurrentIndex(4)
+
+            #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION
+            self.test_sz_box.setValue(0.2)
+
+            ens_size = 50
+            meta_disable = 25
             self.ardBox.show()
             self.linearsvr_Box.show()
             self.libsvrBox.show()
@@ -289,37 +325,42 @@ class MainWindowUIClass(Ui_MainWindow):
                        "libsvm_svr",
                        "random_forest",
                        "sgd"]
+            # MODELING DEFAULTS
+            self.groupBox.setCheckable(True)
+            self.groupBox.setChecked(False)
 
-        # MODELING DEFAULTS
-        self.groupBox.setCheckable(True)
-        self.groupBox.setChecked(False)
+            self.timeLeft_box.setMinimum(30)
+            self.timeLeft_box.setMaximum(30000)
 
-        self.timeLeft_box.setMinimum(30)
-        self.timeLeft_box.setMaximum(30000)
+            self.perRun_box.setMinimum(3)
+            self.perRun_box.setMaximum(int(t_left/2))  # ! na allaksei!
 
-        self.perRun_box.setMinimum(3)
-        self.perRun_box.setMaximum(int(t_left/2))
+            meminfo = dict((i.split()[0].rstrip(':'), int(i.split()[1])) for i in open(
+                '/proc/meminfo').readlines())  # analoga me ta specs tou pc
+            mem_Mb = int(meminfo['MemTotal']/1024)
+            self.memory_box.setMinimum(1024)
+            self.memory_box.setMaximum(mem_Mb)
 
-        meminfo = dict((i.split()[0].rstrip(':'), int(i.split()[1])) for i in open(
-            '/proc/meminfo').readlines())  # analoga me ta specs tou pc
-        mem_Mb = int(meminfo['MemTotal']/1024)
-        self.memory_box.setMinimum(1024)
-        self.memory_box.setMaximum(mem_Mb)
+            # TODO: Na dialeksw poies metrikes tha xrisimopoiw kai na emfanizontai sto teliko model.
 
-        # TODO: Na dialeksw poies metrikes tha xrisimopoiw kai na emfanizontai sto teliko model.
+            resample_list = ["Default", "Cross Validation", "Holdout"]
+            self.ressampleCombo.addItems(resample_list)
 
-        resample_list = ["Default", "Cross Validation", "Holdout"]
-        self.ressampleCombo.addItems(resample_list)
+            resample_args = {'train_size': 0.67}
+            resample = "holdout"
 
-        resample_args = {'train_size': 0.67}
-        resample = "holdout"
+            disable_prepro = None
 
-        disable_prepro = None
+            self.holdout_box.setEnabled(False)
+            self.cvfoldsBox.setEnabled(False)
+            self.test_sz_box.setMinimum(0.1)
+            self.test_sz_box.setMaximum(0.9)
 
-        self.holdout_box.setEnabled(False)
-        self.cvfoldsBox.setEnabled(False)
-        self.test_sz_box.setMinimum(0.1)
-        self.test_sz_box.setMaximum(0.9)
+        else: #If learning_type == "Timeseries"
+            self.stackedWidget.setCurrentIndex(7)
+            print("TIME SERIES YAY")
+
+
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -716,6 +757,8 @@ class MainWindowUIClass(Ui_MainWindow):
         except:  # lathos learning type h lathos target variable
             print("An error has occured!")
             self.comboBox.clear()
+            self.metricCombo.clear()
+            self.ressampleCombo.clear()
             self.nextButton.setEnabled(False)
             popup = QtWidgets.QMessageBox()
             popup.setWindowTitle(" Done ")
@@ -796,6 +839,10 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     # ! 5. MODEL HISTORY SCREEN
+    
+    
+    # ! 6. TIME SERIES MDOE SCREEN 
+
 
 
 def main():

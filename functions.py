@@ -47,7 +47,9 @@ class Func:
         return df
 
     def pickTarget(self, tar_idx, df):
-        target = df.iloc[:, (tar_idx)].to_numpy()  # Target Variable
+        target = df.iloc[:, (tar_idx)].to_numpy() 
+        #todo: sthn periptwsh pou einai Timeseries
+        # target = pd.Series(df.iloc[:, tar_idx].values)
         return target
 
     def pickPredictors(self, tar_idx, df):

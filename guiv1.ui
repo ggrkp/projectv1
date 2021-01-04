@@ -29,10 +29,10 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>10</y>
-      <width>801</width>
-      <height>631</height>
+      <x>40</x>
+      <y>20</y>
+      <width>831</width>
+      <height>621</height>
      </rect>
     </property>
     <property name="font">
@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>7</number>
     </property>
     <widget class="QWidget" name="page_6">
      <widget class="QLabel" name="label_19">
@@ -510,7 +510,7 @@
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="text">
-            <string>LOAD EXISTING MODEL</string>
+            <string>Load Existing Model</string>
            </property>
           </widget>
          </item>
@@ -525,7 +525,7 @@
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="text">
-            <string>CREATE NEW MODEL</string>
+            <string>Next</string>
            </property>
           </widget>
          </item>
@@ -861,7 +861,7 @@
      <widget class="QLabel" name="label_25">
       <property name="geometry">
        <rect>
-        <x>110</x>
+        <x>80</x>
         <y>0</y>
         <width>591</width>
         <height>91</height>
@@ -1282,7 +1282,7 @@
        <rect>
         <x>10</x>
         <y>30</y>
-        <width>91</width>
+        <width>41</width>
         <height>31</height>
        </rect>
       </property>
@@ -1290,14 +1290,24 @@
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="text">
-       <string>ΗΟΜΕ</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>home.png</normaloff>home.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
       </property>
      </widget>
      <widget class="QPushButton" name="hist_btn">
       <property name="geometry">
        <rect>
         <x>700</x>
-        <y>30</y>
+        <y>590</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -1385,7 +1395,7 @@
      <widget class="QLabel" name="label_26">
       <property name="geometry">
        <rect>
-        <x>170</x>
+        <x>140</x>
         <y>0</y>
         <width>471</width>
         <height>91</height>
@@ -1408,9 +1418,9 @@
      <widget class="QPushButton" name="home_btn">
       <property name="geometry">
        <rect>
-        <x>60</x>
+        <x>10</x>
         <y>30</y>
-        <width>71</width>
+        <width>41</width>
         <height>31</height>
        </rect>
       </property>
@@ -1425,7 +1435,17 @@
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="text">
-       <string>HOME</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>home.png</normaloff>home.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
       </property>
      </widget>
      <widget class="QWidget" name="layoutWidget">
@@ -1479,12 +1499,40 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page_7">
-     <widget class="QLabel" name="label_27">
+     <widget class="QPushButton" name="home_btn2_2">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>10</x>
+        <y>30</y>
+        <width>41</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>home.png</normaloff>home.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_28">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
         <y>0</y>
-        <width>591</width>
+        <width>221</width>
         <height>91</height>
        </rect>
       </property>
@@ -1499,22 +1547,22 @@
        </font>
       </property>
       <property name="text">
-       <string>TIME - SERIES MODE</string>
+       <string>ABOUT</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_28">
+     <widget class="QLabel" name="label_34">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>200</y>
-        <width>741</width>
-        <height>141</height>
+        <x>140</x>
+        <y>180</y>
+        <width>531</width>
+        <height>91</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Waree</family>
-        <pointsize>50</pointsize>
+        <family>Serif</family>
+        <pointsize>35</pointsize>
         <weight>75</weight>
         <italic>false</italic>
         <bold>true</bold>
@@ -1522,16 +1570,181 @@
        </font>
       </property>
       <property name="text">
-       <string>Under Construction!</string>
+       <string>Under Construction</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="home_btn2_2">
+    </widget>
+    <widget class="QWidget" name="page_8">
+     <widget class="QWidget" name="layoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>310</y>
-        <width>151</width>
-        <height>71</height>
+        <x>640</x>
+        <y>590</y>
+        <width>171</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_12">
+       <item>
+        <widget class="QPushButton" name="backButton1_3">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Back</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="text">
+          <string>Next</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QFrame" name="extract_frame">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>300</y>
+        <width>751</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label_31">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>0</y>
+         <width>561</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Serif</family>
+         <pointsize>35</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
+         <underline>false</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>EXTRACT FEATURES</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="geometry">
+        <rect>
+         <x>330</x>
+         <y>240</y>
+         <width>80</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>EXTRACT!</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="roll_frame">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>20</y>
+        <width>751</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label1234">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>0</y>
+         <width>561</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Serif</family>
+         <pointsize>35</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
+         <underline>false</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>ROLL TIME SERIES</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="home_btn2_3">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>home.png</normaloff>home.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton">
+       <property name="geometry">
+        <rect>
+         <x>320</x>
+         <y>240</y>
+         <width>80</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ROLL!</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_9">
+     <widget class="QPushButton" name="home_btn2_4">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>41</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
@@ -1540,8 +1753,178 @@
        </font>
       </property>
       <property name="text">
-       <string>HOME</string>
+       <string/>
       </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>home.png</normaloff>home.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_30">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>0</y>
+        <width>271</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Serif</family>
+        <pointsize>35</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>PREVIEW</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame_3">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>520</y>
+        <width>611</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QWidget" name="layoutWidget_3">
+       <property name="geometry">
+        <rect>
+         <x>101</x>
+         <y>50</y>
+         <width>401</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="1">
+         <widget class="QRadioButton" name="radio_btn_r_2">
+          <property name="text">
+           <string>Regression</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="radio_btn_c_2">
+          <property name="text">
+           <string>Classification </string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QLabel" name="label_33">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>10</y>
+         <width>291</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
+         <underline>false</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Define the Problem Type</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>80</y>
+        <width>511</width>
+        <height>411</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_12">
+       <item>
+        <widget class="QLabel" name="label_27">
+         <property name="text">
+          <string>PREDICTORS ( extracted features )</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="tableWidget_2"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>80</y>
+        <width>141</width>
+        <height>411</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_13">
+       <item>
+        <widget class="QLabel" name="label_32">
+         <property name="text">
+          <string>TARGET VARIABLE</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="tableWidget_3"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>670</x>
+        <y>570</y>
+        <width>141</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_13">
+       <item>
+        <widget class="QPushButton" name="backButton1_4">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Back</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_5">
+         <property name="text">
+          <string>Next</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>
@@ -1621,8 +2004,8 @@
    <slot>featureSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>478</x>
-     <y>105</y>
+     <x>468</x>
+     <y>115</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -1701,8 +2084,8 @@
    <slot>ensmemory_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>689</x>
-     <y>221</y>
+     <x>679</x>
+     <y>232</y>
     </hint>
     <hint type="destinationlabel">
      <x>105</x>
@@ -1717,8 +2100,8 @@
    <slot>metricBox()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>555</x>
-     <y>277</y>
+     <x>679</x>
+     <y>288</y>
     </hint>
     <hint type="destinationlabel">
      <x>85</x>
@@ -1733,8 +2116,8 @@
    <slot>resampleBox()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>554</x>
-     <y>243</y>
+     <x>679</x>
+     <y>254</y>
     </hint>
     <hint type="destinationlabel">
      <x>95</x>
@@ -2021,8 +2404,8 @@
    <slot>cv_Folds()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>658</x>
-     <y>366</y>
+     <x>678</x>
+     <y>397</y>
     </hint>
     <hint type="destinationlabel">
      <x>781</x>
@@ -2117,8 +2500,8 @@
    <slot>backSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>120</x>
-     <y>570</y>
+     <x>110</x>
+     <y>580</y>
     </hint>
     <hint type="destinationlabel">
      <x>147</x>
@@ -2133,8 +2516,8 @@
    <slot>nextSlot_1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>678</x>
-     <y>418</y>
+     <x>668</x>
+     <y>428</y>
     </hint>
     <hint type="destinationlabel">
      <x>768</x>
@@ -2149,8 +2532,8 @@
    <slot>load_DB()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>407</x>
-     <y>418</y>
+     <x>397</x>
+     <y>428</y>
     </hint>
     <hint type="destinationlabel">
      <x>739</x>
@@ -2165,8 +2548,8 @@
    <slot>save_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>758</x>
-     <y>474</y>
+     <x>748</x>
+     <y>484</y>
     </hint>
     <hint type="destinationlabel">
      <x>607</x>
@@ -2245,8 +2628,8 @@
    <slot>metalearning_checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>578</x>
-     <y>532</y>
+     <x>568</x>
+     <y>542</y>
     </hint>
     <hint type="destinationlabel">
      <x>770</x>
@@ -2277,8 +2660,8 @@
    <slot>home_slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>68</y>
+     <x>69</x>
+     <y>78</y>
     </hint>
     <hint type="destinationlabel">
      <x>32</x>
@@ -2389,8 +2772,8 @@
    <slot>radio_r()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>393</x>
-     <y>299</y>
+     <x>475</x>
+     <y>310</y>
     </hint>
     <hint type="destinationlabel">
      <x>36</x>
@@ -2405,8 +2788,8 @@
    <slot>radio_ts()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>510</x>
-     <y>298</y>
+     <x>610</x>
+     <y>309</y>
     </hint>
     <hint type="destinationlabel">
      <x>85</x>
@@ -2421,8 +2804,8 @@
    <slot>home_slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>384</x>
-     <y>381</y>
+     <x>84</x>
+     <y>80</y>
     </hint>
     <hint type="destinationlabel">
      <x>25</x>
@@ -2437,8 +2820,8 @@
    <slot>home_slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>100</x>
-     <y>50</y>
+     <x>90</x>
+     <y>60</y>
     </hint>
     <hint type="destinationlabel">
      <x>45</x>
@@ -2453,8 +2836,8 @@
    <slot>history_tabs()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>793</x>
-     <y>45</y>
+     <x>783</x>
+     <y>615</y>
     </hint>
     <hint type="destinationlabel">
      <x>859</x>

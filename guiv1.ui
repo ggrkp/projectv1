@@ -31,7 +31,7 @@
      <rect>
       <x>40</x>
       <y>20</y>
-      <width>831</width>
+      <width>841</width>
       <height>621</height>
      </rect>
     </property>
@@ -1586,7 +1586,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_12">
        <item>
-        <widget class="QPushButton" name="backButton1_3">
+        <widget class="QPushButton" name="back_btn_7">
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
@@ -1596,7 +1596,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="next_btn_7">
          <property name="text">
           <string>Next</string>
          </property>
@@ -1642,7 +1642,7 @@
         <string>EXTRACT FEATURES</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_6">
+      <widget class="QPushButton" name="extract_btn">
        <property name="geometry">
         <rect>
          <x>330</x>
@@ -1722,7 +1722,7 @@
         </size>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="roll_btn">
        <property name="geometry">
         <rect>
          <x>320</x>
@@ -1815,14 +1815,14 @@
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="1">
-         <widget class="QRadioButton" name="radio_btn_r_2">
+         <widget class="QRadioButton" name="reg_radio_btn">
           <property name="text">
            <string>Regression</string>
           </property>
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QRadioButton" name="radio_btn_c_2">
+         <widget class="QRadioButton" name="cl_radio_btn">
           <property name="text">
            <string>Classification </string>
           </property>
@@ -1853,7 +1853,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -1871,11 +1871,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableWidget" name="tableWidget_2"/>
+        <widget class="QTableWidget" name="features_preview"/>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>620</x>
@@ -1893,22 +1893,22 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableWidget" name="tableWidget_3"/>
+        <widget class="QTableWidget" name="target_preview"/>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>670</x>
         <y>570</y>
-        <width>141</width>
+        <width>168</width>
         <height>24</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_13">
        <item>
-        <widget class="QPushButton" name="backButton1_4">
+        <widget class="QPushButton" name="back_btn_8">
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
@@ -1918,7 +1918,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_5">
+        <widget class="QPushButton" name="next_btn_8">
          <property name="text">
           <string>Next</string>
          </property>
@@ -2861,6 +2861,134 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>next_btn_7</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>next_slot_7()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>809</x>
+     <y>622</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>888</x>
+     <y>561</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>back_btn_7</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>back_slot_7()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>746</x>
+     <y>625</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>901</x>
+     <y>521</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>roll_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>roll_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>465</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>883</x>
+     <y>192</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>extract_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>extract_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>472</x>
+     <y>571</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>887</x>
+     <y>404</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>next_btn_8</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>next_slot_8()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>839</x>
+     <y>594</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>892</x>
+     <y>546</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>back_btn_8</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>back_slot_8()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>773</x>
+     <y>601</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>894</x>
+     <y>490</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cl_radio_btn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>radio_c_2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>240</x>
+     <y>603</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>18</x>
+     <y>626</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>reg_radio_btn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>radio_r_2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>457</x>
+     <y>597</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>887</x>
+     <y>387</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>browseSlot()</slot>
@@ -2919,5 +3047,13 @@
   <slot>radio_c()</slot>
   <slot>radio_r()</slot>
   <slot>radio_ts()</slot>
+  <slot>next_slot_8()</slot>
+  <slot>back_slot_8()</slot>
+  <slot>next_slot_7()</slot>
+  <slot>back_slot_7()</slot>
+  <slot>roll_slot()</slot>
+  <slot>extract_slot()</slot>
+  <slot>radio_c_2()</slot>
+  <slot>radio_r_2()</slot>
  </slots>
 </ui>

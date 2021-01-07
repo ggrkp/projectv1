@@ -54,7 +54,7 @@ class Func:
 
     def pickPredictors(self, tar_idx, df):
         # Predictor Variables (All except the Target one.)
-        predictors = df.iloc[:, df.columns != df.columns[tar_idx]].to_numpy()
+        predictors = df.iloc[:, df.columns != df.columns[tar_idx]]
         return predictors
 
     def rowCount(self, df):

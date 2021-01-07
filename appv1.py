@@ -6,6 +6,7 @@ from io import StringIO
 import sqlite3
 from PyQt5.QtGui import QFont
 import pandas as pd
+import copy
 import sklearn
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject
@@ -170,22 +171,28 @@ class MainWindowUIClass(Ui_MainWindow):
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
-    # ! 2. SELECT YOUR TARGET TARGET SCREEN
+    # ! 2. SELECT YOUR TARGET SCREEN
 
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
-        # global learning_type
+        global learning_type , X , y
         self.comboBox.setStyleSheet("selection-background-color: #00a2ed;")
 
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
-        global X
-        global y
         #todo: otan kanw pick target gia time series tha exei diaforetikh diadikasia giati tha ginetai pandas.Series h sthlh
         y = self.functions.pickTarget(item_index, data)
-        X = self.functions.pickPredictors(item_index, data)
+        if learning_type == "Timeseries":
+            y = pd.Series(y)
+            print(type(y))
+            print(y)    
+            X = copy.deepcopy(data)
+            X.insert(0, 'id', 0)
+        else:
+            X = self.functions.pickPredictors(item_index, data).to_numpy()
         # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(True)
+
         for i in range(preview_num):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.item(i, j).setBackground(
@@ -202,7 +209,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def nextSlot_1(self):  # Next pou pigainei stis parametrous tou modeling
         # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
-        global t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable, test_sz
+        global X,data,y, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable, test_sz
 
         if learning_type == "Classification":
             self.stackedWidget.setCurrentIndex(4)
@@ -358,7 +365,8 @@ class MainWindowUIClass(Ui_MainWindow):
 
         else: #If learning_type == "Timeseries"
             self.stackedWidget.setCurrentIndex(7)
-            print("TIME SERIES YAY")
+            
+       
 
 
 
@@ -843,6 +851,34 @@ class MainWindowUIClass(Ui_MainWindow):
     
     # ! 6. TIME SERIES MDOE SCREEN 
 
+    def next_slot_7(self):
+        self.stackedWidget.setCurrentIndex(8)
+        print("new func")
+
+    def back_slot_7(self):
+        self.stackedWidget.setCurrentIndex(2)
+
+        print("new func")
+
+    def roll_slot(self):
+        print("new func")
+
+    def extract_slot(self):
+        print("new func")
+
+    def next_slot_8(self):
+        self.stackedWidget.setCurrentIndex(9)
+        print("new func")
+
+    def back_slot_8(self):
+        self.stackedWidget.setCurrentIndex(7)
+        print("new func")
+
+    def radio_c_2(self):
+        print("new func")
+
+    def radio_r_2(self):
+        print("new func")
 
 
 def main():

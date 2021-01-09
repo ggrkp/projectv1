@@ -38,7 +38,7 @@ class MainWindowUIClass(Ui_MainWindow):
         self.radio_btn_c.setChecked(True)
         self.cl_radio_btn.setChecked(True)
         self.stackedWidget.setCurrentIndex(1)
-    
+
     def home_slot(self):
         self.comboBox.clear()
         self.nextButton.setEnabled(False)
@@ -926,7 +926,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    # app.setStyle('Windows')
+    app.setStyle('Fusion')
     app.setFont(QFont('Consolas', 10))
 
     ex = MainWindowUIClass()

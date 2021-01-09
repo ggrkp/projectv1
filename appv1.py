@@ -36,8 +36,9 @@ class MainWindowUIClass(Ui_MainWindow):
 
         # Arxikopoihsh learning Type gia na mh faei error
         self.radio_btn_c.setChecked(True)
+        self.cl_radio_btn.setChecked(True)
         self.stackedWidget.setCurrentIndex(1)
-
+    
     def home_slot(self):
         self.comboBox.clear()
         self.nextButton.setEnabled(False)
@@ -126,12 +127,12 @@ class MainWindowUIClass(Ui_MainWindow):
 # RADIO BUTTONS - LEARNING TYPE
     def radio_c(self):
         global learning_type
-        if self.radio_btn_c.isChecked():
+        if self.radio_btn_c.isChecked() or self.cl_radio_btn.isChecked():
             learning_type = "Classification"
 
     def radio_r(self):
         global learning_type
-        if self.radio_btn_r.isChecked():
+        if self.radio_btn_r.isChecked() or self.reg_radio_btn.isChecked():
             learning_type = "Regression"
 
     def radio_ts(self):
@@ -907,7 +908,9 @@ class MainWindowUIClass(Ui_MainWindow):
     
 
     def next_slot_8(self):
-        self.stackedWidget.setCurrentIndex(9)
+        global learning_type
+        learning_type = "Regression"
+        self.stackedWidget.setCurrentIndex(4)
         print("next-slot-8")
 
     def back_slot_8(self):

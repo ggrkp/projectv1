@@ -5,7 +5,6 @@
 # Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
@@ -928,10 +927,10 @@ class Ui_MainWindow(QObject):
         self.back_btn_7.clicked.connect(self.back_slot_7)
         self.roll_btn.clicked.connect(self.roll_slot)
         self.extract_btn.clicked.connect(self.extract_slot)
-        self.next_btn_8.clicked.connect(self.next_slot_8)
         self.back_btn_8.clicked.connect(self.back_slot_8)
-        self.cl_radio_btn.toggled['bool'].connect(self.radio_c_2)
-        self.reg_radio_btn.toggled['bool'].connect(self.radio_r_2)
+        self.next_btn_8.clicked.connect(self.nextSlot_1)
+        self.cl_radio_btn.toggled['bool'].connect(self.radio_c)
+        self.reg_radio_btn.toggled['bool'].connect(self.radio_r)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
  #! extra: 
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
@@ -940,7 +939,7 @@ class Ui_MainWindow(QObject):
         self.load_DB_btn.setEnabled(False)
         self.showen_btn.setEnabled(False)
         self.predict_btn.setEnabled(False)
-        
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Auto-ML Tool for IoT Applications"))

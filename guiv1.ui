@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_6">
      <widget class="QLabel" name="label_19">
@@ -2926,22 +2926,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>next_btn_8</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>next_slot_8()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>839</x>
-     <y>594</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>892</x>
-     <y>546</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>back_btn_8</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
@@ -2958,18 +2942,34 @@
    </hints>
   </connection>
   <connection>
+   <sender>next_btn_8</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>nextSlot_1()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>814</x>
+     <y>602</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>900</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>cl_radio_btn</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>radio_c_2()</slot>
+   <slot>radio_c()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>240</x>
-     <y>603</y>
+     <x>230</x>
+     <y>608</y>
     </hint>
     <hint type="destinationlabel">
-     <x>18</x>
-     <y>626</y>
+     <x>38</x>
+     <y>630</y>
     </hint>
    </hints>
   </connection>
@@ -2977,15 +2977,15 @@
    <sender>reg_radio_btn</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>radio_r_2()</slot>
+   <slot>radio_r()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>457</x>
-     <y>597</y>
+     <x>447</x>
+     <y>604</y>
     </hint>
     <hint type="destinationlabel">
-     <x>887</x>
-     <y>387</y>
+     <x>395</x>
+     <y>644</y>
     </hint>
    </hints>
   </connection>

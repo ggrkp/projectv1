@@ -11,6 +11,11 @@ import sklearn
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
+from tsfresh.utilities.dataframe_functions import roll_time_series
+from tsfresh import extract_features
+from tsfresh import extract_relevant_features
+from tsfresh import select_features
+from tsfresh.utilities.dataframe_functions import impute
 
 from functions import Func
 from guiv1 import Ui_MainWindow
@@ -188,6 +193,7 @@ class MainWindowUIClass(Ui_MainWindow):
             print(y)    
             X = copy.deepcopy(data)
             X.insert(0, 'id', 0)
+            print(X)
         else:
             X = self.functions.pickPredictors(item_index, data).to_numpy()
         # Otan ginei to import me valid file energopoieitai to next button
@@ -851,34 +857,68 @@ class MainWindowUIClass(Ui_MainWindow):
     
     # ! 6. TIME SERIES MDOE SCREEN 
 
+
+    def roll_slot(self):
+        global X, X_rld
+        X_rld = roll_time_series(
+        X, column_id="id", column_sort='"Month"', min_timeshift=0, rolling_direction=1)
+        print("\nTHE ROLLED TIME SERIES DATAFRAME IS:\n", X_rld)
+        print("roll-slot")
+
+    def extract_slot(self):
+        global X, X_rld,y
+        X = extract_features(
+        X_rld, column_id='id', column_sort='"Month"')
+        X.reset_index(drop=True, inplace=True)
+        impute(X)
+        X = select_features(X,y,show_warnings=False)
+        print ('................................................ok................................................')
+        print("Extracted features (Relevant):\n", X)
+        print(type(X))
+        print("extract-slot")
+
     def next_slot_7(self):
+        global y, preview_num, X
         self.stackedWidget.setCurrentIndex(8)
-        print("new func")
+
+        self.target_preview.setRowCount(preview_num)
+        self.target_preview.setColumnCount(1)
+
+        for i in range(preview_num):
+                self.target_preview.setItem(
+                    i, 0 , QTableWidgetItem(f"{ y.iloc[i]}"))
+
+        # dimiourgia table me ta dedomena tou dataset gia preview
+        self.features_preview.setRowCount(preview_num)  # set row Count
+        self.features_preview.setColumnCount(
+            self.functions.colCount(X))  # set column count
+        for i in range(preview_num):
+            for j in range(self.functions.colCount(X)):
+                self.features_preview.setItem(
+                    i, j, QTableWidgetItem(f"{ X.iloc[i][j] }"))
+
+        print("next-slot-7")
 
     def back_slot_7(self):
         self.stackedWidget.setCurrentIndex(2)
 
-        print("new func")
+        print("back-slot-7")
 
-    def roll_slot(self):
-        print("new func")
-
-    def extract_slot(self):
-        print("new func")
+    
 
     def next_slot_8(self):
         self.stackedWidget.setCurrentIndex(9)
-        print("new func")
+        print("next-slot-8")
 
     def back_slot_8(self):
         self.stackedWidget.setCurrentIndex(7)
-        print("new func")
+        print("back-slot-8")
 
     def radio_c_2(self):
-        print("new func")
+        print("radio-c")
 
     def radio_r_2(self):
-        print("new func")
+        print("radio-r")
 
 
 def main():

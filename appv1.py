@@ -868,7 +868,8 @@ class MainWindowUIClass(Ui_MainWindow):
         global X, X_rld, sort_by
         X_rld = roll_time_series(
         X, column_id="id", column_sort=f'{sort_by}', min_timeshift=0, rolling_direction=1)
-        self.extract_btn.setEnabled(True)
+        self.extract_frame.setEnabled(True)
+
 
     def extract_slot(self):
         global X, X_rld,y,sort_by, fc_settings
@@ -905,10 +906,8 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def back_slot_7(self):
         self.stackedWidget.setCurrentIndex(2)
-
+        self.sort_box.clear()
         print("back-slot-7")
-
-    
 
     def next_slot_8(self):
         global learning_type
@@ -953,7 +952,7 @@ class MainWindowUIClass(Ui_MainWindow):
         if self.minimal_radio.isChecked():
             fc_settings = EfficientFCParameters()
             print (fc_settings)
-            
+
     def custom_slot(self):
         if self.custom_radio.isChecked():
             self.text_settings.setReadOnly(False)

@@ -996,10 +996,10 @@ class Ui_MainWindow(QObject):
         self.load_DB_btn.setEnabled(False)
         self.showen_btn.setEnabled(False)
         self.predict_btn.setEnabled(False)
-        self.extract_btn.setEnabled(False)
         self.text_settings.setReadOnly(True)
         self.result_text.setReadOnly(True)
-
+        self.extract_frame.setEnabled(False)
+        
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Auto-ML Tool for IoT Applications"))

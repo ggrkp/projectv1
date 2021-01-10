@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>908</width>
-    <height>675</height>
+    <width>924</width>
+    <height>685</height>
    </rect>
   </property>
   <property name="cursor">
@@ -1647,7 +1647,7 @@
         <rect>
          <x>40</x>
          <y>60</y>
-         <width>181</width>
+         <width>211</width>
          <height>21</height>
         </rect>
        </property>
@@ -1664,58 +1664,6 @@
          <height>191</height>
         </rect>
        </property>
-      </widget>
-      <widget class="QGroupBox" name="groupBox_2">
-       <property name="geometry">
-        <rect>
-         <x>340</x>
-         <y>60</y>
-         <width>331</width>
-         <height>121</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Presets</string>
-       </property>
-       <widget class="QRadioButton" name="comprehensive_radio">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>30</y>
-          <width>211</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Comprehensive FC Parameters</string>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="minimal_radio">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>60</y>
-          <width>181</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Minimal FC Parameters</string>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="efficient_radio">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>90</y>
-          <width>181</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Efficient FC Parameters</string>
-        </property>
-       </widget>
       </widget>
       <widget class="QPushButton" name="extract_btn">
        <property name="geometry">
@@ -1741,6 +1689,45 @@
        </property>
        <property name="text">
         <string>Submit</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="comprehensive_radio">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>80</y>
+         <width>211</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Comprehensive FC Parameters</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="minimal_radio">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>110</y>
+         <width>181</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Minimal FC Parameters</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="efficient_radio">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>140</y>
+         <width>181</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Efficient FC Parameters</string>
        </property>
       </widget>
      </widget>
@@ -1795,7 +1782,7 @@
         <string>Roll Time Series</string>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>110</x>
@@ -3115,6 +3102,134 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>min_timeshift_box</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>min_shift_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>465</x>
+     <y>146</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>221</x>
+     <y>643</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>max_timeshift_box</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>max_shift_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>395</x>
+     <y>182</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>33</x>
+     <y>289</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>submit_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>submit_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>557</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>22</x>
+     <y>574</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sort_box</sender>
+   <signal>activated(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>sort_col_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>504</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>14</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>custom_radio</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>custom_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>349</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>8</x>
+     <y>436</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>efficient_radio</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>efficient_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>501</x>
+     <y>464</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>641</x>
+     <y>656</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comprehensive_radio</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>comprehensive_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>595</x>
+     <y>397</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>919</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>minimal_radio</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>minimal_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>538</x>
+     <y>433</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>905</x>
+     <y>463</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>browseSlot()</slot>
@@ -3181,5 +3296,13 @@
   <slot>extract_slot()</slot>
   <slot>radio_c_2()</slot>
   <slot>radio_r_2()</slot>
+  <slot>sort_col_slot()</slot>
+  <slot>min_shift_slot()</slot>
+  <slot>max_shift_slot()</slot>
+  <slot>submit_slot()</slot>
+  <slot>comprehensive_slot()</slot>
+  <slot>minimal_slot()</slot>
+  <slot>efficient_slot()</slot>
+  <slot>custom_slot()</slot>
  </slots>
 </ui>

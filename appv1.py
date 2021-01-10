@@ -1,21 +1,24 @@
 # yolo
+import ast
+import copy
 import csv
 import os
+import sqlite3
 import sys
 from io import StringIO
-import sqlite3
-from PyQt5.QtGui import QFont
+
 import pandas as pd
-import copy
 import sklearn
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
-from tsfresh.utilities.dataframe_functions import roll_time_series
-from tsfresh import extract_features
-from tsfresh import extract_relevant_features
-from tsfresh import select_features
-from tsfresh.utilities.dataframe_functions import impute
+from tsfresh import (extract_features, extract_relevant_features,
+                     select_features)
+from tsfresh.feature_extraction import (ComprehensiveFCParameters,
+                                        EfficientFCParameters,
+                                        MinimalFCParameters)
+from tsfresh.utilities.dataframe_functions import impute, roll_time_series
 
 from functions import Func
 from guiv1 import Ui_MainWindow
@@ -372,6 +375,8 @@ class MainWindowUIClass(Ui_MainWindow):
 
         else: #If learning_type == "Timeseries"
             self.stackedWidget.setCurrentIndex(7)
+            for col in X.columns:
+                self.sort_box.addItem(col)
             
        
 
@@ -860,26 +865,24 @@ class MainWindowUIClass(Ui_MainWindow):
 
 
     def roll_slot(self):
-        global X, X_rld
+        global X, X_rld, sort_by
         X_rld = roll_time_series(
-        X, column_id="id", column_sort='"Month"', min_timeshift=0, rolling_direction=1)
-        print("\nTHE ROLLED TIME SERIES DATAFRAME IS:\n", X_rld)
-        print("roll-slot")
+        X, column_id="id", column_sort=f'{sort_by}', min_timeshift=0, rolling_direction=1)
+        self.extract_btn.setEnabled(True)
 
     def extract_slot(self):
-        global X, X_rld,y
+        global X, X_rld,y,sort_by, fc_settings
         X = extract_features(
-        X_rld, column_id='id', column_sort='"Month"')
+        X_rld, column_id='id', column_sort=f'{sort_by}', default_fc_parameters=fc_settings)
         X.reset_index(drop=True, inplace=True)
         impute(X)
         X = select_features(X,y,show_warnings=False)
-        print ('................................................ok................................................')
-        print("Extracted features (Relevant):\n", X)
-        print(type(X))
-        print("extract-slot")
+        print ( X )
 
     def next_slot_7(self):
         global y, preview_num, X
+        global fc_settings
+        fc_settings = None
         self.stackedWidget.setCurrentIndex(8)
 
         self.target_preview.setRowCount(preview_num)
@@ -917,12 +920,45 @@ class MainWindowUIClass(Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(7)
         print("back-slot-8")
 
-    def radio_c_2(self):
-        print("radio-c")
+    def sort_col_slot(self):
+        global sort_idx, sort_by
+        sort_idx = self.sort_box.currentIndex()
+        sort_by = self.sort_box.itemText(sort_idx)
 
-    def radio_r_2(self):
-        print("radio-r")
+    def min_shift_slot(self):
+        pass
+    
+    def max_shift_slot(self):
+        pass
 
+    def submit_slot(self):
+        global fc_settings
+        fc_settings = ast.literal_eval(self.text_settings.toPlainText())
+        print (fc_settings)
+
+    def comprehensive_slot(self):
+        global fc_settings
+        if self.comprehensive_radio.isChecked():
+            fc_settings = ComprehensiveFCParameters()
+            print (fc_settings)
+
+    def minimal_slot(self):
+        global fc_settings
+        if self.minimal_radio.isChecked():
+            fc_settings = MinimalFCParameters()
+            print (fc_settings)
+
+    def efficient_slot(self):
+        global fc_settings
+        if self.minimal_radio.isChecked():
+            fc_settings = EfficientFCParameters()
+            print (fc_settings)
+            
+    def custom_slot(self):
+        if self.custom_radio.isChecked():
+            self.text_settings.setReadOnly(False)
+        else:
+            self.text_settings.setReadOnly(True)
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

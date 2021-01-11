@@ -4,7 +4,6 @@
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
-# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
@@ -612,14 +611,6 @@ class Ui_MainWindow(QObject):
         self.regression_table.setColumnCount(0)
         self.regression_table.setRowCount(0)
         self.tabWidget.addTab(self.tab_2, "")
-        self.tab_3 = QtWidgets.QWidget()
-        self.tab_3.setObjectName("tab_3")
-        self.ts_table = QtWidgets.QTableWidget(self.tab_3)
-        self.ts_table.setGeometry(QtCore.QRect(10, 10, 431, 421))
-        self.ts_table.setObjectName("ts_table")
-        self.ts_table.setColumnCount(0)
-        self.ts_table.setRowCount(0)
-        self.tabWidget.addTab(self.tab_3, "")
         self.label_26 = QtWidgets.QLabel(self.page_4)
         self.label_26.setGeometry(QtCore.QRect(140, 0, 471, 91))
         font = QtGui.QFont()
@@ -742,7 +733,7 @@ class Ui_MainWindow(QObject):
         self.text_settings.setGeometry(QtCore.QRect(40, 80, 271, 191))
         self.text_settings.setObjectName("text_settings")
         self.extract_btn = QtWidgets.QPushButton(self.extract_frame)
-        self.extract_btn.setGeometry(QtCore.QRect(550, 240, 121, 41))
+        self.extract_btn.setGeometry(QtCore.QRect(550, 230, 121, 41))
         self.extract_btn.setObjectName("extract_btn")
         self.submit_btn = QtWidgets.QPushButton(self.extract_frame)
         self.submit_btn.setGeometry(QtCore.QRect(250, 270, 61, 23))
@@ -955,7 +946,7 @@ class Ui_MainWindow(QObject):
         self.savemodel_Box.stateChanged['int'].connect(self.save_Checked)
         self.showen_btn.clicked.connect(self.show_ensembles)
         self.predict_btn.clicked.connect(self.predict_y)
-        self.pushButton_2.clicked.connect(self.fetch_model)
+        self.pushButton_2.clicked.connect(self.fetch_model_2)
         self.ensembling_checkbox.stateChanged['int'].connect(self.ensembling_checked)
         self.metalearning_checkbox.stateChanged['int'].connect(self.metalearning_checked)
         self.test_sz_box.valueChanged['QString'].connect(self.test_sz_Slot)
@@ -970,7 +961,7 @@ class Ui_MainWindow(QObject):
         self.radio_btn_ts.toggled['bool'].connect(self.radio_ts)
         self.home_btn2_2.clicked.connect(self.home_slot)
         self.nextButton2_2.clicked.connect(self.home_slot)
-        self.pushButton_7.clicked.connect(self.fetch_model)
+        self.pushButton_7.clicked.connect(self.fetch_model_2)
         self.hist_btn.clicked.connect(self.history_tabs)
         self.next_btn_7.clicked.connect(self.next_slot_7)
         self.back_btn_7.clicked.connect(self.back_slot_7)
@@ -988,12 +979,13 @@ class Ui_MainWindow(QObject):
         self.efficient_radio.toggled['bool'].connect(self.efficient_slot)
         self.comprehensive_radio.toggled['bool'].connect(self.comprehensive_slot)
         self.minimal_radio.toggled['bool'].connect(self.minimal_slot)
+        self.pushButton_9.clicked.connect(self.show_more_slot)
+        self.pushButton_7.clicked.connect(self.fetch_model_2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
  #! extra: 
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
         self.nextButton.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(False) # Otan ginei to import me valid file energopoieitai to next button
-        self.load_DB_btn.setEnabled(False)
         self.showen_btn.setEnabled(False)
         self.predict_btn.setEnabled(False)
         self.text_settings.setReadOnly(True)
@@ -1074,14 +1066,13 @@ class Ui_MainWindow(QObject):
         self.hist_btn.setText(_translate("MainWindow", "Show History"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Classification Models"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Regression Models"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Time Series Models"))
         self.label_26.setText(_translate("MainWindow", "MODEL HISTORY"))
         self.pushButton_7.setText(_translate("MainWindow", "Show Model Summary"))
         self.pushButton_9.setText(_translate("MainWindow", "Show more..."))
         self.label_28.setText(_translate("MainWindow", "ABOUT"))
         self.label_34.setText(_translate("MainWindow", "Under Construction"))
         self.back_btn_7.setText(_translate("MainWindow", "Back"))
-        self.next_btn_7.setText(_translate("MainWindow", "Next"))
+        self.next_btn_7.setText(_translate("MainWindow", "Auto - ML"))
         self.label_31.setText(_translate("MainWindow", "EXTRACT FEATURES"))
         self.custom_radio.setText(_translate("MainWindow", "Custom Settings (Advanced)"))
         self.extract_btn.setText(_translate("MainWindow", "Extract Features"))

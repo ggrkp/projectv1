@@ -59,21 +59,16 @@ class MainWindowUIClass(Ui_MainWindow):
 # );
         class_query = "select name, timestamp from models where learning_type='Classification'"
         reg_query = "select name, timestamp from models where learning_type='Regression'"
-        ts_query = "select name, timestamp from models where learning_type='Time Series'"
-
         class_query_cnt = "select count(*) from models where learning_type='Classification'"
         reg_query_cnt = "select count(*) from models where learning_type='Regression'"
-        ts_query_cnt = "select count(*) from models where learning_type='Time Series'"
-
         table_c = self.classification_table
         table_r = self.regression_table
-        table_ts = self.ts_table
+        table_c.setSelectionBehavior(QTableWidget.SelectRows)
+        table_r.setSelectionBehavior(QTableWidget.SelectRows)
 
         self.functions.fill_tables(
             db_name, class_query, class_query_cnt, table_c)
         self.functions.fill_tables(db_name, reg_query, reg_query_cnt, table_r)
-        self.functions.fill_tables(db_name, ts_query, ts_query_cnt, table_ts)
-
     # ! 1. IMPORT YOUR DATA SCREEN
 
 # REFRESH
@@ -807,12 +802,22 @@ class MainWindowUIClass(Ui_MainWindow):
         self.functions.fill_tables(db_name, query1, query1_cnt, table4)
 
     # * LOAD MODEL BUTTON!!
-    def fetch_model(self):
+    def show_more_slot(self):
+        pass
 
-        # todo : Na ftiaksw ta antistoixa gia to history tab !
+    def fetch_model_2(self):
         global ft_model
-        currow = self.dbTable.currentRow()
-        tstamp = self.dbTable.item(currow, 1)
+        if self.tabWidget.currentIndex() == 0:
+            table = self.classification_table
+            text_edit = self.textEdit_2
+        else:
+            table = self.regression_table
+            text_edit = self.textEdit_2
+        if self.stackedWidget.currentIndex() == 3:
+            table = self.dbTable
+            text_edit = self.textEdit
+        currow = table.currentRow()
+        tstamp = table.item(currow, 1)
 
         if tstamp == None:
             popup = QtWidgets.QMessageBox()
@@ -824,12 +829,33 @@ class MainWindowUIClass(Ui_MainWindow):
             popup.setIcon(QtWidgets.QMessageBox.Warning)
             popup.exec_()
         else:
-            tstamp = self.dbTable.item(currow, 1).text()
+            tstamp = table.item(currow, 1).text()
             ft_model = self.functions.load_model(tstamp)
             # show loaded model statistics
-            self.textEdit.setText(ft_model.sprint_statistics())
-            self.showen_btn.setEnabled(True)
-            self.predict_btn.setEnabled(True)
+            text_edit.setText(ft_model.sprint_statistics())
+
+
+    # def fetch_model(self):
+    #     global ft_model
+    #     currow = self.dbTable.currentRow()
+    #     tstamp = self.dbTable.item(currow, 1)
+
+    #     if tstamp == None:
+    #         popup = QtWidgets.QMessageBox()
+    #         popup.setWindowTitle(" Error ")
+    #         popup.setText("No Models Were Selected!")
+    #         popup.setInformativeText(
+    #             "Please select a model from the list.")
+    #         popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
+    #         popup.setIcon(QtWidgets.QMessageBox.Warning)
+    #         popup.exec_()
+    #     else:
+    #         tstamp = self.dbTable.item(currow, 1).text()
+    #         ft_model = self.functions.load_model(tstamp)
+    #         # show loaded model statistics
+    #         self.textEdit.setText(ft_model.sprint_statistics())
+    #         self.showen_btn.setEnabled(True)
+    #         self.predict_btn.setEnabled(True)
 
     def show_ensembles(self):
 

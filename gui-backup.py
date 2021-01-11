@@ -5,6 +5,7 @@
 # Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
@@ -740,24 +741,21 @@ class Ui_MainWindow(QObject):
         self.text_settings = QtWidgets.QTextEdit(self.extract_frame)
         self.text_settings.setGeometry(QtCore.QRect(40, 80, 271, 191))
         self.text_settings.setObjectName("text_settings")
-        self.groupBox_2 = QtWidgets.QGroupBox(self.extract_frame)
-        self.groupBox_2.setGeometry(QtCore.QRect(330, 80, 341, 121))
-        self.groupBox_2.setObjectName("groupBox_2")
-        self.comprehensive_radio = QtWidgets.QRadioButton(self.groupBox_2)
-        self.comprehensive_radio.setGeometry(QtCore.QRect(10, 30, 211, 21))
-        self.comprehensive_radio.setObjectName("comprehensive_radio")
-        self.minimal_radio = QtWidgets.QRadioButton(self.groupBox_2)
-        self.minimal_radio.setGeometry(QtCore.QRect(10, 60, 181, 21))
-        self.minimal_radio.setObjectName("minimal_radio")
-        self.efficient_radio = QtWidgets.QRadioButton(self.groupBox_2)
-        self.efficient_radio.setGeometry(QtCore.QRect(10, 90, 181, 21))
-        self.efficient_radio.setObjectName("efficient_radio")
         self.extract_btn = QtWidgets.QPushButton(self.extract_frame)
         self.extract_btn.setGeometry(QtCore.QRect(550, 240, 121, 41))
         self.extract_btn.setObjectName("extract_btn")
         self.submit_btn = QtWidgets.QPushButton(self.extract_frame)
         self.submit_btn.setGeometry(QtCore.QRect(250, 270, 61, 23))
         self.submit_btn.setObjectName("submit_btn")
+        self.comprehensive_radio = QtWidgets.QRadioButton(self.extract_frame)
+        self.comprehensive_radio.setGeometry(QtCore.QRect(340, 80, 211, 21))
+        self.comprehensive_radio.setObjectName("comprehensive_radio")
+        self.minimal_radio = QtWidgets.QRadioButton(self.extract_frame)
+        self.minimal_radio.setGeometry(QtCore.QRect(340, 110, 181, 21))
+        self.minimal_radio.setObjectName("minimal_radio")
+        self.efficient_radio = QtWidgets.QRadioButton(self.extract_frame)
+        self.efficient_radio.setGeometry(QtCore.QRect(340, 140, 181, 21))
+        self.efficient_radio.setObjectName("efficient_radio")
         self.roll_frame = QtWidgets.QFrame(self.page_8)
         self.roll_frame.setGeometry(QtCore.QRect(40, 20, 751, 201))
         self.roll_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -986,10 +984,10 @@ class Ui_MainWindow(QObject):
         self.max_timeshift_box.valueChanged['QString'].connect(self.max_shift_slot)
         self.submit_btn.clicked.connect(self.submit_slot)
         self.sort_box.activated['QString'].connect(self.sort_col_slot)
-        self.minimal_radio.toggled['bool'].connect(self.minimal_slot)
-        self.comprehensive_radio.toggled['bool'].connect(self.comprehensive_slot)
-        self.efficient_radio.toggled['bool'].connect(self.efficient_slot)
         self.custom_radio.toggled['bool'].connect(self.custom_slot)
+        self.efficient_radio.toggled['bool'].connect(self.efficient_slot)
+        self.comprehensive_radio.toggled['bool'].connect(self.comprehensive_slot)
+        self.minimal_radio.toggled['bool'].connect(self.minimal_slot)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
  #! extra: 
         self.stackedWidget.setCurrentIndex(0) # Na ksekinaei apo 1h othoni
@@ -998,9 +996,9 @@ class Ui_MainWindow(QObject):
         self.load_DB_btn.setEnabled(False)
         self.showen_btn.setEnabled(False)
         self.predict_btn.setEnabled(False)
-        self.extract_btn.setEnabled(False)
         self.text_settings.setReadOnly(True)
         self.result_text.setReadOnly(True)
+        self.extract_frame.setEnabled(False)
         
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -1086,12 +1084,11 @@ class Ui_MainWindow(QObject):
         self.next_btn_7.setText(_translate("MainWindow", "Next"))
         self.label_31.setText(_translate("MainWindow", "EXTRACT FEATURES"))
         self.custom_radio.setText(_translate("MainWindow", "Custom Settings (Advanced)"))
-        self.groupBox_2.setTitle(_translate("MainWindow", "Presets"))
+        self.extract_btn.setText(_translate("MainWindow", "Extract Features"))
+        self.submit_btn.setText(_translate("MainWindow", "Submit"))
         self.comprehensive_radio.setText(_translate("MainWindow", "Comprehensive FC Parameters"))
         self.minimal_radio.setText(_translate("MainWindow", "Minimal FC Parameters"))
         self.efficient_radio.setText(_translate("MainWindow", "Efficient FC Parameters"))
-        self.extract_btn.setText(_translate("MainWindow", "Extract Features"))
-        self.submit_btn.setText(_translate("MainWindow", "Submit"))
         self.label1234.setText(_translate("MainWindow", "ROLL TIME SERIES"))
         self.roll_btn.setText(_translate("MainWindow", "Roll Time Series"))
         self.label_17.setText(_translate("MainWindow", "Sort by"))

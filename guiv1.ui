@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>7</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="page_6">
      <widget class="QLabel" name="label_19">
@@ -1349,7 +1349,7 @@
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1366,21 +1366,6 @@
         <string>Regression Models</string>
        </attribute>
        <widget class="QTableWidget" name="regression_table">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>431</width>
-          <height>421</height>
-         </rect>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_3">
-       <attribute name="title">
-        <string>Time Series Models</string>
-       </attribute>
-       <widget class="QTableWidget" name="ts_table">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -1598,7 +1583,7 @@
        <item>
         <widget class="QPushButton" name="next_btn_7">
          <property name="text">
-          <string>Next</string>
+          <string>Auto - ML</string>
          </property>
         </widget>
        </item>
@@ -1669,7 +1654,7 @@
        <property name="geometry">
         <rect>
          <x>550</x>
-         <y>240</y>
+         <y>230</y>
          <width>121</width>
          <height>41</height>
         </rect>
@@ -2959,22 +2944,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_7</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>fetch_model()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>739</x>
-     <y>135</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>874</x>
-     <y>82</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>next_btn_7</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
@@ -3029,8 +2998,8 @@
    <slot>extract_slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>472</x>
-     <y>571</y>
+     <x>640</x>
+     <y>550</y>
     </hint>
     <hint type="destinationlabel">
      <x>887</x>
@@ -3230,6 +3199,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_9</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>show_more_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>602</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>718</x>
+     <y>652</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fetch_model_2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>782</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>895</x>
+     <y>133</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>browseSlot()</slot>
@@ -3304,5 +3305,7 @@
   <slot>minimal_slot()</slot>
   <slot>efficient_slot()</slot>
   <slot>custom_slot()</slot>
+  <slot>show_more_slot()</slot>
+  <slot>fetch_model_2()</slot>
  </slots>
 </ui>

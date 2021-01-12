@@ -909,11 +909,11 @@ class MainWindowUIClass(Ui_MainWindow):
         print ( X )
 
     def next_slot_7(self):
-        global y, preview_num, X
+        global y, preview_num, X, learning_type
         global fc_settings
         fc_settings = None
+        learning_type = "Classification"
         self.stackedWidget.setCurrentIndex(8)
-
         self.target_preview.setRowCount(preview_num)
         self.target_preview.setColumnCount(1)
 
@@ -929,7 +929,6 @@ class MainWindowUIClass(Ui_MainWindow):
             for j in range(self.functions.colCount(X)):
                 self.features_preview.setItem(
                     i, j, QTableWidgetItem(f"{ X.iloc[i][j] }"))
-
         print("next-slot-7")
 
     def back_slot_7(self):
@@ -939,7 +938,6 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def next_slot_8(self):
         global learning_type
-        learning_type = "Regression"
         self.stackedWidget.setCurrentIndex(4)
         print("next-slot-8")
 

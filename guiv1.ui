@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>889</width>
+    <width>898</width>
     <height>685</height>
    </rect>
   </property>
@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="page_6">
      <widget class="QLabel" name="label_19">
@@ -863,7 +863,7 @@
        <rect>
         <x>80</x>
         <y>0</y>
-        <width>591</width>
+        <width>631</width>
         <height>91</height>
        </rect>
       </property>
@@ -2080,8 +2080,8 @@
    <slot>importSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>276</x>
-     <y>215</y>
+     <x>614</x>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
      <x>217</x>
@@ -2144,8 +2144,8 @@
    <slot>cancelSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>190</x>
-     <y>215</y>
+     <x>501</x>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
      <x>30</x>
@@ -2948,7 +2948,7 @@
      <y>622</y>
     </hint>
     <hint type="destinationlabel">
-     <x>888</x>
+     <x>883</x>
      <y>561</y>
     </hint>
    </hints>
@@ -2964,7 +2964,7 @@
      <y>625</y>
     </hint>
     <hint type="destinationlabel">
-     <x>901</x>
+     <x>883</x>
      <y>521</y>
     </hint>
    </hints>
@@ -2996,7 +2996,7 @@
      <y>550</y>
     </hint>
     <hint type="destinationlabel">
-     <x>887</x>
+     <x>883</x>
      <y>404</y>
     </hint>
    </hints>
@@ -3012,8 +3012,8 @@
      <y>601</y>
     </hint>
     <hint type="destinationlabel">
-     <x>894</x>
-     <y>490</y>
+     <x>767</x>
+     <y>390</y>
     </hint>
    </hints>
   </connection>
@@ -3028,8 +3028,8 @@
      <y>602</y>
     </hint>
     <hint type="destinationlabel">
-     <x>900</x>
-     <y>331</y>
+     <x>759</x>
+     <y>314</y>
     </hint>
    </hints>
   </connection>
@@ -3172,7 +3172,7 @@
      <y>397</y>
     </hint>
     <hint type="destinationlabel">
-     <x>919</x>
+     <x>883</x>
      <y>349</y>
     </hint>
    </hints>
@@ -3188,7 +3188,7 @@
      <y>433</y>
     </hint>
     <hint type="destinationlabel">
-     <x>905</x>
+     <x>883</x>
      <y>463</y>
     </hint>
    </hints>

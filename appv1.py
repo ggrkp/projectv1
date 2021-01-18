@@ -182,7 +182,7 @@ class MainWindowUIClass(Ui_MainWindow):
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
         global learning_type , X , y
-        self.comboBox.setStyleSheet("selection-background-color: #70B900;")
+        # self.comboBox.setStyleSheet("selection-background-color: #70B900;")
 
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
@@ -203,7 +203,7 @@ class MainWindowUIClass(Ui_MainWindow):
         for i in range(preview_num):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.item(i, j).setBackground(
-                    QtGui.QColor('#1A1A1A'))
+                    QtGui.QColor('#fff'))
             self.tableWidget.item(i, item_index).setBackground(
                 QtGui.QColor('#70B900'))
 
@@ -988,7 +988,7 @@ class MainWindowUIClass(Ui_MainWindow):
 def main():
     app = QtWidgets.QApplication(sys.argv)
     # app.setStyle('Fusion')
-    app.setStyleSheet(qdarkgraystyle.load_stylesheet())
+    # app.setStyleSheet(qdarkgraystyle.load_stylesheet())
     app.setFont(QFont('Consolas', 10))
 
     ex = MainWindowUIClass()

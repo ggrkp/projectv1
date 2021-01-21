@@ -252,7 +252,7 @@ class MainWindowUIClass(Ui_MainWindow):
                 "f1_micro": autosklearn.metrics.f1_micro, 
                 "f1_samples": autosklearn.metrics.f1_samples, 
                 "f1_weighted": autosklearn.metrics.f1_weighted, 
-                "mean_absolute_error",
+                "mean_absolute_error": autosklearn.metrics.max_absolute_error,
                 "mean_squared_error": autosklearn.metrics.mean_squared_error,
                 "root_mean_squared_error": autosklearn.metrics.root_mean_squared_error,
                 "mean_squared_log_error": autosklearn.metrics.mean_squared_log_error,

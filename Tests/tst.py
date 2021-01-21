@@ -4,7 +4,6 @@ import sklearn.model_selection
 import sklearn.datasets
 import sklearn.metrics
 from sklearn.model_selection import train_test_split
-import sklearn.metrics
 import autosklearn.classification
 from autosklearn.classification import AutoSklearnClassifier
 import pickle

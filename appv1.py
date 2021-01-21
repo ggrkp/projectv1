@@ -8,6 +8,7 @@ import sys
 from io import StringIO
 import qdarkgraystyle
 import qdarkstyle
+import autosklearn
 
 import pandas as pd
 import sklearn
@@ -181,17 +182,17 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
-        global learning_type , X , y
+        global learning_type, X, y
         # self.comboBox.setStyleSheet("selection-background-color: #70B900;")
 
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
-        #todo: otan kanw pick target gia time series tha exei diaforetikh diadikasia giati tha ginetai pandas.Series h sthlh
+        # todo: otan kanw pick target gia time series tha exei diaforetikh diadikasia giati tha ginetai pandas.Series h sthlh
         y = self.functions.pickTarget(item_index, data)
         if learning_type == "Timeseries":
             y = pd.Series(y)
             print(type(y))
-            print(y)    
+            print(y)
             X = copy.deepcopy(data)
             X.insert(0, 'id', 0)
             print(X)
@@ -216,7 +217,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def nextSlot_1(self):  # Next pou pigainei stis parametrous tou modeling
         # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
-        global X,data,y, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable, test_sz
+        global metric_dict, X, data, y, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_disable, test_sz
 
         if learning_type == "Classification":
             self.stackedWidget.setCurrentIndex(4)
@@ -230,9 +231,37 @@ class MainWindowUIClass(Ui_MainWindow):
                            "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
                            "recall", "recall_macro", "recall_micro", "recall_samples", "recall_weighted",
                            "f1", "f1_macro", "f1_micro", "f1_samples", "f1_weighted"]
+            metric_dict = {
+                "accuracy": autosklearn.metrics.accuracy, 
+                "balanced_accuracy": autosklearn.metrics.balanced_accuracy, 
+                "roc_auc": autosklearn.metrics.roc_auc, 
+                "average_precision": autosklearn.metrics.average_precision, 
+                "log_loss": autosklearn.metrics.log_loss,
+                "precision": autosklearn.metrics.precision, 
+                "precision_macro": autosklearn.metrics.precision_macro, 
+                "precision_micro": autosklearn.metrics.precision_micro, 
+                "precision_samples": autosklearn.metrics.precision_samples, 
+                "precision_weighted": autosklearn.metrics.precision_weighted,
+                "recall": autosklearn.metrics.recall, 
+                "recall_macro": autosklearn.metrics.recall_macro, 
+                "recall_micro": autosklearn.metrics.recall_micro, 
+                "recall_samples": autosklearn.metrics.recall_samples, 
+                "recall_weighted": autosklearn.metrics.recall_weighted,
+                "f1": autosklearn.metrics.f1, 
+                "f1_macro": autosklearn.metrics.f1_macro, 
+                "f1_micro": autosklearn.metrics.f1_micro, 
+                "f1_samples": autosklearn.metrics.f1_samples, 
+                "f1_weighted": autosklearn.metrics.f1_weighted, 
+                "mean_absolute_error",
+                "mean_squared_error": autosklearn.metrics.mean_squared_error,
+                "root_mean_squared_error": autosklearn.metrics.root_mean_squared_error,
+                "mean_squared_log_error": autosklearn.metrics.mean_squared_log_error,
+                "median_absolute_error": autosklearn.metrics.median_absolute_error,
+                "r2": autosklearn.metrics.r2
+            }
 
             self.metricCombo.addItems(metric_list)
-            metric = None
+            metric_var = None
             self.ardBox.hide()
             self.linearsvr_Box.hide()
             self.libsvrBox.hide()
@@ -327,7 +356,7 @@ class MainWindowUIClass(Ui_MainWindow):
                            "r2"]
 
             self.metricCombo.addItems(metric_list)
-            metric = None
+            metric_var = None
             inc_est = ["adaboost",
                        "ard_regression",
                        "decision_tree",
@@ -370,13 +399,10 @@ class MainWindowUIClass(Ui_MainWindow):
             self.test_sz_box.setMinimum(0.1)
             self.test_sz_box.setMaximum(0.9)
 
-        else: #If learning_type == "Timeseries"
+        else:  # If learning_type == "Timeseries"
             self.stackedWidget.setCurrentIndex(7)
             for col in X.columns:
                 self.sort_box.addItem(col)
-            
-       
-
 
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -384,6 +410,7 @@ class MainWindowUIClass(Ui_MainWindow):
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # ! 3. PARAMETER TUNING SCREEN
 # TEST SPLIT SPINBOX
+
     def test_sz_Slot(self):
         global test_sz
         self.test_sz_box.setSingleStep(0.01)
@@ -408,9 +435,12 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # METRIC SELECTION DROPDOWN
     def metricBox(self):
-        global metric
+        global metric_var, metric_dict
         combo_idx_metric = self.metricCombo.currentIndex()
-        metric = self.metricCombo.itemText(combo_idx_metric)
+        metric_text = self.metricCombo.itemText(combo_idx_metric)
+        metric_var = metric_dict[f"{metric_text}"]
+        # metric_var = autosklearn.metrics.log_loss
+        # print("metric_var is : ", metric_var)
 
 # RESAMPLING STRATEGY DROPDOWN
     def resampleBox(self):
@@ -457,7 +487,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def nextSlot_2(self):
         print(f"Included:   {inc_est}")
-        print("Metric:", metric)
+        print("Metric:", metric_var)
         print("Resampling_Technique:", resample)
         print("Args:", resample_args)
         print(t_left)
@@ -739,10 +769,10 @@ class MainWindowUIClass(Ui_MainWindow):
                 #! Check learning problem Type:
                 if learning_type == "Classification":  # classifier call
                     model = self.functions.callClassifier(
-                        t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
+                        t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_disable)
                 elif learning_type == "Regression":  # regressor call
                     model = self.functions.callRegressor(
-                        t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_disable)
+                        t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_disable)
 
                 #! Model Fit:
                 model = self.functions.fitModel(
@@ -765,7 +795,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
                 elif learning_type == "Classification":
                     print("Accuracy score",
-                    sklearn.metrics.accuracy_score(y_test, pred))
+                          sklearn.metrics.accuracy_score(y_test, pred))
                     self.result_text.setText(
                         f"Accuracy: {sklearn.metrics.accuracy_score(y_test, pred)}")  # describe
 
@@ -836,7 +866,6 @@ class MainWindowUIClass(Ui_MainWindow):
             # show loaded model statistics
             text_edit.setText(ft_model.sprint_statistics())
 
-
     # def fetch_model(self):
     #     global ft_model
     #     currow = self.dbTable.currentRow()
@@ -887,26 +916,23 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     # ! 5. MODEL HISTORY SCREEN
-    
-    
-    # ! 6. TIME SERIES MDOE SCREEN 
 
+    # ! 6. TIME SERIES MDOE SCREEN
 
     def roll_slot(self):
         global X, X_rld, sort_by
         X_rld = roll_time_series(
-        X, column_id="id", column_sort=f'{sort_by}', min_timeshift=0, rolling_direction=1)
+            X, column_id="id", column_sort=f'{sort_by}', min_timeshift=0, rolling_direction=1)
         self.extract_frame.setEnabled(True)
 
-
     def extract_slot(self):
-        global X, X_rld,y,sort_by, fc_settings
+        global X, X_rld, y, sort_by, fc_settings
         X = extract_features(
-        X_rld, column_id='id', column_sort=f'{sort_by}', default_fc_parameters=fc_settings)
+            X_rld, column_id='id', column_sort=f'{sort_by}', default_fc_parameters=fc_settings)
         X.reset_index(drop=True, inplace=True)
         impute(X)
-        X = select_features(X,y,show_warnings=False)
-        print ( X )
+        X = select_features(X, y, show_warnings=False)
+        print(X)
 
     def next_slot_7(self):
         global y, preview_num, X, learning_type
@@ -918,8 +944,8 @@ class MainWindowUIClass(Ui_MainWindow):
         self.target_preview.setColumnCount(1)
 
         for i in range(preview_num):
-                self.target_preview.setItem(
-                    i, 0 , QTableWidgetItem(f"{ y.iloc[i]}"))
+            self.target_preview.setItem(
+                i, 0, QTableWidgetItem(f"{ y.iloc[i]}"))
 
         # dimiourgia table me ta dedomena tou dataset gia preview
         self.features_preview.setRowCount(preview_num)  # set row Count
@@ -952,38 +978,39 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def min_shift_slot(self):
         pass
-    
+
     def max_shift_slot(self):
         pass
 
     def submit_slot(self):
         global fc_settings
         fc_settings = ast.literal_eval(self.text_settings.toPlainText())
-        print (fc_settings)
+        print(fc_settings)
 
     def comprehensive_slot(self):
         global fc_settings
         if self.comprehensive_radio.isChecked():
             fc_settings = ComprehensiveFCParameters()
-            print (fc_settings)
+            print(fc_settings)
 
     def minimal_slot(self):
         global fc_settings
         if self.minimal_radio.isChecked():
             fc_settings = MinimalFCParameters()
-            print (fc_settings)
+            print(fc_settings)
 
     def efficient_slot(self):
         global fc_settings
         if self.minimal_radio.isChecked():
             fc_settings = EfficientFCParameters()
-            print (fc_settings)
+            print(fc_settings)
 
     def custom_slot(self):
         if self.custom_radio.isChecked():
             self.text_settings.setReadOnly(False)
         else:
             self.text_settings.setReadOnly(True)
+
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

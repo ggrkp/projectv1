@@ -5,6 +5,9 @@ import sys
 import sqlite3
 import pandas as pd
 import sklearn
+import autosklearn
+import autosklearn.metrics as mtc
+
 from autosklearn.classification import AutoSklearnClassifier
 from autosklearn.regression import AutoSklearnRegressor
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -72,7 +75,7 @@ class Func:
     def splitData(self, pred, target, test_sz):
         return train_test_split(pred, target, test_size=test_sz, random_state=1)
 
-    def callClassifier(self, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_dis):
+    def callClassifier(self, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_dis):
         automl = AutoSklearnClassifier(
             initial_configurations_via_metalearning=meta_dis,
 
@@ -96,12 +99,12 @@ class Func:
             resampling_strategy_arguments=resample_args,
 
             # EPILOGI METRIKWN
-            metric=metric
+            metric=metric_var
         )
         return automl
 #! call regressor
 
-    def callRegressor(self, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric, ens_size, meta_dis):
+    def callRegressor(self, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_dis):
         automl = AutoSklearnRegressor(
 
             initial_configurations_via_metalearning=meta_dis,
@@ -126,7 +129,7 @@ class Func:
             resampling_strategy_arguments=resample_args,
 
             # EPILOGI METRIKWN
-            metric=metric
+            metric=metric_var
 
 
         )

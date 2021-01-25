@@ -793,7 +793,10 @@ class MainWindowUIClass(Ui_MainWindow):
                         f"Accuracy: {sklearn.metrics.accuracy_score(y_test, pred)}")  # describe
 
                 if self.savemodel_Box.isChecked():
-                    self.functions.store_model(model, "model", learning_type)
+                    model_name = self.model_text.toPlainText()
+                    if model_name == "":
+                        model_name = "unnamed_model"
+                    self.functions.store_model(model, model_name, learning_type)
         except:  # lathos learning type h lathos target variable
             print("An error has occured!")
             self.comboBox.clear()
@@ -925,7 +928,18 @@ class MainWindowUIClass(Ui_MainWindow):
         X.reset_index(drop=True, inplace=True)
         impute(X)
         X = select_features(X, y, show_warnings=False)
-        print(X)
+        if X.empty:
+            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+            popup = QtWidgets.QMessageBox()
+            popup.setWindowTitle(" Warning ")
+            popup.setText("Zero features were extracted. Change your preferences.")
+            popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
+            popup.setIcon(QtWidgets.QMessageBox.Warning)
+            popup.setDefaultButton(QtWidgets.QMessageBox.Retry)
+            popup.exec()
+        else:
+            self.next_btn_7.setEnabled(True)
+        print(X)    
 
     def next_slot_7(self):
         global y, preview_num, X, learning_type

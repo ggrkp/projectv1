@@ -171,6 +171,9 @@ class MainWindowUIClass(Ui_MainWindow):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.setItem(
                     i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
+        header_labels = list(data.columns.values)
+        self.tableWidget.setHorizontalHeaderLabels(header_labels)
+
         self.comboBox.adjustSize()
         if learning_type == 'Timeseries':
             self.load_DB_btn.hide()
@@ -189,8 +192,10 @@ class MainWindowUIClass(Ui_MainWindow):
         print(f"Ok. Column {item_index} is your Target Feature! ")
         # todo: otan kanw pick target gia time series tha exei diaforetikh diadikasia giati tha ginetai pandas.Series h sthlh
         y = self.functions.pickTarget(item_index, data)
+
         if learning_type == "Timeseries":
-            y = pd.Series(y)
+            y = pd.Series(
+                y, name=f"{self.functions.getLabel(item_index, data)}")
             print(type(y))
             print(y)
             X = copy.deepcopy(data)
@@ -217,8 +222,37 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def nextSlot_1(self):  # Next pou pigainei stis parametrous tou modeling
         # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
-        global metric_dict, X, data, y, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_disable, test_sz
+        global metric_dict, X, data, y, t_left, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_disable, test_sz
 
+
+        metric_dict = {
+                "accuracy": autosklearn.metrics.accuracy,
+                "balanced_accuracy": autosklearn.metrics.balanced_accuracy,
+                "roc_auc": autosklearn.metrics.roc_auc,
+                "average_precision": autosklearn.metrics.average_precision,
+                "log_loss": autosklearn.metrics.log_loss,
+                "precision": autosklearn.metrics.precision,
+                "precision_macro": autosklearn.metrics.precision_macro,
+                "precision_micro": autosklearn.metrics.precision_micro,
+                "precision_samples": autosklearn.metrics.precision_samples,
+                "precision_weighted": autosklearn.metrics.precision_weighted,
+                "recall": autosklearn.metrics.recall,
+                "recall_macro": autosklearn.metrics.recall_macro,
+                "recall_micro": autosklearn.metrics.recall_micro,
+                "recall_samples": autosklearn.metrics.recall_samples,
+                "recall_weighted": autosklearn.metrics.recall_weighted,
+                "f1": autosklearn.metrics.f1,
+                "f1_macro": autosklearn.metrics.f1_macro,
+                "f1_micro": autosklearn.metrics.f1_micro,
+                "f1_samples": autosklearn.metrics.f1_samples,
+                "f1_weighted": autosklearn.metrics.f1_weighted,
+                "mean_absolute_error": autosklearn.metrics.mean_absolute_error,
+                "mean_squared_error": autosklearn.metrics.mean_squared_error,
+                "root_mean_squared_error": autosklearn.metrics.root_mean_squared_error,
+                "mean_squared_log_error": autosklearn.metrics.mean_squared_log_error,
+                "median_absolute_error": autosklearn.metrics.median_absolute_error,
+                "r2": autosklearn.metrics.r2
+            }
         if learning_type == "Classification":
             self.stackedWidget.setCurrentIndex(4)
 
@@ -231,34 +265,6 @@ class MainWindowUIClass(Ui_MainWindow):
                            "precision", "precision_macro", "precision_micro", "precision_samples", "precision_weighted",
                            "recall", "recall_macro", "recall_micro", "recall_samples", "recall_weighted",
                            "f1", "f1_macro", "f1_micro", "f1_samples", "f1_weighted"]
-            metric_dict = {
-                "accuracy": autosklearn.metrics.accuracy, 
-                "balanced_accuracy": autosklearn.metrics.balanced_accuracy, 
-                "roc_auc": autosklearn.metrics.roc_auc, 
-                "average_precision": autosklearn.metrics.average_precision, 
-                "log_loss": autosklearn.metrics.log_loss,
-                "precision": autosklearn.metrics.precision, 
-                "precision_macro": autosklearn.metrics.precision_macro, 
-                "precision_micro": autosklearn.metrics.precision_micro, 
-                "precision_samples": autosklearn.metrics.precision_samples, 
-                "precision_weighted": autosklearn.metrics.precision_weighted,
-                "recall": autosklearn.metrics.recall, 
-                "recall_macro": autosklearn.metrics.recall_macro, 
-                "recall_micro": autosklearn.metrics.recall_micro, 
-                "recall_samples": autosklearn.metrics.recall_samples, 
-                "recall_weighted": autosklearn.metrics.recall_weighted,
-                "f1": autosklearn.metrics.f1, 
-                "f1_macro": autosklearn.metrics.f1_macro, 
-                "f1_micro": autosklearn.metrics.f1_micro, 
-                "f1_samples": autosklearn.metrics.f1_samples, 
-                "f1_weighted": autosklearn.metrics.f1_weighted, 
-                "mean_absolute_error": autosklearn.metrics.max_absolute_error,
-                "mean_squared_error": autosklearn.metrics.mean_squared_error,
-                "root_mean_squared_error": autosklearn.metrics.root_mean_squared_error,
-                "mean_squared_log_error": autosklearn.metrics.mean_squared_log_error,
-                "median_absolute_error": autosklearn.metrics.median_absolute_error,
-                "r2": autosklearn.metrics.r2
-            }
 
             self.metricCombo.addItems(metric_list)
             metric_var = None
@@ -299,9 +305,6 @@ class MainWindowUIClass(Ui_MainWindow):
 
             self.timeLeft_box.setMinimum(30)
             self.timeLeft_box.setMaximum(30000)
-
-            self.perRun_box.setMinimum(3)
-            self.perRun_box.setMaximum(int(t_left/2))  # ! na allaksei!
 
             meminfo = dict((i.split()[0].rstrip(':'), int(i.split()[1])) for i in open(
                 '/proc/meminfo').readlines())  # analoga me ta specs tou pc
@@ -375,9 +378,6 @@ class MainWindowUIClass(Ui_MainWindow):
             self.timeLeft_box.setMinimum(30)
             self.timeLeft_box.setMaximum(30000)
 
-            self.perRun_box.setMinimum(3)
-            self.perRun_box.setMaximum(int(t_left/2))  # ! na allaksei!
-
             meminfo = dict((i.split()[0].rstrip(':'), int(i.split()[1])) for i in open(
                 '/proc/meminfo').readlines())  # analoga me ta specs tou pc
             mem_Mb = int(meminfo['MemTotal']/1024)
@@ -420,13 +420,6 @@ class MainWindowUIClass(Ui_MainWindow):
     def timeleft_Slot(self):
         global t_left
         t_left = self.timeLeft_box.value()
-        self.perRun_box.setMaximum(int(t_left/10))
-
-# PER RUN TIME LIMIT SPINBOX
-    def perrun_Slot(self):
-        global t_per_run
-        t_per_run = self.perRun_box.value()
-        print(t_per_run)
 
 # ENSEMBLE MEMORY LIMIT SPINBOX
     def ensmemory_Slot(self):
@@ -769,10 +762,10 @@ class MainWindowUIClass(Ui_MainWindow):
                 #! Check learning problem Type:
                 if learning_type == "Classification":  # classifier call
                     model = self.functions.callClassifier(
-                        t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_disable)
+                        t_left, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_disable)
                 elif learning_type == "Regression":  # regressor call
                     model = self.functions.callRegressor(
-                        t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_disable)
+                        t_left, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_disable)
 
                 #! Model Fit:
                 model = self.functions.fitModel(
@@ -937,6 +930,8 @@ class MainWindowUIClass(Ui_MainWindow):
     def next_slot_7(self):
         global y, preview_num, X, learning_type
         global fc_settings
+        header_labels_X = list(X.columns.values)        
+        header_labels_y = list([f"{y.name}"])
         fc_settings = None
         learning_type = "Classification"
         self.stackedWidget.setCurrentIndex(8)
@@ -955,6 +950,10 @@ class MainWindowUIClass(Ui_MainWindow):
             for j in range(self.functions.colCount(X)):
                 self.features_preview.setItem(
                     i, j, QTableWidgetItem(f"{ X.iloc[i][j] }"))
+        self.features_preview.setHorizontalHeaderLabels(header_labels_X)
+        self.target_preview.setHorizontalHeaderLabels(header_labels_y)
+
+
         print("next-slot-7")
 
     def back_slot_7(self):

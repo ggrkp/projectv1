@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="page_6">
      <widget class="QLabel" name="label_19">
@@ -2045,7 +2045,6 @@
    <sender>perRun_box</sender>
    <signal>valueChanged(QString)</signal>
    <receiver>MainWindow</receiver>
-   <slot>perrun_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>678</x>
@@ -3254,7 +3253,6 @@
   <slot>nextSlot_1()</slot>
   <slot>modelSlot()</slot>
   <slot>timeleft_Slot()</slot>
-  <slot>perrun_Slot()</slot>
   <slot>ensmemory_Slot()</slot>
   <slot>backSlot_1()</slot>
   <slot>nextSlot_2()</slot>

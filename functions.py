@@ -55,6 +55,10 @@ class Func:
         # target = pd.Series(df.iloc[:, tar_idx].values)
         return target
 
+    def getLabel(self, tar_idx, df):
+        label = df.columns[tar_idx]
+        return label
+
     def pickPredictors(self, tar_idx, df):
         # Predictor Variables (All except the Target one.)
         predictors = df.iloc[:, df.columns != df.columns[tar_idx]]
@@ -75,7 +79,7 @@ class Func:
     def splitData(self, pred, target, test_sz):
         return train_test_split(pred, target, test_size=test_sz, random_state=1)
 
-    def callClassifier(self, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_dis):
+    def callClassifier(self, t_left, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_dis):
         automl = AutoSklearnClassifier(
             initial_configurations_via_metalearning=meta_dis,
 
@@ -84,7 +88,6 @@ class Func:
             delete_tmp_folder_after_terminate=False,
             # TIME RESTRICTION
             time_left_for_this_task=t_left,
-            per_run_time_limit=t_per_run,
 
             # MEMORY RESTRICTION
             ensemble_size=ens_size,
@@ -104,7 +107,7 @@ class Func:
         return automl
 #! call regressor
 
-    def callRegressor(self, t_left, t_per_run, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_dis):
+    def callRegressor(self, t_left, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_dis):
         automl = AutoSklearnRegressor(
 
             initial_configurations_via_metalearning=meta_dis,
@@ -114,7 +117,6 @@ class Func:
 
             # TIME RESTRICTION
             time_left_for_this_task=t_left,
-            per_run_time_limit=t_per_run,
 
             # MEMORY RESTRICTION
             ensemble_size=ens_size,

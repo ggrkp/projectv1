@@ -1,5 +1,7 @@
 # Edw tha uparxei to file pou tha ginei load kai ta periexomena tou
 # ola tha emfanizontai sto GUI (logika)
+# yolo1
+
 import csv
 import sys
 import sqlite3
@@ -50,9 +52,7 @@ class Func:
         return df
 
     def pickTarget(self, tar_idx, df):
-        target = df.iloc[:, (tar_idx)].to_numpy() 
-        #todo: sthn periptwsh pou einai Timeseries
-        # target = pd.Series(df.iloc[:, tar_idx].values)
+        target = df.iloc[:, (tar_idx)]
         return target
 
     def getLabel(self, tar_idx, df):

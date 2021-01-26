@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_6">
      <widget class="QLabel" name="label_19">
@@ -687,7 +687,7 @@
      <widget class="QLabel" name="label_15">
       <property name="geometry">
        <rect>
-        <x>370</x>
+        <x>330</x>
         <y>90</y>
         <width>211</width>
         <height>21</height>
@@ -921,8 +921,8 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>320</y>
+        <x>330</x>
+        <y>270</y>
         <width>321</width>
         <height>61</height>
        </rect>
@@ -987,8 +987,8 @@
      <widget class="QLabel" name="label_16">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>300</y>
+        <x>330</x>
+        <y>250</y>
         <width>261</width>
         <height>21</height>
        </rect>
@@ -1007,8 +1007,8 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>450</y>
+        <x>330</x>
+        <y>430</y>
         <width>210</width>
         <height>77</height>
        </rect>
@@ -1040,61 +1040,8 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>120</y>
-        <width>321</width>
-        <height>58</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_6">
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>Time left for this task</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_7">
-           <property name="text">
-            <string>Per run time limit</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>118</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
-         <item>
-          <widget class="QSpinBox" name="timeLeft_box"/>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="perRun_box"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>320</x>
-        <y>200</y>
+        <x>330</x>
+        <y>140</y>
         <width>321</width>
         <height>26</height>
        </rect>
@@ -1128,8 +1075,8 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>230</y>
+        <x>330</x>
+        <y>170</y>
         <width>321</width>
         <height>25</height>
        </rect>
@@ -1154,8 +1101,8 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>260</y>
+        <x>330</x>
+        <y>200</y>
         <width>321</width>
         <height>25</height>
        </rect>
@@ -1180,8 +1127,8 @@
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>430</y>
+        <x>330</x>
+        <y>410</y>
         <width>181</width>
         <height>16</height>
        </rect>
@@ -1200,8 +1147,8 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>390</y>
+        <x>330</x>
+        <y>360</y>
         <width>321</width>
         <height>25</height>
        </rect>
@@ -1235,8 +1182,8 @@
      <widget class="QCheckBox" name="savemodel_Box">
       <property name="geometry">
        <rect>
-        <x>580</x>
-        <y>440</y>
+        <x>690</x>
+        <y>420</y>
         <width>129</width>
         <height>25</height>
        </rect>
@@ -1255,8 +1202,8 @@
      <widget class="QPushButton" name="run_Button">
       <property name="geometry">
        <rect>
-        <x>580</x>
-        <y>500</y>
+        <x>690</x>
+        <y>480</y>
         <width>121</width>
         <height>61</height>
        </rect>
@@ -1278,7 +1225,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>play_btn.png</normaloff>play_btn.png</iconset>
+        <normaloff>../../.designer/backup/play_btn.png</normaloff>../../.designer/backup/play_btn.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1304,7 +1251,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>home_icon.png</normaloff>home_icon.png</iconset>
+        <normaloff>../../.designer/backup/home_icon.png</normaloff>../../.designer/backup/home_icon.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1316,9 +1263,9 @@
      <widget class="QPushButton" name="hist_btn">
       <property name="geometry">
        <rect>
-        <x>660</x>
-        <y>590</y>
-        <width>171</width>
+        <x>680</x>
+        <y>30</y>
+        <width>141</width>
         <height>31</height>
        </rect>
       </property>
@@ -1332,9 +1279,9 @@
      <widget class="QTextEdit" name="result_text">
       <property name="geometry">
        <rect>
-        <x>360</x>
-        <y>590</y>
-        <width>291</width>
+        <x>580</x>
+        <y>550</y>
+        <width>231</width>
         <height>31</height>
        </rect>
       </property>
@@ -1342,8 +1289,8 @@
      <widget class="QTextEdit" name="model_text">
       <property name="geometry">
        <rect>
-        <x>660</x>
-        <y>470</y>
+        <x>690</x>
+        <y>450</y>
         <width>121</width>
         <height>21</height>
        </rect>
@@ -1352,15 +1299,50 @@
      <widget class="QLabel" name="label_36">
       <property name="geometry">
        <rect>
-        <x>580</x>
-        <y>470</y>
-        <width>81</width>
+        <x>670</x>
+        <y>450</y>
+        <width>21</width>
         <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>Model Name</string>
+       <string>As:</string>
       </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>110</y>
+        <width>311</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Time left for this task</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>118</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="timeLeft_box"/>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="page_4">
@@ -1457,7 +1439,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>home_icon.png</normaloff>home_icon.png</iconset>
+        <normaloff>../../.designer/backup/home_icon.png</normaloff>../../.designer/backup/home_icon.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1536,7 +1518,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>home_icon.png</normaloff>home_icon.png</iconset>
+        <normaloff>../../.designer/backup/home_icon.png</normaloff>../../.designer/backup/home_icon.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -2064,22 +2046,6 @@
  </widget>
  <resources/>
  <connections>
-  <connection>
-   <sender>perRun_box</sender>
-   <signal>valueChanged(QString)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>perrun_Slot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>678</x>
-     <y>183</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>97</x>
-     <y>145</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>nextButton</sender>
    <signal>clicked()</signal>
@@ -3115,8 +3081,8 @@
      <y>182</y>
     </hint>
     <hint type="destinationlabel">
-     <x>33</x>
-     <y>289</y>
+     <x>147</x>
+     <y>227</y>
     </hint>
    </hints>
   </connection>
@@ -3147,8 +3113,8 @@
      <y>114</y>
     </hint>
     <hint type="destinationlabel">
-     <x>14</x>
-     <y>205</y>
+     <x>163</x>
+     <y>16</y>
     </hint>
    </hints>
   </connection>

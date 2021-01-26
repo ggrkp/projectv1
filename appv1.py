@@ -1,4 +1,4 @@
-# yolo
+# yolo1
 import ast
 import copy
 import csv
@@ -154,7 +154,7 @@ class MainWindowUIClass(Ui_MainWindow):
         self.describe_text_edit.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
         self.describe_text_edit.setText(f"{data.describe()}")  # describe
 
-        preview_num = 20
+        preview_num = 10
         self.stackedWidget.setCurrentIndex(2)
         self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
 
@@ -185,19 +185,24 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
-        global learning_type, X, y
+        global learning_type, X, y, y_df, item_index
         # self.comboBox.setStyleSheet("selection-background-color: #70B900;")
 
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
         # todo: otan kanw pick target gia time series tha exei diaforetikh diadikasia giati tha ginetai pandas.Series h sthlh
-        y = self.functions.pickTarget(item_index, data)
+        y = self.functions.pickTarget(item_index, data).to_numpy()
+        y_df = self.functions.pickTarget(item_index, data)
+        print("TYPE YDF:",type(y_df))
+        # y.to_numpy()
+        print("TYPE Y :",type(y))
 
         if learning_type == "Timeseries":
-            y = pd.Series(
-                y, name=f"{self.functions.getLabel(item_index, data)}")
-            print(type(y))
-            print(y)
+            # y = pd.Series(
+            #     y, name=f"{self.functions.getLabel(item_index, data)}")
+
+            # print(type(y))
+            # print(y)
             X = copy.deepcopy(data)
             X.insert(0, 'id', 0)
             print(X)
@@ -788,7 +793,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
                 elif learning_type == "Classification":
                     print("Accuracy score",
-                          sklearn.metrics.accuracy_score(y_test, pred))
+                            sklearn.metrics.accuracy_score(y_test, pred))
                     self.result_text.setText(
                         f"Accuracy: {sklearn.metrics.accuracy_score(y_test, pred)}")  # describe
 
@@ -914,17 +919,25 @@ class MainWindowUIClass(Ui_MainWindow):
     # ! 5. MODEL HISTORY SCREEN
 
     # ! 6. TIME SERIES MDOE SCREEN
+    def min_shift_slot(self):
+        global min_shift
+        min_shift = self.min_timeshift_box.value()
 
     def roll_slot(self):
-        global X, X_rld, sort_by
+        global X, X_rld, sort_by, y_df, y, item_index, min_shift
         X_rld = roll_time_series(
-            X, column_id="id", column_sort=f'{sort_by}', min_timeshift=0, rolling_direction=1)
+            X, column_id="id", column_sort=f'{sort_by}', min_timeshift= int(min_shift), rolling_direction=1)
+        y_df = y_df.iloc[min_shift:].to_numpy()
+        y=pd.Series(y_df, name=f"{self.functions.getLabel(item_index, data)}")
         self.extract_frame.setEnabled(True)
+        print("--------------------------rld---------------------------",X_rld);
+        print("--------------------y-----------------------",y)
 
     def extract_slot(self):
         global X, X_rld, y, sort_by, fc_settings
         X = extract_features(
             X_rld, column_id='id', column_sort=f'{sort_by}', default_fc_parameters=fc_settings)
+        print(X)
         X.reset_index(drop=True, inplace=True)
         impute(X)
         X = select_features(X, y, show_warnings=False)
@@ -988,9 +1001,6 @@ class MainWindowUIClass(Ui_MainWindow):
         global sort_idx, sort_by
         sort_idx = self.sort_box.currentIndex()
         sort_by = self.sort_box.itemText(sort_idx)
-
-    def min_shift_slot(self):
-        pass
 
     def max_shift_slot(self):
         pass

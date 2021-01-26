@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# yolo1
 
 # Form implementation generated from reading ui file 'guiv1.ui'
 #
@@ -17,7 +18,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(QObject):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(889, 685)
+        MainWindow.resize(898, 685)
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         MainWindow.setLayoutDirection(QtCore.Qt.LeftToRight)
         MainWindow.setAutoFillBackground(False)
@@ -35,7 +36,7 @@ class Ui_MainWindow(QObject):
         self.page_6 = QtWidgets.QWidget()
         self.page_6.setObjectName("page_6")
         self.label_19 = QtWidgets.QLabel(self.page_6)
-        self.label_19.setGeometry(QtCore.QRect(170, 70, 461, 91))
+        self.label_19.setGeometry(QtCore.QRect(170, 70, 481, 91))
         font = QtGui.QFont()
         font.setFamily("Serif")
         font.setPointSize(50)
@@ -76,8 +77,7 @@ class Ui_MainWindow(QObject):
         font.setUnderline(False)
         font.setWeight(50)
         self.pushButton_3.setFont(font)
-        self.pushButton_3.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_3.setObjectName("pushButton_3")
         self.get_started_btn = QtWidgets.QPushButton(self.page_6)
         self.get_started_btn.setGeometry(QtCore.QRect(100, 320, 591, 51))
@@ -87,8 +87,7 @@ class Ui_MainWindow(QObject):
         font.setBold(True)
         font.setWeight(75)
         self.get_started_btn.setFont(font)
-        self.get_started_btn.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.get_started_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.get_started_btn.setObjectName("get_started_btn")
         self.history_btn = QtWidgets.QPushButton(self.page_6)
         self.history_btn.setGeometry(QtCore.QRect(100, 380, 591, 51))
@@ -108,7 +107,7 @@ class Ui_MainWindow(QObject):
         self.nextButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.nextButton.setObjectName("nextButton")
         self.label_22 = QtWidgets.QLabel(self.page)
-        self.label_22.setGeometry(QtCore.QRect(100, 0, 571, 91))
+        self.label_22.setGeometry(QtCore.QRect(100, 0, 601, 91))
         font = QtGui.QFont()
         font.setFamily("Serif")
         font.setPointSize(35)
@@ -143,13 +142,11 @@ class Ui_MainWindow(QObject):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.cancelButton = QtWidgets.QPushButton(self.layoutWidget)
-        self.cancelButton.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.cancelButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.cancelButton.setObjectName("cancelButton")
         self.horizontalLayout_2.addWidget(self.cancelButton)
         self.importButton = QtWidgets.QPushButton(self.layoutWidget)
-        self.importButton.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.importButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.importButton.setObjectName("importButton")
         self.horizontalLayout_2.addWidget(self.importButton)
         self.layoutWidget1 = QtWidgets.QWidget(self.frame)
@@ -165,8 +162,7 @@ class Ui_MainWindow(QObject):
         self.pathLine.setObjectName("pathLine")
         self.horizontalLayout.addWidget(self.pathLine)
         self.browseButton = QtWidgets.QPushButton(self.layoutWidget1)
-        self.browseButton.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.browseButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.browseButton.setObjectName("browseButton")
         self.horizontalLayout.addWidget(self.browseButton)
         self.frame_2 = QtWidgets.QFrame(self.page)
@@ -207,7 +203,7 @@ class Ui_MainWindow(QObject):
         self.backButton1.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.backButton1.setObjectName("backButton1")
         self.label_23 = QtWidgets.QLabel(self.page_2)
-        self.label_23.setGeometry(QtCore.QRect(70, 0, 631, 91))
+        self.label_23.setGeometry(QtCore.QRect(70, 0, 661, 91))
         font = QtGui.QFont()
         font.setFamily("Serif")
         font.setPointSize(35)
@@ -264,8 +260,8 @@ class Ui_MainWindow(QObject):
         self.comboBox.setGeometry(QtCore.QRect(350, 80, 79, 23))
         self.comboBox.setMaximumSize(QtCore.QSize(79, 16777215))
         self.comboBox.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboBox.setStyleSheet("selection-background-color: rgb(85, 255, 127);")
         self.comboBox.setObjectName("comboBox")
-        self.comboBox.setStyleSheet("QComboBox { selection-background-color:#333333 ; }");
         self.stackedWidget.addWidget(self.page_2)
         self.page_5 = QtWidgets.QWidget()
         self.page_5.setObjectName("page_5")
@@ -282,7 +278,7 @@ class Ui_MainWindow(QObject):
         self.back_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.back_btn.setObjectName("back_btn")
         self.label_24 = QtWidgets.QLabel(self.page_5)
-        self.label_24.setGeometry(QtCore.QRect(300, 20, 241, 51))
+        self.label_24.setGeometry(QtCore.QRect(300, 20, 281, 51))
         font = QtGui.QFont()
         font.setFamily("Serif")
         font.setPointSize(35)
@@ -301,8 +297,7 @@ class Ui_MainWindow(QObject):
         self.verticalLayout_4 = QtWidgets.QVBoxLayout()
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.pushButton_2 = QtWidgets.QPushButton(self.layoutWidget4)
-        self.pushButton_2.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_2.setObjectName("pushButton_2")
         self.verticalLayout_4.addWidget(self.pushButton_2)
         self.textEdit = QtWidgets.QTextEdit(self.layoutWidget4)
@@ -398,7 +393,7 @@ class Ui_MainWindow(QObject):
         self.libsvrBox.setObjectName("libsvrBox")
         self.gridLayout_2.addWidget(self.libsvrBox, 13, 0, 1, 1)
         self.label_25 = QtWidgets.QLabel(self.page_3)
-        self.label_25.setGeometry(QtCore.QRect(80, 0, 591, 91))
+        self.label_25.setGeometry(QtCore.QRect(80, 0, 631, 91))
         font = QtGui.QFont()
         font.setFamily("Serif")
         font.setPointSize(35)
@@ -430,8 +425,7 @@ class Ui_MainWindow(QObject):
         self.label_12 = QtWidgets.QLabel(self.layoutWidget5)
         self.label_12.setObjectName("label_12")
         self.horizontalLayout_10.addWidget(self.label_12)
-        spacerItem = QtWidgets.QSpacerItem(
-            88, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(88, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_10.addItem(spacerItem)
         self.holdout_box = QtWidgets.QDoubleSpinBox(self.layoutWidget5)
         self.holdout_box.setObjectName("holdout_box")
@@ -442,8 +436,7 @@ class Ui_MainWindow(QObject):
         self.label_11 = QtWidgets.QLabel(self.layoutWidget5)
         self.label_11.setObjectName("label_11")
         self.horizontalLayout_9.addWidget(self.label_11)
-        spacerItem1 = QtWidgets.QSpacerItem(
-            88, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(88, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_9.addItem(spacerItem1)
         self.cvfoldsBox = QtWidgets.QSpinBox(self.layoutWidget5)
         self.cvfoldsBox.setObjectName("cvfoldsBox")
@@ -487,14 +480,16 @@ class Ui_MainWindow(QObject):
         self.label_7.setObjectName("label_7")
         self.verticalLayout_6.addWidget(self.label_7)
         self.horizontalLayout_5.addLayout(self.verticalLayout_6)
-        spacerItem2 = QtWidgets.QSpacerItem(
-            118, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(118, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem2)
         self.verticalLayout_5 = QtWidgets.QVBoxLayout()
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.timeLeft_box = QtWidgets.QSpinBox(self.layoutWidget7)
         self.timeLeft_box.setObjectName("timeLeft_box")
         self.verticalLayout_5.addWidget(self.timeLeft_box)
+        self.perRun_box = QtWidgets.QSpinBox(self.layoutWidget7)
+        self.perRun_box.setObjectName("perRun_box")
+        self.verticalLayout_5.addWidget(self.perRun_box)
         self.horizontalLayout_5.addLayout(self.verticalLayout_5)
         self.layoutWidget8 = QtWidgets.QWidget(self.page_3)
         self.layoutWidget8.setGeometry(QtCore.QRect(320, 200, 321, 26))
@@ -505,8 +500,7 @@ class Ui_MainWindow(QObject):
         self.label_8 = QtWidgets.QLabel(self.layoutWidget8)
         self.label_8.setObjectName("label_8")
         self.horizontalLayout_6.addWidget(self.label_8)
-        spacerItem3 = QtWidgets.QSpacerItem(
-            88, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem3 = QtWidgets.QSpacerItem(88, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_6.addItem(spacerItem3)
         self.memory_box = QtWidgets.QSpinBox(self.layoutWidget8)
         self.memory_box.setObjectName("memory_box")
@@ -521,8 +515,7 @@ class Ui_MainWindow(QObject):
         self.label_9.setObjectName("label_9")
         self.horizontalLayout_7.addWidget(self.label_9)
         self.ressampleCombo = QtWidgets.QComboBox(self.layoutWidget9)
-        self.ressampleCombo.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.ressampleCombo.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.ressampleCombo.setObjectName("ressampleCombo")
         self.horizontalLayout_7.addWidget(self.ressampleCombo)
         self.layoutWidget10 = QtWidgets.QWidget(self.page_3)
@@ -555,8 +548,7 @@ class Ui_MainWindow(QObject):
         self.label_14 = QtWidgets.QLabel(self.layoutWidget11)
         self.label_14.setObjectName("label_14")
         self.horizontalLayout_11.addWidget(self.label_14)
-        spacerItem4 = QtWidgets.QSpacerItem(
-            88, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem4 = QtWidgets.QSpacerItem(88, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_11.addItem(spacerItem4)
         self.test_sz_box = QtWidgets.QDoubleSpinBox(self.layoutWidget11)
         self.test_sz_box.setObjectName("test_sz_box")
@@ -570,7 +562,7 @@ class Ui_MainWindow(QObject):
         self.savemodel_Box.setFont(font)
         self.savemodel_Box.setObjectName("savemodel_Box")
         self.run_Button = QtWidgets.QPushButton(self.page_3)
-        self.run_Button.setGeometry(QtCore.QRect(600, 470, 121, 61))
+        self.run_Button.setGeometry(QtCore.QRect(580, 500, 121, 61))
         font = QtGui.QFont()
         font.setFamily("Serif")
         font.setPointSize(25)
@@ -581,29 +573,32 @@ class Ui_MainWindow(QObject):
         self.run_Button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.run_Button.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("play_btn.png"),
-                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("play_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.run_Button.setIcon(icon)
         self.run_Button.setIconSize(QtCore.QSize(100, 100))
         self.run_Button.setObjectName("run_Button")
         self.nextButton2_2 = QtWidgets.QPushButton(self.page_3)
         self.nextButton2_2.setGeometry(QtCore.QRect(10, 30, 41, 31))
-        self.nextButton2_2.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.nextButton2_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.nextButton2_2.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("home_icon.png"),
-                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("home_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.nextButton2_2.setIcon(icon1)
         self.nextButton2_2.setIconSize(QtCore.QSize(25, 25))
         self.nextButton2_2.setObjectName("nextButton2_2")
         self.hist_btn = QtWidgets.QPushButton(self.page_3)
-        self.hist_btn.setGeometry(QtCore.QRect(570, 590, 171, 31))
+        self.hist_btn.setGeometry(QtCore.QRect(660, 590, 171, 31))
         self.hist_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.hist_btn.setObjectName("hist_btn")
         self.result_text = QtWidgets.QTextEdit(self.page_3)
-        self.result_text.setGeometry(QtCore.QRect(500, 550, 291, 31))
+        self.result_text.setGeometry(QtCore.QRect(360, 590, 291, 31))
         self.result_text.setObjectName("result_text")
+        self.model_text = QtWidgets.QTextEdit(self.page_3)
+        self.model_text.setGeometry(QtCore.QRect(660, 470, 121, 21))
+        self.model_text.setObjectName("model_text")
+        self.label_36 = QtWidgets.QLabel(self.page_3)
+        self.label_36.setGeometry(QtCore.QRect(580, 470, 81, 20))
+        self.label_36.setObjectName("label_36")
         self.stackedWidget.addWidget(self.page_3)
         self.page_4 = QtWidgets.QWidget()
         self.page_4.setObjectName("page_4")
@@ -667,8 +662,7 @@ class Ui_MainWindow(QObject):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pushButton_7.setFont(font)
-        self.pushButton_7.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_7.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_7.setObjectName("pushButton_7")
         self.verticalLayout_2.addWidget(self.pushButton_7)
         self.textEdit_2 = QtWidgets.QTextEdit(self.layoutWidget12)
@@ -679,8 +673,7 @@ class Ui_MainWindow(QObject):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pushButton_9.setFont(font)
-        self.pushButton_9.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_9.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_9.setObjectName("pushButton_9")
         self.verticalLayout_10.addWidget(self.pushButton_9)
         self.stackedWidget.addWidget(self.page_4)
@@ -803,7 +796,7 @@ class Ui_MainWindow(QObject):
         self.sort_box = QtWidgets.QComboBox(self.layoutWidget13)
         self.sort_box.setMaximumSize(QtCore.QSize(79, 16777215))
         self.sort_box.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.sort_box.setStyleSheet("selection-background-color: #70B900;")
+        self.sort_box.setStyleSheet("selection-background-color: rgb(85, 255, 127);")
         self.sort_box.setObjectName("sort_box")
         self.horizontalLayout_4.addWidget(self.sort_box)
         self.verticalLayout_11.addLayout(self.horizontalLayout_4)
@@ -832,10 +825,8 @@ class Ui_MainWindow(QObject):
         self.horizontalLayout_16.addWidget(self.label_35)
         self.roll_dir_box = QtWidgets.QComboBox(self.layoutWidget13)
         self.roll_dir_box.setMaximumSize(QtCore.QSize(79, 16777215))
-        self.roll_dir_box.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.roll_dir_box.setStyleSheet(
-            "selection-background-color:  #70B900;")
+        self.roll_dir_box.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.roll_dir_box.setStyleSheet("selection-background-color: rgb(85, 255, 127);")
         self.roll_dir_box.setObjectName("roll_dir_box")
         self.horizontalLayout_16.addWidget(self.roll_dir_box)
         self.verticalLayout_11.addLayout(self.horizontalLayout_16)
@@ -1025,19 +1016,16 @@ class Ui_MainWindow(QObject):
         self.result_text.setReadOnly(True)
         self.extract_frame.setEnabled(False)
         self.next_btn_7.setEnabled(False)
-
-
+        
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate(
-            "MainWindow", "Auto-ML Tool for IoT Applications"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Auto-ML Tool for IoT Applications"))
         self.label_19.setText(_translate("MainWindow", "WELCOME "))
         self.label_20.setText(_translate("MainWindow", "TO "))
         self.label_21.setText(_translate("MainWindow", "AUTO-ML TOOL"))
         self.pushButton_3.setText(_translate("MainWindow", "About"))
         self.get_started_btn.setText(_translate("MainWindow", "Get Started"))
-        self.history_btn.setText(_translate(
-            "MainWindow", "Browse Model History"))
+        self.history_btn.setText(_translate("MainWindow", "Browse Model History"))
         self.nextButton.setText(_translate("MainWindow", "Next"))
         self.label_22.setText(_translate("MainWindow", "IMPORT YOUR DATA"))
         self.home_btn2.setText(_translate("MainWindow", "HOME"))
@@ -1049,13 +1037,11 @@ class Ui_MainWindow(QObject):
         self.radio_btn_c.setText(_translate("MainWindow", "Classification "))
         self.radio_btn_r.setText(_translate("MainWindow", "Regression"))
         self.radio_btn_ts.setText(_translate("MainWindow", "Time-Series"))
-        self.label_3.setText(_translate(
-            "MainWindow", "Define the Problem Type"))
+        self.label_3.setText(_translate("MainWindow", "Define the Problem Type"))
         self.backButton1.setText(_translate("MainWindow", "Back"))
         self.label_23.setText(_translate("MainWindow", "SELECT YOUR TARGET"))
         self.label_13.setText(_translate("MainWindow", "Summary"))
-        self.load_DB_btn.setText(_translate(
-            "MainWindow", "Load Existing Model"))
+        self.load_DB_btn.setText(_translate("MainWindow", "Load Existing Model"))
         self.nextButton1.setText(_translate("MainWindow", "Next"))
         self.label_5.setText(_translate("MainWindow", "TARGET"))
         self.back_btn.setText(_translate("MainWindow", "Back"))
@@ -1065,8 +1051,7 @@ class Ui_MainWindow(QObject):
         self.predict_btn.setText(_translate("MainWindow", "Predict Target"))
         self.label_15.setText(_translate("MainWindow", "Other Parameters"))
         self.groupBox.setTitle(_translate("MainWindow", "Select Estimators: "))
-        self.gausianPro_Box.setText(
-            _translate("MainWindow", "gaussian_process"))
+        self.gausianPro_Box.setText(_translate("MainWindow", "gaussian_process"))
         self.extratreeBox.setText(_translate("MainWindow", "extra_trees"))
         self.rforoestBox.setText(_translate("MainWindow", "random_forest"))
         self.qdaBox.setText(_translate("MainWindow", "qda"))
@@ -1091,14 +1076,10 @@ class Ui_MainWindow(QObject):
         self.label_12.setText(_translate("MainWindow", "Holdout Train Size"))
         self.label_11.setText(_translate("MainWindow", "CV folds"))
         self.label_16.setText(_translate("MainWindow", "Resampling Arguments"))
-        self.checkBox_16.setText(_translate(
-            "MainWindow", "Disable Feature Preprocessing"))
-        self.ensembling_checkbox.setText(
-            _translate("MainWindow", "Disable Ensembling"))
-        self.metalearning_checkbox.setText(
-            _translate("MainWindow", "Enable Meta-learning"))
-        self.label_4.setText(_translate(
-            "MainWindow", "Time left for this task"))
+        self.checkBox_16.setText(_translate("MainWindow", "Disable Feature Preprocessing"))
+        self.ensembling_checkbox.setText(_translate("MainWindow", "Disable Ensembling"))
+        self.metalearning_checkbox.setText(_translate("MainWindow", "Enable Meta-learning"))
+        self.label_4.setText(_translate("MainWindow", "Time left for this task"))
         self.label_7.setText(_translate("MainWindow", "Per run time limit"))
         self.label_8.setText(_translate("MainWindow", "Ensemble memory limit"))
         self.label_9.setText(_translate("MainWindow", "Resampling strategy"))
@@ -1107,29 +1088,23 @@ class Ui_MainWindow(QObject):
         self.label_14.setText(_translate("MainWindow", "Set Test Size Split"))
         self.savemodel_Box.setText(_translate("MainWindow", "Save Model"))
         self.hist_btn.setText(_translate("MainWindow", "Show History"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(
-            self.tab), _translate("MainWindow", "Classification Models"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(
-            self.tab_2), _translate("MainWindow", "Regression Models"))
+        self.label_36.setText(_translate("MainWindow", "Model Name"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Classification Models"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Regression Models"))
         self.label_26.setText(_translate("MainWindow", "MODEL HISTORY"))
-        self.pushButton_7.setText(_translate(
-            "MainWindow", "Show Model Summary"))
+        self.pushButton_7.setText(_translate("MainWindow", "Show Model Summary"))
         self.pushButton_9.setText(_translate("MainWindow", "Show more..."))
         self.label_28.setText(_translate("MainWindow", "ABOUT"))
         self.label_34.setText(_translate("MainWindow", "Under Construction"))
         self.back_btn_7.setText(_translate("MainWindow", "Back"))
         self.next_btn_7.setText(_translate("MainWindow", "Auto - ML"))
         self.label_31.setText(_translate("MainWindow", "EXTRACT FEATURES"))
-        self.custom_radio.setText(_translate(
-            "MainWindow", "Custom Settings (Advanced)"))
+        self.custom_radio.setText(_translate("MainWindow", "Custom Settings (Advanced)"))
         self.extract_btn.setText(_translate("MainWindow", "Extract Features"))
         self.submit_btn.setText(_translate("MainWindow", "Submit"))
-        self.comprehensive_radio.setText(_translate(
-            "MainWindow", "Comprehensive FC Parameters"))
-        self.minimal_radio.setText(_translate(
-            "MainWindow", "Minimal FC Parameters"))
-        self.efficient_radio.setText(_translate(
-            "MainWindow", "Efficient FC Parameters"))
+        self.comprehensive_radio.setText(_translate("MainWindow", "Comprehensive FC Parameters"))
+        self.minimal_radio.setText(_translate("MainWindow", "Minimal FC Parameters"))
+        self.efficient_radio.setText(_translate("MainWindow", "Efficient FC Parameters"))
         self.label1234.setText(_translate("MainWindow", "ROLL TIME SERIES"))
         self.roll_btn.setText(_translate("MainWindow", "Roll Time Series"))
         self.label_17.setText(_translate("MainWindow", "Sort by"))
@@ -1139,10 +1114,8 @@ class Ui_MainWindow(QObject):
         self.label_30.setText(_translate("MainWindow", "PREVIEW"))
         self.reg_radio_btn.setText(_translate("MainWindow", "Regression"))
         self.cl_radio_btn.setText(_translate("MainWindow", "Classification "))
-        self.label_33.setText(_translate(
-            "MainWindow", "Define the Problem Type"))
-        self.label_27.setText(_translate(
-            "MainWindow", "PREDICTORS ( extracted features )"))
+        self.label_33.setText(_translate("MainWindow", "Define the Problem Type"))
+        self.label_27.setText(_translate("MainWindow", "PREDICTORS ( extracted features )"))
         self.label_32.setText(_translate("MainWindow", "TARGET VARIABLE"))
         self.back_btn_8.setText(_translate("MainWindow", "Back"))
         self.next_btn_8.setText(_translate("MainWindow", "Next"))

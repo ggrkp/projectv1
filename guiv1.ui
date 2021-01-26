@@ -1225,7 +1225,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../../.designer/backup/play_btn.png</normaloff>../../.designer/backup/play_btn.png</iconset>
+        <normaloff>play_btn.png</normaloff>play_btn.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1251,7 +1251,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../../.designer/backup/home_icon.png</normaloff>../../.designer/backup/home_icon.png</iconset>
+        <normaloff>home.png</normaloff>home.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1439,7 +1439,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../../.designer/backup/home_icon.png</normaloff>../../.designer/backup/home_icon.png</iconset>
+        <normaloff>home.png</normaloff>home.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1518,7 +1518,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../../.designer/backup/home_icon.png</normaloff>../../.designer/backup/home_icon.png</iconset>
+        <normaloff>home.png</normaloff>home.png</iconset>
       </property>
       <property name="iconSize">
        <size>

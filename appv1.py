@@ -39,7 +39,9 @@ class MainWindowUIClass(Ui_MainWindow):
 
     # ! 0. WELCOME SCREEN
     def get_started(self):
-
+        global f_step,min_shift
+        f_step = 0
+        min_shift = 0
         # Arxikopoihsh learning Type gia na mh faei error
         self.radio_btn_c.setChecked(True)
         self.cl_radio_btn.setChecked(True)
@@ -185,7 +187,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
-        global learning_type, X, y, y_df, item_index
+        global learning_type, X, y, y_df, item_index, f_step
         # self.comboBox.setStyleSheet("selection-background-color: #70B900;")
 
         item_index = self.comboBox.currentIndex()
@@ -193,9 +195,9 @@ class MainWindowUIClass(Ui_MainWindow):
         # todo: otan kanw pick target gia time series tha exei diaforetikh diadikasia giati tha ginetai pandas.Series h sthlh
         y = self.functions.pickTarget(item_index, data).to_numpy()
         y_df = self.functions.pickTarget(item_index, data)
-        print("TYPE YDF:",type(y_df))
+        print("TYPE YDF:", type(y_df))
         # y.to_numpy()
-        print("TYPE Y :",type(y))
+        print("TYPE Y :", type(y))
 
         if learning_type == "Timeseries":
             # y = pd.Series(
@@ -225,39 +227,42 @@ class MainWindowUIClass(Ui_MainWindow):
         # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton.setEnabled(False)
 
+    def forecasting_slot(self):
+        global f_step
+        f_step = self.forecast_box.value()
+
     def nextSlot_1(self):  # Next pou pigainei stis parametrous tou modeling
         # Pame ena screen mprosta sto next screen me preprocessing / modeling k parameter tuning
-        global metric_dict, X, data, y, t_left, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_disable, test_sz
-
+        global metric_dict, X, data, y_df, y, t_left, inc_est, disable_prepro, resample, resample_args, metric_var, ens_size, meta_disable, test_sz
 
         metric_dict = {
-                "accuracy": autosklearn.metrics.accuracy,
-                "balanced_accuracy": autosklearn.metrics.balanced_accuracy,
-                "roc_auc": autosklearn.metrics.roc_auc,
-                "average_precision": autosklearn.metrics.average_precision,
-                "log_loss": autosklearn.metrics.log_loss,
-                "precision": autosklearn.metrics.precision,
-                "precision_macro": autosklearn.metrics.precision_macro,
-                "precision_micro": autosklearn.metrics.precision_micro,
-                "precision_samples": autosklearn.metrics.precision_samples,
-                "precision_weighted": autosklearn.metrics.precision_weighted,
-                "recall": autosklearn.metrics.recall,
-                "recall_macro": autosklearn.metrics.recall_macro,
-                "recall_micro": autosklearn.metrics.recall_micro,
-                "recall_samples": autosklearn.metrics.recall_samples,
-                "recall_weighted": autosklearn.metrics.recall_weighted,
-                "f1": autosklearn.metrics.f1,
-                "f1_macro": autosklearn.metrics.f1_macro,
-                "f1_micro": autosklearn.metrics.f1_micro,
-                "f1_samples": autosklearn.metrics.f1_samples,
-                "f1_weighted": autosklearn.metrics.f1_weighted,
-                "mean_absolute_error": autosklearn.metrics.mean_absolute_error,
-                "mean_squared_error": autosklearn.metrics.mean_squared_error,
-                "root_mean_squared_error": autosklearn.metrics.root_mean_squared_error,
-                "mean_squared_log_error": autosklearn.metrics.mean_squared_log_error,
-                "median_absolute_error": autosklearn.metrics.median_absolute_error,
-                "r2": autosklearn.metrics.r2
-            }
+            "accuracy": autosklearn.metrics.accuracy,
+            "balanced_accuracy": autosklearn.metrics.balanced_accuracy,
+            "roc_auc": autosklearn.metrics.roc_auc,
+            "average_precision": autosklearn.metrics.average_precision,
+            "log_loss": autosklearn.metrics.log_loss,
+            "precision": autosklearn.metrics.precision,
+            "precision_macro": autosklearn.metrics.precision_macro,
+            "precision_micro": autosklearn.metrics.precision_micro,
+            "precision_samples": autosklearn.metrics.precision_samples,
+            "precision_weighted": autosklearn.metrics.precision_weighted,
+            "recall": autosklearn.metrics.recall,
+            "recall_macro": autosklearn.metrics.recall_macro,
+            "recall_micro": autosklearn.metrics.recall_micro,
+            "recall_samples": autosklearn.metrics.recall_samples,
+            "recall_weighted": autosklearn.metrics.recall_weighted,
+            "f1": autosklearn.metrics.f1,
+            "f1_macro": autosklearn.metrics.f1_macro,
+            "f1_micro": autosklearn.metrics.f1_micro,
+            "f1_samples": autosklearn.metrics.f1_samples,
+            "f1_weighted": autosklearn.metrics.f1_weighted,
+            "mean_absolute_error": autosklearn.metrics.mean_absolute_error,
+            "mean_squared_error": autosklearn.metrics.mean_squared_error,
+            "root_mean_squared_error": autosklearn.metrics.root_mean_squared_error,
+            "mean_squared_log_error": autosklearn.metrics.mean_squared_log_error,
+            "median_absolute_error": autosklearn.metrics.median_absolute_error,
+            "r2": autosklearn.metrics.r2
+        }
         if learning_type == "Classification":
             self.stackedWidget.setCurrentIndex(4)
 
@@ -405,7 +410,12 @@ class MainWindowUIClass(Ui_MainWindow):
             self.test_sz_box.setMaximum(0.9)
 
         else:  # If learning_type == "Timeseries"
+
             self.stackedWidget.setCurrentIndex(7)
+            if f_step != 0:
+                X = X[:-f_step]
+                y_df = y_df.iloc[f_step:]
+            print(X)
             for col in X.columns:
                 self.sort_box.addItem(col)
 
@@ -415,6 +425,7 @@ class MainWindowUIClass(Ui_MainWindow):
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # ! 3. PARAMETER TUNING SCREEN
 # TEST SPLIT SPINBOX
+
 
     def test_sz_Slot(self):
         global test_sz
@@ -793,7 +804,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
                 elif learning_type == "Classification":
                     print("Accuracy score",
-                            sklearn.metrics.accuracy_score(y_test, pred))
+                          sklearn.metrics.accuracy_score(y_test, pred))
                     self.result_text.setText(
                         f"Accuracy: {sklearn.metrics.accuracy_score(y_test, pred)}")  # describe
 
@@ -801,7 +812,8 @@ class MainWindowUIClass(Ui_MainWindow):
                     model_name = self.model_text.toPlainText()
                     if model_name == "":
                         model_name = "unnamed_model"
-                    self.functions.store_model(model, model_name, learning_type)
+                    self.functions.store_model(
+                        model, model_name, learning_type)
         except:  # lathos learning type h lathos target variable
             print("An error has occured!")
             self.comboBox.clear()
@@ -926,38 +938,50 @@ class MainWindowUIClass(Ui_MainWindow):
     def roll_slot(self):
         global X, X_rld, sort_by, y_df, y, item_index, min_shift
         X_rld = roll_time_series(
-            X, column_id="id", column_sort=f'{sort_by}', min_timeshift= int(min_shift), rolling_direction=1)
+            X, column_id="id", column_sort=f'{sort_by}', min_timeshift=int(min_shift), rolling_direction=1)
         y_df = y_df.iloc[min_shift:].to_numpy()
-        y=pd.Series(y_df, name=f"{self.functions.getLabel(item_index, data)}")
+        y = pd.Series(
+            y_df, name=f"{self.functions.getLabel(item_index, data)}")
         self.extract_frame.setEnabled(True)
-        print("--------------------------rld---------------------------",X_rld);
-        print("--------------------y-----------------------",y)
+        print("--------------------------rld---------------------------", X_rld)
+        print("--------------------y-----------------------", y)
 
     def extract_slot(self):
         global X, X_rld, y, sort_by, fc_settings
-        X = extract_features(
-            X_rld, column_id='id', column_sort=f'{sort_by}', default_fc_parameters=fc_settings)
-        print(X)
-        X.reset_index(drop=True, inplace=True)
-        impute(X)
-        X = select_features(X, y, show_warnings=False)
-        if X.empty:
-            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        try:
+            X = extract_features(
+                X_rld, column_id='id', column_sort=f'{sort_by}', default_fc_parameters=fc_settings)
+            print(X)
+            X.reset_index(drop=True, inplace=True)
+            impute(X)
+            X = select_features(X, y, show_warnings=False)
+            if X.empty:
+                popup = QtWidgets.QMessageBox()
+                popup.setWindowTitle(" Warning ")
+                popup.setText(
+                    "Zero features were extracted. Change your preferences.")
+                popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
+                popup.setIcon(QtWidgets.QMessageBox.Warning)
+                popup.setDefaultButton(QtWidgets.QMessageBox.Retry)
+                popup.exec()
+            else:
+                self.next_btn_7.setEnabled(True)
+            print(X)
+        except NameError :
             popup = QtWidgets.QMessageBox()
             popup.setWindowTitle(" Warning ")
-            popup.setText("Zero features were extracted. Change your preferences.")
+            popup.setText(
+                "Please Choose Valid Parameters")
             popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
             popup.setIcon(QtWidgets.QMessageBox.Warning)
             popup.setDefaultButton(QtWidgets.QMessageBox.Retry)
             popup.exec()
-        else:
-            self.next_btn_7.setEnabled(True)
-        print(X)    
+       
 
     def next_slot_7(self):
         global y, preview_num, X, learning_type
         global fc_settings
-        header_labels_X = list(X.columns.values)        
+        header_labels_X = list(X.columns.values)
         header_labels_y = list([f"{y.name}"])
         fc_settings = None
         learning_type = "Classification"
@@ -980,7 +1004,6 @@ class MainWindowUIClass(Ui_MainWindow):
         self.features_preview.setHorizontalHeaderLabels(header_labels_X)
         self.target_preview.setHorizontalHeaderLabels(header_labels_y)
 
-
         print("next-slot-7")
 
     def back_slot_7(self):
@@ -1001,14 +1024,27 @@ class MainWindowUIClass(Ui_MainWindow):
         global sort_idx, sort_by
         sort_idx = self.sort_box.currentIndex()
         sort_by = self.sort_box.itemText(sort_idx)
+        self.roll_btn.setEnabled(True)
 
     def max_shift_slot(self):
         pass
 
     def submit_slot(self):
         global fc_settings
-        fc_settings = ast.literal_eval(self.text_settings.toPlainText())
-        print(fc_settings)
+        try:
+            fc_settings = ast.literal_eval(self.text_settings.toPlainText())
+            print(fc_settings)
+        except ValueError:
+            fc_settings=None
+            popup = QtWidgets.QMessageBox()
+            popup.setWindowTitle(" Warning ")
+            popup.setText(
+                "Please, Insert a dictionary format.")
+            popup.setInformativeText("Your parameters are now ""None"".")
+            popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
+            popup.setIcon(QtWidgets.QMessageBox.Warning)
+            popup.setDefaultButton(QtWidgets.QMessageBox.Retry)
+            popup.exec()
 
     def comprehensive_slot(self):
         global fc_settings

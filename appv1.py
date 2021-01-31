@@ -39,20 +39,37 @@ class MainWindowUIClass(Ui_MainWindow):
 
     # ! 0. WELCOME SCREEN
     def get_started(self):
-        global f_step,min_shift
+        global f_step, min_shift
         f_step = 0
         min_shift = 0
         # Arxikopoihsh learning Type gia na mh faei error
+        self.stackedWidget.setCurrentIndex(0)  # Na ksekinaei apo 1h othoni
+        # Otan ginei to import me valid file energopoieitai to next button
+        self.nextButton.setEnabled(False)
+        # Otan ginei to import me valid file energopoieitai to next button
+        self.nextButton1.setEnabled(False)
+        self.showen_btn.setEnabled(False)
+        self.predict_btn.setEnabled(False)
+        self.text_settings.setReadOnly(True)
+        self.result_text.setReadOnly(True)
+        self.extract_frame.setEnabled(False)
+        self.next_btn_7.setEnabled(False)
+        self.roll_btn.setEnabled(False)
+        self.submit_btn.setEnabled(False)
+        self.frame_4.hide()
         self.radio_btn_c.setChecked(True)
         self.cl_radio_btn.setChecked(True)
         self.stackedWidget.setCurrentIndex(1)
+        self.show_more_btn.setEnabled(False)
 
     def home_slot(self):
         self.comboBox.clear()
         self.nextButton.setEnabled(False)
+        self.extract_frame.setEnabled(False)
         self.stackedWidget.setCurrentIndex(0)
 
-    def history_tabs(self):
+    def history_tabs(self):        
+        self.show_more_btn.setEnabled(False)
         self.stackedWidget.setCurrentIndex(5)
         db_name = 'models.db'
 
@@ -74,6 +91,18 @@ class MainWindowUIClass(Ui_MainWindow):
         self.functions.fill_tables(
             db_name, class_query, class_query_cnt, table_c)
         self.functions.fill_tables(db_name, reg_query, reg_query_cnt, table_r)
+        
+        header_c = table_c.horizontalHeader()       
+        header_c.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+        header_c.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+        table_c.setHorizontalHeaderLabels(["Model Name","TimeStamp"])
+
+        header_r = table_r.horizontalHeader()       
+        header_r.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+        header_r.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+        table_r.setHorizontalHeaderLabels(["Model Name","TimeStamp"])
+
+        
     # ! 1. IMPORT YOUR DATA SCREEN
 
 # REFRESH
@@ -107,50 +136,46 @@ class MainWindowUIClass(Ui_MainWindow):
             data = self.functions.readFile(fileName)
             self.functions.setFileName(self.pathLine.text())
             self.refreshAll()
-            popup = QtWidgets.QMessageBox()
-            popup.setText("Your file is successfully imported!")
-            popup.setWindowTitle(" Success ")
-            popup.setIcon(QtWidgets.QMessageBox.Information)
-            popup.setStandardButtons(QtWidgets.QMessageBox.Close)
-            popup.setDefaultButton(QtWidgets.QMessageBox.Close)
-            popup.exec_()
+            self.functions.popup_window("Your file is successfully imported!"," Success ","Information" )
             self.refreshAll()
             # Otan ginei to import me valid file energopoieitai to next button
             self.nextButton.setEnabled(True)
         else:
-            popup = QtWidgets.QMessageBox()
-            popup.setWindowTitle(" Error ")
-            popup.setText("Please, choose a valid file to import!")
-            popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
-            popup.setIcon(QtWidgets.QMessageBox.Warning)
-            popup.setDefaultButton(QtWidgets.QMessageBox.Retry)
-            popup.exec_()
+            self.functions.popup_window("Please, choose a valid file to import!"," Error ","Warning" )
+
             self.refreshAll()
 
 # RADIO BUTTONS - LEARNING TYPE
     def radio_c(self):
-        global learning_type
+        global learning_type, series_flag
+
         if self.radio_btn_c.isChecked() or self.cl_radio_btn.isChecked():
             learning_type = "Classification"
+            series_flag = False
 
     def radio_r(self):
-        global learning_type
+        global learning_type, series_flag
         if self.radio_btn_r.isChecked() or self.reg_radio_btn.isChecked():
             learning_type = "Regression"
+            series_flag = False
+
 
     def radio_ts(self):
-        global learning_type
+        global learning_type,series_flag
         if self.radio_btn_ts.isChecked():
             learning_type = "Timeseries"
+            series_flag = True
 
 # CLEAR BUTTON
     def cancelSlot(self):
         # TODO: Na allaksw to clear button k na kanei clear - twra bazei to iris gia eukolia.
         # TODO: Na valw epilogh gia drop columns h drop rows me NaN values!
-        self.pathLine.setText("/home/ggeorg/Desktop/DataSets/iris.csv")
+        self.pathLine.setText("/home/larry/Documents/Thesis/projectv1/Datasets/shampoo.csv")
 
 # NEXT BUTTON POU KANEI TO PREVIEW
     def nextSlot(self):  # Slot gia to next button
+        self.frame_4.hide()
+
         global preview_num
         # NO WRAP GIA NA GINETAI SCROLL KAI NA MHN XALANE TA COLS
         self.describe_text_edit.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
@@ -175,10 +200,12 @@ class MainWindowUIClass(Ui_MainWindow):
                     i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
         header_labels = list(data.columns.values)
         self.tableWidget.setHorizontalHeaderLabels(header_labels)
+        
 
         self.comboBox.adjustSize()
         if learning_type == 'Timeseries':
             self.load_DB_btn.hide()
+            self.frame_4.show()
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -188,11 +215,9 @@ class MainWindowUIClass(Ui_MainWindow):
 # TARGET FEATURE DROPDOWN KAI PREVIEW
     def featureSlot(self):  # Slot gia to drop down box
         global learning_type, X, y, y_df, item_index, f_step
-        # self.comboBox.setStyleSheet("selection-background-color: #70B900;")
 
         item_index = self.comboBox.currentIndex()
         print(f"Ok. Column {item_index} is your Target Feature! ")
-        # todo: otan kanw pick target gia time series tha exei diaforetikh diadikasia giati tha ginetai pandas.Series h sthlh
         y = self.functions.pickTarget(item_index, data).to_numpy()
         y_df = self.functions.pickTarget(item_index, data)
         print("TYPE YDF:", type(y_df))
@@ -200,14 +225,11 @@ class MainWindowUIClass(Ui_MainWindow):
         print("TYPE Y :", type(y))
 
         if learning_type == "Timeseries":
-            # y = pd.Series(
-            #     y, name=f"{self.functions.getLabel(item_index, data)}")
-
-            # print(type(y))
-            # print(y)
             X = copy.deepcopy(data)
             X.insert(0, 'id', 0)
             print(X)
+            self.max_timeshift_box.setMinimum(1)
+            self.max_timeshift_box.setMaximum(X.shape[0])
         else:
             X = self.functions.pickPredictors(item_index, data).to_numpy()
         # Otan ginei to import me valid file energopoieitai to next button
@@ -338,6 +360,7 @@ class MainWindowUIClass(Ui_MainWindow):
             self.test_sz_box.setMaximum(0.9)
 
         elif learning_type == "Regression":
+
             self.stackedWidget.setCurrentIndex(4)
 
             #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION
@@ -410,8 +433,8 @@ class MainWindowUIClass(Ui_MainWindow):
             self.test_sz_box.setMaximum(0.9)
 
         else:  # If learning_type == "Timeseries"
-
-            self.stackedWidget.setCurrentIndex(7)
+            self.stackedWidget.setCurrentIndex(8)
+            self.roll_frame.setEnabled(True)
             if f_step != 0:
                 X = X[:-f_step]
                 y_df = y_df.iloc[f_step:]
@@ -506,8 +529,12 @@ class MainWindowUIClass(Ui_MainWindow):
         print("Yoleleison")
 
     def backSlot_1(self):
+        if series_flag == False:
+            self.stackedWidget.setCurrentIndex(2) 
+        else: # Pame ena screen pisw
+            self.stackedWidget.setCurrentIndex(8)  # Pame ena screen pisw
+
         self.checkBox_16.setChecked(False)
-        self.stackedWidget.setCurrentIndex(2)  # Pame ena screen pisw
         self.metricCombo.clear()
         self.ressampleCombo.clear()
 
@@ -739,14 +766,8 @@ class MainWindowUIClass(Ui_MainWindow):
         try:
             #! ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
             if not inc_est:
-                popup = QtWidgets.QMessageBox()
-                popup.setWindowTitle(" Error ")
-                popup.setText("No Estimators Were Selected!")
-                popup.setInformativeText(
-                    "Please select at least one Estimator from the list.")
-                popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
-                popup.setIcon(QtWidgets.QMessageBox.Warning)
-                popup.exec_()
+                self.functions.popup_window("Please select at least one Estimator from the list."," Error ","Warning" )
+
             else:
                 minutes = t_left/60
                 seconds = t_left
@@ -768,6 +789,7 @@ class MainWindowUIClass(Ui_MainWindow):
                 popup.setStandardButtons(QtWidgets.QMessageBox.Ok)
                 popup.setIcon(QtWidgets.QMessageBox.Information)
                 popup.exec_()
+                
 
                 #! Data Splitting:
                 X_train, X_test, y_train, y_test = self.functions.splitData(
@@ -787,13 +809,7 @@ class MainWindowUIClass(Ui_MainWindow):
                 model = self.functions.fitModel(
                     X_train, y_train, model, dataset_name)
                 pred = model.predict(X_test)
-
-                popup = QtWidgets.QMessageBox()
-                popup.setWindowTitle(" Done ")
-                popup.setText("A new ensemble has been created successfully!")
-                popup.setStandardButtons(QtWidgets.QMessageBox.Close)
-                popup.setIcon(QtWidgets.QMessageBox.Information)
-                popup.exec_()
+                self.functions.popup_window("A new ensemble is created successfully!"," Done ","Information" )
                 self.stackedWidget.setEnabled(True)
 
                 #! Metric results:
@@ -820,16 +836,14 @@ class MainWindowUIClass(Ui_MainWindow):
             self.metricCombo.clear()
             self.ressampleCombo.clear()
             self.nextButton.setEnabled(False)
-            popup = QtWidgets.QMessageBox()
-            popup.setWindowTitle(" Done ")
-            popup.setText("An error has occured. Restart the Process.")
-            popup.setInformativeText(
-                "Make sure you defined the correct learning type and selected the correct target feature!")
-            popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
-            popup.setIcon(QtWidgets.QMessageBox.Warning)
-            popup.exec_()
+            self.functions.popup_window("An error has occured. Restart the Process. Make sure you defined the correct learning type and selected the correct target feature!"," Error ","Warning" )
             self.stackedWidget.setEnabled(True)
-            self.stackedWidget.setCurrentIndex(1)
+            if (series_flag == True):
+                self.stackedWidget.setCurrentIndex(9)
+            else:
+                self.stackedWidget.setCurrentIndex(1)
+
+            
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -845,10 +859,9 @@ class MainWindowUIClass(Ui_MainWindow):
         query1_cnt = "select count(*) from models"
         table4 = self.dbTable
         self.functions.fill_tables(db_name, query1, query1_cnt, table4)
-
+    
     # * LOAD MODEL BUTTON!!
-    def show_more_slot(self):
-        pass
+  
 
     def fetch_model_2(self):
         global ft_model
@@ -863,46 +876,45 @@ class MainWindowUIClass(Ui_MainWindow):
             text_edit = self.textEdit
         currow = table.currentRow()
         tstamp = table.item(currow, 1)
+        self.show_more_btn.setEnabled(True)
+
 
         if tstamp == None:
-            popup = QtWidgets.QMessageBox()
-            popup.setWindowTitle(" Error ")
-            popup.setText("No Models Were Selected!")
-            popup.setInformativeText(
-                "Please select a model from the list.")
-            popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
-            popup.setIcon(QtWidgets.QMessageBox.Warning)
-            popup.exec_()
+            self.functions.popup_window("No Models Were Selected! Please select a model from the list."," Error ","Warning" )
+
         else:
+            self.pushButton_7.setEnabled(True)
             tstamp = table.item(currow, 1).text()
             ft_model = self.functions.load_model(tstamp)
             # show loaded model statistics
             text_edit.setText(ft_model.sprint_statistics())
 
-    # def fetch_model(self):
-    #     global ft_model
-    #     currow = self.dbTable.currentRow()
-    #     tstamp = self.dbTable.item(currow, 1)
+    def show_more_slot(self):
+        global ft_model
+        self.stackedWidget.setCurrentIndex(6)
+        # self.info_text.setText(ft_model.get_models_with_weights())
+        model_list = ft_model.get_models_with_weights()
+        numrows = len(model_list)  # 6 rows in your example
+        numcols = len(model_list[0])  # 3 columns in your example
+        self.weights_table.setColumnCount(numcols)
+        self.weights_table.setRowCount(numrows)
+        print( numrows)
+        for row in range(numrows):
+            self.weights_table.setRowHeight(row, 510)
+            for column in range(numcols):
+                self.weights_table.setItem(row, column, QTableWidgetItem((str(model_list[row][column]))))
+        header = self.weights_table.horizontalHeader()       
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        self.weights_table.setHorizontalHeaderLabels(["Weight","Information"])
 
-    #     if tstamp == None:
-    #         popup = QtWidgets.QMessageBox()
-    #         popup.setWindowTitle(" Error ")
-    #         popup.setText("No Models Were Selected!")
-    #         popup.setInformativeText(
-    #             "Please select a model from the list.")
-    #         popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
-    #         popup.setIcon(QtWidgets.QMessageBox.Warning)
-    #         popup.exec_()
-    #     else:
-    #         tstamp = self.dbTable.item(currow, 1).text()
-    #         ft_model = self.functions.load_model(tstamp)
-    #         # show loaded model statistics
-    #         self.textEdit.setText(ft_model.sprint_statistics())
-    #         self.showen_btn.setEnabled(True)
-    #         self.predict_btn.setEnabled(True)
+        
 
+
+    def ok_slot(self):
+        self.stackedWidget.setCurrentIndex(5)
+
+    
     def show_ensembles(self):
-
         global ft_model
         # print(ft_model.show_models())
         print(ft_model.show_models())
@@ -916,13 +928,8 @@ class MainWindowUIClass(Ui_MainWindow):
             # y_predict = ft_model.predict(X)
             # # print(y_predict)
         except:
-            popup = QtWidgets.QMessageBox()
-            popup.setWindowTitle(" Error ")
-            popup.setText(
-                "The selected model is trained on a different Data Set.")
-            popup.StandardButtons(QtWidgets.QMessageBox.Retry)
-            popup.setIcon(QtWidgets.QMessageBox.Warning)
-            popup.exec_()
+            self.functions.popup_window("The selected model is trained on a different Data Set."," Error ","Warning" )
+
 
     def save_Checked(self):
         pass
@@ -934,17 +941,33 @@ class MainWindowUIClass(Ui_MainWindow):
     def min_shift_slot(self):
         global min_shift
         min_shift = self.min_timeshift_box.value()
+    
+    def max_shift_slot(self):
+        global max_shift
+        max_shift = self.max_timeshift_box.value()
+
+    def max_ts_checked(self):
+        global max_shift,X
+        if self.checkBox.isChecked():
+            self.max_timeshift_box.setEnabled(False)
+            max_shift = X.shape[0]
+        else:
+            self.max_timeshift_box.setEnabled(True)
 
     def roll_slot(self):
-        global X, X_rld, sort_by, y_df, y, item_index, min_shift
-        X_rld = roll_time_series(
-            X, column_id="id", column_sort=f'{sort_by}', min_timeshift=int(min_shift), rolling_direction=1)
-        y_df = y_df.iloc[min_shift:].to_numpy()
-        y = pd.Series(
-            y_df, name=f"{self.functions.getLabel(item_index, data)}")
-        self.extract_frame.setEnabled(True)
-        print("--------------------------rld---------------------------", X_rld)
-        print("--------------------y-----------------------", y)
+        global X, X_rld, sort_by, y_df, y, item_index, min_shift, max_shift
+        self.comprehensive_radio.setChecked(True)
+        try:
+            X_rld = roll_time_series(
+                X, column_id="id", column_sort=f'{sort_by}', min_timeshift=int(min_shift), max_timeshift=int(max_shift), rolling_direction=1)
+            y_df = y_df.iloc[min_shift:].to_numpy()
+            y = pd.Series(
+                y_df, name=f"{self.functions.getLabel(item_index, data)}")
+            self.extract_frame.setEnabled(True)
+            self.roll_frame.setEnabled(False)
+            self.back_btn_7.hide()
+        except KeyError:
+            self.functions.popup_window("Minimum timeshift cannot be greater than Maximum timeshift"," Error ","Warning" )
 
     def extract_slot(self):
         global X, X_rld, y, sort_by, fc_settings
@@ -956,27 +979,12 @@ class MainWindowUIClass(Ui_MainWindow):
             impute(X)
             X = select_features(X, y, show_warnings=False)
             if X.empty:
-                popup = QtWidgets.QMessageBox()
-                popup.setWindowTitle(" Warning ")
-                popup.setText(
-                    "Zero features were extracted. Change your preferences.")
-                popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
-                popup.setIcon(QtWidgets.QMessageBox.Warning)
-                popup.setDefaultButton(QtWidgets.QMessageBox.Retry)
-                popup.exec()
+                self.functions.popup_window("Zero features were extracted. Change your preferences."," Error ","Warning" )
             else:
                 self.next_btn_7.setEnabled(True)
             print(X)
-        except NameError :
-            popup = QtWidgets.QMessageBox()
-            popup.setWindowTitle(" Warning ")
-            popup.setText(
-                "Please Choose Valid Parameters")
-            popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
-            popup.setIcon(QtWidgets.QMessageBox.Warning)
-            popup.setDefaultButton(QtWidgets.QMessageBox.Retry)
-            popup.exec()
-       
+        except NameError:
+            self.functions.popup_window("Please Choose Valid Parameters"," Error ","Warning" )
 
     def next_slot_7(self):
         global y, preview_num, X, learning_type
@@ -985,7 +993,7 @@ class MainWindowUIClass(Ui_MainWindow):
         header_labels_y = list([f"{y.name}"])
         fc_settings = None
         learning_type = "Classification"
-        self.stackedWidget.setCurrentIndex(8)
+        self.stackedWidget.setCurrentIndex(9)
         self.target_preview.setRowCount(preview_num)
         self.target_preview.setColumnCount(1)
 
@@ -1017,7 +1025,7 @@ class MainWindowUIClass(Ui_MainWindow):
         print("next-slot-8")
 
     def back_slot_8(self):
-        self.stackedWidget.setCurrentIndex(7)
+        self.stackedWidget.setCurrentIndex(8)
         print("back-slot-8")
 
     def sort_col_slot(self):
@@ -1026,52 +1034,48 @@ class MainWindowUIClass(Ui_MainWindow):
         sort_by = self.sort_box.itemText(sort_idx)
         self.roll_btn.setEnabled(True)
 
-    def max_shift_slot(self):
-        pass
-
     def submit_slot(self):
         global fc_settings
         try:
             fc_settings = ast.literal_eval(self.text_settings.toPlainText())
             print(fc_settings)
         except ValueError:
-            fc_settings=None
-            popup = QtWidgets.QMessageBox()
-            popup.setWindowTitle(" Warning ")
-            popup.setText(
-                "Please, Insert a dictionary format.")
-            popup.setInformativeText("Your parameters are now ""None"".")
-            popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
-            popup.setIcon(QtWidgets.QMessageBox.Warning)
-            popup.setDefaultButton(QtWidgets.QMessageBox.Retry)
-            popup.exec()
+            fc_settings = None
+            self.functions.popup_window("Please, Insert a dictionary format. - > fc_settings are set to None."," Error ","Warning" )
 
     def comprehensive_slot(self):
         global fc_settings
+        self.submit_btn.setEnabled(False)
+
         if self.comprehensive_radio.isChecked():
             fc_settings = ComprehensiveFCParameters()
             print(fc_settings)
 
     def minimal_slot(self):
         global fc_settings
+        self.submit_btn.setEnabled(False)
+
         if self.minimal_radio.isChecked():
             fc_settings = MinimalFCParameters()
             print(fc_settings)
 
     def efficient_slot(self):
         global fc_settings
+        self.submit_btn.setEnabled(False)
+
         if self.minimal_radio.isChecked():
             fc_settings = EfficientFCParameters()
             print(fc_settings)
 
     def custom_slot(self):
+        self.submit_btn.setEnabled(True)
         if self.custom_radio.isChecked():
             self.text_settings.setReadOnly(False)
         else:
             self.text_settings.setReadOnly(True)
 
 
-def main():
+def main(): 
     app = QtWidgets.QApplication(sys.argv)
     # app.setStyle('Fusion')
     # app.setStyleSheet(qdarkgraystyle.load_stylesheet())

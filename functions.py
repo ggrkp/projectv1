@@ -193,6 +193,25 @@ class Func:
                     row, column, QTableWidgetItem(f'{item}'))
             row += 1
 
+    def popup_window(self,text,title,type):
+        if type == "Warning":
+            popup = QtWidgets.QMessageBox()
+            popup.setWindowTitle(f"{title}")
+            popup.setText(
+                f"{text}")
+            popup.setStandardButtons(QtWidgets.QMessageBox.Retry)
+            popup.setIcon(QtWidgets.QMessageBox.Warning)
+            popup.setDefaultButton(QtWidgets.QMessageBox.Retry)
+            popup.exec()
+        elif type == "Information":
+            popup = QtWidgets.QMessageBox()
+            popup.setText(f"{text}")
+            popup.setWindowTitle(f"{title}")
+            popup.setIcon(QtWidgets.QMessageBox.Information)
+            popup.setStandardButtons(QtWidgets.QMessageBox.Close)
+            popup.setDefaultButton(QtWidgets.QMessageBox.Close)
+            popup.exec_()
+            
 # def getScore(self, automl, p_test, t_test):
 #     pred = automl.predict(p_test)
 #     return sklearn.metrics.accuracy_score(t_test, pred)

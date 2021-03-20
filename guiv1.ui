@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="page_6">
      <widget class="QLabel" name="label_19">
@@ -606,7 +606,7 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -2185,8 +2185,8 @@
    <slot>importSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>624</x>
-     <y>209</y>
+     <x>738</x>
+     <y>213</y>
     </hint>
     <hint type="destinationlabel">
      <x>217</x>
@@ -2201,8 +2201,8 @@
    <slot>timeleft_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>659</x>
-     <y>141</y>
+     <x>739</x>
+     <y>142</y>
     </hint>
     <hint type="destinationlabel">
      <x>95</x>
@@ -2233,8 +2233,8 @@
    <slot>browseSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>699</x>
-     <y>175</y>
+     <x>809</x>
+     <y>176</y>
     </hint>
     <hint type="destinationlabel">
      <x>560</x>
@@ -2249,8 +2249,8 @@
    <slot>cancelSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>511</x>
-     <y>209</y>
+     <x>591</x>
+     <y>213</y>
     </hint>
     <hint type="destinationlabel">
      <x>30</x>
@@ -2297,8 +2297,8 @@
    <slot>ensmemory_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>669</x>
-     <y>173</y>
+     <x>749</x>
+     <y>174</y>
     </hint>
     <hint type="destinationlabel">
      <x>105</x>
@@ -2345,8 +2345,8 @@
    <slot>prepro_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>409</x>
-     <y>460</y>
+     <x>431</x>
+     <y>461</y>
     </hint>
     <hint type="destinationlabel">
      <x>117</x>
@@ -2361,8 +2361,8 @@
    <slot>adaChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>186</x>
-     <y>144</y>
+     <x>202</x>
+     <y>154</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -2569,8 +2569,8 @@
    <slot>rforestChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>178</x>
-     <y>486</y>
+     <x>202</x>
+     <y>496</y>
     </hint>
     <hint type="destinationlabel">
      <x>88</x>
@@ -2601,8 +2601,8 @@
    <slot>qdaChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>168</x>
-     <y>528</y>
+     <x>202</x>
+     <y>538</y>
     </hint>
     <hint type="destinationlabel">
      <x>160</x>
@@ -2617,8 +2617,8 @@
    <slot>cv_Folds()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>668</x>
-     <y>337</y>
+     <x>748</x>
+     <y>347</y>
     </hint>
     <hint type="destinationlabel">
      <x>781</x>
@@ -2633,8 +2633,8 @@
    <slot>holdout_Size()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>668</x>
-     <y>305</y>
+     <x>748</x>
+     <y>308</y>
     </hint>
     <hint type="destinationlabel">
      <x>786</x>
@@ -2665,8 +2665,8 @@
    <slot>gausianPro_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>184</x>
-     <y>272</y>
+     <x>202</x>
+     <y>282</y>
     </hint>
     <hint type="destinationlabel">
      <x>12</x>
@@ -2681,8 +2681,8 @@
    <slot>liblinearsvr_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>153</x>
-     <y>379</y>
+     <x>202</x>
+     <y>389</y>
     </hint>
     <hint type="destinationlabel">
      <x>8</x>
@@ -2857,8 +2857,8 @@
    <slot>test_sz_Slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>669</x>
-     <y>393</y>
+     <x>749</x>
+     <y>394</y>
     </hint>
     <hint type="destinationlabel">
      <x>811</x>
@@ -2953,8 +2953,8 @@
    <slot>radio_c()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>229</x>
-     <y>302</y>
+     <x>302</x>
+     <y>303</y>
     </hint>
     <hint type="destinationlabel">
      <x>23</x>
@@ -2985,8 +2985,8 @@
    <slot>radio_ts()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>590</x>
-     <y>300</y>
+     <x>700</x>
+     <y>301</y>
     </hint>
     <hint type="destinationlabel">
      <x>85</x>
@@ -3129,7 +3129,7 @@
    <slot>nextSlot_1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>814</x>
+     <x>901</x>
      <y>602</y>
     </hint>
     <hint type="destinationlabel">
@@ -3145,8 +3145,8 @@
    <slot>radio_c()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>220</x>
-     <y>598</y>
+     <x>241</x>
+     <y>599</y>
     </hint>
     <hint type="destinationlabel">
      <x>38</x>
@@ -3161,8 +3161,8 @@
    <slot>radio_r()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>437</x>
-     <y>594</y>
+     <x>639</x>
+     <y>595</y>
     </hint>
     <hint type="destinationlabel">
      <x>395</x>
@@ -3193,8 +3193,8 @@
    <slot>max_shift_slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>385</x>
-     <y>172</y>
+     <x>558</x>
+     <y>177</y>
     </hint>
     <hint type="destinationlabel">
      <x>147</x>
@@ -3353,8 +3353,8 @@
    <slot>forecasting_slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>472</x>
-     <y>459</y>
+     <x>552</x>
+     <y>460</y>
     </hint>
     <hint type="destinationlabel">
      <x>792</x>
@@ -3369,8 +3369,8 @@
    <slot>max_ts_checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>194</x>
-     <y>195</y>
+     <x>222</x>
+     <y>206</y>
     </hint>
     <hint type="destinationlabel">
      <x>1</x>

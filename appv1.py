@@ -6,10 +6,7 @@ import os
 import sqlite3
 import sys
 from io import StringIO
-import qdarkgraystyle
-import qdarkstyle
 import autosklearn
-
 import pandas as pd
 import sklearn
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -68,7 +65,7 @@ class MainWindowUIClass(Ui_MainWindow):
         self.extract_frame.setEnabled(False)
         self.stackedWidget.setCurrentIndex(0)
 
-    def history_tabs(self):        
+    def history_tabs(self):
         self.show_more_btn.setEnabled(False)
         self.stackedWidget.setCurrentIndex(5)
         db_name = 'models.db'
@@ -91,18 +88,21 @@ class MainWindowUIClass(Ui_MainWindow):
         self.functions.fill_tables(
             db_name, class_query, class_query_cnt, table_c)
         self.functions.fill_tables(db_name, reg_query, reg_query_cnt, table_r)
-        
-        header_c = table_c.horizontalHeader()       
-        header_c.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-        header_c.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-        table_c.setHorizontalHeaderLabels(["Model Name","TimeStamp"])
 
-        header_r = table_r.horizontalHeader()       
-        header_r.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-        header_r.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-        table_r.setHorizontalHeaderLabels(["Model Name","TimeStamp"])
+        header_c = table_c.horizontalHeader()
+        header_c.setSectionResizeMode(
+            0, QtWidgets.QHeaderView.ResizeToContents)
+        header_c.setSectionResizeMode(
+            1, QtWidgets.QHeaderView.ResizeToContents)
+        table_c.setHorizontalHeaderLabels(["Model Name", "TimeStamp"])
 
-        
+        header_r = table_r.horizontalHeader()
+        header_r.setSectionResizeMode(
+            0, QtWidgets.QHeaderView.ResizeToContents)
+        header_r.setSectionResizeMode(
+            1, QtWidgets.QHeaderView.ResizeToContents)
+        table_r.setHorizontalHeaderLabels(["Model Name", "TimeStamp"])
+
     # ! 1. IMPORT YOUR DATA SCREEN
 
 # REFRESH
@@ -136,12 +136,14 @@ class MainWindowUIClass(Ui_MainWindow):
             data = self.functions.readFile(fileName)
             self.functions.setFileName(self.pathLine.text())
             self.refreshAll()
-            self.functions.popup_window("Your file is successfully imported!"," Success ","Information" )
+            self.functions.popup_window(
+                "Your file is successfully imported!", " Success ", "Information")
             self.refreshAll()
             # Otan ginei to import me valid file energopoieitai to next button
             self.nextButton.setEnabled(True)
         else:
-            self.functions.popup_window("Please, choose a valid file to import!"," Error ","Warning" )
+            self.functions.popup_window(
+                "Please, choose a valid file to import!", " Error ", "Warning")
 
             self.refreshAll()
 
@@ -159,9 +161,8 @@ class MainWindowUIClass(Ui_MainWindow):
             learning_type = "Regression"
             series_flag = False
 
-
     def radio_ts(self):
-        global learning_type,series_flag
+        global learning_type, series_flag
         if self.radio_btn_ts.isChecked():
             learning_type = "Timeseries"
             series_flag = True
@@ -170,7 +171,8 @@ class MainWindowUIClass(Ui_MainWindow):
     def cancelSlot(self):
         # TODO: Na allaksw to clear button k na kanei clear - twra bazei to iris gia eukolia.
         # TODO: Na valw epilogh gia drop columns h drop rows me NaN values!
-        self.pathLine.setText("/home/larry/Documents/Thesis/projectv1/Datasets/shampoo.csv")
+        self.pathLine.setText(
+            "/home/larry/Documents/Thesis/projectv1/Datasets/shampoo.csv")
 
 # NEXT BUTTON POU KANEI TO PREVIEW
     def nextSlot(self):  # Slot gia to next button
@@ -200,7 +202,6 @@ class MainWindowUIClass(Ui_MainWindow):
                     i, j, QTableWidgetItem(f"{ data.iloc[i][j] }"))
         header_labels = list(data.columns.values)
         self.tableWidget.setHorizontalHeaderLabels(header_labels)
-        
 
         self.comboBox.adjustSize()
         if learning_type == 'Timeseries':
@@ -530,8 +531,8 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def backSlot_1(self):
         if series_flag == False:
-            self.stackedWidget.setCurrentIndex(2) 
-        else: # Pame ena screen pisw
+            self.stackedWidget.setCurrentIndex(2)
+        else:  # Pame ena screen pisw
             self.stackedWidget.setCurrentIndex(8)  # Pame ena screen pisw
 
         self.checkBox_16.setChecked(False)
@@ -766,7 +767,8 @@ class MainWindowUIClass(Ui_MainWindow):
         try:
             #! ELEGXOS AN EXOUN EPILEXTHEI ESTIMATORS:
             if not inc_est:
-                self.functions.popup_window("Please select at least one Estimator from the list."," Error ","Warning" )
+                self.functions.popup_window(
+                    "Please select at least one Estimator from the list.", " Error ", "Warning")
 
             else:
                 minutes = t_left/60
@@ -789,7 +791,6 @@ class MainWindowUIClass(Ui_MainWindow):
                 popup.setStandardButtons(QtWidgets.QMessageBox.Ok)
                 popup.setIcon(QtWidgets.QMessageBox.Information)
                 popup.exec_()
-                
 
                 #! Data Splitting:
                 X_train, X_test, y_train, y_test = self.functions.splitData(
@@ -808,8 +809,10 @@ class MainWindowUIClass(Ui_MainWindow):
                 #! Model Fit:
                 model = self.functions.fitModel(
                     X_train, y_train, model, dataset_name)
+
                 pred = model.predict(X_test)
-                self.functions.popup_window("A new ensemble is created successfully!"," Done ","Information" )
+                self.functions.popup_window(
+                    "A new ensemble is created successfully!", " Done ", "Information")
                 self.stackedWidget.setEnabled(True)
 
                 #! Metric results:
@@ -907,12 +910,8 @@ class MainWindowUIClass(Ui_MainWindow):
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         self.weights_table.setHorizontalHeaderLabels(["Weight","Information"])
 
-        
-
-
     def ok_slot(self):
         self.stackedWidget.setCurrentIndex(5)
-
     
     def show_ensembles(self):
         global ft_model
@@ -960,6 +959,8 @@ class MainWindowUIClass(Ui_MainWindow):
         try:
             X_rld = roll_time_series(
                 X, column_id="id", column_sort=f'{sort_by}', min_timeshift=int(min_shift), max_timeshift=int(max_shift), rolling_direction=1)
+            print("\n_______________________________________~-Rolled Dataframe-~_______________________________________________")
+            print(X_rld)
             y_df = y_df.iloc[min_shift:].to_numpy()
             y = pd.Series(
                 y_df, name=f"{self.functions.getLabel(item_index, data)}")

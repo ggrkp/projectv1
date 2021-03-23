@@ -2,23 +2,29 @@ from micromlgen import port
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import load_breast_cancer
-
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn import metrics
 
 
-cancer = load_breast_cancer()
+# cancer = load_breast_cancer()
 
 # The data set is presented in a dictionary form:
-print(cancer.keys())
-df_feat = pd.DataFrame(cancer['data'],
-                       columns=cancer['feature_names'])
+# print(cancer.keys())
+# df_feat = pd.DataFrame(cancer['data'],
+#                        columns=cancer['feature_names'])
 
 # cancer column is our target
-df_target = pd.DataFrame(cancer['target'],
-                         columns=['Cancer'])
+# df_target = pd.DataFrame(cancer['target'],
+#                          columns=['Cancer'])
+fileName= "/home/larry/Documents/projectv1/Datasets/iris.csv"
+df = pd.read_csv(fileName, sep="[,;]",
+                 engine='python')
+# print(df.head())
+tar_idx = 4
+df_target = df.iloc[:, (tar_idx)]
+df_feat = df.iloc[:, df.columns != df.columns[tar_idx]]
 
 
 X_train, X_test, y_train, y_test = train_test_split(
@@ -62,7 +68,7 @@ rf_random.fit(X_train, y_train)
 rf_random.best_params_
 y_pred = rf_random.best_estimator_.predict(X_test)
 
-print (rf_random.best_estimator_)
+print(rf_random.best_estimator_)
 print('ACC : ', metrics.accuracy_score(y_test, y_pred))
 # print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
 # print('Root Mean Squared Error:', np.sqrt(
@@ -73,5 +79,4 @@ print('ACC : ', metrics.accuracy_score(y_test, y_pred))
 #! Mean Squared Error: 0.05207602339181287
 #! Root Mean Squared Error: 0.22820171645238094
 
-print(port(rf_random.best_estimator_))
-
+port(rf_random.best_estimator_)

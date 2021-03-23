@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>999</width>
+    <width>1012</width>
     <height>731</height>
    </rect>
   </property>
@@ -30,7 +30,7 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>10</y>
+      <y>20</y>
       <width>931</width>
       <height>651</height>
      </rect>
@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>10</number>
     </property>
     <widget class="QWidget" name="page_6">
      <widget class="QLabel" name="label_19">
@@ -2156,6 +2156,320 @@
       </layout>
      </widget>
     </widget>
+    <widget class="QWidget" name="page_10">
+     <widget class="QWidget" name="layoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>660</y>
+        <width>321</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_18">
+       <item>
+        <widget class="QLabel" name="label_35">
+         <property name="text">
+          <string>Set Test Size Split</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>88</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="test_sz_box_2"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLabel" name="label_39">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>0</y>
+        <width>801</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Serif</family>
+        <pointsize>35</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>TINY MACHINE LEARNING</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame_export">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>350</y>
+        <width>621</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QWidget" name="layoutWidget_7">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>70</y>
+         <width>321</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_21">
+        <item>
+         <widget class="QLabel" name="label_40">
+          <property name="text">
+           <string>Exported file name:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_10">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>68</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="header_text"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QPushButton" name="export_btn">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>140</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Serif</family>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>Export</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_78">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>10</y>
+         <width>441</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Serif</family>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
+         <underline>false</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>EXPORT MODEL AS C CODE</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="frame_pref">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>79</y>
+        <width>621</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QWidget" name="layoutWidget_6">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>90</y>
+         <width>321</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_20">
+        <item>
+         <widget class="QLabel" name="label_38">
+          <property name="text">
+           <string>Set Test Size Split</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="split_box"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="layoutWidget_5">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>60</y>
+         <width>321</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_19">
+        <item>
+         <widget class="QLabel" name="label_37">
+          <property name="text">
+           <string>CV folds</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_9">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>88</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="cv_box"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QTextEdit" name="result_text_2">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>200</y>
+         <width>391</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="micro_btn">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>130</y>
+         <width>271</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Serif</family>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>Create Model</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_77">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>10</y>
+         <width>511</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Serif</family>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
+         <underline>false</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>SET PREFERRED PARAMETERS</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="home_microbtn">
+      <property name="geometry">
+       <rect>
+        <x>860</x>
+        <y>610</y>
+        <width>41</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>home.png</normaloff>home.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -2163,50 +2477,18 @@
  <resources/>
  <connections>
   <connection>
-   <sender>nextButton</sender>
+   <sender>cancelButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>nextSlot()</slot>
+   <slot>cancelSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>699</x>
-     <y>359</y>
+     <x>592</x>
+     <y>217</y>
     </hint>
     <hint type="destinationlabel">
-     <x>380</x>
-     <y>185</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>importButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>importSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>738</x>
-     <y>213</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>217</x>
-     <y>167</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>timeLeft_box</sender>
-   <signal>valueChanged(QString)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>timeleft_Slot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>739</x>
-     <y>142</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>95</x>
-     <y>61</y>
+     <x>30</x>
+     <y>166</y>
     </hint>
    </hints>
   </connection>
@@ -2217,76 +2499,12 @@
    <slot>featureSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>408</x>
-     <y>106</y>
+     <x>478</x>
+     <y>111</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
      <y>552</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>browseButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>browseSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>809</x>
-     <y>176</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>560</x>
-     <y>106</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cancelButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>cancelSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>591</x>
-     <y>213</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>30</x>
-     <y>166</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>nextButton2</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>nextSlot_2()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>109</x>
-     <y>484</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>89</x>
-     <y>320</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>backButton2</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>backSlot_1()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>107</x>
-     <y>533</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>96</x>
-     <y>366</y>
     </hint>
    </hints>
   </connection>
@@ -2323,6 +2541,134 @@
    </hints>
   </connection>
   <connection>
+   <sender>browseButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>browseSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>809</x>
+     <y>183</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>560</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>timeLeft_box</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>timeleft_Slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>739</x>
+     <y>142</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>95</x>
+     <y>61</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>backButton2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>backSlot_1()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>107</x>
+     <y>533</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>96</x>
+     <y>366</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nextButton2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>nextSlot_2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>109</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>89</x>
+     <y>320</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fetch_model()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>528</x>
+     <y>112</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>793</x>
+     <y>545</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>groupBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>select_all_Estimators()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>207</x>
+     <y>125</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>529</x>
+     <y>11</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nextButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>nextSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>699</x>
+     <y>359</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>380</x>
+     <y>185</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>importButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>importSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>809</x>
+     <y>217</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>217</x>
+     <y>167</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>ressampleCombo</sender>
    <signal>activated(QString)</signal>
    <receiver>MainWindow</receiver>
@@ -2355,6 +2701,22 @@
    </hints>
   </connection>
   <connection>
+   <sender>bernoulliBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>bernoulliChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>207</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>124</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>adaBox</sender>
    <signal>stateChanged(int)</signal>
    <receiver>MainWindow</receiver>
@@ -2371,34 +2733,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>groupBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>select_all_Estimators()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>207</x>
-     <y>125</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>529</x>
-     <y>11</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>bernoulliBox</sender>
+   <sender>extratreeBox</sender>
    <signal>stateChanged(int)</signal>
    <receiver>MainWindow</receiver>
-   <slot>bernoulliChecked()</slot>
+   <slot>extraTreeChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>224</x>
-     <y>187</y>
+     <x>233</x>
+     <y>249</y>
     </hint>
     <hint type="destinationlabel">
      <x>124</x>
-     <y>425</y>
+     <y>482</y>
     </hint>
    </hints>
   </connection>
@@ -2409,28 +2755,12 @@
    <slot>dectreeChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>235</x>
-     <y>208</y>
+     <x>247</x>
+     <y>228</y>
     </hint>
     <hint type="destinationlabel">
      <x>113</x>
      <y>448</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>extratreeBox</sender>
-   <signal>stateChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>extraTreeChecked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>221</x>
-     <y>229</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>124</x>
-     <y>482</y>
     </hint>
    </hints>
   </connection>
@@ -2441,8 +2771,8 @@
    <slot>gausianChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>215</x>
-     <y>251</y>
+     <x>227</x>
+     <y>271</y>
     </hint>
     <hint type="destinationlabel">
      <x>30</x>
@@ -2457,8 +2787,8 @@
    <slot>gradient_checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>271</x>
-     <y>293</y>
+     <x>283</x>
+     <y>313</y>
     </hint>
     <hint type="destinationlabel">
      <x>58</x>
@@ -2473,8 +2803,8 @@
    <slot>knnChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>315</y>
+     <x>260</x>
+     <y>335</y>
     </hint>
     <hint type="destinationlabel">
      <x>33</x>
@@ -2489,8 +2819,8 @@
    <slot>ldaChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>204</x>
-     <y>336</y>
+     <x>216</x>
+     <y>356</y>
     </hint>
     <hint type="destinationlabel">
      <x>79</x>
@@ -2505,76 +2835,12 @@
    <slot>liblinearChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>237</x>
-     <y>358</y>
+     <x>249</x>
+     <y>378</y>
     </hint>
     <hint type="destinationlabel">
      <x>712</x>
      <y>14</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>libsvmBox</sender>
-   <signal>stateChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>libsvmChecked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>271</x>
-     <y>400</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>652</x>
-     <y>31</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>multinbBox</sender>
-   <signal>stateChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>multnbChecked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>228</x>
-     <y>443</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>236</x>
-     <y>7</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pasagrBox</sender>
-   <signal>stateChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>pasagrChecked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>245</x>
-     <y>464</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>369</x>
-     <y>3</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>rforoestBox</sender>
-   <signal>stateChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>rforestChecked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>202</x>
-     <y>496</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>88</x>
-     <y>8</y>
     </hint>
    </hints>
   </connection>
@@ -2585,8 +2851,8 @@
    <slot>sgdChecked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>247</x>
-     <y>503</y>
+     <x>259</x>
+     <y>527</y>
     </hint>
     <hint type="destinationlabel">
      <x>453</x>
@@ -2627,6 +2893,86 @@
    </hints>
   </connection>
   <connection>
+   <sender>ardBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>ard_Checked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>283</x>
+     <y>185</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>10</x>
+     <y>251</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>libsvmBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>libsvmChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>283</x>
+     <y>420</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>652</x>
+     <y>31</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>multinbBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>multnbChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>240</x>
+     <y>463</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>236</x>
+     <y>7</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pasagrBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>pasagrChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>369</x>
+     <y>3</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rforoestBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>rforestChecked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>202</x>
+     <y>496</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>88</x>
+     <y>8</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>holdout_box</sender>
    <signal>valueChanged(QString)</signal>
    <receiver>MainWindow</receiver>
@@ -2639,22 +2985,6 @@
     <hint type="destinationlabel">
      <x>786</x>
      <y>241</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ardBox</sender>
-   <signal>stateChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>ard_Checked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>271</x>
-     <y>165</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>10</x>
-     <y>251</y>
     </hint>
    </hints>
   </connection>
@@ -2697,8 +3027,8 @@
    <slot>libsvr_Checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>218</x>
-     <y>422</y>
+     <x>230</x>
+     <y>442</y>
     </hint>
     <hint type="destinationlabel">
      <x>7</x>
@@ -2755,22 +3085,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>savemodel_Box</sender>
-   <signal>stateChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>save_Checked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>748</x>
-     <y>454</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>607</x>
-     <y>563</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>showen_btn</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
@@ -2783,6 +3097,22 @@
     <hint type="destinationlabel">
      <x>782</x>
      <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>savemodel_Box</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>save_Checked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>748</x>
+     <y>454</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>607</x>
+     <y>563</y>
     </hint>
    </hints>
   </connection>
@@ -2803,30 +3133,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_2</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>fetch_model()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>528</x>
-     <y>112</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>793</x>
-     <y>545</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>ensembling_checkbox</sender>
    <signal>stateChanged(int)</signal>
    <receiver>MainWindow</receiver>
    <slot>ensembling_checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>489</x>
-     <y>486</y>
+     <x>490</x>
+     <y>506</y>
     </hint>
     <hint type="destinationlabel">
      <x>775</x>
@@ -2841,8 +3155,8 @@
    <slot>metalearning_checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>549</x>
-     <y>512</y>
+     <x>550</x>
+     <y>532</y>
     </hint>
     <hint type="destinationlabel">
      <x>770</x>
@@ -2867,18 +3181,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>home_btn</sender>
+   <sender>back_btn</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>home_slot()</slot>
+   <slot>models_back()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>59</x>
-     <y>68</y>
+     <x>84</x>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
-     <x>117</x>
-     <y>95</y>
+     <x>19</x>
+     <y>597</y>
     </hint>
    </hints>
   </connection>
@@ -2899,18 +3213,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>back_btn</sender>
+   <sender>home_btn</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>models_back()</slot>
+   <slot>home_slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>84</x>
-     <y>591</y>
+     <x>59</x>
+     <y>68</y>
     </hint>
     <hint type="destinationlabel">
-     <x>19</x>
-     <y>597</y>
+     <x>117</x>
+     <y>95</y>
     </hint>
    </hints>
   </connection>
@@ -2953,8 +3267,8 @@
    <slot>radio_c()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>302</x>
-     <y>303</y>
+     <x>303</x>
+     <y>311</y>
     </hint>
     <hint type="destinationlabel">
      <x>23</x>
@@ -2969,8 +3283,8 @@
    <slot>radio_r()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>455</x>
-     <y>301</y>
+     <x>565</x>
+     <y>311</y>
     </hint>
     <hint type="destinationlabel">
      <x>36</x>
@@ -2986,27 +3300,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>700</x>
-     <y>301</y>
+     <y>311</y>
     </hint>
     <hint type="destinationlabel">
      <x>85</x>
      <y>650</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>home_btn2_2</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>home_slot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>64</x>
-     <y>70</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>25</x>
-     <y>500</y>
     </hint>
    </hints>
   </connection>
@@ -3027,6 +3325,22 @@
    </hints>
   </connection>
   <connection>
+   <sender>home_btn2_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>home_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>25</x>
+     <y>500</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>hist_btn</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
@@ -3039,6 +3353,22 @@
     <hint type="destinationlabel">
      <x>859</x>
      <y>28</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>roll_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>roll_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>883</x>
+     <y>192</y>
     </hint>
    </hints>
   </connection>
@@ -3071,22 +3401,6 @@
     <hint type="destinationlabel">
      <x>883</x>
      <y>521</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>roll_btn</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>roll_slot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>630</x>
-     <y>210</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>883</x>
-     <y>192</y>
     </hint>
    </hints>
   </connection>
@@ -3171,6 +3485,38 @@
    </hints>
   </connection>
   <connection>
+   <sender>custom_radio</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>custom_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>349</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>8</x>
+     <y>436</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>submit_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>submit_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>557</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>22</x>
+     <y>574</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>min_timeshift_box</sender>
    <signal>valueChanged(QString)</signal>
    <receiver>MainWindow</receiver>
@@ -3203,22 +3549,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>submit_btn</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>submit_slot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>363</x>
-     <y>557</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>22</x>
-     <y>574</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>sort_box</sender>
    <signal>activated(QString)</signal>
    <receiver>MainWindow</receiver>
@@ -3235,22 +3565,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>custom_radio</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>custom_slot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>200</x>
-     <y>349</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>8</x>
-     <y>436</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>efficient_radio</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
@@ -3263,6 +3577,22 @@
     <hint type="destinationlabel">
      <x>641</x>
      <y>656</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>show_more_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>show_more_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>592</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>711</x>
+     <y>620</y>
     </hint>
    </hints>
   </connection>
@@ -3299,18 +3629,34 @@
    </hints>
   </connection>
   <connection>
-   <sender>show_more_btn</sender>
-   <signal>clicked()</signal>
+   <sender>checkBox</sender>
+   <signal>stateChanged(int)</signal>
    <receiver>MainWindow</receiver>
-   <slot>show_more_slot()</slot>
+   <slot>max_ts_checked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>592</x>
-     <y>580</y>
+     <x>222</x>
+     <y>206</y>
     </hint>
     <hint type="destinationlabel">
-     <x>711</x>
-     <y>620</y>
+     <x>1</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ok_btn_3</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>ok_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>480</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>12</x>
+     <y>671</y>
     </hint>
    </hints>
   </connection>
@@ -3354,7 +3700,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>552</x>
-     <y>460</y>
+     <y>461</y>
     </hint>
     <hint type="destinationlabel">
      <x>792</x>
@@ -3363,34 +3709,82 @@
    </hints>
   </connection>
   <connection>
-   <sender>checkBox</sender>
-   <signal>stateChanged(int)</signal>
+   <sender>export_btn</sender>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>max_ts_checked()</slot>
+   <slot>export_h()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>206</y>
+     <x>489</x>
+     <y>529</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1</x>
-     <y>155</y>
+     <x>933</x>
+     <y>480</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>ok_btn_3</sender>
+   <sender>micro_btn</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>ok_slot()</slot>
+   <slot>micro_model()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>480</x>
-     <y>642</y>
+     <x>566</x>
+     <y>251</y>
     </hint>
     <hint type="destinationlabel">
-     <x>12</x>
-     <y>671</y>
+     <x>989</x>
+     <y>238</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>split_box</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>set_split()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>609</x>
+     <y>201</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>916</x>
+     <y>153</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cv_box</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>set_folds()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>596</x>
+     <y>169</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>918</x>
+     <y>111</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>home_microbtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>home_micro()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>924</x>
+     <y>643</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>963</x>
+     <y>693</y>
     </hint>
    </hints>
   </connection>
@@ -3473,5 +3867,10 @@
   <slot>forecasting_slot()</slot>
   <slot>max_ts_checked()</slot>
   <slot>ok_slot()</slot>
+  <slot>export_h()</slot>
+  <slot>micro_model()</slot>
+  <slot>set_split()</slot>
+  <slot>set_folds()</slot>
+  <slot>home_micro()</slot>
  </slots>
 </ui>

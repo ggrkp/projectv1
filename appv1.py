@@ -5,6 +5,11 @@ import csv
 import os
 import sqlite3
 import sys
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import metrics
+from micromlgen import port
+
 from io import StringIO
 import autosklearn
 import pandas as pd
@@ -19,6 +24,7 @@ from tsfresh.feature_extraction import (ComprehensiveFCParameters,
                                         EfficientFCParameters,
                                         MinimalFCParameters)
 from tsfresh.utilities.dataframe_functions import impute, roll_time_series
+from sklearn.model_selection import train_test_split
 
 from functions import Func
 from guiv1 import Ui_MainWindow
@@ -39,6 +45,7 @@ class MainWindowUIClass(Ui_MainWindow):
         global f_step, min_shift
         f_step = 0
         min_shift = 0
+        # !arxikopoihseis
         # Arxikopoihsh learning Type gia na mh faei error
         self.stackedWidget.setCurrentIndex(0)  # Na ksekinaei apo 1h othoni
         # Otan ginei to import me valid file energopoieitai to next button
@@ -287,7 +294,7 @@ class MainWindowUIClass(Ui_MainWindow):
             "r2": autosklearn.metrics.r2
         }
         if learning_type == "Classification":
-            self.stackedWidget.setCurrentIndex(4)
+            self.stackedWidget.setCurrentIndex(10)
 
             #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION
             self.test_sz_box.setValue(0.2)
@@ -839,19 +846,21 @@ class MainWindowUIClass(Ui_MainWindow):
             self.metricCombo.clear()
             self.ressampleCombo.clear()
             self.nextButton.setEnabled(False)
-            self.functions.popup_window("An error has occured. Restart the Process. Make sure you defined the correct learning type and selected the correct target feature!"," Error ","Warning" )
+            self.functions.popup_window(
+                "An error has occured. Restart the Process. Make sure you defined the correct learning type and selected the correct target feature!", " Error ", "Warning")
             self.stackedWidget.setEnabled(True)
             if (series_flag == True):
                 self.stackedWidget.setCurrentIndex(9)
             else:
                 self.stackedWidget.setCurrentIndex(1)
 
-            
 
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # ! 4. MODELS SCREEN
+
+
     def models_back(self):
         self.stackedWidget.setCurrentIndex(2)
 
@@ -862,9 +871,8 @@ class MainWindowUIClass(Ui_MainWindow):
         query1_cnt = "select count(*) from models"
         table4 = self.dbTable
         self.functions.fill_tables(db_name, query1, query1_cnt, table4)
-    
+
     # * LOAD MODEL BUTTON!!
-  
 
     def fetch_model_2(self):
         global ft_model
@@ -881,9 +889,9 @@ class MainWindowUIClass(Ui_MainWindow):
         tstamp = table.item(currow, 1)
         self.show_more_btn.setEnabled(True)
 
-
         if tstamp == None:
-            self.functions.popup_window("No Models Were Selected! Please select a model from the list."," Error ","Warning" )
+            self.functions.popup_window(
+                "No Models Were Selected! Please select a model from the list.", " Error ", "Warning")
 
         else:
             self.pushButton_7.setEnabled(True)
@@ -901,18 +909,19 @@ class MainWindowUIClass(Ui_MainWindow):
         numcols = len(model_list[0])  # 3 columns in your example
         self.weights_table.setColumnCount(numcols)
         self.weights_table.setRowCount(numrows)
-        print( numrows)
+        print(numrows)
         for row in range(numrows):
             self.weights_table.setRowHeight(row, 510)
             for column in range(numcols):
-                self.weights_table.setItem(row, column, QTableWidgetItem((str(model_list[row][column]))))
-        header = self.weights_table.horizontalHeader()       
+                self.weights_table.setItem(
+                    row, column, QTableWidgetItem((str(model_list[row][column]))))
+        header = self.weights_table.horizontalHeader()
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
-        self.weights_table.setHorizontalHeaderLabels(["Weight","Information"])
+        self.weights_table.setHorizontalHeaderLabels(["Weight", "Information"])
 
     def ok_slot(self):
         self.stackedWidget.setCurrentIndex(5)
-    
+
     def show_ensembles(self):
         global ft_model
         # print(ft_model.show_models())
@@ -927,8 +936,8 @@ class MainWindowUIClass(Ui_MainWindow):
             # y_predict = ft_model.predict(X)
             # # print(y_predict)
         except:
-            self.functions.popup_window("The selected model is trained on a different Data Set."," Error ","Warning" )
-
+            self.functions.popup_window(
+                "The selected model is trained on a different Data Set.", " Error ", "Warning")
 
     def save_Checked(self):
         pass
@@ -940,13 +949,13 @@ class MainWindowUIClass(Ui_MainWindow):
     def min_shift_slot(self):
         global min_shift
         min_shift = self.min_timeshift_box.value()
-    
+
     def max_shift_slot(self):
         global max_shift
         max_shift = self.max_timeshift_box.value()
 
     def max_ts_checked(self):
-        global max_shift,X
+        global max_shift, X
         if self.checkBox.isChecked():
             self.max_timeshift_box.setEnabled(False)
             max_shift = X.shape[0]
@@ -968,7 +977,8 @@ class MainWindowUIClass(Ui_MainWindow):
             self.roll_frame.setEnabled(False)
             self.back_btn_7.hide()
         except KeyError:
-            self.functions.popup_window("Minimum timeshift cannot be greater than Maximum timeshift"," Error ","Warning" )
+            self.functions.popup_window(
+                "Minimum timeshift cannot be greater than Maximum timeshift", " Error ", "Warning")
 
     def extract_slot(self):
         global X, X_rld, y, sort_by, fc_settings
@@ -980,12 +990,14 @@ class MainWindowUIClass(Ui_MainWindow):
             impute(X)
             X = select_features(X, y, show_warnings=False)
             if X.empty:
-                self.functions.popup_window("Zero features were extracted. Change your preferences."," Error ","Warning" )
+                self.functions.popup_window(
+                    "Zero features were extracted. Change your preferences.", " Error ", "Warning")
             else:
                 self.next_btn_7.setEnabled(True)
             print(X)
         except NameError:
-            self.functions.popup_window("Please Choose Valid Parameters"," Error ","Warning" )
+            self.functions.popup_window(
+                "Please Choose Valid Parameters", " Error ", "Warning")
 
     def next_slot_7(self):
         global y, preview_num, X, learning_type
@@ -1042,7 +1054,8 @@ class MainWindowUIClass(Ui_MainWindow):
             print(fc_settings)
         except ValueError:
             fc_settings = None
-            self.functions.popup_window("Please, Insert a dictionary format. - > fc_settings are set to None."," Error ","Warning" )
+            self.functions.popup_window(
+                "Please, Insert a dictionary format. - > fc_settings are set to None.", " Error ", "Warning")
 
     def comprehensive_slot(self):
         global fc_settings
@@ -1074,9 +1087,40 @@ class MainWindowUIClass(Ui_MainWindow):
             self.text_settings.setReadOnly(False)
         else:
             self.text_settings.setReadOnly(True)
+# !MICRO MACHINE LEARNING FUNCTIONS ! 
+    
+
+    def micro_model(self):
+        global X, y, model_h
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, np.ravel(y),
+            test_size=0.30, random_state=101)
+
+        model_h = RandomForestClassifier()
+        model_h.fit(X_train, y_train)
+        y_pred = model_h.predict(X_test)
+        print('ACC : ', metrics.accuracy_score(y_test, y_pred))
+
+    def export_h(self):
+        global model_h
+        original_stdout = sys.stdout # Save a reference to the original standard output
+        with open('/home/larry/Documents/projectv1/model.h', 'w') as f:
+            sys.stdout = f # Change the standard output to the file we created.
+            print(port(model_h))         
+            sys.stdout = original_stdout # Reset the standard output to its original value
+
+    def set_split(self):
+        pass
+
+    def set_folds(self):
+        pass
+
+    def home_micro(self):
+
+        pass
 
 
-def main(): 
+def main():
     app = QtWidgets.QApplication(sys.argv)
     # app.setStyle('Fusion')
     # app.setStyleSheet(qdarkgraystyle.load_stylesheet())

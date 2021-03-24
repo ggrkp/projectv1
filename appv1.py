@@ -1108,6 +1108,7 @@ class MainWindowUIClass(Ui_MainWindow):
         pass
 
     def micro_model(self):
+        # todo: SUNARTISEIS!
         global X, y, model_h, split_size
         X_train, X_test, y_train, y_test = train_test_split(
             X, np.ravel(y),

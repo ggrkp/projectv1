@@ -54,12 +54,12 @@ print(grid.best_params_)
 # print how our model looks after hyper-parameter tuning 
 print(grid.best_estimator_) 
 
-grid_predictions = grid.best_estimator_.predict(X_test) 
+grid_predictions = grid.predict(X_test) 
   
 # print classification report 
 print(classification_report(y_test, grid_predictions)) 
 
-print(port(grid.best_estimator_))
+# print(port(grid.best_estimator_))
 
 
  

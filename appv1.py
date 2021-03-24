@@ -5,26 +5,27 @@ import csv
 import os
 import sqlite3
 import sys
-import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-from sklearn import metrics
-from micromlgen import port
-
 from io import StringIO
+from sklearn.model_selection import RandomizedSearchCV
 import autosklearn
+import numpy as np
 import pandas as pd
 import sklearn
+from micromlgen import port
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
+from sklearn import metrics
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
 from tsfresh import (extract_features, extract_relevant_features,
                      select_features)
 from tsfresh.feature_extraction import (ComprehensiveFCParameters,
                                         EfficientFCParameters,
                                         MinimalFCParameters)
 from tsfresh.utilities.dataframe_functions import impute, roll_time_series
-from sklearn.model_selection import train_test_split
 
 from functions import Func
 from guiv1 import Ui_MainWindow
@@ -254,7 +255,7 @@ class MainWindowUIClass(Ui_MainWindow):
                 self.tableWidget.item(i, j).setBackground(
                     QtGui.QColor('#fff'))
             self.tableWidget.item(i, item_index).setBackground(
-                QtGui.QColor('#70B900'))
+                QtGui.QColor('#00BFFF'))
 
 # NEXT BUTTON - BACK BUTTON > DHLWNONTAI DEFAULTS GIA TO EPOMENO SCREEN ( MDOELING SCREEN - PARAMETERS )
     def backSlot(self):  # Slot gia to back button
@@ -1111,10 +1112,61 @@ class MainWindowUIClass(Ui_MainWindow):
         X_train, X_test, y_train, y_test = train_test_split(
             X, np.ravel(y),
             test_size=split_size, random_state=101)
-        model_h = RandomForestClassifier()
-        model_h.fit(X_train, y_train)
-        y_pred = model_h.predict(X_test)
-        print('ACC : ', metrics.accuracy_score(y_test, y_pred))
+
+        #* model 2: RFCLASSIFIER TRAIN HPTUNE FIT
+
+        model_1 = RandomForestClassifier()
+        model_1.fit(X_train, y_train)
+        # y_pred = model_1.predict(X_test)
+        # Number of trees in random forest
+        n_estimators = [int(x) for x in np.linspace(start=200, stop=2000, num=10)]
+        # Number of features to consider at every split
+        max_features = ['auto', 'sqrt']
+        # Maximum number of levels in tree
+        max_depth = [int(x) for x in np.linspace(10, 110, num=11)]
+        max_depth.append(None)
+        # Minimum number of samples required to split a node
+        min_samples_split = [2, 5, 10]
+        # Minimum number of samples required at each leaf node
+        min_samples_leaf = [1, 2, 4]
+        # Method of selecting samples for training each tree
+        bootstrap = [True, False]
+        # Create the random grid
+        random_grid = {'n_estimators': n_estimators,
+                    'max_features': max_features,
+                    'max_depth': max_depth,
+                    'min_samples_split': min_samples_split,
+                    'min_samples_leaf': min_samples_leaf,
+                    'bootstrap': bootstrap}
+        model_1 = RandomizedSearchCV(model_1, param_distributions=random_grid,
+                                    n_iter=100, cv=3, verbose=2, random_state=42, n_jobs=-1)
+
+        model_1.fit(X_train, y_train)
+        y_pred = model_1.best_estimator_.predict(X_test)
+        acc1 = metrics.accuracy_score(y_test, y_pred)
+        # print(rf_random.best_estimator_)
+        # print('ACC : ', metrics.accuracy_score(y_test, y_pred))
+
+
+        #* model 2: SVM TRAIN HPTUNE FIT
+        model_2 = SVC() 
+        model_2.fit(X_train, y_train) 
+        param_grid = {'C': [0.1, 1, 10, 100, 1000],  
+              'gamma': [1, 0.1, 0.01, 0.001, 0.0001], 
+              'kernel': ['rbf']}   
+        model_2 = RandomizedSearchCV(model_2, param_grid, refit = True, verbose = 3) 
+        model_2.fit(X_train, y_train) 
+        
+        predictions = model_2.best_estimator_.predict(X_test) 
+        acc2 =  metrics.accuracy_score(y_test, predictions)
+        print(f"{acc1} vs {acc2}")
+# print prediction results 
+        if acc1 > acc2 :
+            model_h = model_1
+        else:
+            model_h = model_2
+        print(model_h)
+        self.header_text.setText('model')
         self.frame_export.setEnabled(True)
         self.frame_pref.setEnabled(False)
         
@@ -1124,11 +1176,13 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def export_h(self):
         global model_h
+        
+        model_h_name = self.header_text.toPlainText()
         original_stdout = sys.stdout  # Save a reference to the original standard output
-        with open('/home/larry/Documents/projectv1/model.h', 'w') as f:
+        with open('/home/larry/Documents/projectv1/'+model_h_name+'.h', 'w') as f:
             # Change the standard output to the file we created.
             sys.stdout = f
-            print(port(model_h))
+            print(port(model_h.best_estimator_))
             sys.stdout = original_stdout  # Reset the standard output to its original value
         self.functions.popup_window(
             "Model exported successfully.", " Success ", "Information")    

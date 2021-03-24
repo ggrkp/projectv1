@@ -42,7 +42,9 @@ class MainWindowUIClass(Ui_MainWindow):
 
     # ! 0. WELCOME SCREEN
     def get_started(self):
-        global f_step, min_shift
+        global f_step, min_shift, split_size
+        split_size = 0.3
+
         f_step = 0
         min_shift = 0
         # !arxikopoihseis
@@ -52,6 +54,9 @@ class MainWindowUIClass(Ui_MainWindow):
         self.nextButton.setEnabled(False)
         # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(False)
+        self.tiny_btn.setEnabled(False)
+        self.frame_export.setEnabled(False)
+
         self.showen_btn.setEnabled(False)
         self.predict_btn.setEnabled(False)
         self.text_settings.setReadOnly(True)
@@ -242,6 +247,7 @@ class MainWindowUIClass(Ui_MainWindow):
             X = self.functions.pickPredictors(item_index, data).to_numpy()
         # Otan ginei to import me valid file energopoieitai to next button
         self.nextButton1.setEnabled(True)
+        self.tiny_btn.setEnabled(True)
 
         for i in range(preview_num):
             for j in range(self.functions.colCount(data)):
@@ -294,8 +300,7 @@ class MainWindowUIClass(Ui_MainWindow):
             "r2": autosklearn.metrics.r2
         }
         if learning_type == "Classification":
-            self.stackedWidget.setCurrentIndex(10)
-
+            self.stackedWidget.setCurrentIndex(4)
             #! ARXIKOPOIHSEIS ANALOGA ME REGRESSION CLASSIFICATION
             self.test_sz_box.setValue(0.2)
 
@@ -366,6 +371,8 @@ class MainWindowUIClass(Ui_MainWindow):
             self.cvfoldsBox.setEnabled(False)
             self.test_sz_box.setMinimum(0.1)
             self.test_sz_box.setMaximum(0.9)
+            self.split_box.setValue(0.2)
+
 
         elif learning_type == "Regression":
 
@@ -439,6 +446,8 @@ class MainWindowUIClass(Ui_MainWindow):
             self.cvfoldsBox.setEnabled(False)
             self.test_sz_box.setMinimum(0.1)
             self.test_sz_box.setMaximum(0.9)
+            self.split_box.setMinimum(0.1)
+            self.split_box.setMaximum(0.9)
 
         else:  # If learning_type == "Timeseries"
             self.stackedWidget.setCurrentIndex(8)
@@ -854,12 +863,10 @@ class MainWindowUIClass(Ui_MainWindow):
             else:
                 self.stackedWidget.setCurrentIndex(1)
 
-
 # *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # *><><><><><<><><><><><><><><><><><<><><><><><><><><><><><<><><><><><><
     # ! 4. MODELS SCREEN
-
 
     def models_back(self):
         self.stackedWidget.setCurrentIndex(2)
@@ -1087,39 +1094,45 @@ class MainWindowUIClass(Ui_MainWindow):
             self.text_settings.setReadOnly(False)
         else:
             self.text_settings.setReadOnly(True)
-# !MICRO MACHINE LEARNING FUNCTIONS ! 
-    
-
-    def micro_model(self):
-        global X, y, model_h
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, np.ravel(y),
-            test_size=0.30, random_state=101)
-
-        model_h = RandomForestClassifier()
-        model_h.fit(X_train, y_train)
-        y_pred = model_h.predict(X_test)
-        print('ACC : ', metrics.accuracy_score(y_test, y_pred))
-
-    def export_h(self):
-        global model_h
-        original_stdout = sys.stdout # Save a reference to the original standard output
-        with open('/home/larry/Documents/projectv1/model.h', 'w') as f:
-            sys.stdout = f # Change the standard output to the file we created.
-            print(port(model_h))         
-            sys.stdout = original_stdout # Reset the standard output to its original value
+# !MICRO MACHINE LEARNING FUNCTIONS !
+    def tiny_slot(self):
+        self.stackedWidget.setCurrentIndex(10)
 
     def set_split(self):
-        pass
+        global split_size
+        self.split_box.setSingleStep(0.01)
+        split_size = self.split_box.value()
 
     def set_folds(self):
         pass
 
-    def home_micro(self):
+    def micro_model(self):
+        global X, y, model_h, split_size
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, np.ravel(y),
+            test_size=split_size, random_state=101)
+        model_h = RandomForestClassifier()
+        model_h.fit(X_train, y_train)
+        y_pred = model_h.predict(X_test)
+        print('ACC : ', metrics.accuracy_score(y_test, y_pred))
+        self.frame_export.setEnabled(True)
+        self.frame_pref.setEnabled(False)
+        
 
+    def home_micro(self):
         pass
 
-
+    def export_h(self):
+        global model_h
+        original_stdout = sys.stdout  # Save a reference to the original standard output
+        with open('/home/larry/Documents/projectv1/model.h', 'w') as f:
+            # Change the standard output to the file we created.
+            sys.stdout = f
+            print(port(model_h))
+            sys.stdout = original_stdout  # Reset the standard output to its original value
+        self.functions.popup_window(
+            "Model exported successfully.", " Success ", "Information")    
+   
 def main():
     app = QtWidgets.QApplication(sys.argv)
     # app.setStyle('Fusion')

@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>10</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_6">
      <widget class="QLabel" name="label_19">
@@ -515,7 +515,7 @@
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="text">
-       <string>Next</string>
+       <string>Αuto-ML</string>
       </property>
      </widget>
      <widget class="QPushButton" name="load_DB_btn">
@@ -633,6 +633,27 @@
         </item>
        </layout>
       </widget>
+     </widget>
+     <widget class="QPushButton" name="tiny_btn">
+      <property name="geometry">
+       <rect>
+        <x>790</x>
+        <y>580</y>
+        <width>80</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="text">
+       <string>Tiny-ML</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="page_5">
@@ -2230,65 +2251,6 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QWidget" name="layoutWidget_7">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>70</y>
-         <width>321</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_21">
-        <item>
-         <widget class="QLabel" name="label_40">
-          <property name="text">
-           <string>Exported file name:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_10">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>68</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QTextEdit" name="header_text"/>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QPushButton" name="export_btn">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>140</y>
-         <width>201</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Serif</family>
-         <pointsize>20</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>Export</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_78">
        <property name="geometry">
         <rect>
@@ -2311,6 +2273,63 @@
        <property name="text">
         <string>EXPORT MODEL AS C CODE</string>
        </property>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>80</y>
+         <width>351</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_21">
+          <item>
+           <widget class="QLabel" name="label_40">
+            <property name="text">
+             <string>Exported file name:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_10">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>68</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="header_text"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="export_btn">
+          <property name="font">
+           <font>
+            <family>Serif</family>
+            <pointsize>20</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Export</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
      <widget class="QFrame" name="frame_pref">
@@ -3788,6 +3807,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tiny_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>tiny_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>884</x>
+     <y>608</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>981</x>
+     <y>697</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>browseSlot()</slot>
@@ -3872,5 +3907,6 @@
   <slot>set_split()</slot>
   <slot>set_folds()</slot>
   <slot>home_micro()</slot>
+  <slot>tiny_slot()</slot>
  </slots>
 </ui>

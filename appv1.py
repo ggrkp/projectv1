@@ -5,6 +5,8 @@ import csv
 import os
 import sqlite3
 import sys
+from sklearn.metrics import r2_score,max_error
+
 from io import StringIO
 from sklearn.model_selection import RandomizedSearchCV
 import autosklearn
@@ -884,6 +886,8 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def fetch_model_2(self):
         global ft_model
+        self.predict_btn.setEnabled(True)
+
         if self.tabWidget.currentIndex() == 0:
             table = self.classification_table
             text_edit = self.textEdit_2
@@ -937,12 +941,19 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def predict_y(self):
         try:
-            global X, y, ft_model
-            score = ft_model.score(X, y)
-            print("Test Score with pickle model: {0:.2f} %". format(
-                100 * score))
-            # y_predict = ft_model.predict(X)
-            # # print(y_predict)
+            global X, y, ft_model,learning_type
+            # score = ft_model.score(X, y)
+            # print("Test Score with pickle model: {0:.2f} %". format(
+            #     100 * score))
+            y_predict = ft_model.predict(X)
+            print(y_predict)
+            # !new!
+            if(learning_type=="Classification"):
+                for i in range(len(X)):
+                    print("X=%s, True=%s, Predicted=%s" % (X[i], y[i], y_predict[i]))
+                    print(ft_model.score(X,y))
+            else:
+                print(r2_score(y,y_predict))
         except:
             self.functions.popup_window(
                 "The selected model is trained on a different Data Set.", " Error ", "Warning")

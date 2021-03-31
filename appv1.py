@@ -1,11 +1,12 @@
 # yolo1
+from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog
 import ast
 import copy
 import csv
 import os
 import sqlite3
 import sys
-from sklearn.metrics import r2_score,max_error
+from sklearn.metrics import r2_score, max_error
 
 from io import StringIO
 from sklearn.model_selection import RandomizedSearchCV
@@ -31,10 +32,9 @@ from tsfresh.utilities.dataframe_functions import impute, roll_time_series
 
 from functions import Func
 from guiv1 import Ui_MainWindow
-
-
 class MainWindowUIClass(Ui_MainWindow):
     def __init__(self):
+
         global t_left
         super().__init__()
         self.functions = Func()
@@ -375,7 +375,6 @@ class MainWindowUIClass(Ui_MainWindow):
             self.test_sz_box.setMinimum(0.1)
             self.test_sz_box.setMaximum(0.9)
             self.split_box.setValue(0.2)
-
 
         elif learning_type == "Regression":
 
@@ -941,19 +940,24 @@ class MainWindowUIClass(Ui_MainWindow):
 
     def predict_y(self):
         try:
-            global X, y, ft_model,learning_type
+            global X, y, ft_model, learning_type
             # score = ft_model.score(X, y)
             # print("Test Score with pickle model: {0:.2f} %". format(
             #     100 * score))
             y_predict = ft_model.predict(X)
             print(y_predict)
+
             # !new!
-            if(learning_type=="Classification"):
+            if(learning_type == "Classification"):
                 for i in range(len(X)):
-                    print("X=%s, True=%s, Predicted=%s" % (X[i], y[i], y_predict[i]))
-                    print(ft_model.score(X,y))
+                    print("X=%s, True=%s, Predicted=%s" %
+                          (X[i], y[i], y_predict[i]))
+                print(ft_model.score(X, y))
             else:
-                print(r2_score(y,y_predict))
+                for i in range(len(X)):
+                    print("X=%s, True=%s, Predicted=%s" %
+                          (X[i], y[i], y_predict[i]))
+                print(r2_score(y, y_predict))
         except:
             self.functions.popup_window(
                 "The selected model is trained on a different Data Set.", " Error ", "Warning")
@@ -1106,8 +1110,13 @@ class MainWindowUIClass(Ui_MainWindow):
             self.text_settings.setReadOnly(False)
         else:
             self.text_settings.setReadOnly(True)
-# !MICRO MACHINE LEARNING FUNCTIONS !
+
+
+# ! TINY MACHINE LEARNING FUNCTIONS !
+
+
     def tiny_slot(self):
+
         self.stackedWidget.setCurrentIndex(10)
 
     def set_split(self):
@@ -1119,19 +1128,22 @@ class MainWindowUIClass(Ui_MainWindow):
         pass
 
     def micro_model(self):
+
         # todo: SUNARTISEIS!
         global X, y, model_h, split_size
+       
         X_train, X_test, y_train, y_test = train_test_split(
             X, np.ravel(y),
             test_size=split_size, random_state=101)
 
-        #* model 2: RFCLASSIFIER TRAIN HPTUNE FIT
+        # * model 2: RFCLASSIFIER TRAIN HPTUNE FIT
 
         model_1 = RandomForestClassifier()
         model_1.fit(X_train, y_train)
         # y_pred = model_1.predict(X_test)
         # Number of trees in random forest
-        n_estimators = [int(x) for x in np.linspace(start=200, stop=2000, num=10)]
+        n_estimators = [int(x)
+                        for x in np.linspace(start=200, stop=2000, num=10)]
         # Number of features to consider at every split
         max_features = ['auto', 'sqrt']
         # Maximum number of levels in tree
@@ -1145,13 +1157,13 @@ class MainWindowUIClass(Ui_MainWindow):
         bootstrap = [True, False]
         # Create the random grid
         random_grid = {'n_estimators': n_estimators,
-                    'max_features': max_features,
-                    'max_depth': max_depth,
-                    'min_samples_split': min_samples_split,
-                    'min_samples_leaf': min_samples_leaf,
-                    'bootstrap': bootstrap}
+                       'max_features': max_features,
+                       'max_depth': max_depth,
+                       'min_samples_split': min_samples_split,
+                       'min_samples_leaf': min_samples_leaf,
+                       'bootstrap': bootstrap}
         model_1 = RandomizedSearchCV(model_1, param_distributions=random_grid,
-                                    n_iter=100, cv=3, verbose=2, random_state=42, n_jobs=-1)
+                                     n_iter=100, cv=3, verbose=2, random_state=42, n_jobs=-1)
 
         model_1.fit(X_train, y_train)
         y_pred = model_1.best_estimator_.predict(X_test)
@@ -1159,46 +1171,58 @@ class MainWindowUIClass(Ui_MainWindow):
         # print(rf_random.best_estimator_)
         # print('ACC : ', metrics.accuracy_score(y_test, y_pred))
 
+        # * model 2: SVM TRAIN HPTUNE FIT
+        model_2 = SVC()
+        model_2.fit(X_train, y_train)
+        param_grid = {'C': [0.1, 1, 10, 100, 1000],
+                      'gamma': [1, 0.1, 0.01, 0.001, 0.0001],
+                      'kernel': ['rbf']}
+        model_2 = RandomizedSearchCV(
+            model_2, param_grid, refit=True, verbose=3)
+        model_2.fit(X_train, y_train)
 
-        #* model 2: SVM TRAIN HPTUNE FIT
-        model_2 = SVC() 
-        model_2.fit(X_train, y_train) 
-        param_grid = {'C': [0.1, 1, 10, 100, 1000],  
-              'gamma': [1, 0.1, 0.01, 0.001, 0.0001], 
-              'kernel': ['rbf']}   
-        model_2 = RandomizedSearchCV(model_2, param_grid, refit = True, verbose = 3) 
-        model_2.fit(X_train, y_train) 
-        
-        predictions = model_2.best_estimator_.predict(X_test) 
-        acc2 =  metrics.accuracy_score(y_test, predictions)
+        predictions = model_2.best_estimator_.predict(X_test)
+        acc2 = metrics.accuracy_score(y_test, predictions)
         print(f"{acc1} vs {acc2}")
-# print prediction results 
-        if acc1 > acc2 :
+# print prediction results
+        if acc1 > acc2:
             model_h = model_1
         else:
             model_h = model_2
         print(model_h)
-        self.header_text.setText('model')
+        # self.header_text.setText('model')
         self.frame_export.setEnabled(True)
         self.frame_pref.setEnabled(False)
-        
 
     def home_micro(self):
         pass
 
     def export_h(self):
         global model_h
-        
-        model_h_name = self.header_text.toPlainText()
-        original_stdout = sys.stdout  # Save a reference to the original standard output
-        with open('/home/larry/Documents/projectv1/'+model_h_name+'.h', 'w') as f:
-            # Change the standard output to the file we created.
-            sys.stdout = f
-            print(port(model_h.best_estimator_))
-            sys.stdout = original_stdout  # Reset the standard output to its original value
+        # !Export me file browser gia save as:
+        options = QtWidgets.QFileDialog.Options()
+        options |= QtWidgets.QFileDialog.DontUseNativeDialog
+        filename, _ = QFileDialog.getSaveFileName(None, "Save File As", "",
+                                                  "C Header Files (*.h);", options=options)
+        if filename:
+            original_stdout = sys.stdout
+            with open(filename+".h", 'w') as f:
+                # https://www.learnpyqt.com/tutorials/example-browser-file-operations/
+                sys.stdout = f
+                print(port(model_h.best_estimator_))
+                sys.stdout = original_stdout
+
+    # model_h_name = self.header_text.toPlainText()
+    # original_stdout = sys.stdout  # Save a reference to the original standard output
+    # with open('/home/larry/Documents/projectv1/'+model_h_name+'.h', 'w') as f:
+    #     # Change the standard output to the file we created.
+    #     sys.stdout = f
+    #     print(port(model_h.best_estimator_))
+    #     sys.stdout = original_stdout  # Reset the standard output to its original value
         self.functions.popup_window(
-            "Model exported successfully.", " Success ", "Information")    
-   
+            "Model exported successfully.", " Success ", "Information")
+
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
     # app.setStyle('Fusion')

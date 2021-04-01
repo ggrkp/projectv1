@@ -7,7 +7,7 @@ import os
 import sqlite3
 import sys
 from sklearn.metrics import r2_score, max_error
-
+import pickle
 from io import StringIO
 from sklearn.model_selection import RandomizedSearchCV
 import autosklearn
@@ -32,6 +32,8 @@ from tsfresh.utilities.dataframe_functions import impute, roll_time_series
 
 from functions import Func
 from guiv1 import Ui_MainWindow
+
+
 class MainWindowUIClass(Ui_MainWindow):
     def __init__(self):
 
@@ -468,7 +470,6 @@ class MainWindowUIClass(Ui_MainWindow):
     # ! 3. PARAMETER TUNING SCREEN
 # TEST SPLIT SPINBOX
 
-
     def test_sz_Slot(self):
         global test_sz
         self.test_sz_box.setSingleStep(0.01)
@@ -795,7 +796,7 @@ class MainWindowUIClass(Ui_MainWindow):
                 popup = QtWidgets.QMessageBox()
                 popup.setWindowTitle(" Running ")
                 popup.setText(
-                    "Please, wait. An ensemble is being created...     ")
+                    "Please, wait. An ensemble is being created...  ")
                 if minutes < 1:
                     popup.setInformativeText(
                         f"This process will take about {seconds} seconds.   Press OK to continue...")
@@ -806,6 +807,7 @@ class MainWindowUIClass(Ui_MainWindow):
                 else:
                     popup.setInformativeText(
                         f"This process will take about {minutes} minutes. Press OK to continue...")
+
                 popup.setStandardButtons(QtWidgets.QMessageBox.Ok)
                 popup.setIcon(QtWidgets.QMessageBox.Information)
                 popup.exec_()
@@ -831,8 +833,6 @@ class MainWindowUIClass(Ui_MainWindow):
                 pred = model.predict(X_test)
                 self.functions.popup_window(
                     "A new ensemble is created successfully!", " Done ", "Information")
-                self.stackedWidget.setEnabled(True)
-
                 #! Metric results:
                 if learning_type == 'Regression':
                     print("Max error", sklearn.metrics.max_error(y_test, pred))
@@ -851,6 +851,16 @@ class MainWindowUIClass(Ui_MainWindow):
                         model_name = "unnamed_model"
                     self.functions.store_model(
                         model, model_name, learning_type)
+                    #  # !Save model as file:
+                    options = QtWidgets.QFileDialog.Options()
+                    options |= QtWidgets.QFileDialog.DontUseNativeDialog
+                    filename, _ = QFileDialog.getSaveFileName(None, "Save File As", model_name,
+                                                              "Pickle Files (*);", options=options)
+                    if filename:
+                        with open(filename, 'wb') as f:
+                            pickle.dump(model, f)
+                    self.stackedWidget.setEnabled(True)
+
         except:  # lathos learning type h lathos target variable
             print("An error has occured!")
             self.comboBox.clear()
@@ -1114,7 +1124,6 @@ class MainWindowUIClass(Ui_MainWindow):
 
 # ! TINY MACHINE LEARNING FUNCTIONS !
 
-
     def tiny_slot(self):
 
         self.stackedWidget.setCurrentIndex(10)
@@ -1131,7 +1140,7 @@ class MainWindowUIClass(Ui_MainWindow):
 
         # todo: SUNARTISEIS!
         global X, y, model_h, split_size
-       
+
         X_train, X_test, y_train, y_test = train_test_split(
             X, np.ravel(y),
             test_size=split_size, random_state=101)

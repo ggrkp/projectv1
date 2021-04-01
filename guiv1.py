@@ -1129,7 +1129,7 @@ class Ui_MainWindow(QObject):
         self.metalearning_checkbox.stateChanged['int'].connect(
             self.metalearning_checked)
         self.test_sz_box.valueChanged['QString'].connect(self.test_sz_Slot)
-        self.run_Button.clicked.connect(self.modelSlot)
+        # self.run_Button.clicked.connect(self.modelSlot)
         self.home_btn.clicked.connect(self.home_slot)
         self.home_btn2.clicked.connect(self.home_slot)
         self.back_btn.clicked.connect(self.models_back)

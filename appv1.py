@@ -1,4 +1,3 @@
-# yolo1
 from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog
 import ast
 import copy
@@ -29,7 +28,7 @@ from tsfresh.feature_extraction import (ComprehensiveFCParameters,
                                         EfficientFCParameters,
                                         MinimalFCParameters)
 from tsfresh.utilities.dataframe_functions import impute, roll_time_series
-
+sys.path.append(".")
 from functions import Func
 from guiv1 import Ui_MainWindow
 

@@ -859,7 +859,7 @@ class MainWindowUIClass(Ui_MainWindow):
                     if filename:
                         with open(filename, 'wb') as f:
                             pickle.dump(model, f)
-                    self.stackedWidget.setEnabled(True)
+                self.stackedWidget.setEnabled(True)
 
         except:  # lathos learning type h lathos target variable
             print("An error has occured!")

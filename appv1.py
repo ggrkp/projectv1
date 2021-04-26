@@ -257,9 +257,9 @@ class MainWindowUIClass(Ui_MainWindow):
         for i in range(preview_num):
             for j in range(self.functions.colCount(data)):
                 self.tableWidget.item(i, j).setBackground(
-                    QtGui.QColor('#fff'))
+                    QtGui.QColor('lightgrey'))
             self.tableWidget.item(i, item_index).setBackground(
-                QtGui.QColor('#00BFFF'))
+                QtGui.QColor('lightblue'))
 
 # NEXT BUTTON - BACK BUTTON > DHLWNONTAI DEFAULTS GIA TO EPOMENO SCREEN ( MDOELING SCREEN - PARAMETERS )
     def backSlot(self):  # Slot gia to back button

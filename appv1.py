@@ -1237,6 +1237,7 @@ def main():
     # app.setStyle('Fusion')
     # app.setStyleSheet(qdarkgraystyle.load_stylesheet())
     app.setFont(QFont('Consolas', 10))
+    app.setWindowIcon(QtGui.QIcon('./img/icon.png'))
 
     ex = MainWindowUIClass()
     MainWindow = QtWidgets.QMainWindow()
